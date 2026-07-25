@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — OpenWALDO</title>
-<meta name="description" content="OpenWALDO was founded by Gregory Kurtzer — creator of CentOS, Warewulf, Singularity/Apptainer, and Rocky Linux — to build the open source corpus that AI is missing.">
+<meta name="description" content="OpenWALDO's mission: an open source corpus of AI training data — a shared foundation of knowledge owned by everyone and by no one. Founded by Gregory Kurtzer, built by everyone who shows up.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="canonical" href="https://openwaldo.org/about.html">
@@ -43,8 +43,75 @@
 
 <section class="block flush">
   <div class="wrap reveal">
+    <div class="eyebrow">the mission</div>
+    <h2>A shared foundation of knowledge — owned by everyone, and by no one.</h2>
+    <div class="prose">
+      <p>
+        OpenWALDO is building the thing AI is missing: <strong>an open source
+        corpus of training data</strong> — a commons of licensed,
+        provenance-tracked knowledge — and the toolchain that turns it into
+        models anyone can audit, verify, and rebuild. Not a product, not a
+        platform, and not any one company’s asset: a base foundation the whole
+        field can stand on, the way it already stands on Linux, on open
+        compilers, and on open protocols.
+      </p>
+      <p>
+        Look at the arguments consuming AI — accusations over model
+        distillation, creators unhappy about their work being trained on
+        without consent, companies unable to see inside the models they depend
+        on. <strong>Every one of those problems is downstream of the same
+        cause: the data is closed.</strong> Make the data genuinely open
+        source — licensed, attributed, removable, on the record — and those
+        problems don’t get argued away. They disappear.
+      </p>
+      <p>
+        Open weights is not open source. What AI needs is what every layer of
+        trusted infrastructure before it needed: a shared, collaborative base
+        foundation — <strong>a corpus of knowledge that anyone can obtain and
+        anyone can contribute to</strong> — with licenses, provenance, and the
+        right to be removed built into the format itself.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap reveal">
+    <div class="eyebrow">how the project runs</div>
+    <h2>In the open, like everything worth trusting.</h2>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>Everything happens in git</h3>
+        <p>The corpus is curated by pull request; every contribution carries a
+        DCO sign-off under the contributor’s own name. There is no side channel
+        — the repository history is the project’s history.</p>
+      </div>
+      <div class="card">
+        <h3>Peer review is the gate</h3>
+        <p>The license bar is enforced by human review, the way every serious
+        open source project keeps itself honest — license claims checked,
+        sources verified, provenance recorded.</p>
+      </div>
+      <div class="card">
+        <h3>Nobody owns the bytes</h3>
+        <p>Training data is hosted by contributors themselves on federated,
+        content-addressed storage. The project holds the map, not the
+        territory — no single point of control, or failure.</p>
+      </div>
+      <div class="card">
+        <h3>Funding-honest, laptop-first</h3>
+        <p>The roadmap says plainly what each stage costs: today’s rungs train
+        on laptops and single GPUs; the foundation model will take partners.
+        No vaporware, no pretending compute is free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap reveal">
     <div class="eyebrow">the founder</div>
-    <h2>Founded by Gregory Kurtzer.</h2>
+    <h2>Started by Gregory Kurtzer. Built by everyone who shows up.</h2>
 
     <div class="founder">
       <div>
@@ -57,57 +124,26 @@
       </div>
       <div class="prose" style="margin-top:-6px">
         <p>
-          Greg has spent his entire career building open source — not just
-          software, but the <strong>communities</strong> that carry it. He
-          co-founded <strong>CentOS</strong>, the freely available enterprise
-          Linux that became one of the most widely deployed operating systems
-          on the planet. He created <strong>Warewulf</strong>, the cluster
-          provisioning system that has run high-performance computing
-          installations for over two decades. He created
-          <strong>Singularity</strong> — now the Linux Foundation’s
-          <strong>Apptainer</strong> — which brought containers to scientific
-          and high-performance computing and became the standard way research
-          computing runs reproducible workloads. And when CentOS changed
-          course in 2020, he founded <strong>Rocky Linux</strong> and the
-          <strong>Rocky Enterprise Software Foundation</strong>, rebuilding a
-          community of millions around the promise that enterprise Linux would
-          stay free — a project that went from an announcement in a GitHub
-          comment to one of the fastest-growing operating systems in the world.
+          Greg has spent his career founding open source projects and the
+          <strong>communities</strong> that carry them: co-founder of
+          <strong>CentOS</strong>, creator of <strong>Warewulf</strong> and of
+          <strong>Singularity</strong> (now the Linux Foundation’s
+          <strong>Apptainer</strong>), and founder of <strong>Rocky
+          Linux</strong> and the <strong>Rocky Enterprise Software
+          Foundation</strong> — communities counted in the millions, built on
+          the promise that essential infrastructure stays free. That instinct
+          comes from nearly two decades in high-performance computing at
+          <strong>Lawrence Berkeley National Laboratory</strong>, where the
+          software that mattered was open and the science that mattered was
+          reproducible.
         </p>
         <p>
-          That instinct was formed over nearly two decades in high-performance
-          computing at <strong>Lawrence Berkeley National Laboratory</strong>,
-          supporting scientific computing for UC Berkeley and the Department of
-          Energy — where the software that mattered was open, and the science
-          that mattered was reproducible. The pattern across all of it:
-          find the place where openness is missing, build the foundation,
-          and grow the community that makes it permanent.
-        </p>
-        <h3>Why OpenWALDO</h3>
-        <p>
-          Greg is a huge advocate and supporter of AI. That’s exactly why this
-          project exists. Look at the arguments consuming the field —
-          accusations over model distillation, creators unhappy about their
-          work being trained on without consent, companies unable to see what’s
-          inside the models they depend on. <strong>Every one of those problems
-          is downstream of the same cause: the data is closed. Make the data
-          genuinely open source, and the problems don’t get argued away — they
-          disappear.</strong>
-        </p>
-        <p>
-          Open weights is not open source. What AI needs is what every layer of
-          trusted infrastructure before it needed: a shared, collaborative base
-          foundation — a corpus of knowledge that anyone can obtain and anyone
-          can contribute to, with licenses, provenance, and the right to be
-          removed built into the format itself. Open source is necessary. It is
-          how strangers cooperate at scale, how trust gets built without
-          permission, and how technology ends up serving everyone instead of a
-          few.
-        </p>
-        <p>
-          So he’s doing what he has always done: founding the open, shared
-          foundation — this time, a corpus of AI training data — and inviting
-          everyone to join. <strong>The invitation is real, and it’s open.</strong>
+          The pattern across all of it: find the place where openness is
+          missing, build the foundation, and grow the community that makes it
+          permanent. As a huge advocate of AI, Greg sees that place clearly —
+          the data. So he’s doing what he has always done: founding the open,
+          shared foundation, and inviting everyone to join.
+          <strong>The invitation is real, and it’s open.</strong>
         </p>
       </div>
     </div>
