@@ -287,12 +287,8 @@ footer.site { border-top: 1px solid var(--line); padding: 56px 0 40px; backgroun
 .founder { display: grid; grid-template-columns: 220px 1fr; gap: 40px; margin-top: 40px; align-items: start; }
 .headshot {
   width: 220px; height: 220px; border-radius: 16px;
-  background:
-    repeating-linear-gradient(135deg, rgba(255,74,61,.16) 0 14px, rgba(244,237,221,.05) 14px 28px);
   border: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--faint); font-family: var(--mono); font-size: 12.5px; text-align: center;
-  padding: 12px;
+  object-fit: cover; display: block;
 }
 .social-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
 .social-row a {
