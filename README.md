@@ -40,13 +40,16 @@ The front page's stats strip (tokens, documents, size, licenses) reads
 manifests → shards):
 
 ```console
-$ python3 tools/corpus-stats.py ../waldo-index -o kl24bg/assets/stats.json
+$ make stats     # assumes the checkout at ../waldo-index; override with INDEX=…
+python3 tools/corpus-stats.py ../waldo-index -o kl24bg/assets/stats.json
 wrote kl24bg/assets/stats.json: 35,682,197 tokens, 106,262 docs, 7 licenses across 7 manifest(s)
 ```
 
 Re-run it and commit whenever the index grows (a CI job or cron can do the
-same). The JSON also records the index commit and generation date, which the
-strip displays as its provenance line.
+same; eventually this pulls from the repository in realtime). The JSON also
+records the index commit and generation date, which the strip displays as its
+provenance chip. The strip's numbers count up on scroll, and the license
+spectrum bar shows each license's share of tokens.
 
 ## Editing
 
