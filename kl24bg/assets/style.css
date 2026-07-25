@@ -92,7 +92,10 @@ nav.links a[aria-current="page"] {
 }
 
 /* ---- hero ---- */
-.hero { padding: 96px 0 72px; position: relative; overflow: hidden; }
+.hero { padding: 96px 0 72px; position: relative; overflow: hidden; text-align: center; }
+.hero h1.title { margin: 0 auto; }
+.hero p.lede { margin-left: auto; margin-right: auto; }
+.hero .cta-row { justify-content: center; }
 .hero::before {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background:
@@ -111,10 +114,26 @@ h1.title {
 h1.title .k { color: var(--red); position: relative; }
 h1.title .k.lit { text-shadow: 0 0 24px rgba(255,74,61,.85); }
 h1.title .waldo {
-  display: block; margin-top: 16px; color: var(--red);
+  display: block; margin-top: 16px;
   font-size: clamp(52px, 8.5vw, 96px);
-  line-height: 1.05; letter-spacing: -3px;
-  text-shadow: 0 2px 40px rgba(255,74,61,.35);
+  line-height: 1.08; letter-spacing: -3px;
+  padding-bottom: .08em;
+  background: linear-gradient(110deg,
+    var(--red) 0%, var(--red) 42%, #ffe9e6 50%, var(--red) 58%, var(--red) 100%);
+  background-size: 250% 100%;
+  background-position: 210% 0;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 6px 30px rgba(255,74,61,.35));
+  animation: glimmer 5s ease-in-out infinite;
+}
+@keyframes glimmer {
+  0%   { background-position: 210% 0; }
+  45%  { background-position: -60% 0; }
+  100% { background-position: -60% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  h1.title .waldo { animation: none; background-position: -60% 0; }
 }
 .hero p.lede {
   margin-top: 26px; font-size: clamp(17px, 2vw, 21px);
