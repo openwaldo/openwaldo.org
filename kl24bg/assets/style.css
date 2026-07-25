@@ -119,17 +119,16 @@ h1.title .waldo {
   line-height: 1.08; letter-spacing: -3px;
   padding-bottom: .08em;
   background: linear-gradient(110deg,
-    var(--red) 0%, var(--red) 42%, #ffe9e6 50%, var(--red) 58%, var(--red) 100%);
+    var(--red) 0%, var(--red) 43%, #ff9a90 50%, var(--red) 57%, var(--red) 100%);
   background-size: 250% 100%;
   background-position: 210% 0;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   filter: drop-shadow(0 6px 30px rgba(255,74,61,.35));
-  animation: glimmer 5s ease-in-out infinite;
+  animation: glimmer 3s linear infinite;
 }
 @keyframes glimmer {
   0%   { background-position: 210% 0; }
-  45%  { background-position: -60% 0; }
   100% { background-position: -60% 0; }
 }
 @media (prefers-reduced-motion: reduce) {
