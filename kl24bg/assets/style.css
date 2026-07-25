@@ -110,9 +110,15 @@ h1.title {
   font-size: clamp(24px, 3.6vw, 40px);
   line-height: 1.25; letter-spacing: -1px; font-weight: 800;
   max-width: 900px;
+  background: linear-gradient(110deg,
+    var(--ink) 0%, var(--ink) 44%, #ffffff 50%, var(--ink) 56%, var(--ink) 100%);
+  background-size: 250% 100%;
+  background-position: 210% 0;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: glimmer 3s linear infinite;
 }
-h1.title .k { color: var(--red); position: relative; }
-h1.title .k.lit { text-shadow: 0 0 24px rgba(255,74,61,.85); }
+h1.title .k { color: var(--red); -webkit-text-fill-color: var(--red); }
 h1.title .waldo {
   display: block; margin-top: 16px;
   font-size: clamp(52px, 8.5vw, 96px);
@@ -132,7 +138,7 @@ h1.title .waldo {
   100% { background-position: -60% 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  h1.title .waldo { animation: none; background-position: -60% 0; }
+  h1.title, h1.title .waldo { animation: none; background-position: -60% 0; }
 }
 .hero p.lede {
   margin-top: 26px; font-size: clamp(17px, 2vw, 21px);

@@ -110,13 +110,3 @@ if (statsBox) {
     .catch(() => {});
 }
 
-// Hero: cycle a glow across the W-A-L-D-O letters
-const letters = document.querySelectorAll('h1.title .k');
-if (letters.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  let i = 0;
-  setInterval(() => {
-    letters.forEach((l) => l.classList.remove('lit'));
-    letters[i % letters.length].classList.add('lit');
-    i++;
-  }, 900);
-}
