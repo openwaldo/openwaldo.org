@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FAQ — OpenWALDO</title>
-<meta name="description" content="Frequently asked questions about OpenWALDO: what you can do with the corpus, how to contribute, using it with existing models, and how to audit a model built from it.">
+<meta name="description" content="Frequently asked questions about OpenWALDO: how AI labs can build on the corpus and prove what their models are based on, how to contribute, using it with existing models, and how to audit a model built from it.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="canonical" href="https://openwaldo.org/faq.html">
@@ -59,6 +59,32 @@
           fork, chat, export. <strong>The models</strong> are what the project
           builds from the corpus to prove the whole approach works — every one
           carrying a verifiable bill of materials.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>I run an AI lab. How does OpenWALDO fit into how we already train?</summary>
+        <div class="a">
+          <p><strong>Use it as your base layer — and spend your effort on the
+          data that makes your models different.</strong> Every lab
+          independently re-collects the same foundational corpus: the books,
+          the wikis, the code, the papers, the law. That work is
+          undifferentiated, expensive, and legally fraught — and it’s exactly
+          what a commons is for. Pull OpenWALDO as the substrate for a
+          from-scratch base model, or augment your existing training mix with
+          its license-clean corpora, and put your researchers on the curation,
+          synthesis, and post-training that actually distinguish your models.
+          OpenWALDO isn’t competing with your models; it’s the part of every
+          model that never should have been a competition.</p>
+          <p>And you get something no private data pipeline can give you:
+          <strong>a provable answer to “what is this model based on?”</strong>
+          Training on indexed data pins a bill of materials — the exact index
+          commit, manifest hashes, and per-shard licenses — so your customers,
+          your counsel, and your regulators can verify the claim instead of
+          taking your word for it. When part of the diet is OpenWALDO, that
+          part of the audit is already done, in public. Ship the
+          <a href="#badges">“Based on OpenWALDO” badge</a> with your model and
+          the claim is one click from its proof.</p>
         </div>
       </details>
 
@@ -265,6 +291,34 @@
       <a class="btn" href="contribute.html">Contribute</a>
       <a class="btn ghost" href="https://github.com/openwaldo/waldo#readme">Read the full docs</a>
     </div>
+  </div>
+</section>
+
+<section class="block tinted" id="badges">
+  <div class="wrap reveal">
+    <div class="eyebrow">// show your source</div>
+    <h2>Based on OpenWALDO — say it, and let anyone check it.</h2>
+    <p class="sub">
+      If your model trains on indexed data, its bill of materials already
+      proves it — the badge just makes the claim visible. Put it on your model
+      card, your README, or your product page, and link it to the provenance
+      it stands for.
+    </p>
+    <div class="badge-row">
+      <img src="assets/badges/based-on-openwaldo-dark.svg" alt="Based on OpenWALDO — dark badge" width="232" height="52">
+      <img src="assets/badges/based-on-openwaldo-light.svg" alt="Based on OpenWALDO — light badge" width="232" height="52">
+    </div>
+    <pre class="snip"># markdown (model cards, READMEs)
+[![Based on OpenWALDO](https://openwaldo.org/assets/badges/based-on-openwaldo-dark.svg)](https://openwaldo.org)
+
+&lt;!-- html --&gt;
+&lt;a href="https://openwaldo.org"&gt;&lt;img src="https://openwaldo.org/assets/badges/based-on-openwaldo-dark.svg" alt="Based on OpenWALDO"&gt;&lt;/a&gt;</pre>
+    <p class="sub" style="font-size:15px">
+      The badge means something specific: the model’s training record chains
+      to a <code>waldo-index</code> commit, so “based on OpenWALDO” is a
+      checkable statement, not a vibe. Swap <span class="mono">-dark</span>
+      for <span class="mono">-light</span> to match your page.
+    </p>
   </div>
 </section>
 

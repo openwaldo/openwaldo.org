@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="232" height="52" viewBox="0 0 232 52" role="img" aria-label="Based on OpenWALDO">
+  <defs>
+    <clipPath id="dot"><rect x="14" y="15" width="22" height="22" rx="6"/></clipPath>
+  </defs>
+  <rect x="0.5" y="0.5" width="231" height="51" rx="11" fill="#0a0c12" stroke="#232b3b"/>
+  <g clip-path="url(#dot)">
+    <rect x="14" y="15" width="22" height="22" fill="#f4eddd"/>
+    <rect x="14" y="15" width="22" height="5.5" fill="#e6392f"/>
+    <rect x="14" y="26" width="22" height="5.5" fill="#e6392f"/>
+    <rect x="14" y="37" width="22" height="5.5" fill="#e6392f"/>
+  </g>
+  <text x="46" y="21" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="9" letter-spacing="2.5" fill="#9aa3b5">BASED ON</text>
+  <text x="46" y="40" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="17" font-weight="bold"><tspan fill="#f4eddd">open</tspan><tspan fill="#e6392f">WALDO</tspan></text>
+</svg>

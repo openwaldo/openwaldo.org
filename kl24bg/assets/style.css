@@ -298,6 +298,13 @@ details.qa summary::after {
 }
 details.qa[open] summary::after { content: "–"; }
 details.qa summary:hover { color: var(--red); }
+.badge-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; margin-top: 30px; }
+.badge-row img { height: 52px; display: block; }
+pre.snip {
+  margin-top: 16px; padding: 14px 18px; overflow-x: auto;
+  background: #0d0f15; border: 1px solid var(--line); border-radius: 10px;
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: var(--muted);
+}
 details.qa .a { padding: 0 0 24px; color: var(--muted); }
 details.qa .a p + p { margin-top: 12px; }
 details.qa .a strong { color: var(--ink); }
