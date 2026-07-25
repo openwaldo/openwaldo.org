@@ -276,6 +276,31 @@ footer.site { border-top: 1px solid var(--line); padding: 56px 0 40px; backgroun
   html { scroll-behavior: auto; }
 }
 
+/* ---- FAQ ---- */
+.faq { max-width: 860px; }
+.faq .eyebrow { margin-top: 56px; }
+details.qa { border-bottom: 1px solid var(--line); }
+details.qa summary {
+  cursor: pointer; list-style: none; position: relative;
+  padding: 20px 40px 20px 0; font-weight: 700; font-size: 17.5px;
+  letter-spacing: -0.2px;
+}
+details.qa summary::-webkit-details-marker { display: none; }
+details.qa summary::after {
+  content: "+"; position: absolute; right: 6px; top: 16px;
+  color: var(--red); font-family: var(--mono); font-size: 22px; font-weight: 400;
+}
+details.qa[open] summary::after { content: "–"; }
+details.qa summary:hover { color: var(--red); }
+details.qa .a { padding: 0 0 24px; color: var(--muted); }
+details.qa .a p + p { margin-top: 12px; }
+details.qa .a strong { color: var(--ink); }
+code {
+  font-family: var(--mono); font-size: 0.88em;
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 6px; padding: 2px 6px;
+}
+
 /* ---- page hero (subpages) ---- */
 .page-hero { padding: 76px 0 30px; }
 .page-hero h1 {

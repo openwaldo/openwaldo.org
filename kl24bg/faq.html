@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ — OpenWALDO</title>
+<meta name="description" content="Frequently asked questions about OpenWALDO: what you can do with the corpus, how to contribute, using it with existing models, and how to audit a model built from it.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/faq.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><span class="dot"></span>open<em>WALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="why.html">Why open source AI</a>
+      <a href="how.html">How it works</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">// questions, answered</div>
+    <h1>Frequently asked <em>questions</em>.</h1>
+    <p class="sub" style="font-size:19px">
+      The short, practical answers. The long versions live in the
+      <a href="https://github.com/openwaldo/waldo#readme">project docs</a>.
+    </p>
+  </div>
+</section>
+
+<section class="block flush">
+  <div class="wrap reveal">
+    <div class="faq">
+
+      <div class="eyebrow" style="margin-top:0">the basics</div>
+
+      <details class="qa">
+        <summary>What exactly is OpenWALDO — a dataset, a tool, or a model?</summary>
+        <div class="a">
+          <p>All three layers, with the data at the center. <strong>The
+          index</strong> (<code>waldo-index</code>) is the corpus: a git
+          repository of curated, licensed, provenance-tracked training data.
+          <strong>The toolchain</strong> (the <code>waldo</code> CLI) is one
+          binary that manages the whole lifecycle — ingest, verify, train,
+          fork, chat, export. <strong>The models</strong> are what the project
+          builds from the corpus to prove the whole approach works — every one
+          carrying a verifiable bill of materials.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>How is this different from other “open” AI projects?</summary>
+        <div class="a">
+          <p>Most “open” releases are open <em>weights</em>: you can download
+          the model, but not see, verify, or rebuild what went into it — a
+          binary without source. A few excellent projects (OLMo, the Common
+          Pile) publish their data too, and OpenWALDO builds on their work.
+          What OpenWALDO adds is the <strong>commons infrastructure</strong>:
+          a contribution model (git + DCO + review), per-shard licensing,
+          federated hosting, content-addressed verification, and a model
+          lifecycle that records the data-to-weights chain automatically —
+          so the corpus grows permissionlessly, like an open source project,
+          instead of being one lab’s dataset drop.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Do I need an account or permission to use any of this?</summary>
+        <div class="a">
+          <p>No. The index is a public git repository, and every shard of data
+          is <strong>anonymously fetchable</strong> from its committed URL —
+          reads never require credentials. Clone, fetch, verify, train. You
+          need credentials only to host shards on your own storage, and a
+          GitHub account only to open pull requests.</p>
+        </div>
+      </details>
+
+      <div class="eyebrow">using the corpus</div>
+
+      <details class="qa">
+        <summary>What can I do with the corpus?</summary>
+        <div class="a">
+          <p>Anything its licenses allow — and because every shard carries its
+          own SPDX license tag, you can filter to exactly the license profile
+          your use requires. In practice: <strong>pretrain models from
+          scratch</strong>, <strong>fine-tune or continue-pretrain existing
+          models</strong>, build domain-specific models, run dataset research
+          and ablations, teach with it, or mirror it. The corpus is
+          deliberately ordinary data (zstd-compressed JSONL) so nothing about
+          it locks you into the waldo toolchain.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Can I use the data with existing models and training stacks?</summary>
+        <div class="a">
+          <p>Yes. Shards are plain <strong>zstd-compressed JSONL</strong> at
+          stable URLs, verified by sha256 — any training pipeline that can
+          read JSONL can consume them, with or without the waldo CLI. And the
+          toolchain itself supports starting from existing weights:
+          <code>waldo model pull</code> imports a model, and training it on
+          indexed paths records a BOM for everything <em>from that point
+          forward</em>. The full audit-all-the-way-down story applies to
+          from-scratch models, but the corpus and the lineage records work
+          with the models you already have.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What hardware do I need to train something?</summary>
+        <div class="a">
+          <p>A laptop, to start. The smallest rungs of the growth ladder
+          (10–100M parameters) train on Apple Silicon via MLX or any single
+          GPU — the ten-minute walkthrough produces a real, provenanced model
+          on a MacBook. Bigger rungs use the same commands on bigger machines:
+          PyTorch for single/multi-GPU Linux boxes, torchtitan for multi-node.
+          The tooling scales; your ambition and compute budget set the rung.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Can I run it privately — internal data, air-gapped, my own storage?</summary>
+        <div class="a">
+          <p>Yes. The toolchain has no dependency on the project’s
+          infrastructure: start a
+          private tree with <code>waldo index init</code>, point the lookaside
+          at your own S3 bucket or local storage, and ingest and train on data
+          that never leaves your network. You get the same determinism,
+          license tracking, and BOMs — which is exactly what internal
+          compliance wants — without publishing anything.</p>
+        </div>
+      </details>
+
+      <div class="eyebrow">contributing</div>
+
+      <details class="qa">
+        <summary>How do I contribute data?</summary>
+        <div class="a">
+          <p>Git-style, in four steps: gather openly licensed data into a
+          directory (however you like — the <code>fetchers/</code> are worked
+          examples), run <code>waldo index ingest</code> to convert, pack, and
+          push the shards to your storage, then <code>git commit -s</code> and
+          open a pull request. The commit’s DCO sign-off is your attestation
+          that the data is redistributable under the license you declared;
+          the diff plus the URLs in it are the entire contribution. CI
+          re-verifies the whole tree on your PR.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What data qualifies for the official tree?</summary>
+        <div class="a">
+          <p>Content that is <strong>genuinely open at the document
+          level</strong>: public domain, CC-BY, CC-BY-SA, permissively
+          licensed code (per-file), and synthetic data from generators whose
+          licenses place no restrictions on outputs. The bar applies to the
+          underlying documents, not a dataset’s compilation license — which is
+          why CommonCrawl-derived corpora, gated “research-only” collections,
+          and GPT-distilled synthetic sets don’t qualify, however good they
+          are. The gaps that bar creates (math is the biggest) are the
+          project’s top contribution priorities.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>I don’t have data. How else can I help?</summary>
+        <div class="a">
+          <p>Four other ways: <strong>code</strong> (the Go toolchain —
+          converters, fetchers, training backends), <strong>hosting</strong>
+          (shard storage and mirrors are federated and contributor-run),
+          <strong>review</strong> (checking license claims and provenance on
+          data PRs is as valuable as the data itself), and
+          <strong>compute</strong> (the larger rungs of the growth ladder run
+          on donated or funded cluster time). Docs, examples, and evangelism
+          all count too.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Who hosts the data, and what does it cost the project?</summary>
+        <div class="a">
+          <p>Contributors host their own shards — any S3 bucket or static
+          HTTPS host works, and content addressing means every copy is
+          verifiable and mirrorable. The project itself holds only the small
+          git-tracked metadata. That’s the design: no central storage bill, no
+          single point of failure, and no gatekeeper who can decide the
+          corpus disappears.</p>
+        </div>
+      </details>
+
+      <div class="eyebrow">models &amp; auditing</div>
+
+      <details class="qa">
+        <summary>How do I audit a model that came from OpenWALDO?</summary>
+        <div class="a">
+          <p>Every model carries a <strong>bill of materials</strong>: the
+          exact index commit, the manifest hashes it consumed, the recipe,
+          tokenizer, and backend of every training run — written into
+          <code>model.json</code> and shipped human-readable as
+          <code>PROVENANCE.md</code> on export, with lineage chained across
+          forks. To audit: read the BOM, check out the index at the pinned
+          commit, and run <code>waldo index verify --fetch</code> to confirm
+          every referenced shard exists and matches its hash. At that point
+          you can inspect any byte the model trained on — or rebuild the
+          model yourself from the same inputs.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Can a model be reproduced exactly?</summary>
+        <div class="a">
+          <p>The <strong>inputs</strong> replay exactly: anyone with the BOM
+          gets byte-identical data, the same recipe, and the same
+          architecture. The resulting <strong>weights</strong> are equivalent
+          but not bit-identical across different hardware, because GPU
+          training isn’t bit-deterministic — the same honest caveat every
+          reproducibility effort in the field carries. What matters for trust
+          is that the claim “this model was built from this data” is
+          checkable, and it is.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Can I use OpenWALDO models and data commercially?</summary>
+        <div class="a">
+          <p>That’s the intent — the official tree deliberately excludes
+          noncommercial and no-derivative licenses. Obligations that do exist
+          (attribution for CC-BY, share-alike tags, code NOTICE files) are
+          recorded per shard, so you — and your counsel — can see exactly
+          what applies and train on precisely the license profile your
+          product allows. The index makes compliance <em>auditable</em>;
+          what your situation requires is between you and your lawyers, as
+          with any open source license question.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What if my content ends up in the corpus and I want it out?</summary>
+        <div class="a">
+          <p>Takedown is a first-class operation, not a support ticket.
+          Removal happens in the open — the shard leaves the index by commit,
+          storage operators garbage-collect it, and because every model
+          records what it trained on, the record of <em>what was used
+          when</em> stays honest. Openness includes the right to leave.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="cta-row" style="margin-top:52px">
+      <a class="btn" href="contribute.html">Contribute</a>
+      <a class="btn ghost" href="https://github.com/openwaldo/waldo#readme">Read the full docs</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><span class="dot"></span>open<em>WALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">Open WALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="why.html">Why open source AI</a></li>
+          <li><a href="how.html">How it works</a></li>
+          <li><a href="use-cases.html">Use cases</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo/waldo#readme">README</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-WALKTHROUGH.md">Walkthrough</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-INDEX.md">Index spec</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-TRAINING-FOUNDATION.md">Training foundation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
