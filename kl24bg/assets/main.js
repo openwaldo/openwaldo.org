@@ -74,22 +74,39 @@ if (statsBox) {
         licenses.map(([name]) => name).join(', '));
 
       const bar = statsBox.querySelector('[data-stat="bar"]');
-      const legend = statsBox.querySelector('[data-stat="legend"]');
-      if (bar && legend && s.tokens > 0) {
-        licenses.forEach(([name, info], i) => {
-          const pct = (info.tokens / s.tokens) * 100;
-          const pctLabel = pct >= 10 ? Math.round(pct) : pct >= 1 ? pct.toFixed(1) : '<1';
+      if (bar && s.tokens > 0) {
+        const pctOf = (t) => (t / s.tokens) * 100;
+        const pctLabel = (p) => (p >= 10 ? String(Math.round(p)) : p >= 1 ? p.toFixed(1) : '<1');
+        // Custom hover tooltip for the bar (native title tips are too slow)
+        const tip = document.createElement('div');
+        tip.className = 'bar-tip';
+        document.body.appendChild(tip);
+        bar.addEventListener('mousemove', (e) => {
+          const seg = e.target.closest('[data-tip-head]');
+          if (!seg) { tip.classList.remove('show'); return; }
+          tip.innerHTML = '';
+          const head = document.createElement('b');
+          head.textContent = seg.dataset.tipHead;
+          tip.append(head, seg.dataset.tipBody || '');
+          tip.style.left = e.clientX + 'px';
+          tip.style.top = e.clientY + 'px';
+          tip.classList.add('show');
+        });
+        bar.addEventListener('mouseleave', () => tip.classList.remove('show'));
+
+        const addSegment = (color, tokens, head, body) => {
           const seg = document.createElement('span');
-          seg.style.flexGrow = info.tokens;
-          seg.style.background = PALETTE[i % PALETTE.length];
-          seg.title = name + ' — ' + pctLabel + '% · ' +
-            info.tokens.toLocaleString() + ' tokens';
+          seg.style.flexGrow = tokens;
+          seg.style.background = color;
+          seg.dataset.tipHead = head;
+          seg.dataset.tipBody = body;
+          seg.setAttribute('aria-label', head + ' — ' + body);
           bar.appendChild(seg);
-          const chip = document.createElement('span');
-          chip.className = 'chip';
-          chip.innerHTML = '<i style="background:' + PALETTE[i % PALETTE.length] +
-            '"></i><b>' + name + '</b> ' + pctLabel + '%';
-          legend.appendChild(chip);
+        };
+        licenses.forEach(([name, info], i) => {
+          const p = pctLabel(pctOf(info.tokens)) + '%';
+          addSegment(PALETTE[i % PALETTE.length], info.tokens, name,
+            p + ' · ' + info.tokens.toLocaleString() + ' tokens');
         });
       }
 

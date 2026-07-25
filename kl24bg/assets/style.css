@@ -110,13 +110,14 @@ h1.title {
   font-size: clamp(24px, 3.6vw, 40px);
   line-height: 1.25; letter-spacing: -1px; font-weight: 800;
   max-width: 900px;
-  background: linear-gradient(110deg,
-    var(--ink) 0%, var(--ink) 44%, #ffffff 50%, var(--ink) 56%, var(--ink) 100%);
-  background-size: 250% 100%;
-  background-position: 210% 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,0) 42%, rgba(255,255,255,.95) 50%, rgba(255,255,255,0) 58%)
+      no-repeat 100% 0 / 250% 100%,
+    linear-gradient(var(--ink), var(--ink));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
-  animation: glimmer 3s linear infinite;
+  animation: glimmer 6s ease-in-out infinite;
 }
 h1.title .k { color: var(--red); -webkit-text-fill-color: var(--red); }
 h1.title .waldo {
@@ -124,21 +125,28 @@ h1.title .waldo {
   font-size: clamp(52px, 8.5vw, 96px);
   line-height: 1.08; letter-spacing: -3px;
   padding-bottom: .08em;
-  background: linear-gradient(110deg,
-    var(--red) 0%, var(--red) 43%, #ff9a90 50%, var(--red) 57%, var(--red) 100%);
-  background-size: 250% 100%;
-  background-position: 210% 0;
+  background:
+    linear-gradient(90deg,
+      rgba(255,178,168,0) 42%, rgba(255,178,168,1) 50%, rgba(255,178,168,0) 58%)
+      no-repeat 100% 0 / 250% 100%,
+    linear-gradient(180deg, #ff5a4e, var(--red-deep));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   filter: drop-shadow(0 6px 30px rgba(255,74,61,.35));
-  animation: glimmer 3s linear infinite;
+  animation: glimmer 6s ease-in-out infinite;
 }
+/* One band, two directions: left to right, brief pause, back, pause.
+   Only the highlight layer moves; the base color layer stays put.
+   (100% parks the band off the left edge, 0% off the right.) */
 @keyframes glimmer {
-  0%   { background-position: 210% 0; }
-  100% { background-position: -60% 0; }
+  0%   { background-position: 100% 0, 0 0; }
+  30%  { background-position: 0% 0, 0 0; }
+  50%  { background-position: 0% 0, 0 0; }
+  80%  { background-position: 100% 0, 0 0; }
+  100% { background-position: 100% 0, 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  h1.title, h1.title .waldo { animation: none; background-position: -60% 0; }
+  h1.title, h1.title .waldo { animation: none; }
 }
 .hero p.lede {
   margin-top: 26px; font-size: clamp(17px, 2vw, 21px);
@@ -177,6 +185,7 @@ h1.title .waldo {
   gap: 16px; flex-wrap: wrap; margin-bottom: 56px;
 }
 .count-head .eyebrow { margin-bottom: 0; }
+.count-foot { text-align: center; margin-top: 26px; }
 .count-commit {
   font-family: var(--mono); font-size: 12.5px; color: var(--muted);
   text-decoration: none; border: 1px solid var(--line); border-radius: 999px;
@@ -210,22 +219,22 @@ h1.title .waldo {
   background: var(--panel);
 }
 .license-bar span {
-  display: block; min-width: 7px;
+  display: block; min-width: 2px;
   transition: filter .15s ease, transform .15s ease;
 }
 .license-bar span:hover { filter: brightness(1.25); }
-.license-legend {
-  display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 20px;
-  justify-content: center;
+.bar-tip {
+  position: fixed; z-index: 100; pointer-events: none;
+  transform: translate(-50%, calc(-100% - 14px));
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; max-width: 360px;
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.6;
+  color: var(--muted); white-space: pre-line; text-align: left;
+  box-shadow: 0 14px 44px rgba(0,0,0,.55);
+  opacity: 0; transition: opacity .12s ease;
 }
-.license-legend .chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 12.5px; color: var(--muted);
-}
-.license-legend .chip i {
-  width: 10px; height: 10px; border-radius: 3px; display: block; flex: none;
-}
-.license-legend .chip b { color: var(--ink); font-weight: 600; }
+.bar-tip.show { opacity: 1; }
+.bar-tip b { color: var(--ink); display: block; margin-bottom: 2px; }
 
 /* ---- sections ---- */
 section.block { padding: 72px 0; border-top: 1px solid var(--line); }
@@ -233,12 +242,12 @@ section.block.flush { border-top: none; }
 section.tinted { background: var(--bg-2); }
 h2 {
   font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -0.8px;
-  line-height: 1.2; font-weight: 800; max-width: 760px;
+  line-height: 1.2; font-weight: 800;
 }
 h3 { font-size: 20px; letter-spacing: -0.3px; margin-bottom: 8px; }
 .block .eyebrow { margin-bottom: 14px; }
-p.sub { color: var(--muted); margin-top: 14px; max-width: 720px; }
-.prose { max-width: 760px; }
+p.sub { color: var(--muted); margin-top: 14px; }
+.prose { }
 .prose p { margin-top: 18px; color: var(--muted); }
 .prose p strong, .prose li strong { color: var(--ink); }
 .prose ul, .prose ol { margin: 18px 0 0 22px; color: var(--muted); }
@@ -380,7 +389,7 @@ footer.site { border-top: 1px solid var(--line); padding: 56px 0 40px; backgroun
 }
 
 /* ---- FAQ ---- */
-.faq { max-width: 860px; }
+.faq { }
 .faq .eyebrow { margin-top: 56px; }
 details.qa { border-bottom: 1px solid var(--line); }
 details.qa summary {
@@ -415,7 +424,7 @@ code {
 .page-hero { padding: 76px 0 30px; }
 .page-hero h1 {
   font-size: clamp(32px, 4.6vw, 52px); letter-spacing: -1.2px;
-  line-height: 1.15; font-weight: 800; max-width: 860px;
+  line-height: 1.15; font-weight: 800;
 }
 .page-hero h1 em { font-style: normal; color: var(--red); }
 
