@@ -276,6 +276,12 @@ footer.site { border-top: 1px solid var(--line); padding: 56px 0 40px; backgroun
   html { scroll-behavior: auto; }
 }
 
+/* ---- sponsors ---- */
+.sponsor-mark {
+  font-family: var(--mono); font-weight: 800; font-size: 40px;
+  letter-spacing: 2px; color: var(--ink); margin-bottom: 10px;
+}
+
 /* ---- FAQ ---- */
 .faq { max-width: 860px; }
 .faq .eyebrow { margin-top: 56px; }
@@ -341,7 +347,7 @@ code {
   .flow .arrow { transform: rotate(90deg); justify-content: center; height: 28px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   nav.links {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; align-items: flex-start; gap: 0;
@@ -350,6 +356,8 @@ code {
   nav.links.open { display: flex; }
   nav.links a { padding: 10px 0; font-size: 16px; }
   #menu-btn { display: block; }
+}
+@media (max-width: 720px) {
   .grid.cols-2, .grid.cols-3, .grid.cols-5 { grid-template-columns: 1fr; }
   .founder { grid-template-columns: 1fr; }
   .rung { grid-template-columns: 1fr; }
