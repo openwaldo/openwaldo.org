@@ -171,6 +171,7 @@ p.sub { color: var(--muted); margin-top: 14px; max-width: 720px; }
   color: rgba(255,74,61,.10); line-height: 1; pointer-events: none;
 }
 .card h3 .mono, .mono { font-family: var(--mono); }
+.red { color: var(--red); }
 .card .tag {
   display: inline-block; font-family: var(--mono); font-size: 12px;
   color: var(--red); letter-spacing: 1.5px; text-transform: uppercase;
