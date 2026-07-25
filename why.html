@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why open source AI — OpenWALDO</title>
+<meta name="description" content="Open weights is not open source. The case for a shared, auditable, openly licensed corpus of AI training data — and why open source wins this argument again.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/why.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><span class="dot"></span>open<em>WALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="why.html" aria-current="page">Why open source AI</a>
+      <a href="how.html">How it works</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="contribute.html">Contribute</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">// the case</div>
+    <h1>Open weights is <em>not</em> open source.</h1>
+    <p class="sub" style="font-size:19px">
+      You wouldn’t call a compiled binary “open source” because you can download
+      it. A model without its training data is exactly that: a binary without
+      source. Here is why that matters — and what fixes it.
+    </p>
+  </div>
+</section>
+
+<section class="block flush">
+  <div class="wrap reveal">
+    <div class="prose">
+      <h3>The industry argued itself into a corner</h3>
+      <p>
+        The labs selling closed access have spent years insisting that openly
+        released models are dangerous — a story as old as GPT-2, withheld in
+        2019 as too unsafe to release in full, though the predicted harms never
+        arrived. The same labs asked Congress to license who may build powerful
+        models and signed statements ranking their own products alongside
+        pandemics and nuclear war. It is an argument their business depends on:
+        <strong>a model you can only rent through an API is a moat.</strong>
+        And governments listened — model weights became export-controlled
+        technology, and open release came to be treated as a proliferation risk
+        rather than what it has always been in software: the mechanism of trust.
+      </p>
+      <p>
+        Then labs in China began releasing open-weight models that match — and
+        sometimes beat — the closed frontier, freely and by the dozen. The
+        scarcity story collapsed: frontier capability was never a guardable
+        secret. The fear campaign hadn’t contained anything; it had only
+        handicapped the West’s own open ecosystem and ceded open AI leadership
+        to someone else. The response has been more of the same — calls to ban
+        foreign models, statutory purges, renewed pushes with every new
+        release — bans that are close to unenforceable against weights anyone
+        can download.
+      </p>
+
+      <h3>Both sides are afraid of the same thing</h3>
+      <p>
+        All of it gets the threat model half right. The problem was never
+        <em>where</em> a model comes from. The problem is that <strong>nobody can
+        audit what went into it</strong>. An open-weight model without its
+        training data is a binary without source: you can run it, but you
+        cannot inspect it, verify it, or rebuild it. The fear of closed Western
+        models and the fear of open Chinese ones are the same fear — being
+        forced to trust weights no one can see into.
+      </p>
+      <blockquote>
+        What’s missing isn’t policy. It’s an auditable source of data, and the
+        toolchain to build trusted models from it.
+      </blockquote>
+
+      <h3>Open source has won this argument before</h3>
+      <p>
+        Proprietary vendors made identical claims about open code — insecure,
+        unaccountable, impossible to trust — and lost. Not because the world
+        decided to trust strangers, but because <strong>source, licenses, and
+        provenance made trust unnecessary</strong>: anyone could read the code,
+        and anyone could rebuild it. Linux didn’t win by being certified safe;
+        it won by being inspectable, forkable, and community-owned. Today it
+        runs the world’s infrastructure — and the vendors who fought it build
+        on it.
+      </p>
+      <p>
+        AI is missing exactly that property. And no export rule, no ban, and no
+        safety pledge can substitute for it.
+      </p>
+
+      <h3>Closed data is the root of the fights we’re having</h3>
+      <p>
+        Look at what people are actually angry about in AI right now. Authors
+        and artists discovering their work in training sets they never agreed
+        to. Companies finding their content scraped without provenance or
+        recourse. Labs accusing each other of distilling their models. Courts
+        untangling what was pirated and what was licensed. Every one of these
+        conflicts is a symptom of the same disease: <strong>the data is closed,
+        so nobody can prove anything</strong> — not consent, not license, not
+        origin, not absence.
+      </p>
+      <p>
+        Now imagine the opposite. Every byte in the corpus is openly licensed,
+        recorded with its source and its SPDX tag, attested by a sign-off,
+        removable on request, and pinned by hash into every model that trained
+        on it. Consent is recorded. Attribution is carried. Takedown is a
+        first-class operation. The argument doesn’t get won — <strong>it gets
+        dissolved</strong>, the same way open source dissolved the argument
+        about trusting code.
+      </p>
+
+      <h3>Trust through verification, not reputation</h3>
+      <p>
+        A model built on OpenWALDO carries its source. Every training run
+        records a <strong>bill of materials</strong> — the exact index commit,
+        the manifest hashes, the recipe, the tokenizer — into the model’s
+        metadata, and forks preserve lineage. Anyone can audit it. Anyone can
+        verify it. Anyone can recreate it. Where a model was trained stops
+        mattering, because <em>what it was trained on is on the record.</em>
+      </p>
+      <p>
+        This is what “open source AI” has to mean if the words mean anything:
+        not weights plus a press release, but the whole chain —
+        <strong>Weights, Artifacts, Licenses, Data, Origins</strong> — open,
+        verifiable, and rebuildable by anyone.
+      </p>
+
+      <h3>A commons, not a product</h3>
+      <p>
+        No single company can build this, and none should own it. What we need
+        is a <strong>shared, collaborative base foundation — a corpus of human
+        knowledge that anyone can obtain and anyone can contribute to</strong> —
+        governed the way open source has governed itself for thirty years:
+        maintainers, reviews, licenses, provenance, and a community that shows
+        up. The corpus is the commons; the models are proof that it works.
+      </p>
+    </div>
+
+    <div class="cta-row" style="margin-top:44px">
+      <a class="btn" href="how.html">See how it works</a>
+      <a class="btn ghost" href="contribute.html">Contribute to the commons</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><span class="dot"></span>open<em>WALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">Open WALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="why.html">Why open source AI</a></li>
+          <li><a href="how.html">How it works</a></li>
+          <li><a href="use-cases.html">Use cases</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo/waldo#readme">README</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-WALKTHROUGH.md">Walkthrough</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-INDEX.md">Index spec</a></li>
+          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-TRAINING-FOUNDATION.md">Training foundation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
