@@ -104,14 +104,16 @@ nav.links a[aria-current="page"] {
   text-transform: uppercase; color: var(--red); margin-bottom: 22px;
 }
 h1.title {
-  font-size: clamp(34px, 5.6vw, 62px);
-  line-height: 1.12; letter-spacing: -1.5px; font-weight: 800;
+  font-size: clamp(24px, 3.6vw, 40px);
+  line-height: 1.25; letter-spacing: -1px; font-weight: 800;
   max-width: 900px;
 }
 h1.title .k { color: var(--red); position: relative; }
 h1.title .k.lit { text-shadow: 0 0 24px rgba(255,74,61,.85); }
 h1.title .waldo {
-  display: block; margin-top: 10px; color: var(--red);
+  display: block; margin-top: 16px; color: var(--red);
+  font-size: clamp(52px, 8.5vw, 96px);
+  line-height: 1.05; letter-spacing: -3px;
   text-shadow: 0 2px 40px rgba(255,74,61,.35);
 }
 .hero p.lede {
