@@ -9,9 +9,17 @@ Plain static HTML/CSS, no build step, no external dependencies. Served by
 GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 `.nojekyll` disables Jekyll processing).
 
+**Pre-launch staging:** the site currently lives under `staging/` while the
+root `index.html` shows a "coming soon" page — GitHub Pages has no
+server-side auth, so the unpublished path is the gate. To launch: move
+everything in `staging/` back to the repo root (replacing the coming-soon
+`index.html`) and push.
+
 ## Layout
 
 ```
+index.html          coming soon (pre-launch placeholder)
+staging/            the actual site, pre-launch:
 index.html          home — the thesis and the WALDO checklist
 why.html            the case: open weights is not open source
 how.html            the machinery: index, lookaside, CLI, license bar, ladder
