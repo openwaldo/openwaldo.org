@@ -138,7 +138,7 @@ h1.title .waldo {
     radial-gradient(900px 340px at 18% -60%, rgba(255,74,61,.18), transparent 62%),
     radial-gradient(760px 300px at 88% 160%, rgba(244,237,221,.07), transparent 60%),
     var(--bg-2);
-  padding: 52px 0 46px;
+  padding: 88px 0 80px;
 }
 .corpus-count::before {
   content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
@@ -148,7 +148,7 @@ h1.title .waldo {
 }
 .count-head {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap; margin-bottom: 34px;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 56px;
 }
 .count-head .eyebrow { margin-bottom: 0; }
 .count-commit {
@@ -159,8 +159,8 @@ h1.title .waldo {
 }
 .count-commit:hover { border-color: var(--red); color: var(--ink); }
 .count-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.count-stat { padding: 2px 26px; border-left: 1px solid var(--line); }
-.count-stat:first-child { padding-left: 0; border-left: none; }
+.count-stat { padding: 6px 18px; border-left: 1px solid var(--line); text-align: center; }
+.count-stat:first-child { border-left: none; }
 .count-stat .n {
   font-family: var(--mono); font-weight: 800;
   font-size: clamp(40px, 5.4vw, 68px); line-height: 1.05;
@@ -180,7 +180,7 @@ h1.title .waldo {
 }
 .license-bar {
   display: flex; height: 16px; border-radius: 999px; overflow: hidden;
-  margin-top: 40px; border: 1px solid var(--line);
+  margin-top: 64px; border: 1px solid var(--line);
   background: var(--panel);
 }
 .license-bar span {
@@ -189,7 +189,8 @@ h1.title .waldo {
 }
 .license-bar span:hover { filter: brightness(1.25); }
 .license-legend {
-  display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px;
+  display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 20px;
+  justify-content: center;
 }
 .license-legend .chip {
   display: inline-flex; align-items: center; gap: 8px;
@@ -436,9 +437,8 @@ code {
 }
 @media (max-width: 720px) {
   .grid.cols-2, .grid.cols-3, .grid.cols-5 { grid-template-columns: 1fr; }
-  .count-grid { grid-template-columns: repeat(2, 1fr); gap: 26px 0; }
-  .count-stat { padding: 0 18px; }
-  .count-stat:nth-child(odd) { padding-left: 0; border-left: none; }
+  .count-grid { grid-template-columns: repeat(2, 1fr); gap: 34px 0; }
+  .count-stat:nth-child(odd) { border-left: none; }
   .founder { grid-template-columns: 1fr; }
   .rung { grid-template-columns: 1fr; }
   .check-table td.what { white-space: normal; }
