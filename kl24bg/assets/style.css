@@ -130,6 +130,20 @@ h1.title .waldo {
 .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn.ghost:hover { border-color: var(--red); box-shadow: none; color: var(--ink); }
 
+/* ---- corpus counter ---- */
+.corpus-count {
+  border-top: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 30px 0 26px;
+}
+.count-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.count-grid .n {
+  font-family: var(--mono); font-size: 32px; font-weight: 800;
+  letter-spacing: -1px; color: var(--red);
+}
+.count-grid .l { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.count-note { margin-top: 18px; font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+
 /* ---- sections ---- */
 section.block { padding: 72px 0; border-top: 1px solid var(--line); }
 section.block.flush { border-top: none; }
@@ -366,6 +380,7 @@ code {
 }
 @media (max-width: 720px) {
   .grid.cols-2, .grid.cols-3, .grid.cols-5 { grid-template-columns: 1fr; }
+  .count-grid { grid-template-columns: repeat(2, 1fr); }
   .founder { grid-template-columns: 1fr; }
   .rung { grid-template-columns: 1fr; }
   .check-table td.what { white-space: normal; }

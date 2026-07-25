@@ -1,0 +1,53 @@
+{
+  "generated": "2026-07-25T20:37:29Z",
+  "index_commit": "fd9e534",
+  "manifests": 7,
+  "shards": 8,
+  "docs": 106262,
+  "tokens": 35682197,
+  "bytes": 45515194,
+  "licenses": {
+    "Apache-2.0": {
+      "shards": 2,
+      "docs": 24214,
+      "tokens": 10232304,
+      "bytes": 13166514
+    },
+    "CC-BY-3.0": {
+      "shards": 1,
+      "docs": 65640,
+      "tokens": 20967715,
+      "bytes": 25757528
+    },
+    "CC-BY-4.0": {
+      "shards": 1,
+      "docs": 2,
+      "tokens": 12317,
+      "bytes": 17814
+    },
+    "CC-BY-SA-3.0": {
+      "shards": 1,
+      "docs": 14996,
+      "tokens": 2647410,
+      "bytes": 3923184
+    },
+    "CC-BY-SA-4.0": {
+      "shards": 1,
+      "docs": 1406,
+      "tokens": 1508728,
+      "bytes": 2246417
+    },
+    "CC0-1.0": {
+      "shards": 1,
+      "docs": 3,
+      "tokens": 308632,
+      "bytes": 395229
+    },
+    "LicenseRef-CC-BY": {
+      "shards": 1,
+      "docs": 1,
+      "tokens": 5091,
+      "bytes": 8508
+    }
+  }
+}
