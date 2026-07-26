@@ -474,7 +474,10 @@ code {
   border: 1px solid var(--line);
   object-fit: cover; display: block;
 }
-.social-row { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.social-row {
+  display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap;
+  justify-content: center; max-width: 220px;
+}
 .social-row a {
   font-family: var(--mono); font-size: 13.5px; text-decoration: none;
   border: 1px solid var(--line); border-radius: 8px; padding: 7px 13px; color: var(--muted);
