@@ -114,26 +114,33 @@
 <span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
 <span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
 
-<span class="c"># 2. point at a lookaside store (once) — reads never need credentials</span>
-<span class="r">$</span> waldo lookaside set s3://my-bucket/lookaside &amp;&amp; waldo lookaside login
+<span class="c"># 2. point at a lookaside store (once) — any S3-compatible host, named by</span>
+<span class="c">#    endpoint; reads never need credentials</span>
+<span class="r">$</span> waldo lookaside set s3://s3.us-east-2.amazonaws.com/my-bucket/lookaside
+<span class="r">$</span> waldo lookaside login
 
 <span class="c"># 3. ingest any directory of data: convert, pack, push, write the manifest</span>
 <span class="r">$</span> waldo index ingest /tmp/gutenberg-raw core/books --name gutenberg-starter \
-      --license CC0-1.0 --converter gutenberg
-<b>ingested 6 docs (510031 tokens) into 1 shard(s): 1 uploaded, 0 already hosted</b>
-<b>manifest: core/books/gutenberg-starter.json — tree verified ok</b>
-<span class="r">$</span> git add core index.json &amp;&amp; git commit -s   <span class="c"># the DCO sign-off is yours</span>
+      --license CC0-1.0
+<b>summary: 3 docs, 308632 tokens | 1.4 MB text → 395.2 KB zstd (3.5x) in 1 shard(s) | 1 uploaded, 0 already hosted</b>
+<b>manifest: core/books/gutenberg-starter.json</b>
+<b>next: review the diff, then commit with your DCO sign-off</b>
+<span class="r">$</span> git add core index.json &amp;&amp; git commit -s   <span class="c"># the sign-off is yours, not the tool's</span>
 
 <span class="c"># 4. create and train a model on indexed paths</span>
-<span class="r">$</span> waldo model init bookworm        <span class="c"># pick a rung: 10m … 405b, or custom</span>
+<span class="r">$</span> waldo model init bookworm --preset 10m   <span class="c"># rungs 10m … 405b, or --params 42b</span>
+<b>initialized bookworm: 6 layers, 384 hidden, 6 heads (2 kv), ffn 1024, context 512, vocab 259 (byte) — ~9.5M params</b>
 <span class="r">$</span> waldo model train bookworm core/books
-<b>=== stage 1/1: core/books (200 steps, backend mlx) ===</b>
-<b>trained: bookworm — BOM-pinned to waldo-index@8f3a2c1</b>
+<b>pretrain  step    12/12 (100.0%)  loss 3.2147  (avg10 3.7903)</b>
+<b>done: final loss 3.7903 (held-out 3.4355)</b>
+<b>run 1 complete — BOM pinned (1 manifests, index commit 8d04e24c3fbc)</b>
 
 <span class="c"># 5. talk to it, measure it, ship it — with its ancestry</span>
 <span class="r">$</span> waldo chat bookworm
 <span class="r">$</span> waldo model export bookworm ~/bookworm-export
-<b>  model.safetensors · model.json · PROVENANCE.md</b></pre>
+<b>  model.safetensors (~9.5M params; provenance embedded in the safetensors metadata)</b>
+<b>  model.json</b>
+<b>  PROVENANCE.md (2 lineage events, 1 runs)</b></pre>
     </div>
 
     <div class="grid cols-3">
@@ -159,6 +166,105 @@
 </section>
 
 <section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">the receipts</div>
+    <h2>Validation, auditability, and a bill of materials — as artifacts, not promises.</h2>
+    <p class="sub">
+      Everything below is real output from the live public index. This is what
+      you get: every claim checkable by anyone, anonymously, with one command.
+    </p>
+
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>verify — every committed byte, checked against its hash</span></div>
+      <pre><span class="c"># existence + size for every shard; --fetch re-hashes the actual bytes.</span>
+<span class="c"># anonymous: anyone with the checkout can run this — no account, no keys.</span>
+<span class="r">$</span> waldo index verify science
+<b>science/plos/plos.json ⇒ ab3cba1a6fb4            shard     ok — in the store, 18594 bytes as declared</b>
+<b>checked: 2 index(es), 1 manifest(s); declared 34 shard(s), 391454 docs, 2.7B tokens</b>
+<b>bytes:   34 object(s) confirmed present in the store (existence + size; --fetch re-hashes)</b>
+<b>ok</b></pre>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>The manifest: what an auditor reads</h3>
+        <p>Every corpus is a signed, human-readable record. The recipe is pinned
+        down to the compressor version compiled into the binary — and every
+        shard carries its own hash, license, and source. This entry is from the
+        live tree today:</p>
+        <pre class="mono" style="overflow-x:auto;font-size:12.5px;line-height:1.5">{
+  "name": "plos",
+  "license": "CC-BY-4.0",
+  "converted_by": {
+    "tool": "waldo-ingest/jsonl",
+    "version": "0.1.0-dev",
+    "commit": "git:8d2dbd5",
+    "zstd": "1.5.6/-19",
+    "tokenizer": "tiktoken/cl100k_base"
+  },
+  "shards": [{
+    "url": "s3://s3.us-east-2.amazonaws.com/openwaldo/lookaside/a9/31/a931…",
+    "sha256": "a9318180696d…",
+    "license": "CC-BY-3.0",
+    "sources": ["plos"],
+    "docs": 2218, "tokens": 15912772, "bytes": 16561823
+  }, …]
+}</pre>
+      </div>
+      <div class="card">
+        <h3>The model BOM: weights that carry their source</h3>
+        <p><span class="mono">waldo model export</span> writes three artifacts —
+        and the provenance is embedded <em>inside the safetensors metadata</em>,
+        so the ancestry travels with the weights file itself, not beside it:</p>
+        <pre class="mono" style="overflow-x:auto;font-size:12.5px;line-height:1.5">model.safetensors   ← provenance embedded in-file
+model.json          ← the machine-readable BOM
+PROVENANCE.md       ← the human-readable ancestry
+
+## Training runs
+### Run 1 — pretrain via mlx (complete)
+- final loss: 3.7903
+- index: waldo-index @ 8d04e24c3fbc…
+- paths: core/books</pre>
+        <p>Every run records the index commit, the consumed manifests' hashes,
+        and the data totals. Ask "what is this model built from?" and the
+        answer is a hash-pinned record, replayable from one git commit.</p>
+      </div>
+    </div>
+
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>export — take the corpus to your own tools, pedigree included</span></div>
+      <pre><span class="c"># materialize any subtree as plain JSONL — license selection happens here:</span>
+<span class="c"># the index labels, the consumer chooses (--license / --exclude-license)</span>
+<span class="r">$</span> waldo index export core/common-pile/public-domain-review ~/corpus
+<b>exporting 1 shard(s): 1.4K docs, 1.5M tokens, 2.1 MB compressed (unpacks ~3-4×)</b>
+<b>  core/common-pile/public-domain-review/public-domain-review-1a9d8509020e.jsonl (7.3 MB, 1.4K docs)</b>
+<b>exported 1 file(s) (0 already present) + EXPORT.json → ~/corpus</b>
+
+<span class="c"># EXPORT.json is the data-side BOM: the index commit and every file's</span>
+<span class="c"># hash, license, and origin — downstream artifacts cite their source.</span>
+<b>{ "kind": "waldo-export",
+  "roots": [{ "root": "…/waldo-index", "commit": "ab69a6ac5e94…" }],
+  "files": [{ "file": "…/public-domain-review-1a9d8509020e.jsonl",
+              "sha256": "1a9d8509020e…", "license": "CC-BY-SA-4.0",
+              "docs": 1406, "tokens": 1508728 }] }</b>
+
+<span class="c"># and the whole tree rolls up on demand — tokens, licenses, and the</span>
+<span class="c"># compute it takes to train on it</span>
+<span class="r">$</span> waldo index summary</pre>
+    </div>
+
+    <p class="sub">
+      Four artifacts, one discipline: the <strong>manifest</strong> records what
+      went in, <strong>verify</strong> proves it's still there,
+      <strong>EXPORT.json</strong> carries the pedigree out to your tools, and
+      the <strong>model BOM</strong> pins every trained weight back to the
+      commit that fed it. Nothing above requires trusting the project — only
+      checking it.
+    </p>
+  </div>
+</section>
+
+<section class="block tinted">
   <div class="wrap reveal">
     <div class="eyebrow">the license bar</div>
     <h2>Every byte in the official tree is one a mirror can host without inheriting a lawsuit.</h2>
@@ -190,7 +296,7 @@
   </div>
 </section>
 
-<section class="block tinted">
+<section class="block">
   <div class="wrap reveal">
     <div class="eyebrow">the growth ladder</div>
     <h2>Every rung is a real model. The discipline is the product, from the first toy onward.</h2>
@@ -236,7 +342,7 @@
   </div>
 </section>
 
-<section class="block">
+<section class="block tinted">
   <div class="wrap reveal">
     <div class="eyebrow">examples</div>
     <h2>A commons you can train on — and a commons you can teach.</h2>
