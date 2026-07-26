@@ -72,9 +72,11 @@ header.site {
 .wordmark em { font-style: normal; color: var(--red); }
 nav.links { display: flex; gap: 22px; margin-left: auto; align-items: center; }
 nav.links a {
-  color: var(--muted); text-decoration: none; font-size: 15px;
+  color: var(--ink); text-decoration: none; font-size: 15.5px;
+  font-weight: 600; letter-spacing: 0.1px;
 }
 nav.links a:hover, nav.links a[aria-current="page"] { color: var(--ink); }
+nav.links a:hover { color: var(--red); }
 nav.links a[aria-current="page"] {
   color: var(--ink);
   border-bottom: 2px solid var(--red); padding-bottom: 2px;
@@ -83,7 +85,9 @@ nav.links a[aria-current="page"] {
   border: 1px solid var(--line); border-radius: 8px;
   padding: 6px 14px !important; color: var(--ink) !important;
   font-family: var(--mono); font-size: 13.5px !important;
+  margin-left: 14px;               /* set the buttons apart from the menu */
 }
+.gh-btn + .gh-btn { margin-left: -12px; }  /* …and tight to each other */
 .gh-btn:hover { border-color: var(--red); }
 #menu-btn {
   display: none; margin-left: auto; background: none;
@@ -493,6 +497,7 @@ code {
   }
   nav.links.open { display: flex; }
   nav.links a { padding: 10px 0; font-size: 16px; }
+  nav.links .gh-btn, nav.links .gh-btn + .gh-btn { margin-left: 0; }
   #menu-btn { display: block; }
 }
 @media (max-width: 720px) {
