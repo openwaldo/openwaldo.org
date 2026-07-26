@@ -122,6 +122,33 @@
 <span class="r">$</span> git add core index.json &amp;&amp; git commit -s -m "Add gutenberg-set"
 <span class="r">$</span> git push  <span class="c"># → open the pull request; CI re-verifies the whole tree</span></pre>
     </div>
+
+    <p class="sub" style="margin-top:36px">
+      Hacking on the toolchain itself is the same loop developers already know:
+      one Go binary, a root Makefile where <span class="mono">make</span>,
+      <span class="mono">make test</span>, and <span class="mono">make
+      install</span> always work, and an end-to-end suite that trains real
+      models. Fetchers and converters are the friendliest first contribution —
+      each is a standalone worked example, and the generic Hugging Face fetcher
+      covers most datasets before any new code is needed.
+    </p>
+
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>the developer loop</span></div>
+      <pre><span class="c"># build, test — the unit suite includes the golden-byte determinism checks</span>
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo
+<span class="r">$</span> make &amp;&amp; make test
+
+<span class="c"># the end-to-end walkthrough: raw books → ingest → verify → train → chat →</span>
+<span class="c"># export, plus every guard rail that must refuse</span>
+<span class="r">$</span> make test-e2e
+<b>== RESULTS: 49 passed, 0 failed ==</b>
+
+<span class="c"># most datasets need no new fetcher — the generic one maps fields, pins the</span>
+<span class="c"># dataset revision, and normalizes licenses to SPDX</span>
+<span class="r">$</span> fetch-hf -dataset HuggingFaceTB/cosmopedia -list
+<b>336 data file(s); dataset license: Apache-2.0; revision 0ae6ec63f917</b></pre>
+    </div>
   </div>
 </section>
 

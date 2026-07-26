@@ -20,6 +20,7 @@
       <a href="community.html">Community</a>
       <a href="faq.html">FAQ</a>
       <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
       <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
     </nav>
   </div>
@@ -102,45 +103,49 @@
     <div class="eyebrow">using it</div>
     <h2>Git-style, end to end.</h2>
     <p class="sub">
-      You stand in a checkout of the index — or point at one — and the
-      <span class="mono">waldo</span> CLI does everything. Data operations
-      resolve against the enclosing tree the way git resolves against a repo;
-      model operations consume tree paths and record BOMs.
+      You stand in a checkout of the index and the <span class="mono">waldo</span>
+      CLI does everything. Consuming the corpus needs <strong>no account and no
+      credentials</strong> — reads are anonymous and hash-verified. Every output
+      below is real. (Contributing data back is one ingest and a pull request —
+      see <a href="community.html">community</a>.)
     </p>
 
     <div class="term">
-      <div class="bar"><i></i><i></i><i></i><span>raw books → a trained, provenanced model</span></div>
-      <pre><span class="c"># 1. install the toolchain (one binary), check out the index</span>
+      <div class="bar"><i></i><i></i><i></i><span>clone → verify → train → export</span></div>
+      <pre><span class="c"># 1. install the toolchain (one binary), clone the public index —</span>
+<span class="c">#    that's the entire setup</span>
 <span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
 <span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
 
-<span class="c"># 2. point at a lookaside store (once) — any S3-compatible host, named by</span>
-<span class="c">#    endpoint; reads never need credentials</span>
-<span class="r">$</span> waldo lookaside set s3://s3.us-east-2.amazonaws.com/my-bucket/lookaside
-<span class="r">$</span> waldo lookaside login
+<span class="c"># 2. trust nothing — check everything: every committed shard, against its hash</span>
+<span class="r">$</span> waldo index verify
+<b>checked: 14 index(es), 7 manifest(s); declared 40 shard(s), 497713 docs, 2.8B tokens</b>
+<b>bytes:   40 object(s) confirmed present in the store (existence + size; --fetch re-hashes)</b>
+<b>ok</b>
 
-<span class="c"># 3. ingest any directory of data: convert, pack, push, write the manifest</span>
-<span class="r">$</span> waldo index ingest /tmp/gutenberg-raw core/books --name gutenberg-starter \
-      --license CC0-1.0
-<b>summary: 3 docs, 308632 tokens | 1.4 MB text → 395.2 KB zstd (3.5x) in 1 shard(s) | 1 uploaded, 0 already hosted</b>
-<b>manifest: core/books/gutenberg-starter.json</b>
-<b>next: review the diff, then commit with your DCO sign-off</b>
-<span class="r">$</span> git add core index.json &amp;&amp; git commit -s   <span class="c"># the sign-off is yours, not the tool's</span>
+<span class="c"># 3. see what the corpus holds — tokens, licenses, and the training math</span>
+<span class="r">$</span> waldo index summary
+<b>.: 7 corpus(es), 40 shard(s)</b>
+<b>  tokens  2.8B (reference-tokenizer estimate)</b>
+<b>by license:</b>
+<b>  CC-BY-4.0                18 shard(s)      2.0B tokens</b>
+<b>  CC0-1.0                   2 shard(s)     86.8M tokens   …</b>
+<b>  recommended rung: 90m (~75.7M params) — 37 tokens/param at 1 epoch</b>
 
-<span class="c"># 4. create and train a model on indexed paths</span>
+<span class="c"># 4. train on index paths — shards fetch anonymously, verify, and cache</span>
 <span class="r">$</span> waldo model init bookworm --preset 10m   <span class="c"># rungs 10m … 405b, or --params 42b</span>
-<b>initialized bookworm: 6 layers, 384 hidden, 6 heads (2 kv), ffn 1024, context 512, vocab 259 (byte) — ~9.5M params</b>
 <span class="r">$</span> waldo model train bookworm core/books
 <b>pretrain  step    12/12 (100.0%)  loss 3.2147  (avg10 3.7903)</b>
 <b>done: final loss 3.7903 (held-out 3.4355)</b>
 <b>run 1 complete — BOM pinned (1 manifests, index commit 8d04e24c3fbc)</b>
 
-<span class="c"># 5. talk to it, measure it, ship it — with its ancestry</span>
+<span class="c"># 5. talk to it, ship it with its ancestry — or take the data to your own tools</span>
 <span class="r">$</span> waldo chat bookworm
 <span class="r">$</span> waldo model export bookworm ~/bookworm-export
 <b>  model.safetensors (~9.5M params; provenance embedded in the safetensors metadata)</b>
 <b>  model.json</b>
-<b>  PROVENANCE.md (2 lineage events, 1 runs)</b></pre>
+<b>  PROVENANCE.md (2 lineage events, 1 runs)</b>
+<span class="r">$</span> waldo index export science --license "CC-BY-*" ~/corpus   <span class="c"># plain JSONL + EXPORT.json</span></pre>
     </div>
 
     <div class="grid cols-3">
@@ -427,6 +432,7 @@ PROVENANCE.md       ← the human-readable ancestry
         <h4>Get involved</h4>
         <ul>
           <li><a href="community.html">Community</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
         </ul>
