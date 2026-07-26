@@ -18,8 +18,6 @@ community.html      how to contribute, the roles, who's here, sponsors, badges
 about.html          the case for open source AI, how the project runs, the founder
 faq.html            questions answered, grouped by audience
 404.html            not in the index
-why.html, use-cases.html, contribute.html, contributors.html
-                    redirect stubs from the old page structure
 assets/style.css    the one shared stylesheet
 assets/main.js      nav toggle, scroll reveal, hero glimmer, corpus counter
 assets/favicon.svg  the stripes
