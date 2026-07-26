@@ -349,11 +349,50 @@ PROVENANCE.md       ← the human-readable ancestry
 
 <section class="block tinted">
   <div class="wrap reveal">
-    <div class="eyebrow">examples</div>
-    <h2>A commons you can train on — and a commons you can teach.</h2>
+    <div class="eyebrow">built to be built on</div>
+    <h2>A foundational corpus. Add your value on top.</h2>
     <p class="sub">
-      Pull the corpus and build models with a verifiable pedigree, or push your
-      own knowledge into the substrate models learn from. A few of the shapes
+      This is where open source shines: a shared, collaboratively maintained
+      base that nobody has to rebuild and everybody gets to build on — the way
+      companies build products on Linux rather than writing kernels. The corpus
+      is the foundation; <strong>differentiation happens above it</strong>.
+      Model providers pretrain clean bases here and layer their proprietary
+      fine-tuning, alignment, and domain skill on top. Companies feed the
+      corpus into stacks and models they already have. Both inherit the same
+      audit trail — and every improvement to the commons lifts everyone's
+      foundation at once.
+    </p>
+
+    <div class="grid cols-2">
+      <div class="term">
+        <div class="bar"><i></i><i></i><i></i><span>model builders — your base from the commons, your value on top</span></div>
+        <pre><span class="c"># pretrain a base on the shared corpus — the whole build declared</span>
+<span class="c"># in one reviewable file, every stage BOM-pinned</span>
+<span class="r">$</span> waldo compose build configs/base1b.yaml
+
+<span class="c"># then add what makes it yours: fork carries the lineage, and your</span>
+<span class="c"># proprietary SFT / domain anneal trains from a private tree — same</span>
+<span class="c"># toolchain, nothing published</span>
+<span class="r">$</span> waldo model fork base1b acme-assistant
+<span class="r">$</span> waldo train acme-assistant private/support-dialogues
+<span class="c"># the public BOM covers the foundation; your edge stays yours</span></pre>
+      </div>
+      <div class="term">
+        <div class="bar"><i></i><i></i><i></i><span>companies — feed the models and stacks you already run</span></div>
+        <pre><span class="c"># take exactly the license profile your product allows, as plain JSONL</span>
+<span class="r">$</span> waldo index export core science --license "CC-BY-4.0,CC0-1.0" ~/clean
+<b>exporting 22 shard(s): … + EXPORT.json</b>
+
+<span class="c"># now it's yours to use anywhere: continued pretraining of an existing</span>
+<span class="c"># open model, a RAG index, an eval set — your tools, your stack, with</span>
+<span class="c"># EXPORT.json carrying the pedigree into your compliance story</span></pre>
+      </div>
+    </div>
+
+    <p class="sub" style="margin-top:36px">
+      And the loop closes the open-source way: what you can openly license —
+      docs, knowledge bases, domain corpora — you contribute back, and every
+      model built on the foundation afterward knows it. A few of the shapes
       this takes:
     </p>
     <div class="grid cols-3">
