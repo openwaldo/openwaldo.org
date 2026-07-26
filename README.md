@@ -3,7 +3,7 @@
 The OpenWALDO project website — https://openwaldo.org
 
 > **Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.**
-> **Open WALDO.**
+> **OpenWALDO.**
 
 Plain static HTML/CSS, no build step, no external dependencies. Served by
 GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;

@@ -253,13 +253,41 @@
   </div>
 </section>
 
+<section class="block" id="badges">
+  <div class="wrap reveal">
+    <div class="eyebrow">// show your source</div>
+    <h2>Show your source — and let anyone check it.</h2>
+    <p class="sub">
+      If your model trains on indexed data, its bill of materials already
+      proves it — the badge just makes the claim visible. Put it on your model
+      card, your README, or your product page, and link it to the provenance
+      it stands for.
+    </p>
+    <div class="badge-row">
+      <img src="assets/badges/openwaldo-dark.svg" alt="Open Source AI — OpenWALDO, dark badge" width="232" height="52">
+      <img src="assets/badges/openwaldo-light.svg" alt="Open Source AI — OpenWALDO, light badge" width="232" height="52">
+    </div>
+    <pre class="snip"># markdown (model cards, READMEs)
+[![Open Source AI — OpenWALDO](https://openwaldo.org/assets/badges/openwaldo-dark.svg)](https://openwaldo.org)
+
+&lt;!-- html --&gt;
+&lt;a href="https://openwaldo.org"&gt;&lt;img src="https://openwaldo.org/assets/badges/openwaldo-dark.svg" alt="Open Source AI — OpenWALDO"&gt;&lt;/a&gt;</pre>
+    <p class="sub" style="font-size:15px">
+      The badge means something specific: the model’s training record chains
+      to a <code>waldo-index</code> commit, so the claim is checkable, not a
+      vibe. Swap <span class="mono">-dark</span> for
+      <span class="mono">-light</span> to match your page.
+    </p>
+  </div>
+</section>
+
 <div class="band">
   <div class="wrap reveal">
     <div class="eyebrow">// start here</div>
     <h2>The best time to join a commons is while it’s being built.</h2>
     <p class="sub">Run the ten-minute walkthrough, train a tiny model, read its provenance — you’ll get it.</p>
     <div class="cta-row" style="margin-top:32px">
-      <a class="btn" href="https://github.com/openwaldo/waldo/blob/main/README-WALKTHROUGH.md">The walkthrough</a>
+      <a class="btn" href="https://github.com/openwaldo">The walkthrough</a>
       <a class="btn ghost" href="https://github.com/openwaldo/waldo">Toolchain repo ↗</a>
       <a class="btn ghost" href="https://github.com/openwaldo/waldo-index">Index repo ↗</a>
     </div>
@@ -272,8 +300,8 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="wordmark" href="index.html" style="margin-bottom:16px"><span class="dot"></span>open<em>WALDO</em></a>
-        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">Open WALDO.</span></p>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><span class="dot"></span><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
       </div>
       <div>
         <h4>Project</h4>
@@ -295,10 +323,7 @@
       <div>
         <h4>Docs</h4>
         <ul>
-          <li><a href="https://github.com/openwaldo/waldo#readme">README</a></li>
-          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-WALKTHROUGH.md">Walkthrough</a></li>
-          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-INDEX.md">Index spec</a></li>
-          <li><a href="https://github.com/openwaldo/waldo/blob/main/README-TRAINING-FOUNDATION.md">Training foundation</a></li>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
         </ul>
       </div>
     </div>

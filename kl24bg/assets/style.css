@@ -419,17 +419,23 @@ footer.site { border-top: 1px solid var(--line); padding: 56px 0 40px; backgroun
 
 /* ---- FAQ ---- */
 .faq { }
-.faq .eyebrow { margin-top: 56px; }
-details.qa { border-bottom: 1px solid var(--line); }
+.faq .eyebrow { margin-top: 40px; }
 details.qa summary {
-  cursor: pointer; list-style: none; position: relative;
-  padding: 20px 40px 20px 0; font-weight: 700; font-size: 17.5px;
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center;
+  padding: 9px 0; font-weight: 700; font-size: 17.5px;
   letter-spacing: -0.2px;
 }
 details.qa summary::-webkit-details-marker { display: none; }
+/* Leader line from the end of the question to the +, centered on the text */
 details.qa summary::after {
-  content: "+"; position: absolute; right: 6px; top: 16px;
+  content: "+"; flex: 1; min-width: 64px; margin-left: 16px;
+  text-align: right; line-height: 1;
   color: var(--red); font-family: var(--mono); font-size: 22px; font-weight: 400;
+  background-image: linear-gradient(var(--line), var(--line));
+  background-repeat: no-repeat;
+  background-size: calc(100% - 30px) 1px;
+  background-position: 0 50%;
 }
 details.qa[open] summary::after { content: "–"; }
 details.qa summary:hover { color: var(--red); }
@@ -440,7 +446,7 @@ pre.snip {
   background: #0d0f15; border: 1px solid var(--line); border-radius: 10px;
   font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: var(--muted);
 }
-details.qa .a { padding: 0 0 24px; color: var(--muted); }
+details.qa .a { padding: 4px 0 18px; color: var(--muted); }
 details.qa .a p + p { margin-top: 12px; }
 details.qa .a strong { color: var(--ink); }
 code {
