@@ -45,6 +45,10 @@ $ python3 -m http.server -d . 8080
 # → http://localhost:8080
 ```
 
+Preview through the server, not `file://` — `404.html` uses absolute asset
+paths (GitHub Pages serves it for missing URLs at any depth), so opening it
+as a file renders unstyled.
+
 The `www.openwaldo.org` repo holds the redirect from www to the apex domain.
 
 Related repositories: [`openwaldo/waldo`](https://github.com/openwaldo/waldo)
