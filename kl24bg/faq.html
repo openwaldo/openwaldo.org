@@ -31,7 +31,7 @@
 
 <section class="page-hero">
   <div class="wrap">
-    <div class="eyebrow">// questions, answered</div>
+    <div class="eyebrow">questions, answered</div>
     <h1>Frequently asked <em>questions</em>.</h1>
     <p class="sub" style="font-size:19px">
       The short, practical answers. The long versions live in the
@@ -46,17 +46,19 @@
 
       <div class="eyebrow" style="margin-top:0">the basics</div>
 
+
       <details class="qa">
-        <summary>What exactly is OpenWALDO — a dataset, a tool, or a model?</summary>
+        <summary>What exactly is OpenWALDO — a dataset or a tool?</summary>
         <div class="a">
-          <p>All three layers, with the data at the center. <strong>The
-          index</strong> (<code>waldo-index</code>) is the corpus: a git
-          repository of curated, licensed, provenance-tracked training data.
-          <strong>The toolchain</strong> (the <code>waldo</code> CLI) is one
-          binary that manages the whole lifecycle — ingest, verify, train,
-          fork, chat, export. <strong>The models</strong> are what the project
-          builds from the corpus to prove the whole approach works — every one
-          carrying a verifiable bill of materials.</p>
+          <p>Both, with the data at the center. <strong>The index</strong>
+          (<code>waldo-index</code>) is the corpus: a git repository of
+          curated, licensed, provenance-tracked training data. <strong>The
+          toolchain</strong> (the <code>waldo</code> CLI) is one binary that
+          manages the whole lifecycle — ingest, verify, train, fork, chat,
+          export. What OpenWALDO is <em>not</em> is a model vendor: the models
+          are what <strong>you</strong> build from the corpus. The project may
+          publish small reference examples to prove the pipeline, but the
+          product is the source, not the binary.</p>
         </div>
       </details>
 
@@ -76,28 +78,53 @@
       </details>
 
       <details class="qa">
-        <summary>I run an AI lab. How does OpenWALDO fit into how we already train?</summary>
+        <summary>Why does open source matter?</summary>
         <div class="a">
-          <p><strong>Use it as your base layer — and spend your effort on the
-          data that makes your models different.</strong> Every lab
-          independently re-collects the same foundational corpus: the books,
-          the wikis, the code, the papers, the law. That work is
-          undifferentiated, expensive, and legally fraught — and it’s exactly
-          what a commons is for. Pull OpenWALDO as the substrate for a
-          from-scratch base model, or augment your existing training mix with
-          its license-clean corpora, and put your researchers on the curation,
-          synthesis, and post-training that actually distinguish your models.
-          OpenWALDO isn’t competing with your models; it’s the part of every
-          model that never should have been a competition.</p>
-          <p>And you get something no private data pipeline can give you:
-          <strong>a provable answer to “what is this model based on?”</strong>
-          Training on indexed data pins a bill of materials — the exact index
-          commit, manifest hashes, and per-shard licenses — so your customers,
-          your counsel, and your regulators can verify the claim instead of
-          taking your word for it. When part of the diet is OpenWALDO, that
-          part of the audit is already done, in public. Ship the
-          <a href="community.html#badges">OpenWALDO badge</a> with your model and
-          the claim is one click from its proof.</p>
+          <p>Because it’s the only mechanism humanity has found for building
+          technology that strangers can trust <em>without permission and
+          without taking anyone’s word for it</em>. Source, licenses, and
+          provenance replace reputation with verification: anyone can read it,
+          anyone can rebuild it, anyone can fix it, and no vendor can take it
+          away. That’s not ideology — it’s how collaboration outcompeted
+          secrecy in software, decade after decade. AI is the newest layer of
+          critical infrastructure, and it’s the only one trying to skip that
+          step.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What has open source accomplished — and who depends on it?</summary>
+        <div class="a">
+          <p>Practically everything, and practically everyone. Linux runs
+          every one of the world’s top 500 supercomputers, every major cloud,
+          and — as Android — most of the phones on Earth. Apache and Nginx
+          serve most of the web; OpenSSL encrypts it; the internet itself runs
+          on open implementations of open protocols. Git is how software is
+          written, Kubernetes is how it’s run, Python is the language AI is
+          built in, and GCC and LLVM compile all of it. Audits routinely find
+          open source components in <strong>over ninety percent of commercial
+          codebases</strong> — every bank, government, hospital, and car
+          depends on it, whether they know it or not. The pattern is a
+          century’s worth of evidence compressed into thirty years: the shared
+          foundation wins.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Why aren’t today’s “open source” models actually open source?</summary>
+        <div class="a">
+          <p>Bluntly: because you can’t see the source. Weights are the
+          <em>compiled output</em> of training — releasing them is releasing a
+          binary. Many open-weight models do carry genuinely open licenses
+          (Apache-2.0, MIT) — and the license isn’t the problem. <strong>A
+          license can only open what’s included</strong>, and what’s never
+          included is the training data, the curation, and the provenance that
+          produced the weights. However permissive the terms, that’s
+          <strong>freeware with a press release</strong>. Open source has a
+          definition, and it has always meant the source: you can inspect it,
+          verify it, rebuild it, and change it. Until a model ships with its
+          data — Weights, Artifacts, Licenses, Data, Origins, all five — the
+          words don’t apply.</p>
         </div>
       </details>
 
@@ -128,7 +155,34 @@
         </div>
       </details>
 
-      <div class="eyebrow">using the corpus</div>
+      <div class="eyebrow">for AI labs &amp; model builders</div>
+
+
+      <details class="qa">
+        <summary>I run an AI lab. How does OpenWALDO fit into how we already train?</summary>
+        <div class="a">
+          <p><strong>Use it as your base layer — and spend your effort on the
+          data that makes your models different.</strong> Every lab
+          independently re-collects the same foundational corpus: the books,
+          the wikis, the code, the papers, the law. That work is
+          undifferentiated, expensive, and legally fraught — and it’s exactly
+          what a commons is for. Pull OpenWALDO as the substrate for a
+          from-scratch base model, or augment your existing training mix with
+          its license-clean corpora, and put your researchers on the curation,
+          synthesis, and post-training that actually distinguish your models.
+          OpenWALDO isn’t competing with your models; it’s the part of every
+          model that never should have been a competition.</p>
+          <p>And you get something no private data pipeline can give you:
+          <strong>a provable answer to “what is this model based on?”</strong>
+          Training on indexed data pins a bill of materials — the exact index
+          commit, manifest hashes, and per-shard licenses — so your customers,
+          your counsel, and your regulators can verify the claim instead of
+          taking your word for it. When part of the diet is OpenWALDO, that
+          part of the audit is already done, in public. Ship the
+          <a href="community.html#badges">OpenWALDO badge</a> with your model and
+          the claim is one click from its proof.</p>
+        </div>
+      </details>
 
       <details class="qa">
         <summary>What can I do with the corpus?</summary>
@@ -145,7 +199,7 @@
       </details>
 
       <details class="qa">
-        <summary>Can I use the data with existing models and training stacks?</summary>
+        <summary>Can I use OpenWALDO with existing models and training stacks?</summary>
         <div class="a">
           <p>Yes. Shards are plain <strong>zstd-compressed JSONL</strong> at
           stable URLs, verified by sha256 — any training pipeline that can
@@ -162,12 +216,65 @@
       <details class="qa">
         <summary>What hardware do I need to train something?</summary>
         <div class="a">
-          <p>A laptop, to start. The smallest rungs of the growth ladder
-          (10–100M parameters) train on Apple Silicon via MLX or any single
-          GPU — the ten-minute walkthrough produces a real, provenanced model
-          on a MacBook. Bigger rungs use the same commands on bigger machines:
-          PyTorch for single/multi-GPU Linux boxes, torchtitan for multi-node.
-          The tooling scales; your ambition and compute budget set the rung.</p>
+          <p>A laptop, to start — with expectations set honestly. The smallest
+          rungs of the growth ladder (10–100M parameters) train on Apple
+          Silicon via MLX or any single GPU, and the ten-minute walkthrough
+          produces a real, provenanced model on a MacBook. But a model that
+          size generates <strong>incoherent baby babble</strong> —
+          English-shaped, grammatical even, and meaningless. That rung exists
+          to prove the pipeline and the provenance chain, not to talk to.
+          Useful models take bigger machines and the same commands: PyTorch
+          for single/multi-GPU Linux boxes, torchtitan for multi-node. The
+          tooling scales; your ambition and compute budget set the rung.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What’s in the corpus, license-wise?</summary>
+        <div class="a">
+          <p>Only content that is <strong>openly licensed and freely
+          redistributable</strong> — nothing gated, nothing noncommercial,
+          nothing no-derivatives. That means public-domain works, openly
+          licensed text (attribution and share-alike styles), and open source
+          code — <strong>both permissive and copyleft/GNU-licensed</strong>.
+          Copyleft content is included deliberately (it roughly doubles the
+          clean pool), and because every shard carries its license tag, it’s
+          trivially filterable: if you want to ensure no copyleft reaches your
+          training mix, exclude those tags and train on exactly the license
+          profile you choose.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Can I use OpenWALDO models and data commercially?</summary>
+        <div class="a">
+          <p>That’s the intent — the official tree deliberately excludes
+          noncommercial and no-derivative licenses. Obligations that do exist
+          (attribution for CC-BY, share-alike tags, code NOTICE files) are
+          recorded per shard, so you — and your counsel — can see exactly
+          what applies and train on precisely the license profile your
+          product allows. The index makes compliance <em>auditable</em>;
+          what your situation requires is between you and your lawyers, as
+          with any open source license question.</p>
+        </div>
+      </details>
+
+      <div class="eyebrow">for companies &amp; organizations</div>
+
+
+      <details class="qa">
+        <summary>As a company, what should we add to the corpus so AI models know about us?</summary>
+        <div class="a">
+          <p>Anything you want the world’s models to answer correctly about —
+          and are willing to openly license: product documentation, manuals,
+          API references, tutorials, knowledge bases, spec sheets, release
+          notes, published research, industry expertise. Plain text, Markdown,
+          JSONL, HTML, or EPUB — the converter senses each file’s format. One
+          ingest and one DCO-signed pull request later, every model trained on
+          the tree knows your products, <strong>with provenance instead of
+          hallucination</strong> — and the manifests record your company as
+          the source, permanently. <a href="community.html">The contribution
+          flow</a> walks through it end to end.</p>
         </div>
       </details>
 
@@ -184,7 +291,8 @@
         </div>
       </details>
 
-      <div class="eyebrow">contributing</div>
+      <div class="eyebrow">for contributors &amp; curators</div>
+
 
       <details class="qa">
         <summary>How do I contribute data?</summary>
@@ -216,6 +324,22 @@
       </details>
 
       <details class="qa">
+        <summary>I know a great dataset. How do I request that it be reviewed and included?</summary>
+        <div class="a">
+          <p>Propose it in the open: open an issue on the
+          <a href="https://github.com/openwaldo/waldo-index">waldo-index
+          repo</a> — or raise it on <a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack</a> —
+          describing what the data is, where it lives upstream, and the
+          evidence that the <em>underlying documents</em> are openly licensed
+          (the license bar judges documents, not a bundle’s compilation
+          license). The strongest proposal is a pull request with the fetcher
+          and ingest done, but a well-documented pointer is a real
+          contribution too: a reviewer or corpus deputy can pick it up from
+          there.</p>
+        </div>
+      </details>
+
+      <details class="qa">
         <summary>I don’t have data. How else can I help?</summary>
         <div class="a">
           <p>Four other ways: <strong>code</strong> (the Go toolchain —
@@ -225,7 +349,10 @@
           data PRs is as valuable as the data itself), and
           <strong>compute</strong> (the larger rungs of the growth ladder run
           on donated or funded cluster time). Docs, examples, and evangelism
-          all count too.</p>
+          all count too. And the simplest way to start is just to show up:
+          <a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">join
+          the Slack</a>, say hello, and pick a <a href="community.html">role</a>
+          that fits.</p>
         </div>
       </details>
 
@@ -241,21 +368,26 @@
         </div>
       </details>
 
-      <div class="eyebrow">models &amp; auditing</div>
+      <div class="eyebrow">trust, auditing &amp; rights</div>
+
 
       <details class="qa">
-        <summary>How do I audit a model that came from OpenWALDO?</summary>
+        <summary>How do I audit a model built on OpenWALDO?</summary>
         <div class="a">
-          <p>Every model carries a <strong>bill of materials</strong>: the
-          exact index commit, the manifest hashes it consumed, the recipe,
-          tokenizer, and backend of every training run — written into
-          <code>model.json</code> and shipped human-readable as
-          <code>PROVENANCE.md</code> on export, with lineage chained across
-          forks. To audit: read the BOM, check out the index at the pinned
-          commit, and run <code>waldo index verify --fetch</code> to confirm
-          every referenced shard exists and matches its hash. At that point
-          you can inspect any byte the model trained on — or rebuild the
-          model yourself from the same inputs.</p>
+          <p>To be precise: models don’t come <em>from</em> OpenWALDO — they’re
+          built <em>on</em> it, by whoever trains them. When the
+          <code>waldo</code> tooling does the training, it embeds a
+          <strong>bill of materials</strong> automatically: the exact index
+          commit, the manifest hashes consumed, the recipe, tokenizer, and
+          backend of every run — written into <code>model.json</code> and
+          shipped human-readable as <code>PROVENANCE.md</code>, with lineage
+          chained across forks. Builders using their own training stacks are
+          strongly encouraged to embed or distribute the same BOM with their
+          models. To audit one: read the BOM, check out the index at the
+          pinned commit, and run <code>waldo index verify --fetch</code> to
+          confirm every referenced shard exists and matches its hash. At that
+          point you can inspect any byte the model trained on — or rebuild it
+          yourself from the same inputs.</p>
         </div>
       </details>
 
@@ -274,16 +406,15 @@
       </details>
 
       <details class="qa">
-        <summary>Can I use OpenWALDO models and data commercially?</summary>
+        <summary>How do I find out whether my content is in the corpus?</summary>
         <div class="a">
-          <p>That’s the intent — the official tree deliberately excludes
-          noncommercial and no-derivative licenses. Obligations that do exist
-          (attribution for CC-BY, share-alike tags, code NOTICE files) are
-          recorded per shard, so you — and your counsel — can see exactly
-          what applies and train on precisely the license profile your
-          product allows. The index makes compliance <em>auditable</em>;
-          what your situation requires is between you and your lawyers, as
-          with any open source license question.</p>
+          <p>Look — everything is public and inspectable. Every manifest in
+          the index records its sources by name, upstream origin, version,
+          and hash, so searching the tree for your site, name, or project
+          answers most questions in seconds. And because every shard is
+          anonymously downloadable, you can inspect the actual records, not
+          just the metadata. If you find your content and want it gone, see
+          the next question — removal is a first-class operation.</p>
         </div>
       </details>
 

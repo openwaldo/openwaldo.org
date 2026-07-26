@@ -34,8 +34,11 @@ body {
 
 ::selection { background: var(--red); color: #fff; }
 
-a { color: var(--cream); text-decoration-color: var(--red); text-underline-offset: 3px; }
-a:hover { color: var(--red); }
+a {
+  color: var(--cream); text-underline-offset: 3px;
+  text-decoration-color: var(--faint); text-decoration-thickness: 1px;
+}
+a:hover { color: var(--red); text-decoration-color: var(--red); }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
@@ -110,6 +113,7 @@ nav.links a[aria-current="page"] {
   font-family: var(--mono); font-size: 13px; letter-spacing: 2.5px;
   text-transform: uppercase; color: var(--red); margin-bottom: 22px;
 }
+.eyebrow::before { content: "// "; }
 h1.title {
   font-size: clamp(24px, 3.6vw, 40px);
   line-height: 1.25; letter-spacing: -1px; font-weight: 800;
@@ -484,7 +488,12 @@ code {
   background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
 }
 .rung .size { font-family: var(--mono); font-weight: 800; color: var(--red); font-size: 19px; }
-.rung .size small { display: block; color: var(--faint); font-weight: 400; font-size: 12.5px; margin-top: 4px; }
+.rung .size small { display: block; color: var(--faint); font-weight: 400; font-size: 12.5px; margin-top: 6px; line-height: 1.5; }
+.rung .size small hr {
+  border: none; width: 22px; height: 2px; border-radius: 2px;
+  background: var(--red); opacity: .75;
+  margin: 7px 0;
+}
 .rung p { color: var(--muted); font-size: 15px; margin-top: 6px; }
 
 /* ---- responsive ---- */
