@@ -13,15 +13,12 @@
 
 <header class="site">
   <div class="navbar">
-    <a class="wordmark" href="index.html"><span class="dot"></span>open<em>WALDO</em></a>
+    <a class="wordmark" href="index.html"><span class="dot"></span><em>OpenWALDO</em></a>
     <button id="menu-btn" aria-label="Menu">☰</button>
     <nav class="links">
-      <a href="why.html">Why open source AI</a>
       <a href="how.html" aria-current="page">How it works</a>
-      <a href="use-cases.html">Use cases</a>
-      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
       <a href="faq.html">FAQ</a>
-      <a href="contributors.html">Contributors</a>
       <a href="about.html">About</a>
       <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
     </nav>
@@ -239,6 +236,70 @@
   </div>
 </section>
 
+<section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">examples</div>
+    <h2>A commons you can train on — and a commons you can teach.</h2>
+    <p class="sub">
+      Pull the corpus and build models with a verifiable pedigree, or push your
+      own knowledge into the substrate models learn from. A few of the shapes
+      this takes:
+    </p>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Teach every model your product</h3>
+        <p>Openly license your docs, guides, and knowledge bases, ingest them
+        with one command, and open a PR. Every model trained on the tree
+        afterward knows your product — with provenance instead of
+        hallucination.</p>
+      </div>
+      <div class="card">
+        <h3>Internal &amp; domain models</h3>
+        <p>The same toolchain works on a private tree: <span class="mono">waldo
+        index init</span>, ingest internal data, train or fork domain models —
+        with a BOM your compliance team can actually read. Nothing has to be
+        published.</p>
+      </div>
+      <div class="card">
+        <h3>Auditable AI for regulated work</h3>
+        <p>Finance, healthcare, government: when the auditor asks “what is this
+        model built from?”, the answer is a signed, hash-pinned record — not a
+        shrug. License partitioning and takedown are built into the format.</p>
+      </div>
+      <div class="card">
+        <h3>Sovereign &amp; public AI</h3>
+        <p>A model whose entire training input is inspectable, license-clean,
+        and rebuildable inside your own borders. Where it was trained stops
+        mattering, because what it was trained on is on the record.</p>
+      </div>
+      <div class="card">
+        <h3>Reproducible research</h3>
+        <p>A published model anyone can replay: same index commit, same data,
+        same recipe, same architecture. Ablations and dataset studies become
+        diffs against a pinned tree instead of archaeology.</p>
+      </div>
+      <div class="card">
+        <h3>Clean-room model supply</h3>
+        <p>Building a product on a model? Per-shard SPDX tags let you train
+        from precisely the license profile your product allows — include or
+        exclude by tag, and ship the audit trail with it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap reveal">
+    <div class="eyebrow">// the incentive</div>
+    <h2>The corpus is the commons. The models are proof it works.</h2>
+    <p class="sub">Everything you contribute is carried — by hash, by license, by name — in every model that learns from it.</p>
+    <div class="cta-row" style="margin-top:32px">
+      <a class="btn" href="community.html">Contribute your first corpus</a>
+      <a class="btn ghost" href="about.html">Why this matters</a>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <footer class="site">
@@ -251,9 +312,7 @@
       <div>
         <h4>Project</h4>
         <ul>
-          <li><a href="why.html">Why open source AI</a></li>
           <li><a href="how.html">How it works</a></li>
-          <li><a href="use-cases.html">Use cases</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -261,8 +320,7 @@
       <div>
         <h4>Get involved</h4>
         <ul>
-          <li><a href="contribute.html">Contribute</a></li>
-          <li><a href="contributors.html">Contributors &amp; sponsors</a></li>
+          <li><a href="community.html">Community</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
         </ul>

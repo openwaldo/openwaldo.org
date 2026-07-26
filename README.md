@@ -20,36 +20,28 @@ everything in `kl24bg/` back to the repo root (replacing the coming-soon
 ```
 index.html          coming soon (pre-launch placeholder)
 kl24bg/            the actual site, pre-launch:
-index.html          home — the thesis and the WALDO checklist
-why.html            the case: open weights is not open source
-how.html            the machinery: index, lookaside, CLI, license bar, ladder
-use-cases.html      companies, institutions, builders
-contribute.html     how to contribute: data, code, hosting, curation
-about.html          the founder and the why
+index.html          home — the thesis, live corpus counter, WALDO checklist
+how.html            the machinery: index, lookaside, CLI, license bar, ladder, examples
+community.html      how to contribute, corpus priorities, who's here, sponsors
+about.html          the case for open source AI, how the project runs, the founder
+faq.html            questions answered + the Based-on-OpenWALDO badges
 404.html            not in the index
+why.html, use-cases.html, contribute.html, contributors.html
+                    redirect stubs from the old page structure
 assets/style.css    the one shared stylesheet
-assets/main.js      nav toggle, scroll reveal, hero letter glow
+assets/main.js      nav toggle, scroll reveal, hero glimmer, corpus counter
 assets/favicon.svg  the stripes
 ```
 
 ## The corpus counter
 
-The front page's stats strip (tokens, documents, size, licenses) reads
-`assets/stats.json`, which is generated — not hand-maintained — by walking a
-`waldo-index` checkout's metadata (root `index.json` → directory indexes →
-manifests → shards):
-
-```console
-$ make stats     # assumes the checkout at ../waldo-index; override with INDEX=…
-python3 tools/corpus-stats.py ../waldo-index -o kl24bg/assets/stats.json
-wrote kl24bg/assets/stats.json: 35,682,197 tokens, 106,262 docs, 7 licenses across 7 manifest(s)
-```
-
-Re-run it and commit whenever the index grows (a CI job or cron can do the
-same; eventually this pulls from the repository in realtime). The JSON also
-records the index commit and generation date, which the strip displays as its
-provenance chip. The strip's numbers count up on scroll, and the license
-spectrum bar shows each license's share of tokens.
+The front page's stats strip (tokens, documents, size, licenses) loads live
+from the status feed the index repo publishes:
+`https://openwaldo.github.io/waldo-index/status.json`. Nothing in this repo
+generates or stores those numbers — they update whenever the index does. The
+feed records the index commit and generation date, which the strip displays
+as its provenance chip; the numbers count up on scroll, and the license
+spectrum bar shows each license's share of tokens (hover for exact counts).
 
 ## Editing
 

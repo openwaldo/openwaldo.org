@@ -13,15 +13,12 @@
 
 <header class="site">
   <div class="navbar">
-    <a class="wordmark" href="index.html"><span class="dot"></span>open<em>WALDO</em></a>
+    <a class="wordmark" href="index.html"><span class="dot"></span><em>OpenWALDO</em></a>
     <button id="menu-btn" aria-label="Menu">☰</button>
     <nav class="links">
-      <a href="why.html">Why open source AI</a>
       <a href="how.html">How it works</a>
-      <a href="use-cases.html">Use cases</a>
-      <a href="contribute.html">Contribute</a>
+      <a href="community.html">Community</a>
       <a href="faq.html">FAQ</a>
-      <a href="contributors.html">Contributors</a>
       <a href="about.html">About</a>
       <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
     </nav>
@@ -33,7 +30,7 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">// open source AI, actually</div>
+    <div class="eyebrow">// Here's Waldo! Open source AI, for real.</div>
     <h1 class="title">
       Open <span class="k">W</span>eights.
       Open <span class="k">A</span>rtifacts.
@@ -50,8 +47,8 @@
       finally carry its source.
     </p>
     <div class="cta-row">
-      <a class="btn" href="why.html">Read the case</a>
-      <a class="btn ghost" href="contribute.html">Start contributing</a>
+      <a class="btn" href="about.html">Read the case</a>
+      <a class="btn ghost" href="community.html">Start contributing</a>
     </div>
   </div>
 </section>
@@ -89,7 +86,7 @@
 <section class="block flush tinted">
   <div class="wrap reveal">
     <div class="eyebrow">the checklist</div>
-    <h2>“Open” is not a vibe. It’s five things — and the name is the checklist.</h2>
+    <h2>“Open” is five things — and "WALDO" is the checklist.</h2>
     <p class="sub">
       Labs release weights, withhold everything that made them, and collect the
       word “open” anyway. WALDO is what open has to enumerate before it’s
@@ -152,85 +149,7 @@
       </p>
     </div>
     <div class="cta-row">
-      <a class="btn ghost" href="why.html">The full argument →</a>
-    </div>
-  </div>
-</section>
-
-<section class="block tinted">
-  <div class="wrap reveal">
-    <div class="eyebrow">the three parts</div>
-    <h2>Curation lives in git. Bytes live in federated storage. Models carry their source.</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <span class="tag">01 · the index</span>
-        <h3>A git repo of curated metadata</h3>
-        <p>For every shard of every corpus: <em>what</em> it is (sha256), <em>where it came
-        from</em> (sources, licenses), <em>how it was derived</em> (recipe), and <em>where it
-        lives</em> (a URL). Human-reviewable, contributed by pull request.</p>
-      </div>
-      <div class="card">
-        <span class="tag">02 · the lookaside</span>
-        <h3>Federated, content-addressed storage</h3>
-        <p>The actual training bytes, hosted by contributors themselves — any S3
-        bucket or static HTTPS host. Dumb blobs, anonymous reads, every byte
-        verified against its hash.</p>
-      </div>
-      <div class="card">
-        <span class="tag">03 · the waldo CLI</span>
-        <h3>One binary, the whole lifecycle</h3>
-        <p>Ingest data deterministically, verify the tree, train, fork, chat,
-        and export models — every training run records a bill of materials
-        pinning exactly the data that made it.</p>
-      </div>
-    </div>
-
-    <div class="term">
-      <div class="bar"><i></i><i></i><i></i><span>the whole loop — one machine, ten minutes</span></div>
-      <pre><span class="c"># the toolchain: one binary, installed once</span>
-<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
-
-<span class="c"># data: contribute inside a checkout of the index repo, git-style</span>
-<span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
-<span class="r">$</span> waldo index ingest /tmp/my-data core/books
-<span class="r">$</span> git add core index.json &amp;&amp; git commit -s &amp;&amp; git push   <span class="c"># the PR is the contribution</span>
-
-<span class="c"># models: train on indexed paths, with full lineage</span>
-<span class="r">$</span> waldo model init bookworm
-<span class="r">$</span> waldo model train bookworm core/books
-<b>trained: bookworm — BOM-pinned to waldo-index@8f3a2c1</b>
-<span class="r">$</span> waldo chat bookworm</pre>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap reveal">
-    <div class="eyebrow">who it’s for</div>
-    <h2>A commons anyone can train on — and anyone can teach.</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Contributors</h3>
-        <p>One fetcher, one ingest run, one DCO-signed pull request — and every
-        model trained afterward carries your contribution in its BOM. Data,
-        code, hosting, curation: it’s all open.</p>
-      </div>
-      <div class="card">
-        <h3>Companies</h3>
-        <p>Publish your documentation and knowledge into the commons so every
-        model knows your product — or run the same toolchain on a private tree
-        and build domain models your legal team can actually audit.</p>
-      </div>
-      <div class="card">
-        <h3>Researchers &amp; builders</h3>
-        <p>Replayable models with a provable pedigree: same index commit, same
-        data, same recipe. From a laptop-scale pipeline proof to a from-scratch
-        foundation model.</p>
-      </div>
-    </div>
-    <div class="cta-row">
-      <a class="btn" href="use-cases.html">Explore use cases</a>
-      <a class="btn ghost" href="how.html">See how it works</a>
+      <a class="btn ghost" href="about.html">The full argument →</a>
     </div>
   </div>
 </section>
@@ -241,7 +160,7 @@
     <h2>The whole industry keeps asking where AI training data comes from. We built the answer: <span class="red">Here’s&nbsp;WALDO.</span></h2>
     <p class="sub">The data origins were never impossible to find. You just needed the index.</p>
     <div class="cta-row" style="margin-top:32px">
-      <a class="btn" href="contribute.html">Join the project</a>
+      <a class="btn" href="community.html">Join the project</a>
     </div>
   </div>
 </div>
@@ -258,9 +177,7 @@
       <div>
         <h4>Project</h4>
         <ul>
-          <li><a href="why.html">Why open source AI</a></li>
           <li><a href="how.html">How it works</a></li>
-          <li><a href="use-cases.html">Use cases</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -268,8 +185,7 @@
       <div>
         <h4>Get involved</h4>
         <ul>
-          <li><a href="contribute.html">Contribute</a></li>
-          <li><a href="contributors.html">Contributors &amp; sponsors</a></li>
+          <li><a href="community.html">Community</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
         </ul>

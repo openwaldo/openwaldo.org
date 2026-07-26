@@ -119,7 +119,32 @@ h1.title {
   -webkit-text-fill-color: transparent; color: transparent;
   animation: glimmer 6s ease-in-out infinite;
 }
-h1.title .k { color: var(--red); -webkit-text-fill-color: var(--red); }
+/* The red initials carry the same band. Their background is sized to the
+   whole title (--hw) and shifted by each letter's offset within it (--kl,
+   both set by JS), so the shine crosses each letter exactly as the main
+   band passes over it. */
+h1.title .k {
+  /* Pad the background box past the glyph's ink (bold W overhangs its
+     layout box) so the parent's cream fill can't peek through; the
+     negative margin keeps layout identical. */
+  padding: 0.1em 0.14em;
+  margin: 0 -0.14em;
+  background:
+    linear-gradient(90deg,
+      rgba(255,178,168,0) 42%, rgba(255,178,168,1) 50%, rgba(255,178,168,0) 58%)
+      no-repeat 0 0 / calc(var(--hw, 2000px) * 2.5) 100%,
+    linear-gradient(var(--red), var(--red));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: glimmer-k 6s ease-in-out infinite;
+}
+@keyframes glimmer-k {
+  0%   { background-position: calc(-1.5 * var(--hw, 2000px) - var(--kl, 0px)) 0, 0 0; }
+  30%  { background-position: calc(0px - var(--kl, 0px)) 0, 0 0; }
+  50%  { background-position: calc(0px - var(--kl, 0px)) 0, 0 0; }
+  80%  { background-position: calc(-1.5 * var(--hw, 2000px) - var(--kl, 0px)) 0, 0 0; }
+  100% { background-position: calc(-1.5 * var(--hw, 2000px) - var(--kl, 0px)) 0, 0 0; }
+}
 h1.title .waldo {
   display: block; margin-top: 16px;
   font-size: clamp(52px, 8.5vw, 96px);
@@ -146,7 +171,7 @@ h1.title .waldo {
   100% { background-position: 100% 0, 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  h1.title, h1.title .waldo { animation: none; }
+  h1.title, h1.title .waldo, h1.title .k { animation: none; }
 }
 .hero p.lede {
   margin-top: 26px; font-size: clamp(17px, 2vw, 21px);
@@ -175,9 +200,9 @@ h1.title .waldo {
   padding: 88px 0 80px;
 }
 .corpus-count::before {
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 5px;
   background: repeating-linear-gradient(135deg,
-    rgba(255,74,61,.55) 0 12px, transparent 12px 24px);
+    var(--red) 0 12px, var(--cream) 12px 24px);
   pointer-events: none;
 }
 .count-head {
