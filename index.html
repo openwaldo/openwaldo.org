@@ -3,42 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OpenWALDO — coming soon</title>
-<meta name="description" content="Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins. OpenWALDO.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f4eddd'/%3E%3Crect y='4' width='64' height='10' fill='%23e6392f'/%3E%3Crect y='24' width='64' height='10' fill='%23e6392f'/%3E%3Crect y='44' width='64' height='10' fill='%23e6392f'/%3E%3C/svg%3E">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #0a0c12; color: #ece7dc; min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 24px; gap: 26px;
-  }
-  .stripe {
-    position: fixed; left: 0; right: 0; height: 5px;
-    background: repeating-linear-gradient(135deg, #ff4a3d 0 12px, #f4eddd 12px 24px);
-  }
-  .stripe.top { top: 0; } .stripe.bottom { bottom: 0; }
-  .wordmark {
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    font-weight: 700; font-size: 26px; letter-spacing: -0.5px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .wordmark .dot {
-    width: 18px; height: 18px; border-radius: 5px;
-    background: repeating-linear-gradient(180deg, #ff4a3d 0 4.5px, #f4eddd 4.5px 9px);
-  }
-  .wordmark em { font-style: normal; color: #ff4a3d; }
-  h1 { font-size: clamp(22px, 4vw, 34px); font-weight: 800; letter-spacing: -0.8px; max-width: 720px; line-height: 1.3; }
-  h1 .waldo { color: #ff4a3d; }
-  p { color: #9aa3b5; font-size: 17px; }
-</style>
+<title>OpenWALDO — Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.</title>
+<meta name="description" content="OpenWALDO is open source AI: a shared, auditable corpus of training data and a toolchain that builds models the way open source builds software — inspectable, verifiable, rebuildable by anyone.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/">
 </head>
 <body>
-  <div class="stripe top"></div>
-  <div class="wordmark"><span class="dot"></span><em>OpenWALDO</em></div>
-  <h1>Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></h1>
-  <p>Coming soon.</p>
-  <div class="stripe bottom"></div>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><span class="dot"></span><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="how.html">How it works</a>
+      <a href="community.html">Community</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Here's WALDO: The Only Open Source AI</div>
+    <h1 class="title">
+      Open <span class="k">W</span>eights.
+      Open <span class="k">A</span>rtifacts.
+      Open <span class="k">L</span>icenses.
+      Open <span class="k">D</span>ata.
+      Open <span class="k">O</span>rigins.
+      <span class="waldo">OpenWALDO.</span>
+    </h1>
+    <p class="lede">
+      <strong>The training data is the model’s source code.</strong> Without the 
+      source code, it is freeware: you can run it, but you cannot
+      inspect it, verify it, or recreate it. OpenWALDO is the source code for AI —
+      curated in git, licensed per shard, verifiable by hash — so a model can
+      finally carry it.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="community.html">Join the project</a>
+      <a class="btn ghost" href="https://github.com/openwaldo">Start contributing</a>
+    </div>
+  </div>
+</section>
+
+<section class="corpus-count" data-stats>
+  <div class="wrap">
+    <div class="count-head">
+      <div class="eyebrow">the current corpus</div>
+    </div>
+    <div class="count-grid">
+      <div class="count-stat" data-stat="tokens">
+        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="l">tokens indexed</div>
+      </div>
+      <div class="count-stat" data-stat="docs">
+        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="l">documents</div>
+      </div>
+      <div class="count-stat" data-stat="bytes">
+        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="l">of training data</div>
+      </div>
+      <div class="count-stat" data-stat="licenses">
+        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="l">open licenses, every shard tagged</div>
+      </div>
+    </div>
+    <div class="license-bar" data-stat="bar"></div>
+    <div class="count-foot">
+      <a class="count-commit" data-stat="note" href="https://github.com/openwaldo/waldo-index">live from the public index</a>
+    </div>
+  </div>
+</section>
+
+<section class="block flush tinted">
+  <div class="wrap reveal">
+    <div class="eyebrow">the checklist</div>
+    <h2>"WALDO" is the definition of "open".</h2>
+    <p class="sub">
+      Labs release weights, withhold everything that made them, and collect the
+      word “open” anyway. WALDO is what open has to enumerate before it’s
+      honest — and each letter is something this project makes
+      <strong>verifiable, not aspirational</strong>.
+    </p>
+    <div class="table-scroll">
+      <table class="check-table">
+        <tr><th></th><th>open…</th><th>delivered by</th></tr>
+        <tr>
+          <td class="letter">W</td><td class="what">Weights</td>
+          <td class="how">All weights are open and includes its bill of materials: the index commit, manifest hashes, and recipe that produced it.</td>
+        </tr>
+        <tr>
+          <td class="letter">A</td><td class="what">Artifacts</td>
+          <td class="how">Shards, manifests, and all source data are content-addressed artifacts — the hash is the identity; anyone can verify all bytes.</td>
+        </tr>
+        <tr>
+          <td class="letter">L</td><td class="what">Licenses</td>
+          <td class="how">Per-shard SPDX labels, faithfully recorded — any downstream consumer can include or exclude by tag.</td>
+        </tr>
+        <tr>
+          <td class="letter">D</td><td class="what">Data</td>
+          <td class="how">The corpus itself, indexed and anonymously fetchable — the source code of the model.</td>
+        </tr>
+        <tr>
+          <td class="letter">O</td><td class="what">Origins</td>
+          <td class="how">Provenance all the way down: source registries, fetch logs, DCO sign-offs.</td>
+        </tr>
+      </table>
+    </div>
+    <p class="sub">
+      A WALDO compliant model is open when all five are open. Anything less is
+      nothing more than freeware.
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">why this exists</div>
+    <h2>Open source AI doesn’t exist. <span class="red">Until now.</span></h2>
+    <div class="prose">
+      <p>
+        The AI industry has spent years arguing about where models come from —
+        but the fight was never really about the models. It’s about the
+        <strong>data and training material behind them</strong>. Did a frontier
+        lab pull your work into its training set? Did another lab distill and
+        train from that lab’s models? Nobody can say, because
+        <strong>nobody can audit what went into any of them</strong>. Every
+        accusation, lawsuit, and ban in AI today is downstream of that one
+        blind spot.
+      </p>
+      <p>
+        That is exactly what open source is for: <strong>clarity, confidence,
+        and assurances</strong> — trust through verification, not reputation.
+        And open source has won this argument far more than once. Linux runs
+        every cloud, every supercomputer, and most of the phones on Earth.
+        Apache and Nginx serve the web. Git is how the world writes software.
+        Kubernetes runs its infrastructure, Python is the language AI itself
+        is built in, and GCC and LLVM compile all of it. Each one won the same
+        way: source, licenses, and provenance made trust crystal clear. A truly
+        open, WALDO-compatible model brings that property to AI — every source
+        auditable, every claim checkable, leveraging and furthering the work of
+        others, collaboratively.
+      </p>
+    </div>
+    <div class="cta-row">
+      <a class="btn ghost" href="about.html">Read more →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap reveal">
+    <div class="eyebrow">no more copies of copies</div>
+    <h2>Get it from the <span class="red">source</span>.</h2>
+    <p class="sub" style="font-size:19px">
+      AI is becoming a copy of a copy of a copy — models distilling training
+      data from other models, drifts toward <strong>model collapse</strong>.
+      OpenWALDO brings the sources together in a distributable format that
+      anyone can trust, audit, and leverage directly — no distilling from
+      other models, no inheriting someone else’s copy, get it directly, 
+      <strong>from the source</strong>.
+    </p>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap reveal">
+    <div class="eyebrow">Where's the data?</div>
+    <h2>Here's <span class="red">WALDO.</span></h2>
+    <p class="sub">The source code for AI.</p>
+    <div class="cta-row" style="margin-top:32px">
+      <a class="btn" href="community.html">Join the project</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><span class="dot"></span><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="how.html">How it works</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
 </body>
 </html>

@@ -9,28 +9,21 @@ Plain static HTML/CSS, no build step, no external dependencies. Served by
 GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 `.nojekyll` disables Jekyll processing).
 
-**Pre-launch staging:** the site currently lives under `kl24bg/` while the
-root `index.html` shows a "coming soon" page — GitHub Pages has no
-server-side auth, so the unpublished path is the gate. To launch: move
-everything in `kl24bg/` back to the repo root (replacing the coming-soon
-`index.html`) and push.
-
 ## Layout
 
 ```
-index.html          coming soon (pre-launch placeholder)
-kl24bg/            the actual site, pre-launch:
 index.html          home — the thesis, live corpus counter, WALDO checklist
 how.html            the machinery: index, lookaside, CLI, license bar, ladder, examples
-community.html      how to contribute, corpus priorities, who's here, sponsors
+community.html      how to contribute, the roles, who's here, sponsors, badges
 about.html          the case for open source AI, how the project runs, the founder
-faq.html            questions answered + the Based-on-OpenWALDO badges
+faq.html            questions answered, grouped by audience
 404.html            not in the index
 why.html, use-cases.html, contribute.html, contributors.html
                     redirect stubs from the old page structure
 assets/style.css    the one shared stylesheet
 assets/main.js      nav toggle, scroll reveal, hero glimmer, corpus counter
 assets/favicon.svg  the stripes
+assets/badges/      the Open Source AI — OpenWALDO badges
 ```
 
 ## The corpus counter
