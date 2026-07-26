@@ -47,40 +47,84 @@
 
 <section class="block flush">
   <div class="wrap reveal">
-    <div class="eyebrow">four ways in</div>
-    <h2>Data, code, hosting, curation — every one of them moves the project.</h2>
-    <div class="grid cols-2">
+    <div class="eyebrow">the roles</div>
+    <h2>A commons runs on named roles, not anonymous crowds. Pick yours.</h2>
+    <p class="sub">
+      Some are one pull request; the best ones are ongoing. Every role below is
+      real work the project needs this year — and every one of them is on the
+      record, attached to your name.
+    </p>
+    <div class="grid cols-3">
       <div class="card">
         <span class="tag">contribute data</span>
-        <h3>Grow the corpus</h3>
-        <p>The heart of the project. Gather or generate openly licensed data —
-        or write a fetcher for a public source — run one ingest, and open a
-        DCO-signed pull request. Your commit <em>is</em> the contribution, and
-        every model trained afterward carries it in its bill of materials.</p>
+        <h3>Data contributors</h3>
+        <p>The heart of the project. Gather or generate openly licensed data,
+        run one ingest, open a DCO-signed pull request. Your commit <em>is</em>
+        the contribution, and every model trained afterward carries it in its
+        bill of materials.</p>
       </div>
       <div class="card">
-        <span class="tag">contribute code</span>
-        <h3>Build the toolchain</h3>
-        <p>The <span class="mono">waldo</span> CLI is one Go binary: converters,
-        fetchers, training backends (MLX, PyTorch, torchtitan), verification,
-        stores. Ordinary open source development — issues, PRs, reviews — in
-        the <a href="https://github.com/openwaldo/waldo">toolchain repo</a>.</p>
+        <span class="tag">ongoing stewardship</span>
+        <h3>Corpus deputies</h3>
+        <p>Every major corpus needs a named steward: someone who owns its
+        relationship with the upstream source, keeps it fresh, handles
+        takedowns and license corrections, and answers for its quality. An
+        ongoing role with your name on a piece of the commons.</p>
       </div>
       <div class="card">
-        <span class="tag">contribute hosting</span>
-        <h3>Host &amp; mirror the bytes</h3>
+        <span class="tag">judgment</span>
+        <h3>Curators &amp; reviewers</h3>
+        <p>Review data PRs, check license claims, verify sources. The license
+        bar is enforced by humans with taste and rigor — the same peer review
+        that keeps every serious open source project honest.</p>
+      </div>
+      <div class="card">
+        <span class="tag">independent verification</span>
+        <h3>Auditors</h3>
+        <p>The whole design exists to be checked — so check it. Re-hash shards
+        (<span class="mono">verify --fetch</span>), audit license claims
+        against the underlying documents, reproduce ingests, replay models
+        from their BOMs. Every audit that passes strengthens the commons;
+        every one that fails, fixes it.</p>
+      </div>
+      <div class="card">
+        <span class="tag">toolchain</span>
+        <h3>Maintainers &amp; programmers</h3>
+        <p>One Go binary needs owners: converters, fetchers, training backends
+        (MLX, PyTorch, torchtitan), verification, stores. Ordinary open source
+        development — issues, PRs, reviews — in the
+        <a href="https://github.com/openwaldo/waldo">toolchain repo</a>.</p>
+      </div>
+      <div class="card">
+        <span class="tag">infrastructure</span>
+        <h3>Hosts &amp; mirrors</h3>
         <p>Shard bytes live in federated, contributor-hosted storage — any S3
         bucket or static HTTPS host. Hosting a corpus or running a mirror makes
         the commons faster and more durable, and content addressing means your
         copy is verifiably identical.</p>
       </div>
       <div class="card">
-        <span class="tag">contribute judgment</span>
-        <h3>Curate &amp; review</h3>
-        <p>Review data PRs, check license claims, verify sources, improve the
-        docs. The license bar is enforced by humans with taste and rigor — the
-        same peer review that keeps every serious open source project
-        honest.</p>
+        <span class="tag">companies</span>
+        <h3>Adopters who use, test, validate</h3>
+        <p>Consumption is a contribution: train on the corpus, export it into
+        your stack, run it at scale — and report what you find. Gaps, quality
+        issues, license questions surfaced by real use harden the commons
+        faster than anything else.</p>
+      </div>
+      <div class="card">
+        <span class="tag">companies</span>
+        <h3>Teach the models who you are</h3>
+        <p>Openly license what you want the world's models to know — your
+        products, services, docs, industry expertise — and ingest it. <strong>We
+        want AI models to know about everyone</strong>, and the companies in
+        the tree get provenance instead of hallucination.</p>
+      </div>
+      <div class="card">
+        <span class="tag">community</span>
+        <h3>Community members</h3>
+        <p>Docs, triage, first-timer help, spreading the word, asking the
+        question nobody else asked. Commons are made of people before they're
+        made of data.</p>
       </div>
     </div>
   </div>
@@ -91,14 +135,21 @@
     <div class="eyebrow">the contribution flow</div>
     <h2>One ingest, one sign-off, one pull request.</h2>
     <p class="sub">
-      Contributions happen inside a checkout of the index repo, git-style. The
-      <span class="mono">-s</span> is your DCO attestation — made with your own
-      git identity — that the data is redistributable under the license you
-      declared. The diff plus the URLs in it are the entire contribution.
+      Contributions happen inside a checkout of the index repo, git-style.
+      Start with data you already have: your documentation, product guides,
+      knowledge bases, manuals, published research, industry expertise —
+      anything you can openly license. Plain text, Markdown, JSONL records,
+      HTML, or EPUB; the converter senses each file's format. If your company
+      wants the world's AI models to know your products and your field,
+      <strong>this is the mechanism</strong> — with provenance instead of
+      hallucination. The <span class="mono">-s</span> is your DCO attestation —
+      made with your own git identity — that the data is redistributable under
+      the license you declared. The diff plus the URLs in it are the entire
+      contribution.
     </p>
 
     <div class="term">
-      <div class="bar"><i></i><i></i><i></i><span>your first data contribution</span></div>
+      <div class="bar"><i></i><i></i><i></i><span>your first data contribution — data you already have</span></div>
       <pre><span class="c"># 0. install waldo, fork + clone the index</span>
 <span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
 
@@ -107,19 +158,21 @@
 <span class="r">$</span> waldo lookaside set s3://s3.us-east-2.amazonaws.com/my-bucket/lookaside
 <span class="r">$</span> waldo lookaside login
 
-<span class="c"># 2. get raw data — gathered yourself, or via a fetcher (worked examples)</span>
-<span class="r">$</span> go run ../waldo/fetchers/fetch-gutenberg -ids 1342,84,1661 -out /tmp/raw
-<b>collected 3 book(s), 1.4 MB, in 4s → /tmp/raw</b>
-<b>wrote /tmp/raw/fetch-log.json (per-file provenance for `waldo ingest`)</b>
+<span class="c"># 2. your data, ready at /tmp/raw — docs, guides, articles, Q&amp;A —</span>
+<span class="c">#    as .txt / .md / .jsonl / .html / .epub (format sensed per file)</span>
+<span class="r">$</span> ls /tmp/raw
+<b>guide-1.txt  guide-2.txt  guide-3.txt  guide-4.txt</b>
 
-<span class="c"># 3. ingest: convert deterministically, pack, push shards, write the manifest</span>
-<span class="r">$</span> waldo index ingest /tmp/raw core/books --name gutenberg-set --license CC0-1.0
-<b>ingested 3 docs (308632 tokens) into 1 shard(s): 1 uploaded, 0 already hosted</b>
-<b>manifest: core/books/gutenberg-set.json</b>
+<span class="c"># 3. ingest: declare what it is and where it came from — convert</span>
+<span class="c">#    deterministically, pack, push shards, write the manifest</span>
+<span class="r">$</span> waldo index ingest /tmp/raw industry/acme --name acme-docs --license CC-BY-4.0 \
+      --source "name=acme-docs,origin=Acme Inc product documentation,version=2026-07,url=https://docs.acme.example"
+<b>ingested 4 docs (8164 tokens) into 1 shard(s): 1 uploaded, 0 already hosted</b>
+<b>manifest: industry/acme/acme-docs.json</b>
 <b>next: review the diff, then commit with your DCO sign-off</b>
 
 <span class="c"># 4. sign it, push it, open the PR</span>
-<span class="r">$</span> git add core index.json &amp;&amp; git commit -s -m "Add gutenberg-set"
+<span class="r">$</span> git add industry index.json &amp;&amp; git commit -s -m "Add Acme product docs"
 <span class="r">$</span> git push  <span class="c"># → open the pull request; CI re-verifies the whole tree</span></pre>
     </div>
 
@@ -195,54 +248,6 @@
         rented nodes build the first useful models, and the foundation rung
         needs partners. Donated cluster time moves the whole project up a
         stage.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block tinted">
-  <div class="wrap reveal">
-    <div class="eyebrow">who’s here</div>
-    <h2>Everyone who takes part is on the record. The list is young — that’s the invitation.</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Gregory Kurtzer</h3>
-        <p class="mono" style="color:var(--red); font-size:13px; margin-top:2px">founder</p>
-        <p>Founder of OpenWALDO — and of CentOS, Warewulf, Singularity/Apptainer,
-        and Rocky Linux before it. <a href="about.html">The whole story →</a></p>
-      </div>
-      <div class="card">
-        <h3>You?</h3>
-        <p class="mono" style="color:var(--red); font-size:13px; margin-top:2px">contributor</p>
-        <p>Data, code, hosting, review — the first pull request puts you on the
-        project’s permanent record, DCO sign-off and all.</p>
-      </div>
-      <div class="card">
-        <h3>Your company?</h3>
-        <p class="mono" style="color:var(--red); font-size:13px; margin-top:2px">organization</p>
-        <p>Every organization that takes part in the commons — contributing
-        data or engineering, hosting, or sponsoring — gets listed here.
-        <a href="https://github.com/openwaldo">Reach out on GitHub →</a></p>
-      </div>
-    </div>
-    <div class="grid cols-2">
-      <div class="card">
-        <div class="sponsor-mark">CIQ</div>
-        <p>CIQ is the founding sponsor of OpenWALDO — an infrastructure
-        software company built on open source, supporting the communities and
-        technologies that run serious computing. Sponsorship here means what
-        it says: backing the commons, not owning it. The index, the toolchain,
-        and the models belong to the community, license-clean and forkable,
-        no matter whose logo appears on this page.</p>
-        <p style="margin-top:14px"><a href="https://ciq.com">ciq.com ↗</a></p>
-      </div>
-      <div class="card">
-        <h3>What sponsorship supports</h3>
-        <p>Sponsors keep the unglamorous parts moving: engineering time on the
-        toolchain, hosting and mirrors for shard storage, CI that re-verifies
-        every data PR, and compute for the growth ladder’s bigger rungs. In
-        keeping with the project’s funding-honest roadmap, what sponsorship
-        buys is progress — never control.</p>
       </div>
     </div>
   </div>
