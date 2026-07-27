@@ -149,12 +149,13 @@
         <div class="a">
           <p>We do use it — with credit where it’s due: EleutherAI’s Common
           Pile proved that license-clean pretraining works at all, and
-          OpenWALDO ingests it. But <em>ingesting</em> a dataset is very
+          OpenWALDO is ingesting it. But <em>ingesting</em> a dataset is very
           different from <em>pointing at</em> one, because a dataset is not an
           index.</p>
-          <p><strong>Mixed licenses in one bundle.</strong> The Common Pile
-          blends public domain, CC-BY, CC-BY-SA, and permissive content per
-          document. At ingest, OpenWALDO partitions everything into
+          <p><strong>Mixed licenses in one bundle.</strong> Across the corpus,
+          the Common Pile blends public domain, CC-BY, CC-BY-SA, and permissive
+          content — each document under its own license. At ingest, OpenWALDO
+          partitions everything into
           single-license shards with per-shard SPDX tags — so a consumer can
           take exactly the license profile they want and prove what they
           took.</p>
@@ -184,9 +185,12 @@
           behind an access agreement, and OpenWALDO shards must be anonymously
           fetchable by anyone. <strong>Metadata gaps</strong>: Common Corpus
           has honest open ambitions, but parts lack per-document license
-          records — and license metadata can’t be trusted blindly (when
-          EleutherAI audited the top 1,000 CC-marked web domains, barely half
-          survived verification). The sourcing rule that falls out: fetch from
+          records — and license metadata can’t be trusted blindly. Even
+          EleutherAI, curating the Common Pile, concluded that “identifying the
+          license a particular work has is surprisingly hard and automatic tools
+          … are not reliable enough to meet our standards,” which is why
+          per-document provenance, not a bundle license, is the bar. The
+          sourcing rule that falls out: fetch from
           the most upstream source we can reach ourselves, and accept a
           curated compilation only when the compilation itself is openly
           licensed, versioned, and recorded as the source. The goal is an
@@ -402,8 +406,8 @@
           on donated or funded cluster time). Docs, examples, and evangelism
           all count too. And the simplest way to start is just to show up:
           <a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">join
-          the Slack</a>, say hello, and pick a <a href="community.html">role</a>
-          that fits.</p>
+          the Slack</a>, say hello, and find your
+          <a href="community.html">place to plug in</a>.</p>
         </div>
       </details>
 
