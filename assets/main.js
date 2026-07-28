@@ -35,7 +35,9 @@ if (heroTitle) {
 
 // Corpus counter: fill the front-page stats strip live from the status
 // feed the index repo publishes. Numbers count up when the strip scrolls
-// into view; the license bar is a token-share spectrum from the same data.
+// into view; the license bar is a token-share spectrum from the same data;
+// the corpus cloud is a physics playground of glassy spheres, one per
+// corpus, area proportional to tokens.
 const STATS_URL = 'https://openwaldo.github.io/waldo-index/status.json';
 const statsBox = document.querySelector('[data-stats]');
 if (statsBox) {
@@ -73,7 +75,7 @@ if (statsBox) {
     requestAnimationFrame(tick);
   };
 
-  const PALETTE = ['#ff4a3d', '#f4eddd', '#ff8a5c', '#8fa0bd', '#ffb454',
+  const PALETTE = ['#ff4a3d', '#ddd2ba', '#ff8a5c', '#8fa0bd', '#ffb454',
                    '#d92e23', '#c9b8a0', '#7d8aa5', '#ffd9d5', '#58627a'];
 
   fetch(STATS_URL)
@@ -90,15 +92,25 @@ if (statsBox) {
       setStat('licenses', licenses.length, null,
         licenses.map(([name]) => name).join(', '));
 
-      const bar = statsBox.querySelector('[data-stat="bar"]');
-      if (bar && s.tokens > 0) {
-        const pctOf = (t) => (t / s.tokens) * 100;
-        const pctLabel = (p) => (p >= 10 ? String(Math.round(p)) : p >= 1 ? p.toFixed(1) : '<1');
-        // Custom hover tooltip for the bar (native title tips are too slow)
-        const tip = document.createElement('div');
-        tip.className = 'bar-tip';
-        document.body.appendChild(tip);
-        bar.addEventListener('mousemove', (e) => {
+      // license → color for the spectrum bar (and the modal's mini-bar)
+      const licColor = {};
+      licenses.forEach(([name], i) => { licColor[name] = PALETTE[i % PALETTE.length]; });
+      const pctLabel = (p) => (p >= 10 ? String(Math.round(p)) : p >= 1 ? p.toFixed(1) : '<1');
+      const numFmt = (n) => {
+        const [v, u] = split(n, NUM);
+        return fmt(v, v) + u;
+      };
+      const sizeFmt = (n) => {
+        const [v, u] = split(n, SIZE);
+        return fmt(v, v) + u;
+      };
+
+      // Custom hover tooltip, shared (native title tips are too slow)
+      const tip = document.createElement('div');
+      tip.className = 'bar-tip';
+      document.body.appendChild(tip);
+      const attachTip = (host) => {
+        host.addEventListener('mousemove', (e) => {
           const seg = e.target.closest('[data-tip-head]');
           if (!seg) { tip.classList.remove('show'); return; }
           tip.innerHTML = '';
@@ -109,21 +121,224 @@ if (statsBox) {
           tip.style.top = e.clientY + 'px';
           tip.classList.add('show');
         });
-        bar.addEventListener('mouseleave', () => tip.classList.remove('show'));
+        host.addEventListener('mouseleave', () => tip.classList.remove('show'));
+      };
 
-        const addSegment = (color, tokens, head, body) => {
+      const fillLicenseBar = (barEl, licEntries, total) => {
+        licEntries.forEach(([name, info]) => {
+          const p = pctLabel((info.tokens / total) * 100) + '%';
           const seg = document.createElement('span');
-          seg.style.flexGrow = tokens;
-          seg.style.background = color;
-          seg.dataset.tipHead = head;
-          seg.dataset.tipBody = body;
-          seg.setAttribute('aria-label', head + ' — ' + body);
-          bar.appendChild(seg);
+          seg.style.flexGrow = info.tokens;
+          seg.style.background = licColor[name] || '#58627a';
+          seg.dataset.tipHead = name;
+          seg.dataset.tipBody = p + ' · ' + info.tokens.toLocaleString() + ' tokens';
+          seg.setAttribute('aria-label', name + ' — ' + p);
+          barEl.appendChild(seg);
+        });
+      };
+
+      // ---- the corpus map: a treemap of the index tree ----
+      // The corpus IS a tree (core/…, science/…, post-train/…), so draw it
+      // as one: rectangles tiled edge to edge, area proportional to tokens,
+      // colored by top-level branch. A du(1) of the commons.
+      const map = statsBox.querySelector('[data-stat="map"]');
+      const corpora = (s.corpora || []).slice().sort((a, b) => b.tokens - a.tokens);
+      if (map && corpora.length && s.tokens > 0) {
+        const modal = document.querySelector('[data-stat="modal"]');
+        // tiles wear their dominant license's color — the same palette as
+        // the spectrum bar above, so the bar doubles as the map's legend
+        const hexToRgb = (hex) => {
+          const n = parseInt(hex.slice(1), 16);
+          return (n >> 16) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255);
         };
-        licenses.forEach(([name, info], i) => {
-          const p = pctLabel(pctOf(info.tokens)) + '%';
-          addSegment(PALETTE[i % PALETTE.length], info.tokens, name,
-            p + ' · ' + info.tokens.toLocaleString() + ' tokens');
+        const dominantLicense = (c) => {
+          const ls = Object.entries(c.licenses || {})
+            .sort((a, b) => (b[1].tokens || 0) - (a[1].tokens || 0));
+          return ls.length ? ls[0][0] : null;
+        };
+
+        // squarified treemap: lay rows along the shorter side, growing each
+        // row while it improves the worst tile aspect ratio
+        const squarify = (values, x, y, w, h) => {
+          const rects = [];
+          let items = values.slice();
+          while (items.length) {
+            const vertical = w < h;
+            const side = vertical ? w : h;
+            const worst = (row) => {
+              const sum = row.reduce((t, v) => t + v.a, 0);
+              const thick = sum / side;
+              return Math.max(...row.map((v) => {
+                const len = v.a / thick;
+                return Math.max(len / thick, thick / len);
+              }));
+            };
+            let row = [items[0]], rest = items.slice(1);
+            while (rest.length && worst(row.concat(rest[0])) <= worst(row)) {
+              row.push(rest[0]);
+              rest = rest.slice(1);
+            }
+            const thick = row.reduce((t, v) => t + v.a, 0) / side;
+            let off = 0;
+            row.forEach((v) => {
+              const len = v.a / thick;
+              rects.push(vertical
+                ? { v, x: x + off, y, w: len, h: thick }
+                : { v, x, y: y + off, w: thick, h: len });
+              off += len;
+            });
+            if (vertical) { y += thick; h -= thick; } else { x += thick; w -= thick; }
+            items = rest;
+          }
+          return rects;
+        };
+
+        const openModal = (c) => {
+          if (!modal) return;
+          const put = (key, fill) => {
+            const el = modal.querySelector(`[data-m="${key}"]`);
+            if (el) { el.innerHTML = ''; fill(el); }
+          };
+          put('path', (el) => { el.textContent = c.path; });
+          put('name', (el) => { el.textContent = c.name; });
+          put('stats', (el) => {
+            [[numFmt(c.tokens), 'tokens', c.tokens], [numFmt(c.docs), 'documents', c.docs],
+             [sizeFmt(c.bytes), 'of data', c.bytes], [String(c.shards), 'shards', c.shards]]
+              .forEach(([n, l, exact]) => {
+                const d = document.createElement('div');
+                d.title = exact.toLocaleString();
+                d.innerHTML = '<div class="n"></div><div class="l"></div>';
+                d.querySelector('.n').textContent = n;
+                d.querySelector('.l').textContent = l;
+                el.appendChild(d);
+              });
+          });
+          const licEntries = Object.entries(c.licenses || {})
+            .sort((a, b) => (b[1].tokens || 0) - (a[1].tokens || 0));
+          put('bar', (el) => { fillLicenseBar(el, licEntries, c.tokens); attachTip(el); });
+          put('lics', (el) => {
+            licEntries.forEach(([name, info]) => {
+              const chip = document.createElement('span');
+              const dot = document.createElement('i');
+              dot.style.background = licColor[name] || '#58627a';
+              chip.append(dot, name + ' ' + pctLabel((info.tokens / c.tokens) * 100) + '%');
+              el.appendChild(chip);
+            });
+          });
+          put('sources', (el) => {
+            (c.sources || []).forEach((src) => {
+              const d = document.createElement('div');
+              d.className = 'src';
+              if (src.url) {
+                const a = document.createElement('a');
+                a.href = src.url;
+                a.textContent = src.name || src.url;
+                d.appendChild(a);
+              } else {
+                d.textContent = src.name || '';
+              }
+              const rest = [src.origin, src.version].filter(Boolean).join(' · ');
+              if (rest) d.append(' — ' + rest);
+              el.appendChild(d);
+            });
+            if (c.converted_by) {
+              const d = document.createElement('div');
+              d.className = 'src';
+              d.textContent = 'converted by ' + c.converted_by;
+              el.appendChild(d);
+            }
+          });
+          modal.hidden = false;
+          document.body.style.overflow = 'hidden';
+        };
+        const closeModal = () => {
+          if (modal) { modal.hidden = true; document.body.style.overflow = ''; }
+        };
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('.corpus-modal-close')) closeModal();
+          });
+          document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        }
+
+        let firstBuild = true;
+        const buildMap = () => {
+          map.innerHTML = '';
+          const W = map.clientWidth;
+          if (!W) return;
+          const H = Math.max(280, Math.min(460, Math.round(W * 0.4)));
+          map.style.height = H + 'px';
+          // honest areas, with a visibility floor: every corpus gets at
+          // least ~0.6% of the map so the long tail never vanishes; floored
+          // tiles say so in their tooltip
+          const area = W * H;
+          const floorA = area * 0.006;
+          let raw = corpora.map((c) => (c.tokens / s.tokens) * area);
+          raw = raw.map((a) => Math.max(a, floorA));
+          const k = area / raw.reduce((t2, a) => t2 + a, 0);
+          const values = corpora.map((c, i) => ({
+            c, a: raw[i] * k,
+            floored: (c.tokens / s.tokens) * area < floorA,
+          }));
+          squarify(values, 0, 0, W, H).forEach(({ v, x, y, w, h }, i) => {
+            const c = v.c;
+            const dom = dominantLicense(c);
+            const el = document.createElement('div');
+            el.className = 'tile';
+            el.style.left = (x + 1) + 'px';
+            el.style.top = (y + 1) + 'px';
+            el.style.width = Math.max(3, w - 2) + 'px';
+            el.style.height = Math.max(3, h - 2) + 'px';
+            el.style.setProperty('--tint', hexToRgb(licColor[dom] || '#58627a'));
+            el.style.setProperty('--in-delay', (firstBuild ? i * 0.035 : 0) + 's');
+            if (w > 30 && h > 17) {
+              // name scales with the box: as big as fits the width (mono
+              // chars are ~0.62em wide), capped by height and at 34px
+              const nameSize = Math.max(8, Math.min(
+                22, (w - 18) / (c.name.length * 0.9), h * 0.16));
+              const subSize = Math.max(9, Math.min(13, nameSize * 0.55));
+              const label = document.createElement('b');
+              label.textContent = c.name;
+              label.style.fontSize = nameSize + 'px';
+              el.appendChild(label);
+              const addSub = (text) => {
+                const sub = document.createElement('small');
+                sub.textContent = text;
+                sub.style.fontSize = subSize + 'px';
+                sub.style.lineHeight = '1.5';
+                el.appendChild(sub);
+              };
+              if (h > 54 && w > 90) addSub(numFmt(c.tokens) + ' tokens');
+              if (h > 140 && w > 190) {
+                addSub(numFmt(c.docs) + ' docs · ' + sizeFmt(c.bytes));
+                if (dom) addSub('mostly ' + dom);
+              }
+            }
+            el.dataset.tipHead = c.path;
+            el.dataset.tipBody = numFmt(c.tokens) + ' tokens · ' + numFmt(c.docs) +
+              ' docs · ' + sizeFmt(c.bytes) +
+              (dom ? '\nmostly ' + dom : '') +
+              (v.floored ? '\n(tile enlarged to stay visible)' : '') +
+              '\nclick for details';
+            el.setAttribute('role', 'button');
+            el.setAttribute('tabindex', '0');
+            el.setAttribute('aria-label', c.path + ' — ' + numFmt(c.tokens) + ' tokens');
+            const open = () => openModal(c);
+            el.addEventListener('click', open);
+            el.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+            });
+            map.appendChild(el);
+          });
+          firstBuild = false;
+        };
+
+        buildMap();
+        attachTip(map);
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(buildMap, 150);
         });
       }
 
@@ -143,4 +358,3 @@ if (statsBox) {
     })
     .catch(() => {});
 }
-

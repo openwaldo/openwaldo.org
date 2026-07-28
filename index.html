@@ -41,11 +41,11 @@
       <span class="waldo">OpenWALDO.</span>
     </h1>
     <p class="lede">
-      <strong>The training data is the model’s source code.</strong> Without the 
-      source code, it isn't open: you can run it, but you cannot
-      inspect it, verify it, or recreate it. OpenWALDO is the source code for AI —
-      curated in git, licensed per shard, verifiable by hash — so a model can
-      finally carry it.
+      <strong>The training data is the model’s source code.</strong> Open
+      means seeing the source: where every byte came from, its license, and
+      your rights to it. OpenWALDO is source code for AI — tracked in
+      git, licensed per shard, verifiable by hash — and contributing is one
+      pull request away.
     </p>
     <div class="cta-row">
       <a class="btn" href="community.html">Join the project</a>
@@ -77,12 +77,13 @@
         <div class="l">open licenses, every shard tagged</div>
       </div>
     </div>
-    <div class="license-bar" data-stat="bar"></div>
+    <div class="corpus-map" data-stat="map" aria-label="The index tree: corpora tiled by token share"></div>
     <div class="count-foot">
       <a class="count-commit" data-stat="note" href="https://github.com/openwaldo/waldo-index">live from the public index</a>
     </div>
   </div>
 </section>
+
 
 <section class="block flush tinted">
   <div class="wrap reveal">
@@ -228,6 +229,18 @@
   </div>
   <div class="stripe" style="margin-top:40px"></div>
 </footer>
+
+<div class="corpus-modal" data-stat="modal" hidden>
+  <div class="corpus-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cm-name">
+    <button class="corpus-modal-close" aria-label="Close">×</button>
+    <div class="eyebrow" data-m="path" style="margin-bottom:8px"></div>
+    <h3 id="cm-name" data-m="name"></h3>
+    <div class="m-stats" data-m="stats"></div>
+    <div class="license-bar m-bar" data-m="bar"></div>
+    <div class="m-licenses" data-m="lics"></div>
+    <div class="m-sources" data-m="sources"></div>
+  </div>
+</div>
 
 <script src="assets/main.js"></script>
 </body>
