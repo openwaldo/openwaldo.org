@@ -164,9 +164,9 @@
     art.className = 'post';
     art.id = meta.slug;
     art.innerHTML =
-      metaLine(meta) +
       (meta.logo ? '<img class="post-logo" src="' + esc(meta.logo) + '" alt="">' : '') +
       '<h2>' + esc(meta.title) + '</h2>' +
+      metaLine(meta) +
       '<div class="prose post-body">' + md2html(body) + '</div>';
     return art;
   };
