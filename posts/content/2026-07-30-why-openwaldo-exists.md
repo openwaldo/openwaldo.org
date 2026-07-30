@@ -15,7 +15,7 @@ many projects over the years and even had the opportunity to create some
 * [Warewulf](https://warewulf.org/): the cluster provisioning and management
   system that has been deploying HPC systems since 2001
 * [CentOS](https://www.centos.org/): the free, community rebuild of
-  enterprise Linux that ended up running a huge chunk of the internet
+  Enterprise Linux that ended up running a huge chunk of the internet
 * [Apptainer](https://apptainer.org/) (formerly Singularity Containers):
   containers built for HPC and scientific computing, now part of the Linux
   Foundation
@@ -23,7 +23,7 @@ many projects over the years and even had the opportunity to create some
   the community's answer when CentOS changed course, and the foundation that
   keeps it community-owned
 * [OpenELA](https://openela.org/): an association publishing the sources that
-  enterprise Linux distributions need to stay open
+  Enterprise Linux distributions need to stay open
 
 I did all of these because I like solving real problems and pain points for
 people, together with a community that enjoys collaborating. And I started
@@ -73,34 +73,55 @@ The data quite literally is the source code of the AI model.
 
 # The "open source" AI models
 
-Bluntly: people constantly say "open source" about freely available models
-and weights, and it isn't accurate. With a handful of honorable exceptions
-(AI2's OLMo publishes its training data, and EleutherAI trained Comma
-entirely on openly licensed text), the models being called open source are
-nothing of the sort. And even the exceptions are dataset drops from a single
-lab, not a commons anyone can contribute to.
+Now let's apply that source and binary framework to the models being
+released today.
 
-I'm not saying every company must open everything; that is their
-prerogative. But "open source" is getting a bad rap, because the term keeps
-getting attached to models nobody can see into.
+When a lab releases a model as "open," what it's actually releasing is the
+weights: the binary. Often the weights really do carry a genuinely open
+license, Apache or MIT, and you can download them, run them, fine-tune them,
+and ship them in products. That's genuinely useful, and it's easy to see why
+people reach for the words "open source" to describe it.
 
-Here's the confusion: the binary weights get released under a permissive
-license, so you can do almost anything you want with them. But the source is
-not open. If these models were in fact open source, we would know exactly
-what went into them. We could audit the input data and see how they were
-trained. We cannot. They're opaque boxes. That isn't open source; it's
-closed source that you're allowed to download.
+But remember what open source means, it means you freely get the source. But with
+these "open" models, the source, meaning the training data, stays behind closed
+doors. We can't see what went in, we can't audit it, and we can't rebuild the
+model from it. Measured against the definition that has served software for
+decades, an open-weight model is a freely distributable binary. Useful, yes.
+Open source, no.
 
-# Back to me...
+There are honorable mentions worth knowing about. AI2's OLMo publishes its
+training data alongside its weights, and EleutherAI trained Comma entirely
+on openly licensed text. Both deserve real credit. Even then, those are
+dataset releases from single labs, snapshots rather than a living commons
+anyone can contribute to.
 
-So I'm watching this argument play out. Some say these "open" models are
-dangerous because we don't know what's in them (irony), others yell "save
-open source!" and it's honestly just weird.
+None of this means companies are obligated to open everything (or anything);
+that's their call to make. The point is simpler: words matter. When "open
+source" gets attached to models nobody can see into, the term starts losing
+the meaning that made it trustworthy in the first place.
 
-Not because people on the internet are wrong and I need to correct them
-(granted, that urge exists, and sometimes I do). It's because there's an
-obvious fix that nobody is talking about: an open source place to
-collaborate on the source code of AI models itself.
+# Here's what I'm seeing...
+
+Some say these "open" models are dangerous because we don't know what's in
+them. Others are rallying around open source (even though these models are
+not open source).
+
+There is truth in both of these points! The opacity is real: nobody outside
+a lab can say what any given model learned from, and that should bother you
+whether you love these models or fear them. And the instinct to defend open
+source is right too, because the term has a meaning worth protecting; it
+built most of the software world we all rely on.
+
+Opening the data is indeed necessary, but it still isn't enough on its own.
+Even if a model starts from a fully open foundation, nothing stops anyone
+from training on top of it with whatever else they want. Unless the
+training record is open too, we still wouldn't know what's inside.
+
+So the answer has to be both halves working together: an open source
+training foundation, with data curated and licensed in the open, and a
+verifiable record of what each model was actually trained on, a training
+bill of materials. The foundation makes good models possible. The record
+makes them provable.
 
 # The solution
 
@@ -122,8 +143,10 @@ a pull request, tested for awesomeness, and merged. Strong, auditable
 provenance, running on a process the industry has trusted for twenty years.
 
 Couple that with properly licensed and audited data, and we have a corpus of
-knowledge that everyone can train on.
-[How it works](https://openwaldo.org/how.html) goes deeper.
+knowledge that everyone can train on. And models trained from it can carry a
+verifiable record, a bill of materials listing exactly which sources went
+in. That's the other half of trust: not just open source, but provable
+ingredients. [How it works](https://openwaldo.org/how.html) goes deeper.
 
 # Who cares?
 
@@ -157,7 +180,7 @@ I believe this project can reach tens of trillions of tokens, which is more
 than enough to train very large models, and eventually be additive to
 frontier models.
 
-There's also an opportunity to define a standard here: an AI Bill of
+That verifiable record deserves to become a standard: an AI Bill of
 Materials (AIBOM) that states exactly what went into a model. That lets any
 AI provider build from precisely the license profile they choose. Include
 Copyleft or exclude it; either way it's your call, per shard, on the record.
