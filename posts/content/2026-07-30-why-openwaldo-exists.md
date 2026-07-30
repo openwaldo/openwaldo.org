@@ -129,6 +129,15 @@ The simple version first: treat the AI source exactly like open source
 code. A community contributes it, reviews it, and licenses it, and anyone
 can build with it.
 
+OpenWALDO is a community-managed, openly licensed corpus of AI training
+data, plus the toolchain to contribute to it, verify it, and train from it.
+Weights, Artifacts, Licenses, Data, and Origins: open weights let you run
+and build; open artifacts and data let you see and rebuild exactly what a
+model is made of; open licenses tell you your rights to every piece; open
+origins trace every byte of training material to a real source and a
+responsible person. Together they turn "trust me" into "check for
+yourself."
+
 Now the mechanics. Tools like git already do this at planet scale for
 software, but they're built for text, not petabytes of training data. So
 OpenWALDO splits the job. A git repository holds the index: the metadata,
@@ -188,12 +197,12 @@ That choice simply doesn't exist anywhere else today.
 
 # The invitation
 
-Let's work together on this!
+Let's build this together!
 
 A corpus where contributors control what goes in, and AI providers get a
 common, open, and safe foundation, so they can focus on the real value-add
 in their models. That's what open source looks like when it's applied to AI.
 
-[See ya in the Slack!](https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g)
+[Join the Slack](https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g) and let's talk!
 
 Greg
