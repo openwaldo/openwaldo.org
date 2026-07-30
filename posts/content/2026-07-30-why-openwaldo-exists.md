@@ -103,14 +103,14 @@ the meaning that made it trustworthy in the first place.
 # Here's what I'm seeing...
 
 Some say these "open" models are dangerous because we don't know what's in
-them. Others are rallying around open source (even though these models are
-not open source).
+them. Others are rallying to defend open source itself.
 
-There is truth in both of these points! The opacity is real: nobody outside
-a lab can say what any given model learned from, and that should bother you
-whether you love these models or fear them. And the instinct to defend open
-source is right too, because the term has a meaning worth protecting; it
-built most of the software world we all rely on.
+There is truth in both of these positions! The opacity is real: nobody
+outside a lab can say what any given model learned from, and that should
+bother you whether you love these models or fear them. And defending open
+source is right too; the term has a meaning worth protecting, and it built
+most of the software world we all rely on. The trouble is that the thing
+being defended, in this case, isn't actually open source.
 
 Opening the data is indeed necessary, but it still isn't enough on its own.
 Even if a model starts from a fully open foundation, nothing stops anyone
