@@ -200,7 +200,11 @@ if (statsBox) {
             if (el) { el.innerHTML = ''; fill(el); }
           };
           put('path', (el) => { el.textContent = c.path; });
-          put('name', (el) => { el.textContent = c.name; });
+          put('name', (el) => { el.textContent = c.title || c.name; });
+          put('desc', (el) => {
+            el.textContent = c.description || '';
+            el.hidden = !c.description;
+          });
           put('stats', (el) => {
             [[numFmt(c.tokens), 'tokens', c.tokens], [numFmt(c.docs), 'documents', c.docs],
              [sizeFmt(c.bytes), 'of data', c.bytes], [String(c.shards), 'shards', c.shards]]
@@ -282,6 +286,7 @@ if (statsBox) {
           }));
           squarify(values, 0, 0, W, H).forEach(({ v, x, y, w, h }, i) => {
             const c = v.c;
+            const disp = c.title || c.name;
             const dom = dominantLicense(c);
             const el = document.createElement('div');
             el.className = 'tile';
@@ -295,10 +300,10 @@ if (statsBox) {
               // name scales with the box: as big as fits the width (mono
               // chars are ~0.62em wide), capped by height and at 34px
               const nameSize = Math.max(8, Math.min(
-                22, (w - 18) / (c.name.length * 0.9), h * 0.16));
+                22, (w - 18) / (disp.length * 0.9), h * 0.16));
               const subSize = Math.max(9, Math.min(13, nameSize * 0.55));
               const label = document.createElement('b');
-              label.textContent = c.name;
+              label.textContent = disp;
               label.style.fontSize = nameSize + 'px';
               el.appendChild(label);
               const addSub = (text) => {
@@ -308,21 +313,32 @@ if (statsBox) {
                 sub.style.lineHeight = '1.5';
                 el.appendChild(sub);
               };
+              if (c.description && h > 170 && w > 260) {
+                const d = document.createElement('span');
+                d.className = 'tile-desc';
+                d.textContent = c.description;
+                d.style.fontSize = Math.max(10, subSize) + 'px';
+                el.appendChild(d);
+              }
               if (h > 54 && w > 90) addSub(numFmt(c.tokens) + ' tokens');
               if (h > 140 && w > 190) {
                 addSub(numFmt(c.docs) + ' docs · ' + sizeFmt(c.bytes));
                 if (dom) addSub('mostly ' + dom);
               }
             }
-            el.dataset.tipHead = c.path;
-            el.dataset.tipBody = numFmt(c.tokens) + ' tokens · ' + numFmt(c.docs) +
+            el.dataset.tipHead = disp;
+            const shortDesc = (c.description || '').length > 110
+              ? c.description.slice(0, 109).trimEnd() + '…' : (c.description || '');
+            el.dataset.tipBody = (shortDesc ? shortDesc + '\n' : '') +
+              c.path + '\n' +
+              numFmt(c.tokens) + ' tokens · ' + numFmt(c.docs) +
               ' docs · ' + sizeFmt(c.bytes) +
               (dom ? '\nmostly ' + dom : '') +
               (v.floored ? '\n(tile enlarged to stay visible)' : '') +
               '\nclick for details';
             el.setAttribute('role', 'button');
             el.setAttribute('tabindex', '0');
-            el.setAttribute('aria-label', c.path + ' — ' + numFmt(c.tokens) + ' tokens');
+            el.setAttribute('aria-label', disp + ' — ' + numFmt(c.tokens) + ' tokens');
             const open = () => openModal(c);
             el.addEventListener('click', open);
             el.addEventListener('keydown', (e) => {
