@@ -224,6 +224,10 @@ h1.title .waldo {
   transition: border-color .15s ease, color .15s ease;
 }
 .count-commit:hover { border-color: var(--red); color: var(--ink); }
+.count-note-lede {
+  color: var(--muted); font-size: 16px;
+  margin: -34px 0 44px;
+}
 .count-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .count-stat { padding: 6px 18px; border-left: 1px solid var(--line); text-align: center; }
 .count-stat:first-child { border-left: none; }
@@ -313,6 +317,15 @@ h1.title .waldo {
 .type-chip.filter { cursor: pointer; background: none; }
 .type-chip.filter:hover { border-color: var(--red); color: var(--ink); }
 .type-chip.filter.on { border-color: var(--red); color: var(--red); }
+
+/* ---- walkthrough: architecture picker ---- */
+.arch-tabs { display: flex; gap: 12px; flex-wrap: wrap; }
+.arch-btn { font-family: var(--mono); font-size: 15px; }
+#wt .only-mac, #wt .only-linux { display: none; }
+#wt.arch-mac .only-mac { display: block; }
+#wt.arch-linux .only-linux { display: block; }
+#wt .prose h3 { margin-top: 44px; }
+#wt .term { margin-top: 20px; }
 
 /* ---- corpus map: a treemap of the index tree ---- */
 .corpus-map {
@@ -600,7 +613,15 @@ pre.snip {
   background: #0d0f15; border: 1px solid var(--line); border-radius: 10px;
   font-family: var(--mono); font-size: 12.5px; line-height: 1.7; color: var(--muted);
 }
-details.qa .a { padding: 4px 0 18px; color: var(--muted); }
+details.qa .a {
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: none;                 /* the box hangs off its question */
+  border-radius: 0 0 12px 12px;
+  padding: 18px 22px 20px;
+  margin: 2px 0 28px;               /* air before the next question */
+}
 details.qa .a p + p { margin-top: 12px; }
 details.qa .a strong { color: var(--ink); }
 code {

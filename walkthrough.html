@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Train your first model from scratch — OpenWALDO</title>
+<meta name="description" content="Ten minutes, one machine, full provenance: clone the public index, verify every byte, and train a from-scratch model that carries its own bill of materials.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Train your first model from scratch — OpenWALDO">
+<meta property="og:description" content="Ten minutes, one machine, full provenance: clone the public index, verify every byte, and train a from-scratch model that carries its own bill of materials.">
+<meta property="og:url" content="https://openwaldo.org/walkthrough.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/walkthrough.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/favicon.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="how.html">How it works</a>
+      <a href="community.html">Community</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">the walkthrough</div>
+    <h1>Train your first model <em>from scratch</em>.</h1>
+    <p class="sub" style="font-size:19px">
+      Ten minutes, one machine, full provenance. You’ll clone the public
+      index, verify every byte against its hash, and train a real model
+      whose entire existence — data, licenses, recipe — is on the record.
+    </p>
+    <p class="sub">
+      Set expectations honestly: a ~10M-parameter model trained on a slice
+      of the corpus generates <strong>English-shaped babble</strong> —
+      grammatical, charming, and meaningless. That’s the correct result at
+      this scale. What you’re really building is the discipline: a model
+      that carries its own bill of materials.
+    </p>
+  </div>
+</section>
+
+<section class="block flush" id="wt">
+  <div class="wrap">
+    <div class="arch-tabs" role="tablist" aria-label="Choose your machine">
+      <button class="btn arch-btn" data-arch="mac" role="tab">macOS · Apple Silicon</button>
+      <button class="btn ghost arch-btn" data-arch="linux" role="tab">Linux · NVIDIA GPU</button>
+    </div>
+
+    <div class="prose" style="margin-top:40px">
+      <h3>1. Install the toolchain</h3>
+      <p>
+        One Go binary, built from source (binary packages to follow), plus
+        <a href="https://docs.astral.sh/uv/"><span class="mono">uv</span></a> —
+        the training harness runs through it with dependencies resolved
+        automatically, so there’s no Python environment to set up.
+      </p>
+    </div>
+
+    <div class="term only-mac">
+      <div class="bar"><i></i><i></i><i></i><span>macOS — install</span></div>
+      <pre><span class="c"># prerequisites: git, Go 1.24+, and uv</span>
+<span class="r">$</span> brew install go uv
+
+<span class="c"># build and install the waldo binary</span>
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
+
+<span class="c"># training backend: MLX, auto-detected on Apple Silicon — nothing to configure</span></pre>
+    </div>
+    <div class="term only-linux">
+      <div class="bar"><i></i><i></i><i></i><span>Linux — install</span></div>
+      <pre><span class="c"># prerequisites: git, Go 1.24+, uv, and the NVIDIA driver for GPU training</span>
+<span class="r">$</span> sudo dnf install golang git   <span class="c"># or apt install golang-go git</span>
+<span class="r">$</span> curl -LsSf https://astral.sh/uv/install.sh | sh
+
+<span class="c"># build and install the waldo binary</span>
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
+
+<span class="c"># training backend: PyTorch, auto-detected on CUDA — add --gpus N for multi-GPU</span></pre>
+    </div>
+
+    <div class="prose">
+      <h3>2. Clone the public index</h3>
+      <p>
+        The checkout <em>is</em> the corpus: small, human-readable metadata
+        in git, with the actual training bytes fetched on demand from
+        federated storage and verified by hash. Consuming it needs no
+        account and no credentials.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>the index</span></div>
+      <pre><span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index</pre>
+    </div>
+
+    <div class="prose">
+      <h3>3. Trust nothing — verify everything</h3>
+      <p>
+        Before training on a single byte, check the whole tree: every
+        committed shard, against its recorded hash.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>verify</span></div>
+      <pre><span class="r">$</span> waldo index verify
+<b>checked: 14 index(es), 7 manifest(s); declared 40 shard(s), 497713 docs, 2.8B tokens</b>
+<b>bytes:   40 object(s) confirmed present in the store (existence + size; --fetch re-hashes)</b>
+<b>ok</b></pre>
+    </div>
+
+    <div class="prose">
+      <h3>4. See what the corpus holds</h3>
+      <p>
+        Tokens, licenses, and the honest training math — including which
+        model size this much data can actually support.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>summary</span></div>
+      <pre><span class="r">$</span> waldo index summary
+<b>.: 7 corpus(es), 40 shard(s)</b>
+<b>  tokens  2.8B (reference-tokenizer estimate)</b>
+<b>by license:</b>
+<b>  CC-BY-4.0                18 shard(s)      2.0B tokens</b>
+<b>  CC0-1.0                   2 shard(s)     86.8M tokens   …</b>
+<b>  recommended rung: 90m (~75.7M params) — 37 tokens/param at 1 epoch</b></pre>
+    </div>
+
+    <div class="prose">
+      <h3>5. Create your model</h3>
+      <p>
+        Architecture is chosen at init — preset rungs run from
+        <span class="mono">10m</span> to <span class="mono">405b</span>, or
+        derive a custom shape with <span class="mono">--params</span>. For a
+        first model, the 10m rung proves the whole pipeline on any machine.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>init</span></div>
+      <pre><span class="r">$</span> waldo model init bookworm --preset 10m</pre>
+    </div>
+
+    <div class="prose">
+      <h3>6. Train</h3>
+      <p>
+        Point the model at an index path. Shards fetch anonymously, verify
+        against their hashes, cache locally, and stream into training — and
+        the run pins its bill of materials before the first step.
+      </p>
+    </div>
+    <div class="term only-mac">
+      <div class="bar"><i></i><i></i><i></i><span>train — MLX</span></div>
+      <pre><span class="r">$</span> waldo model train bookworm core/books
+<b>pretrain  step    12/12 (100.0%)  loss 3.2147  (avg10 3.7903)</b>
+<b>done: final loss 3.7903 (held-out 3.4355)</b>
+<b>run 1 complete — BOM pinned (1 manifests, index commit 8d04e24c3fbc)</b></pre>
+    </div>
+    <div class="term only-linux">
+      <div class="bar"><i></i><i></i><i></i><span>train — PyTorch</span></div>
+      <pre><span class="r">$</span> waldo model train bookworm core/books   <span class="c"># --gpus 8 for a multi-GPU box</span>
+<b>pretrain  step    12/12 (100.0%)  loss 3.2147  (avg10 3.7903)</b>
+<b>done: final loss 3.7903 (held-out 3.4355)</b>
+<b>run 1 complete — BOM pinned (1 manifests, index commit 8d04e24c3fbc)</b></pre>
+    </div>
+
+    <div class="prose">
+      <h3>7. Talk to it — then read its receipts</h3>
+      <p>
+        The chat will babble; the provenance won’t. Export ships the weights
+        with the full ancestry embedded: every run, every manifest, every
+        license, pinned to the exact index commit.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>chat &amp; export</span></div>
+      <pre><span class="r">$</span> waldo chat bookworm
+<span class="r">$</span> waldo model export bookworm ~/bookworm-export
+<b>  model.safetensors (~9.5M params; provenance embedded in the safetensors metadata)</b>
+<b>  model.json</b>
+<b>  PROVENANCE.md (2 lineage events, 1 runs)</b></pre>
+    </div>
+
+    <div class="prose">
+      <h3>Where to go from here</h3>
+      <ul>
+        <li><strong>Bigger rungs</strong> — the same commands scale from this
+        laptop toy to GPU servers and clusters; see
+        <a href="how.html">the growth ladder</a>.</li>
+        <li><strong>Your own tools</strong> —
+        <span class="mono">waldo index export science --license "CC-BY-*"</span>
+        hands the corpus to any training stack as plain files, filtered to
+        the license profile you choose.</li>
+        <li><strong>Contribute</strong> — data you’re allowed to share is one
+        ingest and one pull request away;
+        <a href="community.html">the community page</a> walks through it.</li>
+      </ul>
+    </div>
+
+    <div class="cta-row" style="margin-top:44px">
+      <a class="btn" href="community.html">Join the community</a>
+      <a class="btn ghost" href="https://github.com/openwaldo">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/favicon.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="how.html">How it works</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="walkthrough.html">Train your first model</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+// architecture picker: swap the per-arch blocks; the choice persists in
+// the URL hash so links can point at a specific flavor
+(() => {
+  const wt = document.getElementById('wt');
+  const btns = document.querySelectorAll('.arch-btn');
+  const set = (arch) => {
+    wt.classList.remove('arch-mac', 'arch-linux');
+    wt.classList.add('arch-' + arch);
+    btns.forEach((b) => {
+      const on = b.dataset.arch === arch;
+      b.classList.toggle('ghost', !on);
+      b.setAttribute('aria-selected', on);
+    });
+    if (location.hash.slice(1) !== arch) history.replaceState(null, '', '#' + arch);
+  };
+  btns.forEach((b) => b.addEventListener('click', () => set(b.dataset.arch)));
+  set(location.hash === '#linux' ? 'linux' : 'mac');
+})();
+</script>
+</body>
+</html>

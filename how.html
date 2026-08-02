@@ -315,6 +315,46 @@ PROVENANCE.md       ← the human-readable ancestry
 
 <section class="block">
   <div class="wrap reveal">
+    <div class="eyebrow">knowledge by policy</div>
+    <h2>Ask for knowledge the way you’d query a database.</h2>
+    <div class="prose">
+      <p>
+        Because every shard carries its metadata — license, source, origin,
+        format, path — the corpus can be <em>queried</em>, not just
+        downloaded. That already works for licenses today:
+        <code>waldo index export code --license "GPL-*,MIT,Apache-2.0"</code>
+        assembles a corpus from exactly the license profile you accept.
+      </p>
+      <p>
+        Follow that idea forward. “Build me a Linux kernel expert” isn’t
+        really a prompt — it’s a policy: lean the mix heavily toward code;
+        accept GPL and permissive licenses; prefer kernel and systems
+        sources; favor recent material over stale. As the index grows richer
+        metadata — domains, review depth, recency — that policy becomes an
+        executable query, and the query assembles the training corpus.
+      </p>
+      <p>
+        The payoff is the answer to a simple question: <strong>where did
+        this model come from?</strong> Today the industry’s honest answer is
+        a shrug — “approximately four trillion tokens.” A model built from a
+        corpus query answers differently:
+      </p>
+      <blockquote>
+        Expert 3.2 was trained from OpenWALDO query <span class="mono">98a7f…</span>
+        — 2.4 billion licensed tokens, from 18,247 contributors, under these
+        licenses.
+      </blockquote>
+      <p>
+        The query’s receipt is the model’s bill of materials — reproducible
+        by anyone, forever. The license dimension ships today; the rest is
+        the roadmap, and every contribution makes the queries richer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap reveal">
     <div class="eyebrow">the growth ladder</div>
     <h2>What you can build on the corpus, at every scale.</h2>
     <p class="sub">
@@ -372,13 +412,13 @@ PROVENANCE.md       ← the human-readable ancestry
       </div>
     </div>
     <div class="cta-row">
-      <a class="btn" href="https://github.com/openwaldo">Run the walkthrough</a>
+      <a class="btn" href="walkthrough.html">Train your first model from scratch</a>
       <a class="btn ghost" href="https://github.com/openwaldo">Read the format spec</a>
     </div>
   </div>
 </section>
 
-<section class="block tinted">
+<section class="block">
   <div class="wrap reveal">
     <div class="eyebrow">built to be built on</div>
     <h2>A foundational corpus. Add your value on top.</h2>
@@ -503,6 +543,7 @@ PROVENANCE.md       ← the human-readable ancestry
         <h4>Get involved</h4>
         <ul>
           <li><a href="community.html">Community</a></li>
+          <li><a href="walkthrough.html">Train your first model</a></li>
           <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>

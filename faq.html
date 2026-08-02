@@ -122,6 +122,35 @@
       </details>
 
       <details class="qa">
+        <summary>What is open source AI?</summary>
+        <div class="a">
+          <p>A model's source code is its training data. Weights <em>are</em>
+          the resulting binaries of training, so releasing the binaries
+          without the sources is not open source.</p>
+          <p>The institutions split on exactly this point. The OSI's
+          <a href="https://opensource.org/ai">Open Source AI Definition</a>
+          (2024) accepts "data information" — a detailed
+          <em>description</em> of the training data — in place of the data
+          itself, a concession to how much data is encumbered by copyright,
+          contracts, or privacy. The
+          <a href="https://www.fsf.org/news/fsf-is-working-on-freedom-in-machine-learning-applications">FSF</a>
+          holds the line: the software, the raw training data, and the
+          scripts must all be genuinely open — free to use, study, enhance,
+          and share, the way open source has always worked — or the
+          application isn't open, even when its code is.</p>
+          <p>OpenWALDO stands with the stricter reading, which is more aligned
+          with the general understanding and value of open source: a
+          description of the source is not the source. You can't
+          audit or rebuild the distributable binaries from "data
+          information" any more than from a binary's changelog. The
+          compromise assumes genuinely open training data at scale doesn't
+          exist — which is an argument for <em>building it</em>, not for
+          redefining "open" around its absence. <strong>OpenWALDO exists to
+          make this compromise unnecessary.</strong></p>
+        </div>
+      </details>
+
+      <details class="qa">
         <summary>Why aren’t today’s “open source” models actually open source?</summary>
         <div class="a">
           <p>Bluntly: because you can’t see the source. Weights are the
@@ -144,8 +173,10 @@
         <div class="a">
           <p>Most “open” releases are open <em>weights</em>: you can download
           the model, but not see, verify, or rebuild what went into it — a
-          binary without source. A few excellent projects (OLMo, the Common
-          Pile) publish their data too, and OpenWALDO builds on their work.
+          binary without source. A few excellent projects publish their data too
+          — AI2's OLMo, the Common Pile, and Switzerland's
+          <a href="https://www.apertus-ai.org">Apertus</a> — and OpenWALDO
+          builds on that work.
           What OpenWALDO adds is the <strong>commons infrastructure</strong>:
           a contribution model (git + DCO + review), per-shard licensing,
           federated hosting, content-addressed verification, and a model
@@ -527,6 +558,7 @@
         <h4>Get involved</h4>
         <ul>
           <li><a href="community.html">Community</a></li>
+          <li><a href="walkthrough.html">Train your first model</a></li>
           <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
