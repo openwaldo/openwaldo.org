@@ -1,14 +1,20 @@
-// News: markdown posts with frontmatter, no build step, no dependencies.
+// Posts: markdown entries with frontmatter, no build step in the browser
+// and no dependencies.
 //
-//   posts/posts.txt         the listing — one filename per line, # comments
 //   posts/content/*.md      posts: YYYY-MM-DD-slug.md with frontmatter
-//                           (title, type, description, logo — all optional;
-//                           date comes from the filename)
+//                           (title, type, author, description, logo — all
+//                           optional; date comes from the filename)
+//   posts/index.json        the listing and search index — generated from
+//                           the frontmatter by .scripts/build-posts-index.py
+//                           (CI runs it at deploy time; gitignored locally)
 //
-// Three render modes:
-//   [data-posts]            the posts page — searchable, filterable,
-//                           lazy-loading summary cards; ?p=slug shows one
-//                           full post
+// The whole index loads in one fetch, so cards, search, and filters work
+// entirely in memory at any archive size; a post's markdown is fetched
+// only when it's actually opened.
+//
+// Render modes:
+//   [data-posts]            the posts page — searchable, filterable cards;
+//                           ?p=slug shows one full post
 //   [data-posts-latest]     homepage strip — the newest few, as cards
 (async () => {
   const listEl = document.querySelector('[data-posts]');
@@ -17,7 +23,6 @@
 
   // base path from the homepage vs the posts page itself
   const BASE = latestEl && !listEl ? 'posts/' : '';
-  const BATCH = 10;
 
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -86,7 +91,8 @@
     return out.join('\n');
   };
 
-  // frontmatter: a flat `key: value` block between --- fences
+  // frontmatter: a flat `key: value` block between --- fences (used for the
+  // single-post view; the listing's metadata comes from index.json)
   const parsePost = (slug, md) => {
     const meta = {
       slug,
@@ -115,25 +121,15 @@
         md = md.replace(h1[0], '');
       }
     }
-    if (!meta.description) {
-      const p = md.replace(/^---[\s\S]*?---/, '').split(/\n\s*\n/).find((b) => b.trim() && !/^[#>\-*`]/.test(b.trim()));
-      if (p) meta.description = p.trim().replace(/\s+/g, ' ').slice(0, 180);
-    }
     return { meta, body: md };
   };
 
   const get = (url) => fetch(url).then((r) => (r.ok ? r.text() : Promise.reject(r.status)));
 
-  const loadListing = async () => (await get(BASE + 'posts.txt')).split('\n')
-    .map((l) => l.trim())
-    .filter((l) => l && !l.startsWith('#'))
-    .map((l) => l.replace(/\.md$/, ''))
-    .sort().reverse();
-
-  const cache = new Map();
-  const loadPost = async (slug) => {
-    if (!cache.has(slug)) cache.set(slug, parsePost(slug, await get(BASE + 'content/' + slug + '.md')));
-    return cache.get(slug);
+  // the whole archive, one fetch, in memory
+  const loadIndex = async () => {
+    const posts = JSON.parse(await get(BASE + 'index.json'));
+    return posts.sort((a, b) => (a.slug < b.slug ? 1 : -1));
   };
 
   const metaLine = (meta) => {
@@ -148,10 +144,13 @@
     const a = document.createElement('article');
     a.className = 'post-card';
     a.innerHTML =
+      (meta.type ? '<div class="post-type">' + esc(meta.type) + '</div>' : '') +
       (meta.logo ? '<img class="post-logo" src="' + esc(meta.logo) + '" alt="">' : '') +
-      metaLine(meta) +
       '<h3><a href="' + href + '">' + esc(meta.title) + '</a></h3>' +
-      (meta.description ? '<p>' + esc(meta.description) + '</p>' : '');
+      (meta.description ? '<p>' + esc(meta.description) + '</p>' : '') +
+      '<div class="post-meta card-meta">' +
+      (meta.author ? '<span class="post-author">by ' + esc(meta.author) + '</span>' : '<span></span>') +
+      '<span>' + esc(meta.date) + '</span></div>';
     // the whole tile navigates; inner links (the title) still win
     a.addEventListener('click', (e) => {
       if (!e.target.closest('a')) location.href = href;
@@ -174,10 +173,10 @@
   // ---- homepage: the newest few, as cards ----
   if (latestEl && !listEl) {
     try {
-      const slugs = (await loadListing()).slice(0, 3);
-      if (!slugs.length) { latestEl.closest('section')?.remove(); return; }
+      const posts = (await loadIndex()).slice(0, 3);
+      if (!posts.length) { latestEl.closest('section')?.remove(); return; }
       latestEl.innerHTML = '';
-      for (const slug of slugs) latestEl.appendChild(card((await loadPost(slug)).meta));
+      posts.forEach((meta) => latestEl.appendChild(card(meta)));
     } catch (e) { latestEl.closest('section')?.remove(); }
     return;
   }
@@ -186,7 +185,7 @@
   const param = new URLSearchParams(location.search).get('p');
   try {
     if (param && /^[\w-]+$/.test(param)) {
-      const post = await loadPost(param);
+      const post = parsePost(param, await get('content/' + param + '.md'));
       // single-post view: the post IS the page — drop the listing hero
       document.querySelector('.page-hero')?.remove();
       const section = listEl.closest('section');
@@ -199,14 +198,14 @@
       return;
     }
 
-    const slugs = await loadListing();
+    const posts = await loadIndex();
     listEl.innerHTML = '';
-    if (!slugs.length) {
+    if (!posts.length) {
       listEl.innerHTML = '<p class="sub">Nothing on the record yet.</p>';
       return;
     }
 
-    // toolbar: search + type filter chips (built from what's loaded)
+    // toolbar: search + type filter chips — all in memory, any archive size
     const toolbar = document.createElement('div');
     toolbar.className = 'post-toolbar';
     toolbar.innerHTML =
@@ -214,43 +213,34 @@
       '<div class="post-filters"></div>';
     const results = document.createElement('div');
     results.className = 'post-list';
-    const sentinel = document.createElement('div');
-    listEl.append(toolbar, results, sentinel);
+    listEl.append(toolbar, results);
     const input = toolbar.querySelector('input');
     const filtersEl = toolbar.querySelector('.post-filters');
 
-    let loaded = 0, typeFilter = '', query = '';
-
-    const ensure = async (n) => {
-      while (loaded < Math.min(n, slugs.length)) await loadPost(slugs[loaded++]);
-    };
-    const ensureAll = () => ensure(slugs.length);
+    let typeFilter = '', query = '';
 
     const rebuildFilters = () => {
-      const types = [...new Set(slugs.slice(0, loaded).map((s) => cache.get(s).meta.type).filter(Boolean))];
+      const types = [...new Set(posts.map((p) => p.type).filter(Boolean))];
       filtersEl.innerHTML = '';
       if (!types.length) return;
       ['', ...types].forEach((t) => {
         const b = document.createElement('button');
         b.className = 'type-chip filter' + ((t === typeFilter) ? ' on' : '');
         b.textContent = t || 'all';
-        b.addEventListener('click', async () => { typeFilter = t; await ensureAll(); render(); });
+        b.addEventListener('click', () => { typeFilter = t; render(); });
         filtersEl.appendChild(b);
       });
     };
 
-    const matches = (meta) => {
-      if (typeFilter && meta.type !== typeFilter) return false;
-      if (!query) return true;
-      return (meta.title + ' ' + meta.description + ' ' + meta.type + ' ' + meta.author + ' ' + meta.date)
-        .toLowerCase().includes(query);
-    };
+    const matches = (meta) =>
+      (!typeFilter || meta.type === typeFilter) &&
+      (!query || (meta.title + ' ' + meta.description + ' ' + meta.type + ' ' +
+        meta.author + ' ' + meta.date).toLowerCase().includes(query));
 
     const render = () => {
       results.innerHTML = '';
       let shown = 0;
-      for (const slug of slugs.slice(0, loaded)) {
-        const { meta } = cache.get(slug);
+      for (const meta of posts) {
         if (matches(meta)) { results.appendChild(card(meta)); shown++; }
       }
       if (!shown) results.innerHTML = '<p class="sub">No posts match.</p>';
@@ -260,24 +250,13 @@
     let deb;
     input.addEventListener('input', () => {
       clearTimeout(deb);
-      deb = setTimeout(async () => {
+      deb = setTimeout(() => {
         query = input.value.trim().toLowerCase();
-        if (query) await ensureAll();
         render();
-      }, 150);
+      }, 120);
     });
 
-    // lazy-load the next batch as the sentinel scrolls into view
-    const io = new IntersectionObserver(async (entries) => {
-      if (!entries.some((e) => e.isIntersecting)) return;
-      if (loaded >= slugs.length) { io.disconnect(); return; }
-      await ensure(loaded + BATCH);
-      render();
-    }, { rootMargin: '400px' });
-
-    await ensure(BATCH);
     render();
-    io.observe(sentinel);
   } catch (e) {
     listEl.innerHTML = '<p class="sub">Couldn’t load the posts right now — they live ' +
       '<a href="https://github.com/openwaldo/openwaldo.org/tree/main/posts/content">on GitHub</a> too.</p>';

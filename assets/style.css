@@ -275,10 +275,11 @@ h1.title .waldo {
 
 /* ---- posts: cards, toolbar, chips ---- */
 .post-meta {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap;
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 1px;
   text-transform: uppercase; color: var(--red);
 }
+.post-meta > span { white-space: nowrap; }  /* dates never break at hyphens */
 .post-author { color: var(--faint); text-transform: none; letter-spacing: 0.2px; }
 .type-chip {
   border: 1px solid var(--line); border-radius: 999px;
@@ -292,16 +293,34 @@ h1.title .waldo {
   transition: border-color .15s ease, transform .15s ease;
 }
 .post-card:hover { border-color: #3a4560; transform: translateY(-1px); }
-.post-card h3 { margin-top: 5px; font-size: 17px; letter-spacing: -0.3px; }
-.post-card h3 a { text-decoration: none; color: var(--ink); }
-.post-card h3 a:hover { color: var(--red); }
+.post-card .post-meta {
+  margin-top: 10px; font-size: 11.5px;
+  flex-wrap: nowrap;                          /* one line, always */
+  justify-content: space-between;             /* author left, date right */
+  color: var(--ink);                          /* the date reads white */
+}
+.post-card .post-meta .post-author {
+  overflow: hidden; text-overflow: ellipsis;  /* squeeze gracefully, never wrap */
+}
+.post-card .post-type {
+  text-align: center; line-height: 1;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--faint);
+  margin: -2px 0 5px;
+}
+.post-card h3 { margin-top: 0; font-size: 17px; letter-spacing: -0.3px; }
+.post-card h3 a { text-decoration: none; color: var(--red); }
 .post-card p {
-  color: var(--muted); font-size: 14px; margin-top: 4px; line-height: 1.5;
+  color: var(--muted); font-size: 14px; margin-top: 5px; line-height: 1.5;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .post-logo { height: 28px; margin-bottom: 12px; display: block; }
-.post-list { display: grid; gap: 10px; margin-top: 32px; }
+.post-list {
+  display: grid; gap: 10px; margin-top: 32px;
+  align-content: start;
+  min-height: 55vh;   /* an empty search result doesn't yank the footer up */
+}
 .post-toolbar {
   display: flex; flex-direction: column; gap: 14px;
   padding-bottom: 24px; border-bottom: 1px solid var(--line);

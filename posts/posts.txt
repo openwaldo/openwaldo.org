@@ -1,4 +1,0 @@
-# One post filename per line (in posts/content/). Order doesn't matter —
-# the page sorts by the YYYY-MM-DD filename prefix, newest first.
-2026-07-29-heres-waldo.md
-2026-07-30-why-openwaldo-exists.md

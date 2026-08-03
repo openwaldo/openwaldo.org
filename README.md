@@ -34,6 +34,25 @@ feed records the index commit and generation date, which the strip displays
 as its provenance chip; the numbers count up on scroll, and the license
 spectrum bar shows each license's share of tokens (hover for exact counts).
 
+## Posts
+
+Posts are markdown files in `posts/content/` named `YYYY-MM-DD-slug.md`,
+with flat frontmatter (`title`, `type`, `author`, `description`, optional
+`logo`). Publishing is just adding the file and pushing: the deploy
+workflow (`.github/workflows/deploy.yml`) runs
+`.scripts/build-posts-index.py` to generate `posts/index.json` — the
+listing and search index — and ships it in the Pages artifact. The file is
+gitignored; to test locally, run the script yourself, then serve:
+
+```console
+$ python3 .scripts/build-posts-index.py
+wrote posts/index.json: 2 post(s)
+$ python3 -m http.server -d . 8080
+```
+
+Note: deploys go through GitHub Actions now — the repo's Pages source must
+be set to "GitHub Actions" (Settings → Pages → Source).
+
 ## Editing
 
 Edit the HTML, push to `main`, GitHub Pages redeploys. To preview locally:
