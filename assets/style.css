@@ -421,6 +421,7 @@ h1.title .waldo {
 
 .bar-tip {
   position: fixed; z-index: 100; pointer-events: none;
+  width: max-content;               /* never shrink-to-fit at the viewport edge */
   transform: translate(-50%, calc(-100% - 14px));
   background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
   padding: 10px 14px; max-width: 360px;

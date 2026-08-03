@@ -117,7 +117,13 @@ if (statsBox) {
           const head = document.createElement('b');
           head.textContent = seg.dataset.tipHead;
           tip.append(head, seg.dataset.tipBody || '');
-          tip.style.left = e.clientX + 'px';
+          // clamp horizontally so the box slides inward at the viewport
+          // edges instead of getting cut off (content is set, so the
+          // measured width is its natural, un-squashed width)
+          const half = tip.offsetWidth / 2;
+          tip.style.left = Math.min(
+            Math.max(e.clientX, half + 10),
+            window.innerWidth - half - 10) + 'px';
           tip.style.top = e.clientY + 'px';
           tip.classList.add('show');
         });
