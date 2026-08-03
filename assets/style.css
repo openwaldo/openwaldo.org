@@ -277,6 +277,23 @@ h1.title .waldo {
 .post-back { margin: 0 0 26px; font-family: var(--mono); font-size: 14px; }
 .post-back a { text-decoration: none; color: var(--muted); }
 .post-back a:hover { color: var(--red); }
+.post-share {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
+}
+.post-share .share-label {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--faint); margin-right: 4px;
+}
+.post-share .share-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 0;
+  border: 1px solid var(--line); border-radius: 999px;
+  cursor: pointer; background: none; text-decoration: none; color: var(--muted);
+  transition: border-color .15s ease, color .15s ease;
+}
+.post-share .share-chip svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.post-share .share-chip:hover { border-color: var(--red); color: var(--ink); }
 .post-body pre {
   margin-top: 16px; padding: 14px 18px; overflow-x: auto;
   background: #0d0f15; border: 1px solid var(--line); border-radius: 10px;
