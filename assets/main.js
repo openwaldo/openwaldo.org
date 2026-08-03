@@ -157,10 +157,15 @@ if (statsBox) {
           const n = parseInt(hex.slice(1), 16);
           return (n >> 16) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255);
         };
+        // the license with the most tokens; "mostly" only when it isn't
+        // the whole corpus
         const dominantLicense = (c) => {
           const ls = Object.entries(c.licenses || {})
             .sort((a, b) => (b[1].tokens || 0) - (a[1].tokens || 0));
-          return ls.length ? ls[0][0] : null;
+          if (!ls.length) return null;
+          const total = ls.reduce((t, [, v]) => t + (v.tokens || 0), 0);
+          const sole = (ls[0][1].tokens || 0) === total;
+          return { name: ls[0][0], label: sole ? ls[0][0] : 'mostly ' + ls[0][0] };
         };
 
         // squarified treemap: lay rows along the shorter side, growing each
@@ -300,7 +305,7 @@ if (statsBox) {
             el.style.top = (y + 1) + 'px';
             el.style.width = Math.max(3, w - 2) + 'px';
             el.style.height = Math.max(3, h - 2) + 'px';
-            el.style.setProperty('--tint', hexToRgb(licColor[dom] || '#58627a'));
+            el.style.setProperty('--tint', hexToRgb((dom && licColor[dom.name]) || '#58627a'));
             el.style.setProperty('--in-delay', (firstBuild ? i * 0.035 : 0) + 's');
             if (w > 30 && h > 17) {
               // name scales with the box: as big as fits the width (mono
@@ -329,7 +334,7 @@ if (statsBox) {
               if (h > 54 && w > 90) addSub(numFmt(c.tokens) + ' tokens');
               if (h > 140 && w > 190) {
                 addSub(numFmt(c.docs) + ' docs · ' + sizeFmt(c.bytes));
-                if (dom) addSub('mostly ' + dom);
+                if (dom) addSub(dom.label);
               }
             }
             el.dataset.tipHead = disp;
@@ -339,7 +344,7 @@ if (statsBox) {
               c.path + '\n' +
               numFmt(c.tokens) + ' tokens · ' + numFmt(c.docs) +
               ' docs · ' + sizeFmt(c.bytes) +
-              (dom ? '\nmostly ' + dom : '') +
+              (dom ? '\n' + dom.label : '') +
               (v.floored ? '\n(tile enlarged to stay visible)' : '') +
               '\nclick for details';
             el.setAttribute('role', 'button');
