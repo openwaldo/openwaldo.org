@@ -213,11 +213,14 @@
       '<div class="post-filters"></div>';
     const results = document.createElement('div');
     results.className = 'post-list';
-    listEl.append(toolbar, results);
+    const pager = document.createElement('div');
+    pager.className = 'post-pager';
+    listEl.append(toolbar, results, pager);
     const input = toolbar.querySelector('input');
     const filtersEl = toolbar.querySelector('.post-filters');
 
-    let typeFilter = '', query = '';
+    const PAGE_SIZE = 10;
+    let typeFilter = '', query = '', page = 1;
 
     const rebuildFilters = () => {
       const types = [...new Set(posts.map((p) => p.type).filter(Boolean))];
@@ -227,7 +230,7 @@
         const b = document.createElement('button');
         b.className = 'type-chip filter' + ((t === typeFilter) ? ' on' : '');
         b.textContent = t || 'all';
-        b.addEventListener('click', () => { typeFilter = t; render(); });
+        b.addEventListener('click', () => { typeFilter = t; page = 1; render(); });
         filtersEl.appendChild(b);
       });
     };
@@ -238,13 +241,36 @@
         meta.author + ' ' + meta.date).toLowerCase().includes(query));
 
     const render = () => {
+      const hits = posts.filter(matches);
+      const pages = Math.max(1, Math.ceil(hits.length / PAGE_SIZE));
+      page = Math.min(Math.max(1, page), pages);
       results.innerHTML = '';
-      let shown = 0;
-      for (const meta of posts) {
-        if (matches(meta)) { results.appendChild(card(meta)); shown++; }
-      }
-      if (!shown) results.innerHTML = '<p class="sub">No posts match.</p>';
+      hits.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+        .forEach((meta) => results.appendChild(card(meta)));
+      if (!hits.length) results.innerHTML = '<p class="sub">No posts match.</p>';
       rebuildFilters();
+
+      // prev / next
+      pager.innerHTML = '';
+      if (pages > 1) {
+        const btn = (label, target, enabled) => {
+          const b = document.createElement('button');
+          b.className = 'btn ghost pager-btn';
+          b.textContent = label;
+          b.disabled = !enabled;
+          b.addEventListener('click', () => {
+            page = target;
+            render();
+            toolbar.scrollIntoView({ block: 'start' });
+          });
+          return b;
+        };
+        const status = document.createElement('span');
+        status.className = 'pager-status';
+        status.textContent = 'page ' + page + ' of ' + pages;
+        pager.append(btn('← newer', page - 1, page > 1), status,
+                     btn('older →', page + 1, page < pages));
+      }
     };
 
     let deb;
@@ -252,6 +278,7 @@
       clearTimeout(deb);
       deb = setTimeout(() => {
         query = input.value.trim().toLowerCase();
+        page = 1;
         render();
       }, 120);
     });
