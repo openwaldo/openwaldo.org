@@ -188,17 +188,20 @@
 
   const shareRow = (meta) => {
     const url = 'https://openwaldo.org/posts/?p=' + encodeURIComponent(meta.slug);
-    // prefill: title + description where the platform takes free text;
-    // title alone where it's a submission title (HN, Reddit)
-    const text = meta.title + (meta.description ? ' - ' + meta.description : '');
+    // prefill: "From OpenWALDO..." + title: description where the platform
+    // takes free text (X gets the @ mention); title alone where it's a
+    // submission title (HN, Reddit)
+    const blurb = (from) => from + '...\n\n' +
+      meta.title + (meta.description ? ': ' + meta.description : '');
     const u = encodeURIComponent(url);
-    const t = encodeURIComponent(text);
+    const t = encodeURIComponent(blurb('From OpenWALDO'));
+    const tx = encodeURIComponent(blurb('From @OpenWALDO'));
     const title = encodeURIComponent(meta.title);
     const links = [
       // share-offsite ignores text, so open the feed composer prefilled
-      ['LinkedIn', 'linkedin', 'https://www.linkedin.com/feed/?shareActive=true&text=' + t + '%20' + u],
-      ['X', 'x', 'https://x.com/intent/post?url=' + u + '&text=' + t + '&via=openwaldo'],
-      ['Bluesky', 'bluesky', 'https://bsky.app/intent/compose?text=' + t + '%20' + u],
+      ['LinkedIn', 'linkedin', 'https://www.linkedin.com/feed/?shareActive=true&text=' + t + '%0A' + u],
+      ['X', 'x', 'https://x.com/intent/post?url=' + u + '&text=' + tx],
+      ['Bluesky', 'bluesky', 'https://bsky.app/intent/compose?text=' + t + '%0A' + u],
       ['Hacker News', 'hackernews', 'https://news.ycombinator.com/submitlink?u=' + u + '&t=' + title],
       ['Reddit', 'reddit', 'https://www.reddit.com/submit?url=' + u + '&title=' + title],
       ['Facebook', 'facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + u + '&quote=' + t],
