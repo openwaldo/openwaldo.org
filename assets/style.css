@@ -84,7 +84,10 @@ nav.links a:hover, nav.links a[aria-current="page"] { color: var(--ink); }
 nav.links a:hover { color: var(--red); }
 nav.links a[aria-current="page"] {
   color: var(--ink);
-  border-bottom: 2px solid var(--red); padding-bottom: 2px;
+  /* text-decoration, not border-bottom: the line hugs the label and
+     ignores the separator padding */
+  text-decoration: underline; text-decoration-color: var(--red);
+  text-decoration-thickness: 2px; text-underline-offset: 6px;
 }
 .gh-btn {
   border: 1px solid var(--line); border-radius: 8px;
@@ -239,9 +242,12 @@ h1.title .waldo {
   font-family: var(--mono); font-weight: 800;
   font-size: clamp(40px, 5.4vw, 68px); line-height: 1.05;
   letter-spacing: -3px; white-space: nowrap;
+  color: var(--red);
+  /* gradient text, off for now — restore by swapping this block back in:
   background: linear-gradient(180deg, #ffe1dd 0%, var(--red) 58%, var(--red-deep) 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
+  */
   filter: drop-shadow(0 10px 34px rgba(255,74,61,.28));
 }
 .count-stat .n .u {
