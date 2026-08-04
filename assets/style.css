@@ -59,7 +59,7 @@ header.site {
 }
 .navbar {
   display: flex; align-items: center; gap: 28px;
-  padding: 14px 24px; max-width: var(--maxw); margin: 0 auto;
+  padding: 6px 24px; max-width: var(--maxw); margin: 0 auto;
 }
 .wordmark {
   font-family: var(--mono); font-weight: 700; font-size: 19px;
@@ -68,7 +68,7 @@ header.site {
 }
 .wordmark:hover { color: var(--ink); }
 .wordmark img.dot {
-  width: 21px; height: 21px; flex: none; display: block;
+  height: 38px; width: auto; flex: none; display: block;
 }
 .wordmark em { font-style: normal; color: var(--red); }
 nav.links { display: flex; gap: 22px; margin-left: auto; align-items: center; }
@@ -496,6 +496,10 @@ p.sub { color: var(--muted); margin-top: 14px; }
 .prose ul, .prose ol { margin: 18px 0 0 22px; color: var(--muted); }
 .prose li { margin-top: 10px; }
 .prose h3 { margin-top: 40px; color: var(--ink); }
+/* step labels inside walkthrough prose: the eyebrow owns the gap above,
+   the title stays tight beneath it */
+.prose .eyebrow { margin: 48px 0 0; }
+.prose .eyebrow + h3 { margin-top: 10px; }
 .prose blockquote {
   margin-top: 24px; padding: 18px 22px; border-left: 3px solid var(--red);
   background: var(--panel); border-radius: 0 10px 10px 0; color: var(--ink);
@@ -513,6 +517,9 @@ p.sub { color: var(--muted); margin-top: 14px; }
   transition: border-color .15s ease, transform .15s ease;
 }
 .card:hover { border-color: #3a4560; transform: translateY(-2px); }
+.card.here, .card.here:hover { border-color: var(--red); transform: none; }
+a.card { display: block; text-decoration: none; color: inherit; }
+a.card:hover { border-color: var(--red); }
 .card p { color: var(--muted); font-size: 15px; margin-top: 8px; }
 .card .big-letter {
   position: absolute; top: -26px; right: -6px;
@@ -679,6 +686,10 @@ code {
 
 /* ---- page hero (subpages) ---- */
 .page-hero { padding: 76px 0 30px; }
+/* heroes above the howto tiles share a height so the tiles don't bounce
+   between pages; min-height, so longer copy still grows instead of clipping */
+.page-hero.fixed-h { min-height: 430px; box-sizing: border-box; }
+@media (max-width: 720px) { .page-hero.fixed-h { min-height: 0; } }
 .page-hero h1 {
   font-size: clamp(32px, 4.6vw, 52px); letter-spacing: -1.2px;
   line-height: 1.15; font-weight: 800;

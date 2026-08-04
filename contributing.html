@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contributing — OpenWALDO</title>
+<meta name="description" content="Contribute to OpenWALDO: openly licensed data with one DCO-signed pull request, audits and verification of the commons, code, compute — an open, permissionless data commons anyone can build on.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contributing — OpenWALDO">
+<meta property="og:description" content="Contribute to OpenWALDO: openly licensed data with one DCO-signed pull request, audits and verification of the commons, code, compute — an open, permissionless data commons anyone can build on.">
+<meta property="og:url" content="https://openwaldo.org/contributing.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/contributing.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="training.html">Training</a>
+      <a href="contributing.html" aria-current="page">Contributing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">the community</div>
+    <h1>This is a project <em>anyone</em> can contribute to. Yes, you.</h1>
+    <p class="sub" style="font-size:19px">
+      Open source didn’t win because a company built it — it won because
+      everyone did. The corpus grows the same way: incremental and
+      permissionless. If you know git, you already know the workflow.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="walkthrough-contributing.html">The contributing walkthrough</a>
+      <a class="btn ghost" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a>
+      <a class="btn ghost" href="https://github.com/openwaldo">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">what the corpus needs most</div>
+    <h2>The clean pool has gaps. Filling one is a named, lasting contribution.</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <div class="big-letter">1</div>
+        <h3>Math &amp; structured reasoning</h3>
+        <p>The biggest gap: the standard math sets fail the license bar. Clean
+        paths exist — synthetic generation with clean-generator models,
+        public-domain texts, CC-licensed Q&amp;A.</p>
+      </div>
+      <div class="card">
+        <div class="big-letter">2</div>
+        <h3>Instruction &amp; preference data</h3>
+        <p>Community-collected conversation data is the only unbounded clean
+        source — the OASST model proved it works. Human turns, openly licensed.</p>
+      </div>
+      <div class="card">
+        <div class="big-letter">3</div>
+        <h3>Multilingual breadth</h3>
+        <p>The public-domain and CC pool outside English and French is barely
+        tapped: national libraries, government works, Wikipedia editions.</p>
+      </div>
+      <div class="card">
+        <div class="big-letter">4</div>
+        <h3>Fresh, permissive code</h3>
+        <p>Permissively licensed repositories ingested directly with per-file
+        SPDX fidelity — freshening a corpus that ages fast.</p>
+      </div>
+      <div class="card">
+        <div class="big-letter">5</div>
+        <h3>Newly opened archives</h3>
+        <p>Every institution that flips a collection to genuinely open terms is
+        one fetch-and-ingest away from the index. Help us find them.</p>
+      </div>
+      <div class="card">
+        <div class="big-letter">+</div>
+        <h3>Compute &amp; funding</h3>
+        <p>The growth ladder is funding-honest: laptops prove the pipeline,
+        rented nodes build the first useful models, and the foundation rung
+        needs partners. Donated cluster time moves the whole project up a
+        stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="block tinted">
+  <div class="wrap reveal">
+    <div class="eyebrow">the contribution flow</div>
+    <h2>One ingest, one sign-off, one pull request.</h2>
+    <p class="sub">
+      Contributions happen inside a checkout of the index repo, git-style.
+      Start with data you already have: your documentation, product guides,
+      knowledge bases, manuals, published research, industry expertise —
+      anything you can openly license. Plain text, Markdown, JSONL records,
+      HTML, or EPUB; the converter senses each file's format. If your company
+      wants the world's AI models to know your products and your field,
+      <strong>this is the mechanism</strong> — with provenance instead of
+      hallucination. Your website works too: <span class="mono">fetch-site</span>
+      crawls your own docs — politely, robots.txt honored, scoped to the paths
+      you name — into deposits with per-page provenance.
+    </p>
+    <p class="sub">
+      <strong>Authorization works the way corporate open source has worked for
+      twenty years: the DCO.</strong> The <span class="mono">-s</span> on the
+      commit is a named person's attestation — made with their own git
+      identity — that they're authorized to contribute this data under the
+      license declared. Reviewers apply the obvious norm (a sign-off from
+      <span class="mono">you@acme.com</span> contributing acme.com content is
+      ordinary; a stranger claiming to speak for Acme invites questions), and
+      companies that <em>can</em> publish a machine-readable grant at
+      <span class="mono">/.well-known/openwaldo.txt</span> get it hash-pinned
+      into the record as an optional, domain-grade strengthener — never a
+      requirement. Takedown is first-class if a claim ever proves wrong. The
+      diff plus the URLs in it are the entire contribution.
+    </p>
+
+    <p class="sub">
+      The flow itself is five steps: clone the index, point at the lookaside
+      store you host, assemble your raw data, ingest it — declaring title,
+      description, and license — then verify and open the DCO-signed pull
+      request. Every step, with real commands and real output, is in the
+      walkthrough:
+    </p>
+
+    <div class="cta-row" style="margin-top:36px">
+      <a class="btn" href="walkthrough-contributing.html">The contributing walkthrough</a>
+      <a class="btn ghost" href="https://github.com/openwaldo/waldo/blob/main/CORPUS-BACKLOG.md">What’s wanted next ↗</a>
+    </div>
+
+    <p class="sub" style="margin-top:36px">
+      Hacking on the toolchain itself is the same loop developers already know:
+      one Go binary, a root Makefile where <span class="mono">make</span>,
+      <span class="mono">make test</span>, and <span class="mono">make
+      install</span> always work, and an end-to-end suite that trains real
+      models. Fetchers and converters are the friendliest first contribution —
+      each is a standalone worked example, and the generic Hugging Face fetcher
+      covers most datasets before any new code is needed. Start at
+      <a href="https://github.com/openwaldo/waldo">the toolchain repo</a>.
+    </p>
+  </div>
+</section>
+
+<section class="block" id="badges">
+  <div class="wrap reveal">
+    <div class="eyebrow">show your source</div>
+    <h2>Show your source — and let anyone check it.</h2>
+    <p class="sub">
+      If your model trains on indexed data, its bill of materials already
+      proves it — the badge just makes the claim visible. Put it on your model
+      card, your README, or your product page, and link it to the provenance
+      it stands for.
+    </p>
+    <div class="badge-row">
+      <img src="assets/badges/openwaldo-dark.svg" alt="Open Source AI — OpenWALDO, dark badge" width="232" height="52">
+      <img src="assets/badges/openwaldo-light.svg" alt="Open Source AI — OpenWALDO, light badge" width="232" height="52">
+    </div>
+    <p class="sub" style="font-size:15px">
+      The badge means something specific: the model’s training record chains
+      to a <code>waldo-index</code> commit, so the claim is checkable, not a
+      vibe. Embed it from
+      <span class="mono">openwaldo.org/assets/badges/openwaldo-dark.svg</span>,
+      linked to <span class="mono">openwaldo.org</span> — and swap
+      <span class="mono">-dark</span> for <span class="mono">-light</span> to
+      match your page.
+    </p>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap reveal">
+    <div class="eyebrow">start here</div>
+    <h2>The best time to join a commons is while it’s being built.</h2>
+    <p class="sub">Run the ten-minute walkthrough, train a tiny model, read its provenance — you’ll get it.</p>
+    <div class="cta-row" style="margin-top:32px">
+      <a class="btn" href="walkthrough-contributing.html">Contribute your first corpus</a>
+      <a class="btn ghost" href="walkthrough-build.html">Train your first model</a>
+      <a class="btn ghost" href="https://github.com/openwaldo/waldo-index">Index repo ↗</a>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contributing.html">Contributing</a></li>
+          <li><a href="training.html#walkthroughs">Train a model</a></li>
+          <li><a href="walkthrough-contributing.html">Contribute data</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

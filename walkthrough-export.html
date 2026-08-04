@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WALDO export — OpenWALDO</title>
+<meta name="description" content="Export the corpus as verifiable parquet and train with your own stack — PyTorch, TorchTitan, anything that reads parquet — with EXPORT.json carrying the pedigree.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WALDO export — OpenWALDO">
+<meta property="og:description" content="Export the corpus as verifiable parquet and train with your own stack — PyTorch, TorchTitan, anything that reads parquet — with EXPORT.json carrying the pedigree.">
+<meta property="og:url" content="https://openwaldo.org/walkthrough-export.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/walkthrough-export.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="training.html">Training</a>
+      <a href="contributing.html">Contributing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero fixed-h">
+  <div class="wrap">
+    <div class="eyebrow">howto · waldo export</div>
+    <h1>Export the data. <em>Bring your own trainer.</em></h1>
+    <p class="sub" style="font-size:19px">
+      <strong>What this HOWTO does:</strong> takes the corpus out of the index
+      as verifiable parquet and trains it with your own stack — PyTorch,
+      TorchTitan, or anything that reads parquet — with
+      <span class="mono">EXPORT.json</span> carrying the pedigree. Nothing
+      about the index requires you to use <span class="mono">waldo</span> as a
+      trainer; its job is to be a trustworthy source of data.
+    </p>
+    <p class="sub">
+      All you need is the <span class="mono">waldo</span> binary and a
+      checkout of the index — exporting needs no account, no credentials, and
+      no Python.
+    </p>
+  </div>
+</section>
+
+<section class="block flush">
+  <div class="wrap">
+
+    <div class="grid cols-3" style="margin-top:0">
+      <a class="card" href="walkthrough-build.html">
+        <span class="tag">howto</span>
+        <h3>WALDO build</h3>
+        <p>Train a model directly with CLI commands — the shortest path from
+        corpus to weights.</p>
+      </a>
+      <a class="card" href="walkthrough-compose.html">
+        <span class="tag">howto</span>
+        <h3>WALDO compose</h3>
+        <p>Declare architecture and curriculum in one YAML document — check,
+        build, resume.</p>
+      </a>
+      <div class="card here">
+        <span class="tag">you are here</span>
+        <h3>WALDO export</h3>
+        <p>Take the corpus out as parquet and train it with your own
+        stack.</p>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:48px">
+      <div class="eyebrow" style="margin-top:0">step 1</div>
+      <h3>Export</h3>
+      <p>
+        <strong>Shards export as they are</strong> — parquet,
+        ZSTD-compressed, byte-identical to what the manifest hashes. That
+        matters: every exported file verifies against the index on its own,
+        so a collaborator can confirm you did not quietly edit the data.
+        <span class="mono">--jsonl</span> decodes to canonical JSONL instead,
+        at roughly 3–4× the disk and producing files the index has no hash
+        for.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>export</span></div>
+      <pre><span class="r">$</span> waldo index export core/books ~/corpus
+<b>exporting 1 shard(s) as shard: 6 docs, 510.0K tokens, 2.3 MB on disk</b>
+<b>  core/books/books-87f1a41d56b5.parquet (2.3 MB, 6 docs)</b>
+<b>exported 1 file(s) (0 already present) + EXPORT.json → ~/corpus</b>
+
+<span class="c"># filter by license profile — the index labels, the consumer chooses</span>
+<span class="r">$</span> waldo index export science --license "CC-BY-*" ~/corpus
+
+<span class="c"># or stream a subset without materializing it at all</span>
+<span class="r">$</span> waldo index export core/books --jsonl --stdout | head -1 | jq -r '.text' | head -3</pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 2</div>
+      <h3>Know the schema</h3>
+      <p>
+        One row per document — <span class="mono">text</span> (the document;
+        text, never tokens), <span class="mono">sha256</span> (the dedup key),
+        <span class="mono">license</span> (SPDX token; constant within a
+        shard, since shards are single-license),
+        <span class="mono">license_raw</span> (what upstream said, when it
+        differs — the evidence for the label), <span class="mono">source</span> /
+        <span class="mono">source_name</span>, <span class="mono">lang</span> /
+        <span class="mono">lang_score</span>, and
+        <span class="mono">date</span>, <span class="mono">tokens</span>,
+        <span class="mono">kind</span>, <span class="mono">meta</span>.
+        <span class="mono">EXPORT.json</span> is the BOM: the index commit,
+        and for every file its path, URL, sha256, license, doc and token
+        counts.
+      </p>
+
+      <div class="eyebrow">step 3</div>
+      <h3>Train with PyTorch</h3>
+      <p>
+        Read it with pyarrow or <span class="mono">datasets</span>; nothing is
+        waldo-specific. Two habits worth keeping. <strong>Filter on
+        <span class="mono">license</span>, not on the path</strong> — a
+        subtree can mix licenses across shards, and the column is the
+        authority per record. And <strong>keep
+        <span class="mono">EXPORT.json</span> next to the data</strong>: it is
+        what lets anyone re-derive which index commit your training run
+        consumed, which is the whole reason to take data from here rather
+        than from a scrape.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>with PyTorch</span></div>
+      <pre>import pyarrow.parquet as pq, glob
+
+files = sorted(glob.glob("~/corpus/core/books/*.parquet"))
+tbl = pq.read_table(files, columns=["text", "license", "lang"])
+
+<span class="c"># shards are single-license, so filtering is a cheap column scan — this is</span>
+<span class="c"># how a downstream consumer honours "no copyleft" or "permissive only"</span>
+mask = pc.is_in(tbl["license"], value_set=pa.array(["CC0-1.0", "CC-BY-4.0"]))</pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 4</div>
+      <h3>Or generate a TorchTitan job bundle</h3>
+      <p>
+        For multi-node runs, waldo generates a job bundle rather than trying
+        to drive your cluster: <span class="mono">config.toml</span> (a
+        torchtitan job config carrying your architecture, optimizer and step
+        count — it says of itself that it is <em>“a STARTING POINT, not
+        turnkey”</em>), <span class="mono">shards.txt</span> (the
+        materialized shard paths, in training order), and
+        <span class="mono">JOB.md</span> (submission notes and the caveats,
+        including which torchtitan model family is nearest and where waldo’s
+        architecture differs from it).
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>torchtitan bundle</span></div>
+      <pre><span class="r">$</span> waldo model train titan1b core/books --steps 1000 --backend torchtitan
+<b>materialized 1 shard(s): 6 docs, ~510031 tokens</b>
+<b>job bundle written: ~/.waldo/models/titan1b/jobs/titan-20260804-012200</b>
+<b>  — see JOB.md there for cluster submission</b>
+<b>no training run recorded — record it after the cluster run completes</b></pre>
+    </div>
+
+    <div class="prose">
+      <p>
+        Note the last line: <strong>no run is recorded.</strong> waldo did not
+        train anything, so it does not claim a run. Record it after the
+        cluster job finishes, or the BOM chain will have a gap where the
+        training was. Single-node multi-GPU does not need any of this — that
+        is the PyTorch backend and it is turnkey:
+        <span class="mono">waldo compose build configs/words373m.yaml --gpus 8</span>.
+      </p>
+
+      <h3>Where to go next</h3>
+      <p>
+        To let waldo do the training — with the BOM recorded for you —
+        start with <a href="walkthrough-build.html">WALDO build</a>, then
+        declare the whole curriculum in
+        <a href="walkthrough-compose.html">WALDO compose</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contributing.html">Contributing</a></li>
+          <li><a href="training.html#walkthroughs">Train a model</a></li>
+          <li><a href="walkthrough-contributing.html">Contribute data</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

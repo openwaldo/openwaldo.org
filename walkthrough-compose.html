@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WALDO compose — OpenWALDO</title>
+<meta name="description" content="Build a model from one declarative YAML document — architecture plus staged curriculum — with a strict pre-flight check, resumable stages, and a bill of materials per stage.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WALDO compose — OpenWALDO">
+<meta property="og:description" content="Build a model from one declarative YAML document — architecture plus staged curriculum — with a strict pre-flight check, resumable stages, and a bill of materials per stage.">
+<meta property="og:url" content="https://openwaldo.org/walkthrough-compose.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/walkthrough-compose.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="training.html">Training</a>
+      <a href="contributing.html">Contributing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero fixed-h">
+  <div class="wrap">
+    <div class="eyebrow">howto · waldo compose</div>
+    <h1>One document, <em>one build</em>.</h1>
+    <p class="sub" style="font-size:19px">
+      <strong>What this HOWTO does:</strong> builds a model from a single YAML
+      compose document — architecture plus the staged curriculum — with a
+      strict pre-flight check, resumable stages, and a bill of materials
+      recorded per stage. This is how you keep, share, and re-run a build. The
+      document is intent; the BOM each stage records is the outcome.
+    </p>
+    <p class="sub">
+      Prerequisites are the same as <a href="walkthrough-build.html">WALDO
+      build</a>: the <span class="mono">waldo</span> binary, a checkout of the
+      index, and <span class="mono">uv</span>. Do the direct path once first —
+      it shows what this document is a shorthand for.
+    </p>
+  </div>
+</section>
+
+<section class="block flush">
+  <div class="wrap">
+
+    <div class="grid cols-3" style="margin-top:0">
+      <a class="card" href="walkthrough-build.html">
+        <span class="tag">howto</span>
+        <h3>WALDO build</h3>
+        <p>Train a model directly with CLI commands — the shortest path from
+        corpus to weights.</p>
+      </a>
+      <div class="card here">
+        <span class="tag">you are here</span>
+        <h3>WALDO compose</h3>
+        <p>Declare architecture and curriculum in one YAML document — check,
+        build, resume.</p>
+      </div>
+      <a class="card" href="walkthrough-export.html">
+        <span class="tag">howto</span>
+        <h3>WALDO export</h3>
+        <p>Take the corpus out as parquet and train it with your own
+        stack.</p>
+      </a>
+    </div>
+
+    <div class="prose" style="margin-top:48px">
+      <div class="eyebrow" style="margin-top:0">step 1</div>
+      <h3>Write the document</h3>
+      <p>
+        <span class="mono">waldo compose new my-model.yaml</span> writes a
+        template documenting <strong>every field in the schema</strong> with
+        its default — and run inside a checkout, it lists that tree’s corpus
+        paths as comments so you can pick from them. In brief:
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>my-model.yaml</span></div>
+      <pre>model: bookworm
+
+arch:
+  preset: 10m            <span class="c"># or params: 500m, or every dimension spelled out</span>
+  context: 512
+  <span class="c"># tokenizer: byte      # byte | tiktoken/&lt;encoding&gt;</span>
+
+train:
+  seed: 42
+  checkpoint_steps: 500
+  stages:
+    - phase: pretrain    <span class="c"># pretrain, then midtrain as an anneal</span>
+      paths: [core/books]
+      epochs: 1          <span class="c"># or steps:, or tokens: — exactly one</span>
+      batch: 8
+      lr: 3e-4</pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 2</div>
+      <h3>Check before you build</h3>
+      <p>
+        <span class="mono">check</span> is the command that saves money. It
+        parses strictly (an unknown key is an error, never a silent default),
+        reports data starvation and budget coverage, forecasts wall-clock
+        against real hardware, sizes the optimizer state against <em>this</em>
+        machine’s memory — and inspects the model the document targets.
+        Architecture is immutable after init, so a mismatch is a build that
+        would fail <em>after</em> you queued it; <span class="mono">check</span>
+        names the differing dimension instead.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>compose check</span></div>
+      <pre><span class="r">$</span> waldo compose check configs/words373m.yaml
+<b>model words373m: 24 layers, 1024 hidden, vocab 100277 (tiktoken/cl100k_base) — ~373.3M params</b>
+<b>pretrain: core — 228881 steps, batch 32, lr 0.0003</b>
+
+<b>projected build (≈6 × params × tokens-seen = 16.8 EFLOPs; rough ±2×):</b>
+<b>  Apple M4 Max (MLX, 128 GB unified) ~32.4 days</b>
+<b>  1× H100 80GB                       ~13.3 hours</b>
+<b>  1× AMD MI300X 192GB                ~11.7 hours</b>
+<b>  8× H200 (one node, DDP)            ~1.7 hours</b>
+
+<b>room (fp32):</b>
+<b>  weights on disk                    ~1.4 GB</b>
+<b>  training state in memory           ~5.6 GB (weights + gradients + Adam moments)</b>
+<b>  this machine                       431.6 GB free disk, 128.0 GB memory</b>
+
+<b>projected quality after this training: held-out confidence ~5.56% (loss ~2.89)</b>
+<b>ok</b></pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 3</div>
+      <h3>Build</h3>
+      <p>
+        <strong>A build creates the model from scratch</strong> and refuses
+        one that already has training, because appending to a run history
+        someone will later read as provenance is a different intention. To
+        continue an interrupted run, <span class="mono">--append</span> —
+        completed stages are skipped, so it resumes from the first incomplete
+        one. Editing one stage reruns only that stage; pass a name to build
+        the same curriculum as a different model:
+        <span class="mono">waldo compose build variant-b configs/words373m.yaml</span>.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>compose build</span></div>
+      <pre><span class="r">$</span> waldo compose build configs/smoke10m.yaml
+<b>created smoke10m: 6 layers, 384 hidden, 6 heads (2 kv), ffn 1024, context 128,</b>
+<b>  vocab 259 (byte) — ~9.5M params</b>
+<b>=== pretrain (1/1): core/common-pile/public-domain-review (20 steps, backend mlx) ===</b>
+<b>done: final loss 3.2203 (held-out 3.1666)</b>
+<b>train complete: smoke10m (1 stage(s) run), BOM-pinned</b>
+
+<span class="c"># resume an interrupted run — completed stages are skipped</span>
+<span class="r">$</span> waldo compose build --append configs/english1b.yaml
+<b>pretrain: up to date, skipping</b>
+<b>=== midtrain (2/2): post-train (508 steps, backend pytorch) ===</b>
+
+<span class="c"># single-node multi-GPU is turnkey</span>
+<span class="r">$</span> waldo compose build configs/words373m.yaml --gpus 8</pre>
+    </div>
+
+    <div class="prose">
+      <h3>The ladder</h3>
+      <p>
+        The toolchain repo’s <span class="mono">configs/</span> directory
+        holds four documents that go from “does this machine work” to “this
+        writes English”, with measured times on nine hardware configurations —
+        see <a href="https://github.com/openwaldo/waldo/tree/main/configs">configs/README.md</a>.
+        Alongside them are four <em>instruments</em> — documents that each
+        isolate one feature so it can be proved in seconds before you commit
+        hours.
+      </p>
+    </div>
+    <div class="table-scroll">
+      <table class="check-table">
+        <tr><th>tier</th><th>model</th><th>params</th><th>tokens</th><th>what comes out</th></tr>
+        <tr><td class="letter">1</td><td class="what mono">smoke10m</td><td>9.5M</td><td>10K</td><td class="how">noise — a receipt that the pipeline ran (~2.5s)</td></tr>
+        <tr><td class="letter">2</td><td class="what mono">babble85m</td><td>85.2M</td><td>1.7B</td><td class="how">real words, no grammar joining them</td></tr>
+        <tr><td class="letter">3</td><td class="what mono">words373m</td><td>373.3M</td><td>7.5B</td><td class="how">sentences that hold together locally</td></tr>
+        <tr><td class="letter">4</td><td class="what mono">english1b</td><td>1.2B</td><td>24B</td><td class="how">fluent English across paragraphs</td></tr>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h3>Where to go next</h3>
+      <p>
+        Measuring and shipping what you built — <span class="mono">model
+        test</span>, <span class="mono">model info</span>,
+        <span class="mono">export</span> with
+        <span class="mono">PROVENANCE.md</span> — works exactly as in
+        <a href="walkthrough-build.html">WALDO build</a>. To train with your
+        own stack instead of waldo’s,
+        <a href="walkthrough-export.html">WALDO export</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contributing.html">Contributing</a></li>
+          <li><a href="training.html#walkthroughs">Train a model</a></li>
+          <li><a href="walkthrough-contributing.html">Contribute data</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>

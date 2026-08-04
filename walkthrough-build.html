@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WALDO build — OpenWALDO</title>
+<meta name="description" content="Build and train a model directly with CLI commands: size an architecture against the corpus, init it, train on an index path, and ship BOM-pinned weights.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WALDO build — OpenWALDO">
+<meta property="og:description" content="Build and train a model directly with CLI commands: size an architecture against the corpus, init it, train on an index path, and ship BOM-pinned weights.">
+<meta property="og:url" content="https://openwaldo.org/walkthrough-build.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://openwaldo.org/walkthrough-build.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="training.html">Training</a>
+      <a href="contributing.html">Contributing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero fixed-h">
+  <div class="wrap">
+    <div class="eyebrow">howto · waldo build</div>
+    <h1>Build and train a model, <em>directly</em>.</h1>
+    <p class="sub" style="font-size:19px">
+      <strong>What this HOWTO does:</strong> builds a model with CLI commands
+      alone — size an architecture against the corpus, init it, train it on an
+      index path, and ship weights that carry their own bill of materials. The
+      shortest path from corpus to model, and what
+      <a href="walkthrough-compose.html">the compose document</a> is shorthand
+      for.
+    </p>
+    <p class="sub">
+      Set expectations honestly: every model here is a <strong>base</strong>
+      model — it continues text the way a book does. It does not answer
+      questions and does not converse (<span class="mono">waldo chat</span>
+      says so on startup). And a small model trained on a slice of the corpus
+      generates English-shaped babble; that’s the correct result at that
+      scale. What you’re really building is the discipline: a model that
+      carries its own bill of materials.
+    </p>
+  </div>
+</section>
+
+<section class="block flush">
+  <div class="wrap">
+
+    <div class="grid cols-3" style="margin-top:0">
+      <div class="card here">
+        <span class="tag">you are here</span>
+        <h3>WALDO build</h3>
+        <p>Train a model directly with CLI commands — the shortest path from
+        corpus to weights.</p>
+      </div>
+      <a class="card" href="walkthrough-compose.html">
+        <span class="tag">howto</span>
+        <h3>WALDO compose</h3>
+        <p>Declare architecture and curriculum in one YAML document — check,
+        build, resume.</p>
+      </a>
+      <a class="card" href="walkthrough-export.html">
+        <span class="tag">howto</span>
+        <h3>WALDO export</h3>
+        <p>Take the corpus out as parquet and train it with your own
+        stack.</p>
+      </a>
+    </div>
+
+    <div class="prose" style="margin-top:48px">
+      <div class="eyebrow" style="margin-top:0">step 0</div>
+      <h3>What you need</h3>
+      <p>
+        The <span class="mono">waldo</span> binary, a checkout of the index
+        with at least one corpus, and
+        <a href="https://docs.astral.sh/uv/"><span class="mono">uv</span></a> —
+        the training harness runs through it and resolves its own
+        dependencies, so there’s no Python environment to set up.
+      </p>
+      <p>
+        Backends are chosen by the machine, never declared:
+        <strong>MLX</strong> on Apple Silicon, <strong>PyTorch</strong>
+        everywhere else (CUDA, ROCm, MPS, or CPU at runtime). Weights are
+        byte-compatible between them, so you can prototype on a laptop and
+        continue the same model on a GPU node.
+      </p>
+    </div>
+
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>macOS — install</span></div>
+      <pre><span class="c"># prerequisites: git, Go 1.24+, and uv</span>
+<span class="r">$</span> brew install go uv
+
+<span class="c"># build and install the waldo binary, then clone the public index</span>
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
+
+<span class="c"># training backend: MLX, auto-detected on Apple Silicon — nothing to configure</span></pre>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>Linux — install</span></div>
+      <pre><span class="c"># prerequisites: git, Go 1.24+, uv, and the NVIDIA driver for GPU training</span>
+<span class="r">$</span> sudo dnf install golang git   <span class="c"># or apt install golang-go git</span>
+<span class="r">$</span> curl -LsSf https://astral.sh/uv/install.sh | sh
+
+<span class="c"># build and install the waldo binary, then clone the public index</span>
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo.git &amp;&amp; cd waldo &amp;&amp; make install
+<span class="r">$</span> git clone https://github.com/openwaldo/waldo-index.git &amp;&amp; cd waldo-index
+
+<span class="c"># training backend: PyTorch, auto-detected on CUDA — add --gpus N for multi-GPU</span></pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 1</div>
+      <h3>Size the model against the corpus</h3>
+      <p>
+        Tokens-per-parameter math, done for you — which model size this much
+        data can actually support.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>recommend</span></div>
+      <pre><span class="r">$</span> waldo model recommend core/books
+<b>rung   params    tokens/param at 1 epoch</b>
+<b>  10m  9.5M      0.0534</b>
+<b>→ 10m</b>
+<b>recommended: 10m — the largest rung this corpus feeds to at least compute-optimal</b></pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 2</div>
+      <h3>Create, then train</h3>
+      <p>
+        Architecture is immutable after init. Training a subtree path trains
+        every manifest beneath it, and each run records a
+        <strong>BOM</strong>: the index commit, every consumed manifest’s
+        hash, data totals, and the builder version. Re-running is make-style —
+        a completed stage with unchanged data, recipe and hyperparameters is
+        skipped. Models live in <span class="mono">~/.waldo/models/</span> —
+        machine artifacts, never repo content.
+      </p>
+      <p>
+        Note the warnings below: six books is 510K tokens, so even the
+        smallest rung is starved. They’re correct and worth heeding.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>init &amp; train</span></div>
+      <pre><span class="r">$</span> waldo model init bookworm --preset 10m --context 512
+<b>created bookworm: 6 layers, 384 hidden, 6 heads (2 kv), ffn 1024, context 512,</b>
+<b>  vocab 259 (byte) — ~9.5M params</b>
+
+<span class="r">$</span> waldo model train bookworm core/books --steps 200
+<b>warning: pretrain corpus is ~510.0K tokens against ~9.5M params (0.0534 tokens/param</b>
+<b>  at 1 epoch) — severely data-starved; consider a smaller rung or more data</b>
+<b>=== pretrain (1/1): core/books (200 steps, backend mlx) ===</b>
+<b>step   200  loss 1.7871  (avg10 1.8345)</b>
+<b>done: final loss 1.7871 (held-out 1.8345)</b>
+<b>trained: bookworm — BOM-pinned; try `waldo chat bookworm`</b></pre>
+    </div>
+
+    <div class="prose">
+      <div class="eyebrow">step 3</div>
+      <h3>Measure it, then ship it</h3>
+      <p>
+        <span class="mono">PROVENANCE.md</span> is why any of this exists, and
+        the BOM chain is embedded <em>inside</em> the safetensors too, so the
+        weights carry their own history even when separated from the
+        directory. The replay guarantee is exact for the
+        <strong>inputs</strong>: anyone with your index commit rebuilds from
+        the same data, recipe and architecture. Weights themselves are not
+        bit-deterministic across GPUs, and the tool does not pretend
+        otherwise.
+      </p>
+    </div>
+    <div class="term">
+      <div class="bar"><i></i><i></i><i></i><span>test, inspect, chat, export</span></div>
+      <pre><span class="r">$</span> waldo model test bookworm core/books
+<b>eval: loss 1.7947, perplexity 6.02 over 2188772 tokens</b>
+
+<span class="r">$</span> waldo model info bookworm            <span class="c"># runs, BOMs, lineage, saturation</span>
+<span class="r">$</span> waldo chat bookworm                  <span class="c"># it continues text; it does not answer</span>
+<span class="r">$</span> waldo model export bookworm ~/out
+<b>exported bookworm → ~/out</b>
+<b>  model.safetensors (~9.5M params)</b>
+<b>  model.json</b>
+<b>  PROVENANCE.md (3 lineage events, 2 runs)</b></pre>
+    </div>
+
+    <div class="prose">
+      <h3>Where to go next</h3>
+      <p>
+        That is the whole direct path. It works, and it does not scale to a
+        curriculum you want to keep, share, or re-run six months later. For
+        that, declare the build in one reviewable file:
+        <a href="walkthrough-compose.html">WALDO compose</a>. Or skip waldo as
+        a trainer entirely and take the data to your own stack:
+        <a href="walkthrough-export.html">WALDO export</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contributing.html">Contributing</a></li>
+          <li><a href="training.html#walkthroughs">Train a model</a></li>
+          <li><a href="walkthrough-contributing.html">Contribute data</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
