@@ -76,6 +76,10 @@ nav.links a {
   color: var(--ink); text-decoration: none; font-size: 15.5px;
   font-weight: 600; letter-spacing: 0.1px;
 }
+/* thin separators between the text links; the buttons stay set apart */
+nav.links a:not(.gh-btn) + a:not(.gh-btn) {
+  border-left: 1px solid var(--line); padding-left: 22px;
+}
 nav.links a:hover, nav.links a[aria-current="page"] { color: var(--ink); }
 nav.links a:hover { color: var(--red); }
 nav.links a[aria-current="page"] {
@@ -744,6 +748,7 @@ code {
   }
   nav.links.open { display: flex; }
   nav.links a { padding: 10px 0; font-size: 16px; }
+  nav.links a:not(.gh-btn) + a:not(.gh-btn) { border-left: none; padding-left: 0; }
   nav.links .gh-btn, nav.links .gh-btn + .gh-btn { margin-left: 0; }
   #menu-btn { display: block; }
 }
