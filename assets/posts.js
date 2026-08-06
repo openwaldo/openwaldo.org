@@ -8,9 +8,10 @@
 //                           the frontmatter by .scripts/build-posts-index.py
 //                           (CI runs it at deploy time; gitignored locally)
 //
-// The whole index loads in one fetch, so cards, search, and filters work
-// entirely in memory at any archive size; a post's markdown is fetched
-// only when it's actually opened.
+// The metadata index loads in one fetch, so cards, search, filters, and
+// pagination work entirely in memory. A post's markdown is fetched only
+// when it is opened. At very large archive sizes, the generated index can
+// be split into static pages without changing the post format.
 //
 // Render modes:
 //   [data-posts]            the posts page — searchable, filterable cards;
@@ -144,13 +145,15 @@
     const a = document.createElement('article');
     a.className = 'post-card';
     a.innerHTML =
-      (meta.type ? '<div class="post-type">' + esc(meta.type) + '</div>' : '') +
+      '<div class="post-card-index"><span>' + esc(meta.date) + '</span>' +
+      (meta.type ? '<b>' + esc(meta.type) + '</b>' : '') + '</div>' +
+      '<div class="post-card-copy">' +
       (meta.logo ? '<img class="post-logo" src="' + esc(meta.logo) + '" alt="">' : '') +
       '<h3><a href="' + href + '">' + esc(meta.title) + '</a></h3>' +
-      (meta.description ? '<p>' + esc(meta.description) + '</p>' : '') +
-      '<div class="post-meta card-meta">' +
-      (meta.author ? '<span class="post-author">by ' + esc(meta.author) + '</span>' : '<span></span>') +
-      '<span>' + esc(meta.date) + '</span></div>';
+      (meta.description ? '<p>' + esc(meta.description) + '</p>' : '') + '</div>' +
+      '<div class="post-card-author">' +
+      (meta.author ? '<span>By</span><b>' + esc(meta.author) + '</b>' : '') + '</div>' +
+      '<span class="post-card-action">Read ↗</span>';
     // the whole tile navigates; inner links (the title) still win
     a.addEventListener('click', (e) => {
       if (!e.target.closest('a')) location.href = href;
@@ -169,6 +172,10 @@
       '<div class="prose post-body">' + md2html(body) + '</div>';
     return art;
   };
+
+  const returnLink = () =>
+    '<a class="post-return" href="./"><span aria-hidden="true">←</span>' +
+    '<span><small>Return to the archive</small><strong>All posts</strong></span></a>';
 
   // share links always point at the live site, so they work even when the
   // page is being previewed over file:// or a local server; brand logos are
@@ -244,16 +251,14 @@
   try {
     if (param && /^[\w-]+$/.test(param)) {
       const post = parsePost(param, await get('content/' + param + '.md'));
-      // single-post view: the post IS the page — drop the listing hero
-      document.querySelector('.page-hero')?.remove();
-      const section = listEl.closest('section');
-      if (section) section.style.paddingTop = '64px';
+      // Keep only a compact dark masthead above the light editorial page.
+      document.body.classList.add('single-post-page');
       document.title = post.meta.title + ' — OpenWALDO';
       listEl.innerHTML = '';
-      listEl.insertAdjacentHTML('beforeend', '<p class="post-back"><a href="./">← all posts</a></p>');
+      listEl.insertAdjacentHTML('beforeend', returnLink());
       listEl.appendChild(fullPost(post));
       listEl.appendChild(shareRow(post.meta));
-      listEl.insertAdjacentHTML('beforeend', '<p class="post-back" style="margin-top:26px"><a href="./">← all posts</a></p>');
+      listEl.insertAdjacentHTML('beforeend', returnLink());
       return;
     }
 
@@ -264,7 +269,7 @@
       return;
     }
 
-    // toolbar: search + type filter chips — all in memory, any archive size
+    // toolbar: search + type filter chips over the generated metadata index
     const toolbar = document.createElement('div');
     toolbar.className = 'post-toolbar';
     toolbar.innerHTML =
@@ -278,21 +283,59 @@
     const input = toolbar.querySelector('input');
     const filtersEl = toolbar.querySelector('.post-filters');
 
-    const PAGE_SIZE = 10;
-    let typeFilter = '', query = '', page = 1;
+    const PAGE_SIZE = 12;
+    const readState = () => {
+      const state = new URLSearchParams(location.search);
+      return {
+        type: state.get('type') || '',
+        query: (state.get('q') || '').trim().toLowerCase(),
+        page: Math.max(1, parseInt(state.get('page') || '1', 10) || 1),
+      };
+    };
+    let initial = readState();
+    let typeFilter = initial.type, query = initial.query, page = initial.page;
+    input.value = query;
 
-    const rebuildFilters = () => {
-      const types = [...new Set(posts.map((p) => p.type).filter(Boolean))];
+    const stateUrl = (targetPage = page) => {
+      const url = new URL(location.href);
+      url.search = '';
+      if (query) url.searchParams.set('q', query);
+      if (typeFilter) url.searchParams.set('type', typeFilter);
+      if (targetPage > 1) url.searchParams.set('page', targetPage);
+      return url;
+    };
+
+    const syncState = (mode = 'replace') => {
+      history[mode + 'State']({}, '', stateUrl());
+    };
+
+    const types = [...new Set(posts.map((p) => p.type).filter(Boolean))].sort();
+    if (typeFilter && !types.includes(typeFilter)) typeFilter = '';
+
+    const filterButtons = new Map();
+    const buildFilters = () => {
       filtersEl.innerHTML = '';
       if (!types.length) return;
       ['', ...types].forEach((t) => {
         const b = document.createElement('button');
         b.className = 'type-chip filter' + ((t === typeFilter) ? ' on' : '');
         b.textContent = t || 'all';
-        b.addEventListener('click', () => { typeFilter = t; page = 1; render(); });
+        b.setAttribute('aria-pressed', String(t === typeFilter));
+        b.addEventListener('click', () => {
+          typeFilter = t;
+          page = 1;
+          syncState('push');
+          render();
+        });
+        filterButtons.set(t, b);
         filtersEl.appendChild(b);
       });
     };
+
+    const updateFilters = () => filterButtons.forEach((button, type) => {
+      button.classList.toggle('on', type === typeFilter);
+      button.setAttribute('aria-pressed', String(type === typeFilter));
+    });
 
     const matches = (meta) =>
       (!typeFilter || meta.type === typeFilter) &&
@@ -302,33 +345,60 @@
     const render = () => {
       const hits = posts.filter(matches);
       const pages = Math.max(1, Math.ceil(hits.length / PAGE_SIZE));
+      const requestedPage = page;
       page = Math.min(Math.max(1, page), pages);
+      if (requestedPage !== page) syncState('replace');
       results.innerHTML = '';
       hits.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
         .forEach((meta) => results.appendChild(card(meta)));
       if (!hits.length) results.innerHTML = '<p class="sub">No posts match.</p>';
-      rebuildFilters();
+      updateFilters();
 
-      // prev / next
+      // Result count plus compact, shareable numbered pagination.
       pager.innerHTML = '';
+      const first = hits.length ? ((page - 1) * PAGE_SIZE) + 1 : 0;
+      const last = Math.min(page * PAGE_SIZE, hits.length);
+      const summary = document.createElement('span');
+      summary.className = 'pager-summary';
+      summary.textContent = hits.length ? first + '–' + last + ' of ' + hits.length + ' posts' : '0 posts';
+      pager.appendChild(summary);
+
       if (pages > 1) {
-        const btn = (label, target, enabled) => {
-          const b = document.createElement('button');
-          b.className = 'btn ghost pager-btn';
+        const controls = document.createElement('div');
+        controls.className = 'pager-controls';
+        const link = (label, target, current = false) => {
+          const b = document.createElement(current ? 'span' : 'a');
+          b.className = 'pager-btn' + (current ? ' current' : '');
           b.textContent = label;
-          b.disabled = !enabled;
-          b.addEventListener('click', () => {
-            page = target;
-            render();
-            toolbar.scrollIntoView({ block: 'start' });
-          });
+          if (!current) {
+            b.href = stateUrl(target);
+            b.addEventListener('click', (event) => {
+              event.preventDefault();
+              page = target;
+              syncState('push');
+              render();
+              toolbar.scrollIntoView({ block: 'start' });
+            });
+          } else {
+            b.setAttribute('aria-current', 'page');
+          }
           return b;
         };
-        const status = document.createElement('span');
-        status.className = 'pager-status';
-        status.textContent = 'page ' + page + ' of ' + pages;
-        pager.append(btn('← newer', page - 1, page > 1), status,
-                     btn('older →', page + 1, page < pages));
+        const gap = () => {
+          const s = document.createElement('span');
+          s.className = 'pager-gap';
+          s.textContent = '…';
+          return s;
+        };
+        if (page > 1) controls.appendChild(link('← Newer', page - 1));
+        const visible = [...new Set([1, page - 2, page - 1, page, page + 1, page + 2, pages])]
+          .filter((n) => n >= 1 && n <= pages).sort((a, b) => a - b);
+        visible.forEach((n, i) => {
+          if (i && n - visible[i - 1] > 1) controls.appendChild(gap());
+          controls.appendChild(link(String(n), n, n === page));
+        });
+        if (page < pages) controls.appendChild(link('Older →', page + 1));
+        pager.appendChild(controls);
       }
     };
 
@@ -338,10 +408,22 @@
       deb = setTimeout(() => {
         query = input.value.trim().toLowerCase();
         page = 1;
+        syncState('replace');
         render();
       }, 120);
     });
 
+    addEventListener('popstate', () => {
+      const state = readState();
+      typeFilter = types.includes(state.type) ? state.type : '';
+      query = state.query;
+      page = state.page;
+      input.value = query;
+      render();
+    });
+
+    buildFilters();
+    syncState('replace');
     render();
   } catch (e) {
     listEl.innerHTML = '<p class="sub">Couldn’t load the posts right now — they live ' +
