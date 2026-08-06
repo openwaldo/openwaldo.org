@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using &amp; Training — OpenWALDO</title>
+<meta name="description" content="Take verified OpenWALDO data into your own training stack or use WALDO's provenance-carrying model lifecycle from blank architecture or open weights to portable release.">
+<meta property="og:site_name" content="OpenWALDO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Using &amp; Training — OpenWALDO">
+<meta property="og:description" content="Two explicit paths from verified training data to auditable model releases.">
+<meta property="og:url" content="https://openwaldo.org/training.html">
+<meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="The OpenWALDO logo">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/legacy.css?v=20260806">
+<link rel="canonical" href="https://openwaldo.org/training.html">
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="index.html"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+    <button id="menu-btn" aria-label="Menu">☰</button>
+    <nav class="links">
+      <a href="training.html" aria-current="page">Training</a>
+      <a href="contributing.html">Contributing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="posts/">Posts</a>
+      <a href="about.html">About</a>
+      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
+    </nav>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main>
+
+<section class="page-hero feature-hero">
+  <div class="wrap feature-hero-grid">
+    <div>
+      <div class="eyebrow">using the commons</div>
+      <h1>Verified data in. <em>Auditable models out.</em></h1>
+      <p class="sub">
+        OpenWALDO turns an index selection into immutable, independently
+        verifiable training data. Export it to the stack you already use, or
+        carry it through WALDO’s model lifecycle from blank architecture or
+        open weights to a portable release.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#paths">Choose your path</a>
+        <a class="btn ghost" href="index.html#corpus">Explore the corpus</a>
+        <a class="btn ghost" href="https://github.com/openwaldo/waldo">Read the CLI docs ↗</a>
+      </div>
+    </div>
+    <div class="hero-artifact" aria-label="The OpenWALDO provenance chain">
+      <div class="artifact-sheet corpus-sheet">
+        <small>verified input</small>
+        <strong>OpenWALDO BOM</strong>
+        <span>index · sources · licenses · shards</span>
+      </div>
+      <div class="artifact-sheet run-sheet">
+        <small>observed execution</small>
+        <strong>RUN-BOM.json</strong>
+        <span>plan · backend · consumption · outputs</span>
+      </div>
+      <div class="artifact-sheet release-sheet">
+        <small>portable release</small>
+        <strong>BOM.json</strong>
+        <span>origin · lineage · artifact hashes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted" id="paths">
+  <div class="wrap reveal">
+    <div class="eyebrow">one verified handoff, two paths</div>
+    <h2>Use WALDO’s data without being locked into WALDO’s trainer.</h2>
+    <p class="sub measure">
+      Both paths begin with the same recursive verification and immutable
+      OpenWALDO BOM. What happens after that is your choice.
+    </p>
+    <div class="path-grid">
+      <article class="path-card external-path">
+        <div class="path-topline"><span>Path A</span><span>Bring your own stack</span></div>
+        <h3>Export verified corpus data</h3>
+        <p>Materialize native Parquet or canonical JSONL with <span class="mono">EXPORT.json</span> beside it. Audit it independently, train from scratch, or combine it with open weights in the tools you already operate.</p>
+        <div class="path-steps">
+          <span>Select</span><i>→</i><span>Verify</span><i>→</i><span>Export + BOM</span><i>→</i><span>Your tools</span>
+        </div>
+        <a class="text-link" href="https://github.com/openwaldo/waldo#export-and-inspect-corpus-data">Export and inspect corpus data ↗</a>
+      </article>
+      <article class="path-card waldo-path">
+        <div class="path-topline"><span>Path B</span><span>Use the WALDO lifecycle</span></div>
+        <h3>Compose, train, test, and release</h3>
+        <p>Start from an immutable blank architecture or pull compatible open weights with an origin BOM. Forecast, train, resume, inspect, chat, and export while the provenance chain grows with every real run.</p>
+        <div class="path-steps">
+          <span>Blank or open weights</span><i>→</i><span>Compose</span><i>→</i><span>Train</span><i>→</i><span>Release + BOMs</span>
+        </div>
+        <a class="text-link" href="https://github.com/openwaldo/waldo#forecast-and-train-a-model">Forecast and train a model ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">the complete model path</div>
+    <h2>Two valid starting points. One append-only history.</h2>
+    <p class="sub measure">
+      OpenWALDO never disguises inherited weights as a from-scratch build. The
+      starting point is pinned first; each observed training run is appended
+      afterward.
+    </p>
+    <div class="model-lifecycle">
+      <div class="starting-points">
+        <div class="lifecycle-node starting"><small>start clean</small><strong>Blank architecture</strong><span>declared in model compose</span></div>
+        <div class="lifecycle-or">or</div>
+        <div class="lifecycle-node starting"><small>continue openly</small><strong>Open weights</strong><span>pulled with origin BOM</span></div>
+      </div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node"><small>before compute</small><strong>Forecast &amp; compose</strong><span>architecture · data · objective · resources</span></div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node active"><small>observed execution</small><strong>Train &amp; evaluate</strong><span>consumption · losses · checkpoints · hashes</span></div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node"><small>portable output</small><strong>Test &amp; export</strong><span>WALDO · Hugging Face · MLX · GGUF · Ollama</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap reveal">
+    <div class="eyebrow">the receipts</div>
+    <h2>Provenance is an artifact, not a paragraph in a model card.</h2>
+    <p class="sub measure">
+      Each boundary writes the record needed by the next one. Hashes prove
+      identity and integrity; the BOM states exactly what WALDO verified and
+      what the backend reported.
+    </p>
+    <div class="grid cols-2 receipt-grid">
+      <div class="card receipt-card">
+        <span class="file-label">EXPORT.json</span>
+        <h3>Corpus OpenWALDO BOM</h3>
+        <p>Pins the Git revision, selected manifests, sources, licenses, canonical objects, counts, and exported-file hashes.</p>
+      </div>
+      <div class="card receipt-card">
+        <span class="file-label">ORIGIN-BOM.json</span>
+        <h3>Starting-weight identity</h3>
+        <p>Records the immutable repository revision, acquired artifacts, architecture, tokenizer, precision, and provenance gaps of pulled weights.</p>
+      </div>
+      <div class="card receipt-card">
+        <span class="file-label">RUN-BOM.json</span>
+        <h3>Planned and observed run</h3>
+        <p>Writes the immutable plan before execution, then binds backend observations, evaluation, checkpoints, and output hashes afterward.</p>
+      </div>
+      <div class="card receipt-card">
+        <span class="file-label">BOM.json · EU-BOM.json</span>
+        <h3>Release inventory and disclosure</h3>
+        <p>Ships the selected origin or real run with a hashed release inventory and a separate regulatory disclosure projection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap reveal">
+    <div class="eyebrow">working today</div>
+    <h2>From laptop experiments to a single multi-GPU node.</h2>
+    <div class="capability-board">
+      <div class="capability-column">
+        <span class="capability-state ready">available</span>
+        <h3>Training backends</h3>
+        <ul>
+          <li>MLX training and generation on Apple Silicon</li>
+          <li>PyTorch on Linux CPU, NVIDIA CUDA, and AMD ROCm</li>
+          <li>Single-node distributed TorchTitan across visible Linux GPUs</li>
+          <li>Atomic checkpoints and exact same-run resume</li>
+        </ul>
+      </div>
+      <div class="capability-column">
+        <span class="capability-state ready">available</span>
+        <h3>Release formats</h3>
+        <ul>
+          <li>Native self-contained WALDO archive</li>
+          <li>Hugging Face and MLX packages</li>
+          <li>GGUF and Ollama, with explicit quantization</li>
+          <li>Technical and EU BOMs, optionally signed</li>
+        </ul>
+      </div>
+      <div class="capability-column">
+        <span class="capability-state pending">next</span>
+        <h3>Deliberately pending</h3>
+        <ul>
+          <li>General Hugging Face tokenizer and architecture profiles</li>
+          <li>Supervised fine-tuning and preference training</li>
+          <li>Pinned chat templates and PyTorch generation</li>
+          <li>Multi-node cluster orchestration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block open-source-callout">
+  <div class="wrap reveal">
+    <div class="eyebrow">open means the source is open</div>
+    <h2>Weights alone are not enough.</h2>
+    <p class="sub measure">
+      A model is not fully open when its training data and build record
+      disappear. OpenWALDO keeps the data, artifacts, license assertions,
+      origins, and run history connected to the release—so “open” can be
+      inspected instead of merely claimed.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="index.html#corpus">Explore the training data</a>
+      <a class="btn ghost" href="contributing.html">Add to the commons</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html" style="margin-bottom:16px"><img class="dot" src="assets/mark.svg" alt=""><em>OpenWALDO</em></a>
+        <p class="foot-tag" style="margin-top:14px">Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.<br><span class="waldo">OpenWALDO.</span></p>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="training.html">Training</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="posts/">Posts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="contributing.html">Contributing</a></li>
+          <li><a href="index.html#corpus">Explore the corpus</a></li>
+          <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
+          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul><li><a href="https://github.com/openwaldo/waldo">On GitHub ↗</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The OpenWALDO Project</span>
+      <span class="mono">open(Weights, Artifacts, Licenses, Data, Origins)</span>
+    </div>
+  </div>
+  <div class="stripe" style="margin-top:40px"></div>
+</footer>
+
+<script src="assets/legacy.js?v=20260806"></script>
+</body>
+</html>
