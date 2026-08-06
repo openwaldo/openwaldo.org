@@ -76,7 +76,7 @@ em { font-family: Georgia, serif; font-weight: 400; }
 .corpus-total { padding: 42px 44px 48px 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
 .corpus-total > span, .corpus-total small { font: 600 10px/1.4 var(--font-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
 .corpus-total strong { margin: 30px 0 18px; font-size: clamp(76px, 10vw, 146px); line-height: .75; letter-spacing: -.085em; }
-.corpus-total strong em { color: var(--red); font-family: inherit; font-size: .42em; font-style: normal; letter-spacing: -.04em; }
+.corpus-total strong em { margin-left: .12em; color: var(--red); font-family: inherit; font-size: .42em; font-style: normal; letter-spacing: -.04em; }
 .corpus-total small { color: var(--muted); }
 .branch-map { padding: 36px 0 36px 44px; display: flex; flex-direction: column; justify-content: center; gap: 19px; }
 .branch > div { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font: 650 11px/1 var(--font-mono), monospace; }
