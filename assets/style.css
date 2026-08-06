@@ -464,6 +464,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .manifesto-title .light { color: rgba(244,241,232,.55); }
 .manifesto h2 { max-width: 700px; font-size: clamp(43px, 5.2vw, 68px); }
 .manifesto h2 em { color: var(--red); }
+.manifesto-thesis { max-width: 590px; margin: 28px 0 0; color: var(--red); font-size: clamp(20px, 2vw, 27px); line-height: 1.35; letter-spacing: -.025em; font-weight: 500; }
 .manifesto-points article { padding: 28px 0; border-color: rgba(244,241,232,.2); }
 .manifesto-points article:last-child { border-color: rgba(244,241,232,.2); }
 .manifesto-points h3 { font-size: 21px; font-weight: 500; letter-spacing: -.025em; }
