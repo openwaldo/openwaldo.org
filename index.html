@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OpenWALDO — Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.</title>
-<meta name="description" content="OpenWALDO is open source AI: a shared, auditable corpus of training data and a toolchain that builds models the way open source builds software — inspectable, verifiable, rebuildable by anyone.">
+<meta name="description" content="OpenWALDO is a community-governed corpus and toolchain for contributing, verifying, selecting, and tracing AI training data from original source to model bill of materials.">
 <meta property="og:site_name" content="OpenWALDO">
 <meta property="og:type" content="website">
 <meta property="og:title" content="OpenWALDO — Open Weights. Open Artifacts. Open Licenses. Open Data. Open Origins.">
-<meta property="og:description" content="OpenWALDO is open source AI: a shared, auditable corpus of training data and a toolchain that builds models the way open source builds software — inspectable, verifiable, rebuildable by anyone.">
+<meta property="og:description" content="A community-governed corpus and toolchain for contributing, verifying, selecting, and tracing AI training data from original source to model bill of materials.">
 <meta property="og:url" content="https://openwaldo.org/">
 <meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
 <meta property="og:image:width" content="1024">
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="The OpenWALDO logo">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=20260806">
 <link rel="canonical" href="https://openwaldo.org/">
 </head>
 <body>
@@ -53,47 +53,129 @@
     </h1>
     <p class="lede">
       <strong>Open source AI doesn't truly exist, <span class="red">until
-      now.</span></strong> The training data is a model’s source code and
-      OpenWALDO opens the source to the community: the first
-      cryptographically attributed community driven corpus of training data,
-      one everyone can take part in. This is what open source means.
+      now.</span></strong> OpenWALDO is a community-governed corpus and
+      toolchain for contributing, verifying, selecting, and tracing training
+      data — from original source to model bill of materials. If training data
+      is a model’s source code, the source must be open too.
     </p>
     <div class="cta-row">
-      <a class="btn" href="about.html">Learn more</a>
-      <a class="btn ghost" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join Slack</a>
+      <a class="btn" href="#corpus">Explore the corpus</a>
+      <a class="btn ghost" href="contributing.html">Contribute data</a>
+      <a class="btn ghost" href="https://github.com/openwaldo">View on GitHub ↗</a>
     </div>
   </div>
 </section>
 
-<section class="corpus-count" data-stats>
+<div class="project-status" aria-label="Project status">
+  <div class="wrap status-row">
+    <span class="status-label">Project status</span>
+    <span><i class="status-dot live"></i>Public index live</span>
+    <span><i class="status-dot live"></i>Data workflows ready</span>
+    <span><i class="status-dot active"></i>Model tooling expanding</span>
+  </div>
+</div>
+
+<section class="block mechanisms">
+  <div class="wrap reveal">
+    <div class="eyebrow">two paths, one provenance chain</div>
+    <h2>Put data into the commons. Take verified data into a model.</h2>
+    <p class="sub measure">
+      OpenWALDO keeps contribution and consumption deliberately separate. Git
+      governs meaning, lookaside storage serves canonical bytes, and immutable
+      BOMs carry the verified handoff between them.
+    </p>
+
+    <div class="journey-stack">
+      <article class="journey-card">
+        <div class="journey-intro">
+          <span class="journey-number">01</span>
+          <div>
+            <h3>Contribute training data</h3>
+            <p>Turn acquired material into a small, reviewable Git contribution while large canonical objects stay outside Git.</p>
+          </div>
+        </div>
+        <div class="mechanism-flow contribution-flow" aria-label="Contribution flow">
+          <div class="mechanism-node"><small>start with</small><strong>Local files</strong><span>or a reviewed ingest recipe</span></div>
+          <span class="mechanism-arrow" aria-hidden="true">→</span>
+          <div class="mechanism-node accent"><small>waldo</small><strong>Ingest &amp; audit</strong><span>sense · convert · verify</span></div>
+          <span class="mechanism-arrow" aria-hidden="true">→</span>
+          <div class="mechanism-split">
+            <div class="mechanism-node"><small>meaning</small><strong>Git review</strong><span>sources · licenses · hashes</span></div>
+            <div class="mechanism-node"><small>bytes</small><strong>Lookaside</strong><span>canonical Parquet</span></div>
+          </div>
+          <span class="mechanism-arrow" aria-hidden="true">→</span>
+          <div class="mechanism-node result"><small>result</small><strong>Indexed corpus</strong><span>reviewed and reproducible</span></div>
+        </div>
+        <a class="text-link" href="contributing.html">See how contribution works →</a>
+      </article>
+
+      <article class="journey-card">
+        <div class="journey-intro">
+          <span class="journey-number">02</span>
+          <div>
+            <h3>Use and train on verified data</h3>
+            <p>Resolve an index selection into an immutable OpenWALDO BOM, then take either of two explicit paths.</p>
+          </div>
+        </div>
+        <div class="mechanism-flow use-flow" aria-label="Data use and training flow">
+          <div class="mechanism-split inputs">
+            <div class="mechanism-node"><small>meaning</small><strong>Git index</strong><span>select any subtree</span></div>
+            <div class="mechanism-node"><small>bytes</small><strong>Lookaside</strong><span>canonical Parquet</span></div>
+          </div>
+          <span class="mechanism-arrow" aria-hidden="true">→</span>
+          <div class="mechanism-node accent"><small>waldo</small><strong>Verify &amp; audit</strong><span>metadata · objects · records</span></div>
+          <span class="mechanism-arrow" aria-hidden="true">→</span>
+          <div class="mechanism-node bom-node"><small>immutable handoff</small><strong>OpenWALDO BOM</strong><span>revision · sources · licenses · hashes</span></div>
+          <span class="mechanism-arrow branch-arrow" aria-hidden="true">⇢</span>
+          <div class="outcome-branches">
+            <div class="outcome-card">
+              <small>bring your own stack</small>
+              <strong>Export the corpus</strong>
+              <span>Audit, validate, train from scratch, or combine with open weights.</span>
+            </div>
+            <div class="outcome-card">
+              <small>use the WALDO lifecycle</small>
+              <strong>Compose &amp; train</strong>
+              <span>Start blank or pull open weights, then forecast, train, test, and export with BOMs.</span>
+            </div>
+          </div>
+        </div>
+        <a class="text-link" href="training.html">See how data becomes auditable models →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="corpus-count" id="corpus" data-stats>
   <div class="wrap">
     <div class="count-head">
       <div class="eyebrow">the corpus is growing</div>
     </div>
     <p class="count-note-lede">
-      AI competes on size, OpenWALDO wins on trust: every token here is
-      licensed, attributed, and verifiable — drawn from open upstream sources,
-      license-checked at ingest, and removable if a claim ever proves wrong.
+      AI competes on size. OpenWALDO competes on evidence: every object is
+      attributed and hash-verifiable, with its sources and asserted licenses
+      recorded in the open for anyone to inspect.
     </p>
-    <div class="count-grid">
+    <div class="count-grid" aria-live="polite">
       <div class="count-stat" data-stat="tokens">
-        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="n"><span class="v">—</span><span class="u"></span></div>
         <div class="l">tokens indexed</div>
       </div>
       <div class="count-stat" data-stat="docs">
-        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="n"><span class="v">—</span><span class="u"></span></div>
         <div class="l">documents</div>
       </div>
       <div class="count-stat" data-stat="bytes">
-        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="n"><span class="v">—</span><span class="u"></span></div>
         <div class="l">of training data</div>
       </div>
       <div class="count-stat" data-stat="licenses">
-        <div class="n"><span class="v">0</span><span class="u"></span></div>
+        <div class="n"><span class="v">—</span><span class="u"></span></div>
         <div class="l">open licenses, every shard tagged</div>
       </div>
     </div>
     <div class="corpus-map" data-stat="map" aria-label="The index tree: corpora tiled by token share"></div>
+    <div class="corpus-list" data-stat="list" aria-label="Largest indexed corpora"></div>
     <div class="count-foot">
       <a class="count-commit" data-stat="note" href="https://github.com/openwaldo/waldo-index">live from the public index</a>
     </div>
@@ -116,15 +198,15 @@
         <tr><th></th><th>open…</th><th>delivered by</th></tr>
         <tr>
           <td class="letter">W</td><td class="what">Weights</td>
-          <td class="how">All weights are open and includes its bill of materials: the index commit, manifest hashes, and recipe that produced it.</td>
+          <td class="how">Open model releases carry a bill of materials: the starting weights, index commit, manifest hashes, training runs, and recipes that produced them.</td>
         </tr>
         <tr>
           <td class="letter">A</td><td class="what">Artifacts</td>
-          <td class="how">Shards, manifests, and all source data are content-addressed artifacts — the hash is the identity; anyone can verify all bytes.</td>
+          <td class="how">Canonical shards and model artifacts are content-addressed — the hash is the identity, and anyone can verify the bytes.</td>
         </tr>
         <tr>
           <td class="letter">L</td><td class="what">Licenses</td>
-          <td class="how">Per-shard SPDX labels, faithfully recorded — any downstream consumer can include or exclude by tag.</td>
+          <td class="how">License assertions and upstream evidence stay on the record, so downstream consumers can select the exact profile they accept.</td>
         </tr>
         <tr>
           <td class="letter">D</td><td class="what">Data</td>
@@ -132,7 +214,7 @@
         </tr>
         <tr>
           <td class="letter">O</td><td class="what">Origins</td>
-          <td class="how">Provenance all the way down: source registries, fetch logs, DCO sign-offs.</td>
+          <td class="how">Provenance all the way down: source references, reviewed ingest evidence, object hashes, and DCO sign-offs.</td>
         </tr>
       </table>
     </div>
@@ -184,10 +266,10 @@
     <div class="eyebrow">no more copies of copies</div>
     <h2>Get it from the <span class="red">source</span>.</h2>
     <p class="sub" style="font-size:19px">
-      AI is becoming a copy of a copy of a copy — models distilling training
-      data from other models, drifts toward <strong>model collapse</strong>.
+      AI is becoming a copy of a copy of a copy — models distill training
+      data from other models, drifting toward <strong>model collapse</strong>.
       OpenWALDO brings the sources together in a distributable format that
-      anyone can trust, audit, and leverage directly — no distilling from
+      anyone can inspect, audit, and use directly — no distilling from
       other models, no inheriting someone else’s copy, get it directly, 
       <strong>from the source</strong>.
     </p>
@@ -273,7 +355,7 @@
   </div>
 </div>
 
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=20260806"></script>
 <script src="assets/posts.js"></script>
 </body>
 </html>

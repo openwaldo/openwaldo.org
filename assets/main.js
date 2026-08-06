@@ -1,10 +1,40 @@
 // OpenWALDO site — small shared behaviors. No dependencies.
 
+// Shared keyboard affordance. It is injected here so every static page gets
+// the same target without duplicating structural markup.
+const mainContent = document.querySelector('main');
+if (mainContent) {
+  mainContent.id ||= 'main-content';
+  const skip = document.createElement('a');
+  skip.className = 'skip-link';
+  skip.href = '#main-content';
+  skip.textContent = 'Skip to content';
+  document.body.prepend(skip);
+}
+
 // Mobile nav toggle
 const menuBtn = document.getElementById('menu-btn');
 if (menuBtn) {
+  const menu = document.querySelector('nav.links');
+  menu.id ||= 'site-menu';
+  menuBtn.setAttribute('aria-controls', menu.id);
+  menuBtn.setAttribute('aria-expanded', 'false');
+  const closeMenu = () => {
+    menu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  };
   menuBtn.addEventListener('click', () => {
-    document.querySelector('nav.links').classList.toggle('open');
+    const open = menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu.classList.contains('open')) {
+      closeMenu();
+      menuBtn.focus();
+    }
   });
 }
 
@@ -79,9 +109,11 @@ if (statsBox) {
                    '#d92e23', '#c9b8a0', '#7d8aa5', '#ffd9d5', '#58627a'];
 
   fetch(STATS_URL)
-    .then((r) => (r.ok ? r.json() : null))
+    .then((r) => {
+      if (!r.ok) throw new Error('status feed unavailable');
+      return r.json();
+    })
     .then((s) => {
-      if (!s) return;
       const licenses = Object.entries(s.licenses || {})
         .sort((a, b) => b[1].tokens - a[1].tokens);
 
@@ -151,6 +183,8 @@ if (statsBox) {
       const corpora = (s.corpora || []).slice().sort((a, b) => b.tokens - a.tokens);
       if (map && corpora.length && s.tokens > 0) {
         const modal = document.querySelector('[data-stat="modal"]');
+        const list = statsBox.querySelector('[data-stat="list"]');
+        let modalReturnFocus = null;
         // tiles wear their dominant license's color — the same palette as
         // the spectrum bar above, so the bar doubles as the map's legend
         const hexToRgb = (hex) => {
@@ -265,15 +299,35 @@ if (statsBox) {
           });
           modal.hidden = false;
           document.body.style.overflow = 'hidden';
+          modalReturnFocus = document.activeElement;
+          modal.querySelector('.corpus-modal-close')?.focus();
         };
         const closeModal = () => {
-          if (modal) { modal.hidden = true; document.body.style.overflow = ''; }
+          if (modal && !modal.hidden) {
+            modal.hidden = true;
+            document.body.style.overflow = '';
+            modalReturnFocus?.focus();
+          }
         };
         if (modal) {
           modal.addEventListener('click', (e) => {
             if (e.target === modal || e.target.closest('.corpus-modal-close')) closeModal();
           });
-          document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+          document.addEventListener('keydown', (e) => {
+            if (modal.hidden) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Tab') {
+              const focusable = [...modal.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])')]
+                .filter((el) => !el.hidden && el.offsetParent !== null);
+              if (!focusable.length) return;
+              const first = focusable[0], last = focusable[focusable.length - 1];
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault(); last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault(); first.focus();
+              }
+            }
+          });
         }
 
         let firstBuild = true;
@@ -362,6 +416,23 @@ if (statsBox) {
 
         buildMap();
         attachTip(map);
+        if (list) {
+          list.innerHTML = '';
+          corpora.slice(0, 7).forEach((c) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            const name = document.createElement('strong');
+            name.textContent = c.title || c.name;
+            const path = document.createElement('small');
+            path.textContent = c.path;
+            const count = document.createElement('span');
+            count.className = 'corpus-list-count';
+            count.textContent = numFmt(c.tokens) + ' tokens';
+            button.append(name, path, count);
+            button.addEventListener('click', () => openModal(c));
+            list.appendChild(button);
+          });
+        }
         let resizeTimer;
         window.addEventListener('resize', () => {
           clearTimeout(resizeTimer);
@@ -383,5 +454,21 @@ if (statsBox) {
         io2.observe(statsBox);
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      statsBox.classList.add('stats-unavailable');
+      const note = statsBox.querySelector('[data-stat="note"]');
+      if (note) {
+        note.textContent = 'Live index statistics are temporarily unavailable · open the public index ↗';
+      }
+      statsBox.querySelectorAll('.count-stat .v').forEach((value) => {
+        value.textContent = '—';
+      });
+      const map = statsBox.querySelector('[data-stat="map"]');
+      if (map) {
+        map.classList.add('map-unavailable');
+        map.textContent = 'The corpus map will return with the live index feed.';
+      }
+      const list = statsBox.querySelector('[data-stat="list"]');
+      if (list) list.textContent = 'Live corpus details are temporarily unavailable.';
+    });
 }
