@@ -662,12 +662,12 @@ code { font-size: 10px; }
 .community-paths .actions { margin-top: 34px; }
 .paper-button { color: var(--ink); border-color: rgba(24,32,29,.45); }
 .paper-button:hover { background: var(--ink); color: var(--paper); }
-.spread-section { background: var(--red); color: var(--ink); }
+.spread-section { background: #a94f3d; color: var(--paper); }
 .spread-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 9vw; align-items: end; }
 .spread-grid h2 { margin: 0; font-size: clamp(48px, 6vw, 82px); line-height: .94; letter-spacing: -.055em; font-weight: 600; }
 .spread-grid > div:last-child > p { margin: 0; font-size: 18px; line-height: 1.65; }
-.dark-button { color: var(--ink); border-color: rgba(24,32,29,.5); background: transparent; cursor: pointer; }
-.dark-button:hover { background: var(--ink); color: var(--paper); }
+.dark-button { color: var(--paper); border-color: rgba(244,241,232,.55); background: transparent; cursor: pointer; }
+.dark-button:hover { background: var(--paper); color: var(--ink); }
 .copy-status { min-height: 20px; margin-top: 14px !important; font: 400 9px var(--font-mono); text-transform: uppercase; }
 .community-footer { align-items: end; gap: 60px; }
 .footer-actions { max-width: 720px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
