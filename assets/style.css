@@ -409,10 +409,11 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-copy { padding: 30px 0 54px; }
 .hero-copy h1 { max-width: 900px; margin: 0; line-height: 1; font-weight: 650; }
 .hero-copy h1 > span, .hero-copy h1 > strong { display: block; }
-.hero-copy .hero-acronym-stack { display: grid; gap: 2px; font-size: clamp(18px, 2vw, 25px); line-height: 1.05; letter-spacing: -.025em; }
-.hero-copy .hero-acronym-stack > span { display: block; }
+.hero-copy .hero-acronym-stack { width: max-content; margin-left: 18px; display: grid; gap: 3px; line-height: 1.05; }
+.hero-copy .hero-acronym-stack > span { display: grid; grid-template-columns: 48px .72em auto; align-items: baseline; font-size: clamp(16px, 1.55vw, 19px); letter-spacing: -.02em; }
+.hero-copy .hero-acronym-stack i { padding-right: 10px; color: rgba(244,241,232,.5); font: 400 10px/1 var(--font-mono); text-align: right; text-transform: uppercase; }
 .hero-copy .hero-acronym-stack b { color: var(--red); font-weight: 700; }
-.hero-copy .hero-name { margin-top: .2em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
+.hero-copy .hero-name { margin-top: .25em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
 .hero-copy .hero-name b { color: var(--red); font-weight: 700; }
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
 .hero-lede { max-width: 670px; margin-top: 22px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; letter-spacing: -.01em; }
@@ -650,7 +651,9 @@ code { font-size: 10px; }
 .share-chip svg { width: 15px; height: 15px; fill: currentColor; }
 
 @media (max-width: 700px) {
-  .hero-copy .hero-acronym-stack { gap: 1px; font-size: 17px; }
+  .hero-copy .hero-acronym-stack { margin-left: 10px; gap: 2px; }
+  .hero-copy .hero-acronym-stack > span { grid-template-columns: 42px .72em auto; font-size: 15px; }
+  .hero-copy .hero-acronym-stack i { padding-right: 8px; font-size: 9px; }
   .hero-copy .hero-name { font-size: clamp(64px, 19vw, 88px); }
   .hero-subtitle { font-size: 22px; }
   .post-toolbar { align-items: stretch; flex-direction: column; padding: 18px; gap: 16px; }
