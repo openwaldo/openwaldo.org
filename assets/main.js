@@ -11,6 +11,51 @@ if (mainContent) {
   document.body.prepend(skip);
 }
 
+// Progressive mobile navigation. Without JavaScript the links remain visible;
+// once enhanced, the button controls a compact full-width menu on small screens.
+(() => {
+  const header = document.querySelector('.site-header');
+  const shell = header?.querySelector('.nav-shell');
+  const nav = shell?.querySelector('nav');
+  if (!header || !shell || !nav) return;
+
+  nav.id ||= 'primary-navigation';
+  const toggle = document.createElement('button');
+  toggle.className = 'nav-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-controls', nav.id);
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-label', 'Open navigation');
+
+  const label = document.createElement('span');
+  label.textContent = 'Menu';
+  const icon = document.createElement('i');
+  icon.setAttribute('aria-hidden', 'true');
+  toggle.append(label, icon);
+  shell.insertBefore(toggle, nav);
+  header.classList.add('nav-enhanced');
+
+  const setOpen = (open) => {
+    header.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  };
+
+  toggle.addEventListener('click', () => setOpen(!header.classList.contains('nav-open')));
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && header.classList.contains('nav-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  window.matchMedia('(min-width: 701px)').addEventListener('change', (event) => {
+    if (event.matches) setOpen(false);
+  });
+})();
+
 // stats.json is the canonical public aggregate feed. status.json remains a
 // temporary fallback while the index publisher transitions to the new name.
 const fetchIndexStats = async () => {
