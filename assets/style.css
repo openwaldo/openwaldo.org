@@ -459,7 +459,6 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .page-intro-side { padding-top: 18px; }
 .page-intro-side > span { margin-bottom: 38px; font-weight: 400; }
 .page-intro-side p { font-size: 17px; line-height: 1.68; }
-.page-intro-claim { margin: 42px 0 0; padding-top: 24px; border-top: 1px solid rgba(244,241,232,.25); color: var(--red); font-size: clamp(25px, 2.5vw, 36px); line-height: 1.05; letter-spacing: -.035em; font-weight: 500; }
 .compact-intro { min-height: 540px; }
 
 .metric-band { background: var(--red); }
