@@ -29,12 +29,13 @@ from breaking during the visual migration.
 
 ## The corpus counter
 
-The front page corpus record and the corpus explorer load live
-from the status feed the index repo publishes:
-`https://openwaldo.github.io/waldo-index/status.json`. Nothing in this repo
-generates those numbers — they update whenever the index does. Both pages ship
-with a complete local snapshot, so the corpus remains useful if the live feed
-is temporarily unavailable.
+The front page corpus record and the corpus explorer load live from the
+aggregate feed the index repo publishes:
+`https://openwaldo.github.io/waldo-index/stats.json`. During the feed-name
+transition, the site falls back to `status.json`. Nothing in this repo generates
+those numbers—they update whenever the index does. Both pages ship with a
+complete local snapshot, so the corpus remains useful if the live feed is
+temporarily unavailable.
 
 ## Posts
 

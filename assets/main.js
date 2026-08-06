@@ -11,6 +11,24 @@ if (mainContent) {
   document.body.prepend(skip);
 }
 
+// stats.json is the canonical public aggregate feed. status.json remains a
+// temporary fallback while the index publisher transitions to the new name.
+const fetchIndexStats = async () => {
+  const feeds = [
+    'https://openwaldo.github.io/waldo-index/stats.json',
+    'https://openwaldo.github.io/waldo-index/status.json',
+  ];
+  for (const feed of feeds) {
+    try {
+      const response = await fetch(feed);
+      if (response.ok) return await response.json();
+    } catch (_) {
+      // Try the compatibility feed before falling back to checked-in HTML.
+    }
+  }
+  throw new Error('index statistics unavailable');
+};
+
 // FAQ accordion and durable deep links. Only one answer remains open, and the
 // selected question is reflected in ?faq= so the exact state can be shared.
 (() => {
@@ -62,7 +80,7 @@ if (mainContent) {
 })();
 
 // Update the Corpus page's inline scale sentence. The page remains complete
-// with its checked-in snapshot when the public status feed is unavailable.
+// with its checked-in snapshot when the public statistics feed is unavailable.
 (() => {
   const summary = document.querySelector('[data-corpus-summary]');
   if (!summary) return;
@@ -84,8 +102,7 @@ if (mainContent) {
     return node;
   };
 
-  fetch('https://openwaldo.github.io/waldo-index/status.json')
-    .then((response) => { if (!response.ok) throw new Error('status unavailable'); return response.json(); })
+  fetchIndexStats()
     .then((status) => {
       if (!status || !Array.isArray(status.corpora) || !Number.isFinite(status.tokens)
         || !Number.isFinite(status.docs) || !Number.isFinite(status.shards)
@@ -114,7 +131,7 @@ if (mainContent) {
     .catch(() => {});
 })();
 
-// Keep the homepage corpus record live from the same public status feed. The
+// Keep the homepage corpus record live from the same public statistics feed. The
 // HTML snapshot remains visible if the network is unavailable.
 (() => {
   const total = document.querySelector('[data-home-total]');
@@ -136,8 +153,7 @@ if (mainContent) {
       : `Live public index · ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
   };
 
-  fetch('https://openwaldo.github.io/waldo-index/status.json')
-    .then((response) => { if (!response.ok) throw new Error('status unavailable'); return response.json(); })
+  fetchIndexStats()
     .then((status) => {
       if (!status || !Array.isArray(status.corpora) || !status.tokens) throw new Error('invalid status');
       total.textContent = compact(status.tokens);
@@ -147,19 +163,30 @@ if (mainContent) {
       set('[data-home-licenses]', Object.keys(status.licenses || {}).length.toLocaleString());
       set('[data-home-feed]', dateLabel(status.generated));
 
+      const branchMap = document.querySelector('[data-home-branches]');
       const branches = new Map();
       status.corpora.forEach((corpus) => {
         const branch = corpus.path.split('/')[0];
         branches.set(branch, (branches.get(branch) || 0) + Number(corpus.tokens || 0));
       });
-      document.querySelectorAll('[data-branch]').forEach((node) => {
-        const tokens = branches.get(node.dataset.branch) || 0;
+      const ranked = [...branches.entries()].sort((a, b) => b[1] - a[1]);
+      const displayed = ranked.slice(0, 4);
+      displayed.push(['others', ranked.slice(4).reduce((sum, entry) => sum + entry[1], 0)]);
+      if (branchMap) branchMap.replaceChildren(...displayed.map(([branch, tokens], index) => {
         const share = tokens / status.tokens * 100;
+        const node = document.createElement('div');
+        node.className = `branch ${branch === 'others' ? 'branch-others' : `branch-rank-${index + 1}`}`;
         node.style.setProperty('--branch-width', `${Math.max(share, .1)}%`);
         node.title = `${tokens.toLocaleString()} reference tokens`;
-        const label = node.querySelector('b');
-        if (label) label.textContent = `${share < .1 ? '<0.1' : share.toFixed(1)}%`;
-      });
+        const row = document.createElement('div');
+        const name = document.createElement('span');
+        const label = document.createElement('b');
+        name.textContent = `${branch}/`;
+        label.textContent = `${share > 0 && share < .1 ? '<0.1' : share.toFixed(1)}%`;
+        row.append(name, label);
+        node.append(row, document.createElement('i'));
+        return node;
+      }));
     })
     .catch(() => {});
 })();
