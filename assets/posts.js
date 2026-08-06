@@ -268,8 +268,8 @@
     const toolbar = document.createElement('div');
     toolbar.className = 'post-toolbar';
     toolbar.innerHTML =
-      '<input type="search" placeholder="Search the posts…" aria-label="Search the posts">' +
-      '<div class="post-filters"></div>';
+      '<label><span>Find a post</span><input type="search" placeholder="Search title, author, or topic…" aria-label="Find a post"></label>' +
+      '<div class="post-filters" aria-label="Filter posts by type"></div>';
     const results = document.createElement('div');
     results.className = 'post-list';
     const pager = document.createElement('div');
