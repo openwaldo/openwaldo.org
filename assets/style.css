@@ -405,7 +405,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .brand { gap: 10px; font-size: 16px; letter-spacing: -.015em; }
 .brand strong { font-weight: 600; }
 .provenance-mark { width: 22px; height: 31px; }
-.site-header nav { gap: 26px; font-family: var(--font-mono); font-size: 10px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
+.site-header nav { gap: 26px; font-family: var(--font-mono); font-size: 11px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
 .site-header nav a { position: relative; }
 .site-header nav a::after { content: ""; position: absolute; right: 0; bottom: 21px; left: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .18s ease; }
 .site-header nav a:hover::after, .site-header nav a[aria-current="page"]::after { transform: scaleX(1); }
