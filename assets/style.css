@@ -408,9 +408,11 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-grid { min-height: 560px; grid-template-columns: minmax(0, 1.5fr) minmax(280px, .5fr); gap: 9vw; }
 .hero-copy { padding: 30px 0 54px; }
 .hero-copy h1 { max-width: 900px; margin: 0; line-height: 1; font-weight: 650; }
-.hero-copy h1 span, .hero-copy h1 strong { display: block; }
-.hero-copy h1 span { white-space: nowrap; font-size: clamp(10px, 1.42vw, 17px); line-height: 1.2; letter-spacing: -.01em; }
-.hero-copy h1 strong { margin-top: .12em; color: var(--red); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
+.hero-copy h1 > span, .hero-copy h1 > strong { display: block; }
+.hero-copy .hero-acronym-line { white-space: nowrap; font-size: clamp(11px, 1.62vw, 19px); line-height: 1.2; letter-spacing: -.015em; }
+.hero-copy .hero-acronym-line b { color: var(--red); font-weight: 700; }
+.hero-copy .hero-name { margin-top: .12em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
+.hero-copy .hero-name b { color: var(--red); font-weight: 700; }
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
 .hero-lede { max-width: 670px; margin-top: 22px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; letter-spacing: -.01em; }
 .hero-object { min-height: 390px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); }
@@ -647,8 +649,8 @@ code { font-size: 10px; }
 .share-chip svg { width: 15px; height: 15px; fill: currentColor; }
 
 @media (max-width: 700px) {
-  .hero-copy h1 span { font-size: clamp(8px, 2.2vw, 10px); }
-  .hero-copy h1 strong { font-size: clamp(64px, 19vw, 88px); }
+  .hero-copy .hero-acronym-line { font-size: clamp(8px, 2.35vw, 10px); }
+  .hero-copy .hero-name { font-size: clamp(64px, 19vw, 88px); }
   .hero-subtitle { font-size: 22px; }
   .post-toolbar { align-items: stretch; flex-direction: column; padding: 18px; gap: 16px; }
   .post-toolbar label { align-items: stretch; flex-direction: column; gap: 8px; }
