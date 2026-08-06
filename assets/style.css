@@ -482,10 +482,13 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .record-sheet { padding: 30px; border: 1px solid var(--ink); border-top: 5px solid var(--red); background: var(--white); }
 .sheet-head { display: flex; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--ink); font: 400 9px var(--font-mono); letter-spacing: .06em; }
 .sheet-head b { color: var(--red); font-weight: 400; }
+.sheet-head b .live-dot { margin-right: 3px; }
 .record-sheet dl { margin: 26px 0 0; }
 .record-sheet dl div { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--line); }
 .record-sheet dt { color: var(--muted); font: 400 9px var(--font-mono); text-transform: uppercase; }
 .record-sheet dd { margin: 0; font-size: 15px; font-weight: 500; }
+.record-sheet dd a { color: inherit; border-bottom: 1px solid var(--line); }
+.record-sheet dd a:hover { color: var(--red); border-color: var(--red); }
 .record-sheet > p { margin: 28px 0 0; color: var(--muted); font: 400 10px/1.6 var(--font-mono); }
 .bom-sheet { position: relative; box-shadow: 14px 14px 0 var(--cream); }
 .bom-sheet::after { content: "BOM"; position: absolute; right: 24px; bottom: 18px; color: rgba(228,87,63,.08); font-size: 72px; line-height: 1; font-weight: 700; pointer-events: none; }

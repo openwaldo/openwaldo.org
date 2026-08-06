@@ -22,16 +22,24 @@ if (mainContent) {
     if (number >= 1e6) return `${(number / 1e6).toFixed(1)}M`;
     return number.toLocaleString();
   };
+  const gigabytes = (number) => `${(number / 1e9).toFixed(1)} GB`;
   const setAll = (key, value) => {
     document.querySelectorAll(`[data-total="${key}"]`).forEach((node) => {
       node.textContent = value;
     });
   };
+  const setBom = (key, value) => {
+    const node = document.querySelector(`[data-bom="${key}"]`);
+    if (node) node.textContent = value;
+    return node;
+  };
 
   fetch('https://openwaldo.github.io/waldo-index/status.json')
     .then((response) => { if (!response.ok) throw new Error('status unavailable'); return response.json(); })
     .then((status) => {
-      if (!status || !Array.isArray(status.corpora) || !status.tokens) throw new Error('invalid status');
+      if (!status || !Array.isArray(status.corpora) || !Number.isFinite(status.tokens)
+        || !Number.isFinite(status.docs) || !Number.isFinite(status.shards)
+        || !Number.isFinite(status.bytes)) throw new Error('invalid status');
       const licenseCount = Object.keys(status.licenses || {}).length || new Set(
         status.corpora.flatMap((corpus) => Object.keys(corpus.licenses || {})),
       ).size;
@@ -40,6 +48,18 @@ if (mainContent) {
       setAll('docs', compact(status.docs));
       setAll('tokens', compact(status.tokens));
       setAll('licenses', licenseCount.toLocaleString());
+
+      const revision = status.index_commit || 'Unavailable';
+      const revisionLink = setBom('revision', `${revision} ↗`);
+      if (revisionLink && status.index_commit) revisionLink.href = `https://github.com/openwaldo/waldo-index/commit/${status.index_commit}`;
+      setBom('selection', `${status.corpora.length.toLocaleString()} public corpora`);
+      setBom('objects', `${Number(status.shards || 0).toLocaleString()} shards · ${gigabytes(status.bytes)}`);
+      setBom('contents', `${compact(status.docs)} documents · ${compact(status.tokens)} tokens`);
+      setBom('licenses', `${licenseCount.toLocaleString()} license identifiers`);
+      const generated = new Date(status.generated);
+      if (!Number.isNaN(generated.valueOf())) {
+        setBom('generated', `Generated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`);
+      }
     })
     .catch(() => {});
 })();
