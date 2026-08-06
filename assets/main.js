@@ -70,24 +70,77 @@ if (mainContent) {
   };
 
   const updateTotals = () => {
+    const licenseCount = Object.keys(status.licenses || {}).length || new Set(
+      status.corpora.flatMap((corpus) => Object.keys(corpus.licenses || {})),
+    ).size;
     const values = {
       tokens: compact(status.tokens), docs: compact(status.docs),
       corpora: String(status.corpora.length), bytes: `${(status.bytes / 1e9).toFixed(1)}GB`,
+      shards: Number(status.shards || 0).toLocaleString(), licenses: licenseCount.toLocaleString(),
     };
     Object.entries(values).forEach(([key, value]) => {
-      const target = document.querySelector(`[data-total="${key}"]`);
-      if (target) target.textContent = value;
+      document.querySelectorAll(`[data-total="${key}"]`).forEach((target) => {
+        target.textContent = value;
+      });
     });
   };
 
   const renderDetail = (corpus) => {
     detail.replaceChildren();
+    const licenses = Object.keys(corpus.licenses || {});
+    const sources = Array.isArray(corpus.sources) ? corpus.sources : [];
+    const encodedPath = corpus.path.split('/').map(encodeURIComponent).join('/');
+
     add(detail, 'p', corpus.path, 'detail-path');
     add(detail, 'h2', corpus.title || corpus.name || corpus.path);
     add(detail, 'p', corpus.description || 'An indexed corpus with attributable source and license metadata, canonical content-addressed shards, and exact counts.');
 
+    const heading = add(detail, 'h3', 'Accountability record', 'record-heading');
+    heading.id = 'accountability-record';
+    const evidence = document.createElement('div');
+    evidence.className = 'evidence-status';
+    [
+      ['Origin claim', sources.length ? 'Recorded' : 'Not exposed', Boolean(sources.length)],
+      ['License assertion', licenses.length ? `${licenses.length} recorded` : 'Not exposed', Boolean(licenses.length)],
+      ['Conversion identity', corpus.converted_by || corpus.format || 'Not exposed', Boolean(corpus.converted_by || corpus.format)],
+      ['Object inventory', corpus.shards ? `${corpus.shards.toLocaleString()} shards` : 'Not exposed', Boolean(corpus.shards)],
+      ['Exact counts', Number.isFinite(corpus.docs) && Number.isFinite(corpus.tokens) ? 'Recorded' : 'Not exposed', Number.isFinite(corpus.docs) && Number.isFinite(corpus.tokens)],
+      ['Index revision', status.index_commit ? status.index_commit.slice(0, 12) : 'Inspectable', true],
+    ].forEach(([label, value, present]) => {
+      const row = document.createElement('div');
+      row.className = present ? 'evidence-present' : 'evidence-missing';
+      add(row, 'span', label);
+      add(row, 'strong', value);
+      evidence.appendChild(row);
+    });
+    detail.appendChild(evidence);
+
+    const source = document.createElement('div');
+    source.className = 'source-note';
+    add(source, 'span', 'Recorded sources');
+    if (sources.length) {
+      sources.slice(0, 4).forEach((item) => {
+        const value = item.origin || item.name || item.url || 'Recorded in manifest';
+        const line = add(source, item.url ? 'a' : 'p', value);
+        if (item.url) { line.href = item.url; line.rel = 'noopener'; }
+      });
+      if (sources.length > 4) add(source, 'p', `+ ${sources.length - 4} more in the public manifest`, 'more-sources');
+    } else {
+      add(source, 'p', 'Source evidence is not exposed in this status snapshot.', 'missing-copy');
+    }
+    detail.appendChild(source);
+
+    const licenseBox = document.createElement('div');
+    licenseBox.className = 'license-list';
+    add(licenseBox, 'span', 'Asserted licenses');
+    if (licenses.length) licenses.forEach((license) => add(licenseBox, 'b', license));
+    else add(licenseBox, 'p', 'License assertions are not exposed in this status snapshot.', 'missing-copy');
+    detail.appendChild(licenseBox);
+
     const list = document.createElement('dl');
     [
+      ['Conversion', corpus.converted_by || '—'],
+      ['Format', corpus.format || '—'],
       ['Reference tokens', corpus.tokens.toLocaleString()],
       ['Documents', corpus.docs.toLocaleString()],
       ['Canonical data', byteSize(corpus.bytes)],
@@ -98,21 +151,15 @@ if (mainContent) {
     });
     detail.appendChild(list);
 
-    const licenses = Object.keys(corpus.licenses || {});
-    if (licenses.length) {
-      const box = document.createElement('div'); box.className = 'license-list';
-      add(box, 'span', 'Asserted licenses');
-      licenses.forEach((license) => add(box, 'b', license));
-      detail.appendChild(box);
-    }
-    if (corpus.sources && corpus.sources[0]) {
-      const source = document.createElement('div'); source.className = 'source-note';
-      add(source, 'span', 'Source');
-      add(source, 'p', corpus.sources[0].origin || corpus.sources[0].name || corpus.sources[0].url || 'Recorded in manifest');
-      detail.appendChild(source);
-    }
-    const link = add(detail, 'a', 'Inspect metadata on GitHub ↗', 'text-action');
-    link.href = `https://github.com/openwaldo/waldo-index/tree/main/${corpus.path.split('/').map(encodeURIComponent).join('/')}`;
+    const links = document.createElement('div');
+    links.className = 'record-links';
+    const metadata = add(links, 'a', 'Inspect record ↗', 'text-action');
+    metadata.href = `https://github.com/openwaldo/waldo-index/tree/main/${encodedPath}`;
+    const history = add(links, 'a', 'View history ↗', 'text-action');
+    history.href = `https://github.com/openwaldo/waldo-index/commits/main/${encodedPath}`;
+    const correction = add(links, 'a', 'Question a claim ↗', 'text-action');
+    correction.href = 'https://github.com/openwaldo/waldo-index/issues/new';
+    detail.appendChild(links);
   };
 
   const render = () => {
@@ -130,7 +177,7 @@ if (mainContent) {
       const section = document.createElement('section'); section.className = 'tree-branch';
       const heading = document.createElement('h2');
       add(heading, 'span', '▾'); heading.append(`${branch}/`);
-      add(heading, 'b', compact(corpora.reduce((sum, corpus) => sum + corpus.tokens, 0)));
+      add(heading, 'b', `${corpora.length} ${corpora.length === 1 ? 'record' : 'records'}`);
       section.appendChild(heading);
       corpora.forEach((corpus) => {
         const button = document.createElement('button');
@@ -139,10 +186,16 @@ if (mainContent) {
         const names = document.createElement('span');
         add(names, 'strong', corpus.title || corpus.name || corpus.path);
         add(names, 'small', corpus.path.split('/').slice(1).join('/'));
-        button.appendChild(names); add(button, 'b', compact(corpus.tokens));
-        const share = document.createElement('i');
-        share.style.setProperty('--share', `${Math.max(1, corpus.tokens / status.tokens * 100)}%`);
-        button.appendChild(share);
+        button.appendChild(names); add(button, 'b', 'public record');
+        const markers = document.createElement('small');
+        markers.className = 'tree-evidence';
+        const markerText = [
+          corpus.sources?.length ? 'origin recorded' : 'origin not exposed',
+          Object.keys(corpus.licenses || {}).length ? 'license recorded' : 'license not exposed',
+          corpus.shards ? 'objects recorded' : 'objects not exposed',
+        ];
+        markers.textContent = markerText.join(' · ');
+        button.appendChild(markers);
         button.addEventListener('click', () => { selectedPath = corpus.path; render(); renderDetail(corpus); });
         section.appendChild(button);
       });

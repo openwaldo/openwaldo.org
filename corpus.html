@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Public Corpus — OpenWALDO</title>
-  <meta name="description" content="Explore the public OpenWALDO index by branch, corpus, source, and asserted license.">
-  <meta property="og:site_name" content="OpenWALDO"><meta property="og:type" content="website"><meta property="og:title" content="The Public Corpus — OpenWALDO"><meta property="og:description" content="Explore the public OpenWALDO index by branch, corpus, source, and asserted license."><meta property="og:url" content="https://openwaldo.org/corpus.html"><meta property="og:image" content="https://openwaldo.org/assets/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://openwaldo.org/corpus.html">
+  <meta name="description" content="Inspect the sources, license assertions, canonical objects, and public history behind every corpus in the OpenWALDO index.">
+  <meta property="og:site_name" content="OpenWALDO"><meta property="og:type" content="website"><meta property="og:title" content="The Public Corpus — OpenWALDO"><meta property="og:description" content="A public corpus with an inspectable accountability record."><meta property="og:url" content="https://openwaldo.org/corpus.html"><meta property="og:image" content="https://openwaldo.org/assets/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://openwaldo.org/corpus.html">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <header class="site-header"><div class="shell nav-shell"><a class="brand" href="index.html" aria-label="OpenWALDO home"><img class="provenance-mark" src="assets/mark.svg" alt=""><span>Open<strong>WALDO</strong></span></a><nav aria-label="Primary navigation"><a href="index.html">Index</a><a href="corpus.html" aria-current="page">Corpus</a><a href="training.html">Training</a><a href="contributing.html">Contributing</a><a href="posts/">Posts</a><a href="about.html">About</a></nav></div></header>
 <main>
-  <section class="page-intro"><div class="shell page-intro-grid"><div><p class="kicker light">The public commons</p><h1>See what the<br>model can see.</h1></div><div class="page-intro-side"><span>01 / CORPUS</span><p>A Git-governed index of openly available training material. Browse the tree, inspect its claims, then verify the canonical bytes yourself.</p></div></div></section>
-  <section class="metric-band"><div class="shell four-metrics"><div><strong data-total="tokens">124.0B</strong><span>reference tokens</span></div><div><strong data-total="docs">75.1M</strong><span>documents</span></div><div><strong data-total="corpora">20</strong><span>corpora</span></div><div><strong data-total="bytes">167.8GB</strong><span>canonical Parquet</span></div></div></section>
+  <section class="page-intro"><div class="shell page-intro-grid"><div><p class="kicker light">Accountability, corpus by corpus</p><h1>A public corpus<br><em>with receipts.</em></h1></div><div class="page-intro-side"><span>01 / CORPUS</span><p>OpenWALDO puts source claims, asserted licenses, conversion identity, canonical object inventory, exact counts, and Git history on a public record that can be inspected and challenged.</p></div></div></section>
+  <section class="section accountability-section"><div class="shell">
+    <div class="section-head split-head"><div><p class="kicker">Why use OpenWALDO</p><h2>The record travels<br>with the data.</h2></div><p>Scale matters. Accountability matters more. The index separates attributable claims from machine-verifiable identity so downstream users can see what is recorded, what can be verified, where its history lives, and where the evidence ends.</p></div>
+    <p class="accountability-summary">The public index currently records <strong data-total="corpora">20</strong> corpora across <strong data-total="shards">1,051</strong> canonical shards—<strong data-total="docs">75.1M</strong> documents and <strong data-total="tokens">124.0B</strong> reference tokens under <strong data-total="licenses">18</strong> asserted license identifiers.</p>
+    <div class="accountability-grid">
+      <article><span>01 / ORIGIN</span><h3>Source provenance</h3><p>Where the material came from, how it was acquired, and which source claims were placed on the record.</p></article>
+      <article><span>02 / RIGHTS</span><h3>License accountability</h3><p>Attributed license assertions that can be inspected, questioned, and corrected—not silent legal conclusions.</p></article>
+      <article><span>03 / IDENTITY</span><h3>Reproducible objects</h3><p>Conversion identity, canonical shards, content hashes, and exact counts bind the record to specific bytes.</p></article>
+      <article><span>04 / HISTORY</span><h3>Public governance</h3><p>Meaning changes through Git, leaving a reviewable history instead of disappearing behind a private catalog.</p></article>
+    </div>
+    <div class="evidence-key"><strong>Recorded is not the same as verified.</strong><p>A manifest records an attributable claim. A hash proves object identity. Verification proves only the checks that were actually run. None of them alone establishes legal rights, quality, or safety.</p></div>
+  </div></section>
   <section class="section explorer-section"><div class="shell">
-    <div class="section-head split-head"><div><p class="kicker">Index tree</p><h2>The corpus,<br>without the black box.</h2></div><p>Token counts are informational estimates recorded with a named counter. License values are attributable assertions—not legal conclusions. Hashes prove identity and integrity, not rights.</p></div>
+    <div class="section-head split-head"><div><p class="kicker">Inspect the record</p><h2>Open a corpus.<br>Follow the evidence.</h2></div><p>Browse by index path or search by name. Each record exposes the accountability fields available in the public index and says plainly when evidence is not exposed.</p></div>
     <div class="explorer-wrap" data-corpus-explorer>
       <div class="explorer-toolbar"><label><span>Find a corpus</span><input id="corpus-search" type="search" placeholder="Search name or path…" autocomplete="off"></label><p><i class="snapshot-dot"></i><span data-feed-state>Verified local snapshot</span></p></div>
       <div class="explorer"><div class="tree-panel" aria-label="Corpus index tree" data-corpus-tree></div><aside class="corpus-detail" data-corpus-detail aria-live="polite"></aside></div>
