@@ -51,7 +51,7 @@ if (mainContent) {
 
       const revision = status.index_commit || 'Unavailable';
       const revisionLink = setBom('revision', `${revision} ↗`);
-      if (revisionLink && status.index_commit) revisionLink.href = `https://github.com/openwaldo/waldo-index/commit/${status.index_commit}`;
+      if (revisionLink && status.index_commit) revisionLink.href = `https://github.com/openwaldo/waldo-index/tree/${status.index_commit}`;
       setBom('selection', `${status.corpora.length.toLocaleString()} public corpora`);
       setBom('objects', `${Number(status.shards || 0).toLocaleString()} shards · ${gigabytes(status.bytes)}`);
       setBom('contents', `${compact(status.docs)} documents · ${compact(status.tokens)} tokens`);
