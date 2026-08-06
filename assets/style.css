@@ -267,6 +267,18 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .separation-grid h3 { margin: 80px 0 36px; font-size: clamp(48px, 5vw, 72px); letter-spacing: -.06em; }
 .separation-grid ul { list-style: none; margin: 0; padding: 0; }
 .separation-grid li { padding: 13px 0; border-top: 1px solid var(--line); }
+.dco-section { background: var(--cream); scroll-margin-top: 84px; }
+.dco-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.dco-grid article { min-height: 330px; padding: 30px; display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.dco-grid article:first-child { padding-left: 0; }
+.dco-grid article:last-child { padding-right: 0; border-right: 0; }
+.dco-grid span { color: var(--red); font: 400 9px var(--font-mono); letter-spacing: .08em; }
+.dco-grid h3 { margin: auto 0 14px; font-size: 27px; font-weight: 500; letter-spacing: -.03em; }
+.dco-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.dco-grid code { display: inline; padding: 2px 5px; font-size: 11px; }
+.dco-limit { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 38px; padding-top: 26px; border-top: 1px solid var(--line); }
+.dco-limit strong { color: var(--red); font-size: 20px; }
+.dco-limit p { margin: 0; color: var(--muted); line-height: 1.65; }
 .join-section { background: var(--red); }
 .join-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 9vw; align-items: end; }
 .join-grid h2 { margin: 0; font-size: clamp(56px, 7vw, 100px); line-height: .88; letter-spacing: -.07em; }
@@ -728,6 +740,10 @@ code { font-size: 10px; }
   .principles-grid article:nth-child(2) { border-right: 0; }
   .principles-grid article:nth-child(n+3) { border-top: 1px solid var(--line); }
   .prose-layout aside { max-width: 400px; }
+  .dco-grid { grid-template-columns: 1fr; }
+  .dco-grid article, .dco-grid article:first-child, .dco-grid article:last-child { min-height: 230px; padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .dco-grid article:last-child { border-bottom: 0; }
+  .dco-limit { grid-template-columns: 1fr; gap: 16px; }
 }
 
 @media (max-width: 700px) {
