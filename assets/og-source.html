@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OpenWALDO social preview source</title>
+  <style>
+    @font-face { font-family: "Plex Sans"; src: url("fonts/ibm-plex-sans.woff2") format("woff2"); }
+    @font-face { font-family: "Plex Mono"; src: url("fonts/ibm-plex-mono.woff2") format("woff2"); }
+    * { box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+    body { color: #f4f1e8; background: #18211e; font-family: "Plex Sans", sans-serif; }
+    .card {
+      position: relative; width: 1200px; height: 630px; padding: 58px 68px;
+      background-image:
+        linear-gradient(rgba(244,241,232,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,241,232,.045) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .card::before { content: ""; position: absolute; inset: 0 0 auto; height: 7px; background: #d9634f; }
+    .copy { position: relative; z-index: 1; width: 825px; }
+    .eyebrow { margin: 0 0 42px; color: rgba(244,241,232,.62); font: 15px/1 "Plex Mono", monospace; letter-spacing: .18em; }
+    h1 { margin: 0; font-size: 70px; line-height: .98; letter-spacing: -.055em; font-weight: 600; }
+    h1 span { color: #d9634f; }
+    .brand { position: absolute; bottom: 58px; left: 68px; margin: 0; font-size: 43px; line-height: 1; letter-spacing: -.04em; }
+    .brand strong { color: #d9634f; font-weight: 600; }
+    .mark-panel { position: absolute; top: 76px; right: 68px; width: 245px; height: 478px; border: 1px solid rgba(244,241,232,.28); border-top: 7px solid #d9634f; }
+    .mark-panel img { position: absolute; top: 67px; left: 58px; width: 128px; height: 188px; }
+    .mark-panel p { position: absolute; right: 22px; bottom: 25px; left: 22px; padding-top: 18px; margin: 0; border-top: 1px solid rgba(244,241,232,.12); color: rgba(244,241,232,.58); font: 12px/1 "Plex Mono", monospace; letter-spacing: .12em; }
+    .serial { position: absolute; top: 25px; right: 20px; color: rgba(244,241,232,.42); font: 10px/1 "Plex Mono", monospace; letter-spacing: .12em; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="copy">
+      <p class="eyebrow">THE AI SOURCE CODE</p>
+      <h1>AI IS NOT OPEN SOURCE<br>WITHOUT THE <span>SOURCE.</span></h1>
+    </div>
+    <p class="brand">Open<strong>WALDO</strong></p>
+    <div class="mark-panel">
+      <span class="serial">PROVENANCE / 001</span>
+      <img src="mark.svg" alt="">
+      <p>OPEN THE INPUTS<br>TRACE THE OUTPUTS</p>
+    </div>
+  </main>
+</body>
+</html>
