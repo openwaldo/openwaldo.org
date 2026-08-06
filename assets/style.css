@@ -668,6 +668,9 @@ code { font-size: 10px; }
 .spread-grid > div:last-child > p { margin: 0; font-size: 18px; line-height: 1.65; }
 .dark-button { color: var(--paper); border-color: rgba(244,241,232,.55); background: transparent; cursor: pointer; }
 .dark-button:hover { background: var(--paper); color: var(--ink); }
+.share-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.share-actions .button { width: 100%; justify-content: space-between; }
+.share-actions .button[hidden] { display: none; }
 .copy-status { min-height: 20px; margin-top: 14px !important; font: 400 9px var(--font-mono); text-transform: uppercase; }
 .community-footer { align-items: end; gap: 60px; }
 .footer-actions { max-width: 720px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
@@ -783,6 +786,7 @@ code { font-size: 10px; }
   .community-audiences article, .community-audiences article:first-child, .community-roles article, .community-roles article:first-child { min-height: 230px; padding: 24px 0; border-right: 0; border-top: 1px solid var(--line); }
   .community-roles article, .community-roles article:first-child { border-color: rgba(244,241,232,.18); }
   .community-paths article { min-height: 480px; padding: 26px; }
+  .share-actions { grid-template-columns: 1fr; }
   .footer-actions { flex-direction: column; }
   .footer-actions .button { flex: 0 0 auto; }
   .faq-item { scroll-margin-top: 132px; }

@@ -67,16 +67,27 @@ const fetchIndexStats = async () => {
 // Community share helper. The social links work without JavaScript; this adds
 // a convenient copy action with a visible success state.
 (() => {
-  const button = document.querySelector('[data-copy-community]');
-  if (!button) return;
+  const copyButton = document.querySelector('[data-copy-community]');
+  const shareButton = document.querySelector('[data-share-community]');
+  if (!copyButton && !shareButton) return;
   const status = document.querySelector('[data-copy-status]');
-  button.addEventListener('click', () => {
+  copyButton?.addEventListener('click', () => {
     navigator.clipboard.writeText('https://openwaldo.org/').then(() => {
       if (status) status.textContent = 'Copied: https://openwaldo.org/';
     }).catch(() => {
       if (status) status.textContent = 'Copy failed — use https://openwaldo.org/';
     });
   });
+  if (shareButton && navigator.share) {
+    shareButton.hidden = false;
+    shareButton.addEventListener('click', () => {
+      navigator.share({
+        title: 'Join the OpenWALDO AI community',
+        text: 'AI is not open source without the source. Join the OpenWALDO AI community.',
+        url: 'https://openwaldo.org/',
+      }).catch(() => {});
+    });
+  }
 })();
 
 // Update the Corpus page's inline scale sentence. The page remains complete
