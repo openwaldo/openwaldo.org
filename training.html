@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Training — OpenWALDO</title>
-<meta name="description" content="Training on OpenWALDO: a git-curated index, federated content-addressed storage, and one CLI that takes you from a verified corpus to a model with a verifiable bill of materials.">
+<title>Using &amp; Training — OpenWALDO</title>
+<meta name="description" content="Take verified OpenWALDO data into your own training stack or use WALDO's provenance-carrying model lifecycle from blank architecture or open weights to portable release.">
 <meta property="og:site_name" content="OpenWALDO">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Training — OpenWALDO">
-<meta property="og:description" content="Training on OpenWALDO: a git-curated index, federated content-addressed storage, and one CLI that takes you from a verified corpus to a model with a verifiable bill of materials.">
+<meta property="og:title" content="Using &amp; Training — OpenWALDO">
+<meta property="og:description" content="Two explicit paths from verified training data to auditable model releases.">
 <meta property="og:url" content="https://openwaldo.org/training.html">
 <meta property="og:image" content="https://openwaldo.org/assets/og-logo.png">
 <meta property="og:image:width" content="1024">
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="The OpenWALDO logo">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=20260806">
 <link rel="canonical" href="https://openwaldo.org/training.html">
 </head>
 <body>
@@ -40,117 +40,95 @@
 
 <main>
 
-<section class="page-hero fixed-h">
-  <div class="wrap">
-    <div class="eyebrow">the machinery</div>
-    <h1>Models built the way open source builds software — <em>from source</em>.</h1>
-    <p class="sub" style="font-size:19px">
-      The training data is the model’s source code — so OpenWALDO manages it
-      like code: proposed, reviewed, licensed, recorded, and removable in the
-      open, with every model carrying a verifiable bill of materials pointing
-      back at exactly the data that made it.
-    </p>
+<section class="page-hero feature-hero">
+  <div class="wrap feature-hero-grid">
+    <div>
+      <div class="eyebrow">using the commons</div>
+      <h1>Verified data in. <em>Auditable models out.</em></h1>
+      <p class="sub">
+        OpenWALDO turns an index selection into immutable, independently
+        verifiable training data. Export it to the stack you already use, or
+        carry it through WALDO’s model lifecycle from blank architecture or
+        open weights to a portable release.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#paths">Choose your path</a>
+        <a class="btn ghost" href="index.html#corpus">Explore the corpus</a>
+        <a class="btn ghost" href="https://github.com/openwaldo/waldo">Read the CLI docs ↗</a>
+      </div>
+    </div>
+    <div class="hero-artifact" aria-label="The OpenWALDO provenance chain">
+      <div class="artifact-sheet corpus-sheet">
+        <small>verified input</small>
+        <strong>OpenWALDO BOM</strong>
+        <span>index · sources · licenses · shards</span>
+      </div>
+      <div class="artifact-sheet run-sheet">
+        <small>observed execution</small>
+        <strong>RUN-BOM.json</strong>
+        <span>plan · backend · consumption · outputs</span>
+      </div>
+      <div class="artifact-sheet release-sheet">
+        <small>portable release</small>
+        <strong>BOM.json</strong>
+        <span>origin · lineage · artifact hashes</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="block flush" id="walkthroughs">
-  <div class="wrap">
-    <div class="grid cols-3" style="margin-top:0">
-      <a class="card" href="walkthrough-build.html">
-        <span class="tag">howto</span>
-        <h3>WALDO build</h3>
-        <p>Train a model directly with CLI commands — the shortest path from
-        corpus to weights.</p>
-      </a>
-      <a class="card" href="walkthrough-compose.html">
-        <span class="tag">howto</span>
-        <h3>WALDO compose</h3>
-        <p>Declare architecture and curriculum in one YAML document — check,
-        build, resume.</p>
-      </a>
-      <a class="card" href="walkthrough-export.html">
-        <span class="tag">howto</span>
-        <h3>WALDO export</h3>
-        <p>Take the corpus out as parquet and train it with your own
-        stack.</p>
-      </a>
+<section class="block tinted" id="paths">
+  <div class="wrap reveal">
+    <div class="eyebrow">one verified handoff, two paths</div>
+    <h2>Use WALDO’s data without being locked into WALDO’s trainer.</h2>
+    <p class="sub measure">
+      Both paths begin with the same recursive verification and immutable
+      OpenWALDO BOM. What happens after that is your choice.
+    </p>
+    <div class="path-grid">
+      <article class="path-card external-path">
+        <div class="path-topline"><span>Path A</span><span>Bring your own stack</span></div>
+        <h3>Export verified corpus data</h3>
+        <p>Materialize native Parquet or canonical JSONL with <span class="mono">EXPORT.json</span> beside it. Audit it independently, train from scratch, or combine it with open weights in the tools you already operate.</p>
+        <div class="path-steps">
+          <span>Select</span><i>→</i><span>Verify</span><i>→</i><span>Export + BOM</span><i>→</i><span>Your tools</span>
+        </div>
+        <a class="text-link" href="https://github.com/openwaldo/waldo#export-and-inspect-corpus-data">Export and inspect corpus data ↗</a>
+      </article>
+      <article class="path-card waldo-path">
+        <div class="path-topline"><span>Path B</span><span>Use the WALDO lifecycle</span></div>
+        <h3>Compose, train, test, and release</h3>
+        <p>Start from an immutable blank architecture or pull compatible open weights with an origin BOM. Forecast, train, resume, inspect, chat, and export while the provenance chain grows with every real run.</p>
+        <div class="path-steps">
+          <span>Blank or open weights</span><i>→</i><span>Compose</span><i>→</i><span>Train</span><i>→</i><span>Release + BOMs</span>
+        </div>
+        <a class="text-link" href="https://github.com/openwaldo/waldo#forecast-and-train-a-model">Forecast and train a model ↗</a>
+      </article>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="wrap reveal">
-    <div class="eyebrow">the design</div>
-    <h2>Curation lives in git. Bytes live in federated object storage. Content hashes join them.</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <span class="tag">the index</span>
-        <h3>Managed, curated, ordered</h3>
-        <p>A git repository of metadata: for every shard of every corpus,
-        <em>what</em> it is (sha256), <em>where it came from</em> (sources,
-        licenses), <em>how it was derived</em> (recipe), and <em>where it
-        lives</em> (a URL). Contribution is an ordinary pull request with a DCO
-        sign-off.</p>
+    <div class="eyebrow">the complete model path</div>
+    <h2>Two valid starting points. One append-only history.</h2>
+    <p class="sub measure">
+      OpenWALDO never disguises inherited weights as a from-scratch build. The
+      starting point is pinned first; each observed training run is appended
+      afterward.
+    </p>
+    <div class="model-lifecycle">
+      <div class="starting-points">
+        <div class="lifecycle-node starting"><small>start clean</small><strong>Blank architecture</strong><span>declared in model compose</span></div>
+        <div class="lifecycle-or">or</div>
+        <div class="lifecycle-node starting"><small>continue openly</small><strong>Open weights</strong><span>pulled with origin BOM</span></div>
       </div>
-      <div class="card">
-        <span class="tag">the lookaside cache</span>
-        <h3>Federated, content-addressed blobs</h3>
-        <p>The actual training bytes — hosted by contributors themselves on any
-        S3 bucket or static HTTPS host, never by the project. Reads are
-        anonymous; every fetched byte verifies against its manifest sha256. No
-        host can serve the wrong data undetected.</p>
-      </div>
-      <div class="card">
-        <span class="tag">the waldo CLI</span>
-        <h3>One Go binary, the whole lifecycle</h3>
-        <p>Walking and verifying the index, pushing to and fetching from
-        lookaside stores, deterministic ingestion, and model init / train /
-        fork / chat / export with full lineage.</p>
-      </div>
-    </div>
-
-    <div class="flow">
-      <div class="step">
-        <span class="tag">raw data</span>
-        <h3>Fetch or gather</h3>
-        <p>Any local corpus of data — gathered, curated, or generated by you,
-        with per-file provenance.</p>
-      </div>
-      <div class="arrow">→</div>
-      <div class="step">
-        <span class="tag">index + lookaside</span>
-        <h3>Ingest</h3>
-        <p>Convert → dedup → pack → push shards to a lookaside, write the
-        manifest and index entries. Deterministic: same input, same hashes,
-        every time.</p>
-      </div>
-      <div class="arrow">→</div>
-      <div class="step">
-        <span class="tag">models</span>
-        <h3>Train &amp; ship</h3>
-        <p>Init or pull a model, train on index paths, fork, test, chat — and
-        export with its bill of materials.</p>
-      </div>
-    </div>
-
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Deterministic by construction</h3>
-        <p>Same input + same recipe → identical shard hashes. Canonical JSON,
-        records sorted by hash, a pinned compressor compiled into the binary.
-        Re-running an ingest is a byte-level no-op.</p>
-      </div>
-      <div class="card">
-        <h3>Identity beats location</h3>
-        <p>Every artifact is named by its content hash. Mirrors, migrations, and
-        rehosting change nothing: the bytes either match or they don’t.</p>
-      </div>
-      <div class="card">
-        <h3>Backends discovered, never assumed</h3>
-        <p>MLX on Apple Silicon, PyTorch / torchtitan on CUDA — chosen at
-        runtime, overridable by config. Weights interchange as safetensors, so
-        the same model moves from laptop to cluster.</p>
-      </div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node"><small>before compute</small><strong>Forecast &amp; compose</strong><span>architecture · data · objective · resources</span></div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node active"><small>observed execution</small><strong>Train &amp; evaluate</strong><span>consumption · losses · checkpoints · hashes</span></div>
+      <span class="lifecycle-arrow" aria-hidden="true">→</span>
+      <div class="lifecycle-node"><small>portable output</small><strong>Test &amp; export</strong><span>WALDO · Hugging Face · MLX · GGUF · Ollama</span></div>
     </div>
   </div>
 </section>
@@ -158,256 +136,92 @@
 <section class="block tinted">
   <div class="wrap reveal">
     <div class="eyebrow">the receipts</div>
-    <h2>Validation, auditability, and a bill of materials — as artifacts, not promises.</h2>
-    <p class="sub">
-      Every claim is checkable by anyone, anonymously, with one command —
-      <a href="#walkthroughs">the walkthroughs</a> show each of these
-      artifacts being made, with real output from the live public index.
+    <h2>Provenance is an artifact, not a paragraph in a model card.</h2>
+    <p class="sub measure">
+      Each boundary writes the record needed by the next one. Hashes prove
+      identity and integrity; the BOM states exactly what WALDO verified and
+      what the backend reported.
     </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>The manifest: what an auditor reads</h3>
-        <p>Every corpus is a signed, human-readable record. The recipe is pinned
-        down to the compressor version compiled into the binary — and every
-        shard carries its own hash, license, sources, and doc, token, and byte
-        counts. <span class="mono">waldo index verify</span> proves the store
-        still matches it: existence and size for every shard by default, a full
-        re-hash of the actual bytes on request — anonymous, no account, no
-        keys.</p>
+    <div class="grid cols-2 receipt-grid">
+      <div class="card receipt-card">
+        <span class="file-label">EXPORT.json</span>
+        <h3>Corpus OpenWALDO BOM</h3>
+        <p>Pins the Git revision, selected manifests, sources, licenses, canonical objects, counts, and exported-file hashes.</p>
       </div>
-      <div class="card">
-        <h3>The model BOM: weights that carry their source</h3>
-        <p><span class="mono">waldo model export</span> writes three artifacts:
-        the weights with provenance embedded <em>inside the safetensors
-        metadata</em>, a machine-readable BOM, and a human-readable
-        <span class="mono">PROVENANCE.md</span> — the ancestry travels with the
-        weights file itself, not beside it. Every run records the index commit,
-        the consumed manifests' hashes, and the data totals. Ask "what is this
-        model built from?" and the answer is a hash-pinned record, replayable
-        from one git commit.</p>
+      <div class="card receipt-card">
+        <span class="file-label">ORIGIN-BOM.json</span>
+        <h3>Starting-weight identity</h3>
+        <p>Records the immutable repository revision, acquired artifacts, architecture, tokenizer, precision, and provenance gaps of pulled weights.</p>
       </div>
-      <div class="card">
-        <h3>EXPORT.json: the pedigree travels with the data</h3>
-        <p>Exporting any subtree writes parquet that is byte-identical to what
-        the manifest hashes, plus <span class="mono">EXPORT.json</span> — the
-        data-side BOM: the index commit and every file's hash, license, and
-        origin. Downstream artifacts cite their source.</p>
+      <div class="card receipt-card">
+        <span class="file-label">RUN-BOM.json</span>
+        <h3>Planned and observed run</h3>
+        <p>Writes the immutable plan before execution, then binds backend observations, evaluation, checkpoints, and output hashes afterward.</p>
       </div>
-    </div>
-
-    <p class="sub">
-      Nothing here requires trusting the project — only checking it.
-    </p>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap reveal">
-    <div class="eyebrow">the license bar</div>
-    <h2>Every byte in the official tree is one a mirror can host without inheriting a lawsuit.</h2>
-    <div class="prose">
-      <p>
-        The official index admits only content that is <strong>genuinely
-        open</strong> — public domain, CC-BY, CC-BY-SA, and permissively
-        licensed code — attested by DCO sign-off as redistributable under its
-        stated SPDX license. The bar applies to the <em>underlying
-        documents</em>, not just a dataset’s compilation license, because a
-        permissive label on a bundle says nothing about the copyright of what’s
-        inside it.
-      </p>
-      <p>
-        That’s a strict bar, and it has an honest price: the web-crawl datasets
-        that trained most recent open models don’t clear it. The projects that
-        proved license-clean training works — EleutherAI’s Common Pile, AI2’s
-        OLMo, Pleias’ Common Corpus — showed the gap is corpus size and
-        diversity, not anything fundamental. <strong>Growing that clean corpus
-        is exactly what this project exists to do.</strong>
-      </p>
-      <p>
-        And openness includes the right to leave: takedown is a first-class
-        operation, obligations like attribution travel with the manifests, and
-        per-shard license tags mean any downstream consumer can include or
-        exclude by SPDX id.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="block tinted">
-  <div class="wrap reveal">
-    <div class="eyebrow">knowledge by policy</div>
-    <h2>Ask for knowledge the way you’d query a database.</h2>
-    <div class="prose">
-      <p>
-        Because every shard carries its metadata — license, source, origin,
-        format, path — the corpus can be <em>queried</em>, not just
-        downloaded. That already works for licenses today:
-        <code>waldo index export code --license "GPL-*,MIT,Apache-2.0"</code>
-        assembles a corpus from exactly the license profile you accept.
-      </p>
-      <p>
-        Follow that idea forward. “Build me a Linux kernel expert” isn’t
-        really a prompt — it’s a policy: lean the mix heavily toward code;
-        accept GPL and permissive licenses; prefer kernel and systems
-        sources; favor recent material over stale. As the index grows richer
-        metadata — domains, review depth, recency — that policy becomes an
-        executable query, and the query assembles the training corpus.
-      </p>
-      <p>
-        The payoff is the answer to a simple question: <strong>where did
-        this model come from?</strong> Today the industry’s honest answer is
-        a shrug — “approximately four trillion tokens.” A model built from a
-        corpus query answers differently:
-      </p>
-      <blockquote>
-        Expert 3.2 was trained from OpenWALDO query <span class="mono">98a7f…</span>
-        — 2.4 billion licensed tokens, from 18,247 contributors, under these
-        licenses.
-      </blockquote>
-      <p>
-        The query’s receipt is the model’s bill of materials — reproducible
-        by anyone, forever. The license dimension ships today; the rest is
-        the roadmap, and every contribution makes the queries richer.
-      </p>
+      <div class="card receipt-card">
+        <span class="file-label">BOM.json · EU-BOM.json</span>
+        <h3>Release inventory and disclosure</h3>
+        <p>Ships the selected origin or real run with a hashed release inventory and a separate regulatory disclosure projection.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="wrap reveal">
-    <div class="eyebrow">the growth ladder</div>
-    <h2>What you can build on the corpus, at every scale.</h2>
-    <p class="sub">
-      OpenWALDO doesn’t ship models — it ships the source and the toolchain,
-      and <strong>you</strong> set the ambition. The ladder below is what the
-      corpus supports as it grows, from a laptop experiment to a from-scratch
-      foundation model (with, at most, small reference examples from the
-      project to prove the pipeline).
-    </p>
-    <div class="ladder">
-      <div class="rung">
-        <div class="size">Stage A<small>10–100M params<hr/>GPU laptops or mini-systems</small></div>
-        <div>
-          <h3>Prove the pipeline</h3>
-          <p>Books + reference corpora, trained on a laptop (Apple Silicon /
-          MLX) or any single GPU. A tiny model whose entire existence —
-          tokenizer, corpus, run config — replays from one index commit.
-          Quality is explicitly not the point; the BOM chain is.</p>
-        </div>
+    <div class="eyebrow">working today</div>
+    <h2>From laptop experiments to a single multi-GPU node.</h2>
+    <div class="capability-board">
+      <div class="capability-column">
+        <span class="capability-state ready">available</span>
+        <h3>Training backends</h3>
+        <ul>
+          <li>MLX training and generation on Apple Silicon</li>
+          <li>PyTorch on Linux CPU, NVIDIA CUDA, and AMD ROCm</li>
+          <li>Single-node distributed TorchTitan across visible Linux GPUs</li>
+          <li>Atomic checkpoints and exact same-run resume</li>
+        </ul>
       </div>
-      <div class="rung">
-        <div class="size">Stage B<small>~1B params<hr/>GPU or multi-GPU servers</small></div>
-        <div>
-          <h3>First useful models</h3>
-          <p>A ~115B-token license-clean corpus — books, wikis, code, papers,
-          law — through the full pipeline: pretrain, anneal, SFT, preference.
-          One big GPU box (an 8× H100/H200 node, rented for days) puts this
-          rung within reach of any team or serious community member.</p>
-        </div>
+      <div class="capability-column">
+        <span class="capability-state ready">available</span>
+        <h3>Release formats</h3>
+        <ul>
+          <li>Native self-contained WALDO archive</li>
+          <li>Hugging Face and MLX packages</li>
+          <li>GGUF and Ollama, with explicit quantization</li>
+          <li>Technical and EU BOMs, optionally signed</li>
+        </ul>
       </div>
-      <div class="rung">
-        <div class="size">Stage C<small>3–7B params<hr/>GPU clusters</small></div>
-        <div>
-          <h3>Foundation models</h3>
-          <p>The full clean pool plus everything the community ingests along
-          the way supports from-scratch foundation models with a provable,
-          replayable, license-clean pedigree. This is GPU-cluster territory —
-          AI labs, large companies, donated compute — built by whoever brings
-          it, and auditable by everyone.</p>
-        </div>
-      </div>
-      <div class="rung">
-        <div class="size">Beyond<small>13B → 405B<hr/>AI-lab scale</small></div>
-        <div>
-          <h3>The frontier trains on the commons</h3>
-          <p>Stage C is the proof, not the ceiling. From there the corpus
-          becomes what it was always meant to be: the <strong>base layer for
-          AI labs</strong> — pulled as the substrate for frontier-scale
-          training, or blended into existing corpora at any size. Every model
-          that draws on the commons, at any scale, gains what no private
-          pipeline can offer: a publicly auditable slice of its diet.</p>
-        </div>
+      <div class="capability-column">
+        <span class="capability-state pending">next</span>
+        <h3>Deliberately pending</h3>
+        <ul>
+          <li>General Hugging Face tokenizer and architecture profiles</li>
+          <li>Supervised fine-tuning and preference training</li>
+          <li>Pinned chat templates and PyTorch generation</li>
+          <li>Multi-node cluster orchestration</li>
+        </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="block open-source-callout">
+  <div class="wrap reveal">
+    <div class="eyebrow">open means the source is open</div>
+    <h2>Weights alone are not enough.</h2>
+    <p class="sub measure">
+      A model is not fully open when its training data and build record
+      disappear. OpenWALDO keeps the data, artifacts, license assertions,
+      origins, and run history connected to the release—so “open” can be
+      inspected instead of merely claimed.
+    </p>
     <div class="cta-row">
-      <a class="btn" href="walkthrough-build.html">Train your first model from scratch</a>
+      <a class="btn" href="index.html#corpus">Explore the training data</a>
+      <a class="btn ghost" href="contributing.html">Add to the commons</a>
     </div>
   </div>
 </section>
-
-<section class="block tinted">
-  <div class="wrap reveal">
-    <div class="eyebrow">built to be built on</div>
-    <h2>A foundational corpus. Add your value on top.</h2>
-    <p class="sub">
-      This is where open source shines: a shared, collaboratively maintained
-      base that nobody has to rebuild and everybody gets to build on — the way
-      companies build products on Linux rather than writing kernels. The corpus
-      is the foundation; <strong>differentiation happens above it</strong> —
-      and every improvement to the commons lifts everyone's foundation at once.
-    </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Model builders — your base from the commons, your value on top</h3>
-        <p>Pretrain a base on the shared corpus — the whole build declared in
-        one reviewable compose document, every stage BOM-pinned. Then add what
-        makes it yours: a fork carries the lineage, and your proprietary SFT
-        and domain anneal train from a private tree with the same toolchain,
-        nothing published. The public BOM covers the foundation; your edge
-        stays yours.</p>
-      </div>
-      <div class="card">
-        <h3>Companies — feed the models and stacks you already run</h3>
-        <p>Export exactly the license profile your product allows, as parquet
-        shards, and it's yours to use anywhere: continued pretraining of an
-        existing open model, a RAG index, an eval set — your tools, your
-        stack, with EXPORT.json carrying the pedigree into your compliance
-        story.</p>
-      </div>
-    </div>
-
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Auditable AI for regulated work</h3>
-        <p>Finance, healthcare, government: the auditor gets a signed,
-        hash-pinned record of the training input. License partitioning and
-        takedown are built into the format.</p>
-      </div>
-      <div class="card">
-        <h3>Sovereign &amp; public AI</h3>
-        <p>A model whose entire training input is inspectable, license-clean,
-        and rebuildable inside your own borders. Where it was trained stops
-        mattering, because what it was trained on is on the record.</p>
-      </div>
-      <div class="card">
-        <h3>Reproducible research</h3>
-        <p>A published model anyone can replay: same index commit, same data,
-        same recipe, same architecture. Ablations and dataset studies become
-        diffs against a pinned tree instead of archaeology.</p>
-      </div>
-    </div>
-
-    <p class="sub" style="margin-top:36px">
-      And the loop closes the open-source way: what you can openly license,
-      you <a href="contributing.html">contribute back</a> — and every model
-      built on the foundation afterward knows it.
-    </p>
-  </div>
-</section>
-
-<div class="band">
-  <div class="wrap reveal">
-    <div class="eyebrow">the incentive</div>
-    <h2>The corpus is the commons. The models are proof it works.</h2>
-    <p class="sub">Everything you contribute is carried — by hash, by license, by name — in every model that learns from it.</p>
-    <div class="cta-row" style="margin-top:32px">
-      <a class="btn" href="walkthrough-contributing.html">Contribute your first corpus</a>
-      <a class="btn ghost" href="about.html">Why this matters</a>
-    </div>
-  </div>
-</div>
 
 </main>
 
@@ -431,8 +245,7 @@
         <h4>Get involved</h4>
         <ul>
           <li><a href="contributing.html">Contributing</a></li>
-          <li><a href="training.html#walkthroughs">Train a model</a></li>
-          <li><a href="walkthrough-contributing.html">Contribute data</a></li>
+          <li><a href="index.html#corpus">Explore the corpus</a></li>
           <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
           <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
@@ -440,9 +253,7 @@
       </div>
       <div>
         <h4>Docs</h4>
-        <ul>
-          <li><a href="https://github.com/openwaldo">On GitHub ↗</a></li>
-        </ul>
+        <ul><li><a href="https://github.com/openwaldo/waldo">On GitHub ↗</a></li></ul>
       </div>
     </div>
     <div class="foot-bottom">
@@ -453,6 +264,6 @@
   <div class="stripe" style="margin-top:40px"></div>
 </footer>
 
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=20260806"></script>
 </body>
 </html>
