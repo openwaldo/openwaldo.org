@@ -455,12 +455,12 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .red-card p { color: rgba(24,32,29,.7); }
 .door-card b { font-family: var(--font-mono); font-size: 10px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
 
-.page-intro { min-height: 620px; padding: 160px 0 76px; }
+.page-intro { min-height: 560px; padding: 140px 0 64px; }
 .page-intro h1 { max-width: 780px; font-size: clamp(52px, 6.4vw, 82px); line-height: .97; letter-spacing: -.05em; font-weight: 600; }
 .page-intro-side { padding-top: 18px; }
 .page-intro-side > span { margin-bottom: 38px; font-weight: 400; }
 .page-intro-side p { font-size: 17px; line-height: 1.68; }
-.compact-intro { min-height: 540px; }
+.compact-intro { min-height: 500px; }
 
 .metric-band { background: var(--red); }
 .four-metrics { min-height: 132px; }
@@ -742,8 +742,8 @@ code { font-size: 10px; }
   .hero-lede { font-size: 16px; }
   .hero-object { min-height: 280px; padding: 24px; }
   .hero-object strong { font-size: 45px; }
-  .page-intro { min-height: 690px; padding-top: 172px; }
-  .compact-intro { min-height: 590px; }
+  .page-intro { min-height: 630px; padding-top: 150px; }
+  .compact-intro { min-height: 550px; }
   .page-intro h1 { font-size: clamp(44px, 12.2vw, 58px); }
   .split-head h2, .manifesto h2, .run-header h2, .ingest-section > .shell > h2 { font-size: 39px; }
   .corpus-total strong { font-size: 76px; }
