@@ -70,7 +70,6 @@ as a file renders unstyled.
 
 The `www.openwaldo.org` repo holds the redirect from www to the apex domain.
 
-Related repositories: [`openwaldo/waldo`](https://github.com/openwaldo/waldo)
-(the toolchain) and
-[`openwaldo/waldo-index`](https://github.com/openwaldo/waldo-index) (the data
-tree).
+Related projects: the [OpenWALDO GitHub organization](https://github.com/openwaldo)
+and [`openwaldo/waldo-index`](https://github.com/openwaldo/waldo-index) (the
+public data tree).

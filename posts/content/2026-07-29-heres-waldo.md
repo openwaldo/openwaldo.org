@@ -23,7 +23,7 @@ The [front page](https://openwaldo.org/) counts it in real time.
 Come take part:
 
 - **The index**: [openwaldo/waldo-index](https://github.com/openwaldo/waldo-index)
-- **The toolchain**: [openwaldo/waldo](https://github.com/openwaldo/waldo)
+- **The project**: [OpenWALDO on GitHub](https://github.com/openwaldo)
 - **The community**: [Slack](https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g) · [how to contribute](https://openwaldo.org/community.html)
 
 Open source AI didn’t exist, until now.

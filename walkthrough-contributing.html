@@ -31,7 +31,7 @@
       <a href="faq.html">FAQ</a>
       <a href="posts/">Posts</a>
       <a href="about.html">About</a>
-      <a class="gh-btn" href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Slack ↗</a>
+      <a class="gh-btn" href="community.html">AI Community ↗</a>
       <a class="gh-btn" href="https://github.com/openwaldo">GitHub ↗</a>
     </nav>
   </div>
@@ -133,17 +133,17 @@
       <p>
         Ingest takes <strong>any local directory</strong> — and assembling it
         is your job. Pull from an API, mirror an archive, dump a knowledge
-        base, gather documents you already have: plain text, Markdown, JSONL,
-        HTML, or EPUB, with the format sensed per file. How you fetch is up
-        to you; the only interface is what lands on disk.
+        base, gather documents you already have: plain text, Markdown, plain
+        or compressed JSONL, or raw Parquet, with the format and schema sensed
+        from the content. For direct local input, the interface is what lands
+        on disk.
       </p>
       <p>
         Hints, for fetching from a public source: <span class="mono">curl</span>
-        and <span class="mono">jq</span> go a long way, and the toolchain’s
-        <a href="https://github.com/openwaldo/waldo/tree/main/fetchers"><span class="mono">fetchers/</span></a>
-        directory holds shell scripts that pull specific public sources —
-        worked examples to crib from, outside the binary and outside the
-        deterministic core. Prefer the primary source, and mind the license
+        and <span class="mono">jq</span> go a long way. The
+        <a href="contributing.html">current contribution guide</a> explains how
+        reviewed acquisition recipes and source-specific scripts stay outside
+        the binary and the deterministic core. Prefer the primary source, and mind the license
         <em>of the underlying documents</em> — that’s what you’ll be
         attesting to in step 5.
       </p>
@@ -171,7 +171,7 @@
     <div class="prose">
       <p>
         The metafile contract is documented in
-        <a href="https://github.com/openwaldo/waldo/tree/main/fetchers">fetchers/README.md</a> —
+        <a href="contributing.html">the current contribution guide</a> —
         normative if you write one, and entirely optional: ingest takes a
         directory without one and asks you for what’s missing. Two rules from
         it are worth knowing before you start. <strong>The file list is sorted by content hash</strong>,
@@ -303,7 +303,7 @@
     <p class="sub">
       The index is a curated layer <em>on top of</em> the open-data commons,
       not a re-hosting of it.
-      <a href="https://github.com/openwaldo/waldo/blob/main/CORPUS-BACKLOG.md">CORPUS-BACKLOG.md</a>
+      <a href="community.html#corpus">the public corpus participation page</a>
       states the sourcing principles in full and lists what is wanted next,
       with runnable commands. The short version:
     </p>
@@ -393,7 +393,7 @@
           <li><a href="training.html#walkthroughs">Train a model</a></li>
           <li><a href="walkthrough-contributing.html">Contribute data</a></li>
           <li><a href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g">Join us on Slack</a></li>
-          <li><a href="https://github.com/openwaldo/waldo">The toolchain</a></li>
+          <li><a href="https://github.com/openwaldo">OpenWALDO on GitHub</a></li>
           <li><a href="https://github.com/openwaldo/waldo-index">The index</a></li>
         </ul>
       </div>

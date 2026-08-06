@@ -46,6 +46,21 @@ if (mainContent) {
   }
 })();
 
+// Community share helper. The social links work without JavaScript; this adds
+// a convenient copy action with a visible success state.
+(() => {
+  const button = document.querySelector('[data-copy-community]');
+  if (!button) return;
+  const status = document.querySelector('[data-copy-status]');
+  button.addEventListener('click', () => {
+    navigator.clipboard.writeText('https://openwaldo.org/').then(() => {
+      if (status) status.textContent = 'Copied: https://openwaldo.org/';
+    }).catch(() => {
+      if (status) status.textContent = 'Copy failed — use https://openwaldo.org/';
+    });
+  });
+})();
+
 // Update the Corpus page's inline scale sentence. The page remains complete
 // with its checked-in snapshot when the public status feed is unavailable.
 (() => {
