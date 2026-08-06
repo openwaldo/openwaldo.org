@@ -11,6 +11,41 @@ if (mainContent) {
   document.body.prepend(skip);
 }
 
+// FAQ accordion and durable deep links. Only one answer remains open, and the
+// selected question is reflected in ?faq= so the exact state can be shared.
+(() => {
+  const items = [...document.querySelectorAll('.faq-item[data-faq]')];
+  if (!items.length) return;
+
+  const selectedKey = () => new URLSearchParams(window.location.search).get('faq');
+  const updateUrl = (key) => {
+    const url = new URL(window.location.href);
+    if (key) url.searchParams.set('faq', key);
+    else url.searchParams.delete('faq');
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  };
+
+  items.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        items.forEach((other) => { if (other !== item) other.open = false; });
+        updateUrl(item.dataset.faq);
+      } else if (selectedKey() === item.dataset.faq) {
+        updateUrl(null);
+      }
+    });
+  });
+
+  const requested = selectedKey();
+  const target = requested && items.find((item) => item.dataset.faq === requested);
+  if (target) {
+    target.open = true;
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    });
+  }
+})();
+
 // Update the Corpus page's inline scale sentence. The page remains complete
 // with its checked-in snapshot when the public status feed is unavailable.
 (() => {

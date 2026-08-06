@@ -612,7 +612,7 @@ code { font-size: 10px; }
 .faq-group-label span { color: var(--red); font: 400 10px var(--font-mono); }
 .faq-group-label p { margin: 12px 0 0; font: 400 10px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
 .faq-list { border-left: 1px solid var(--line); }
-.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item { scroll-margin-top: 110px; border-bottom: 1px solid var(--line); }
 .faq-item summary { min-height: 112px; display: grid; grid-template-columns: 46px minmax(0, 1fr) 24px; gap: 18px; align-items: center; padding: 24px 0 24px 30px; cursor: pointer; list-style: none; }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary > span { color: var(--red); font: 400 9px var(--font-mono); }
@@ -720,6 +720,7 @@ code { font-size: 10px; }
   .evidence-status > div:nth-child(even) { padding-left: 0; }
   .principles-grid article, .principles-grid article:not(:first-child) { min-height: 210px; padding: 24px 0; border-right: 0; border-top: 1px solid var(--line); }
   .post-row { grid-template-columns: 1fr; gap: 14px; padding: 30px 0; }
+  .faq-item { scroll-margin-top: 132px; }
   .faq-item summary { min-height: 96px; grid-template-columns: 32px minmax(0, 1fr) 20px; gap: 10px; padding: 20px 0; }
   .faq-item summary strong { font-size: 20px; }
   .faq-answer { padding: 0 30px 28px 42px; }
