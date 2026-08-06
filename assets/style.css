@@ -407,9 +407,9 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-grain { display: none; }
 .hero-grid { min-height: 560px; grid-template-columns: minmax(0, 1.5fr) minmax(280px, .5fr); gap: 9vw; }
 .hero-copy { padding: 30px 0 54px; }
-.hero-copy h1 { max-width: 900px; margin: 0; line-height: 1; font-weight: 650; }
+.hero-copy h1 { width: fit-content; max-width: 900px; margin: 0; line-height: 1; font-weight: 650; }
 .hero-copy h1 > span, .hero-copy h1 > strong { display: block; }
-.hero-copy .hero-principles { max-width: 760px; color: var(--paper); font-size: clamp(24px, 2.55vw, 34px); line-height: 1.28; letter-spacing: -.035em; }
+.hero-copy .hero-principles { max-width: 760px; color: var(--paper); font-size: clamp(24px, 2.55vw, 34px); line-height: 1.28; letter-spacing: -.035em; text-align: center; }
 .hero-copy .hero-principles b { color: var(--red); font-weight: 700; }
 .hero-copy .hero-name { margin-top: .25em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
 .hero-copy .hero-name b { color: var(--red); font-weight: 700; }
