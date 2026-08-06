@@ -1,7 +1,4 @@
-// OpenWALDO site — small shared behaviors. No dependencies.
-
-// Shared keyboard affordance. It is injected here so every static page gets
-// the same target without duplicating structural markup.
+// Shared keyboard affordance for every static page using the primary theme.
 const mainContent = document.querySelector('main');
 if (mainContent) {
   mainContent.id ||= 'main-content';
@@ -12,463 +9,216 @@ if (mainContent) {
   document.body.prepend(skip);
 }
 
-// Mobile nav toggle
-const menuBtn = document.getElementById('menu-btn');
-if (menuBtn) {
-  const menu = document.querySelector('nav.links');
-  menu.id ||= 'site-menu';
-  menuBtn.setAttribute('aria-controls', menu.id);
-  menuBtn.setAttribute('aria-expanded', 'false');
-  const closeMenu = () => {
-    menu.classList.remove('open');
-    menuBtn.setAttribute('aria-expanded', 'false');
+(() => {
+  const explorer = document.querySelector('[data-corpus-explorer]');
+  if (!explorer) return;
+
+  const fallbackCorpora = [
+    ['science/pes2o', 'Open-Access Papers', 39552347762, 6108982, 'CC-BY-4.0'],
+    ['core/common-pile/stackexchange', 'Stack Exchange', 21812312528, 30987453, 'CC-BY-SA'],
+    ['law/caselaw', 'United States Caselaw', 17426449985, 6918857, 'Public domain'],
+    ['core/common-pile/wikimedia', 'Wikimedia', 14091099944, 16270398, 'CC-BY-SA-4.0'],
+    ['government/usgpo', 'US Government Publishing Office', 7774131037, 2009402, 'Public domain'],
+    ['core/books/gutenberg', 'Project Gutenberg', 5601863578, 61297, 'CC0-1.0'],
+    ['core/common-pile/youtube', 'YouTube Transcripts', 4073362588, 986374, 'CC-BY-4.0'],
+    ['core/common-pile/wikiteam', 'WikiTeam Archives', 2943095688, 10230106, 'CC-BY-SA-3.0'],
+    ['core/books/doab', 'Directory of Open Access Books', 2804023659, 403917, 'Mixed Creative Commons'],
+    ['science/plos', 'PLOS Articles', 2734709557, 391454, 'Mixed open licenses'],
+    ['government/uk-hansard', 'UK Parliament Hansard', 2012229928, 47894, 'Open Parliament Licence'],
+    ['core/common-pile/ubuntu-irc', 'Ubuntu IRC Logs', 1762060903, 214962, 'Public domain'],
+    ['government/regulations', 'US Federal Rulemaking', 1280789827, 192436, 'Public domain'],
+    ['post-train/sft/aya', 'Aya Dataset', 104293685, 193211, 'Apache-2.0'],
+    ['core/common-pile/foodista', 'Foodista', 20967715, 65640, 'CC-BY-3.0'],
+    ['post-train/sft/oasst2', 'OpenAssistant Conversations 2', 6156748, 13852, 'Apache-2.0'],
+    ['post-train/sft/oasst1', 'OpenAssistant Conversations 1', 4075556, 10362, 'Apache-2.0'],
+    ['post-train/sft/dolly', 'Databricks Dolly', 2647410, 14996, 'CC-BY-SA-3.0'],
+    ['core/common-pile/python-enhancement-proposals', 'Python Enhancement Proposals', 2535956, 655, 'Public domain'],
+    ['core/common-pile/public-domain-review', 'The Public Domain Review', 1508728, 1406, 'CC-BY-SA-4.0'],
+  ].map(([path, title, tokens, docs, license]) => ({
+    path, title, tokens, docs,
+    description: 'An indexed corpus with attributable source and license metadata, canonical content-addressed shards, and exact counts.',
+    licenses: { [license]: { tokens } },
+  }));
+
+  const fallback = {
+    generated: '2026-08-06T14:20:58Z', tokens: 124010662782,
+    docs: 75123654, bytes: 167759371114, shards: 1051,
+    corpora: fallbackCorpora,
   };
-  menuBtn.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', String(open));
-  });
-  menu.addEventListener('click', (event) => {
-    if (event.target.closest('a')) closeMenu();
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && menu.classList.contains('open')) {
-      closeMenu();
-      menuBtn.focus();
-    }
-  });
-}
 
-// Scroll-reveal
-const io = new IntersectionObserver((entries) => {
-  for (const e of entries) {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  let status = fallback;
+  let selectedPath = fallback.corpora[0].path;
+  let query = '';
+  const tree = explorer.querySelector('[data-corpus-tree]');
+  const detail = explorer.querySelector('[data-corpus-detail]');
+  const search = explorer.querySelector('#corpus-search');
+  const feedState = explorer.querySelector('[data-feed-state]');
+  const feedDot = explorer.querySelector('.snapshot-dot');
 
-// Hero glimmer alignment: the red initials' shine is positioned in pixels
-// so it lines up with the band sweeping the whole title. Measure the title
-// width and each letter's offset into it; re-measure on load and resize.
-const heroTitle = document.querySelector('h1.title');
-if (heroTitle) {
-  const layoutGlimmer = () => {
-    heroTitle.style.setProperty('--hw', heroTitle.clientWidth + 'px');
-    const left = heroTitle.getBoundingClientRect().left;
-    heroTitle.querySelectorAll('.k').forEach((k) => {
-      k.style.setProperty('--kl', (k.getBoundingClientRect().left - left) + 'px');
+  const compact = (number) => {
+    if (number >= 1e9) return `${(number / 1e9).toFixed(number >= 1e11 ? 1 : 2)}B`;
+    if (number >= 1e6) return `${(number / 1e6).toFixed(1)}M`;
+    return number.toLocaleString();
+  };
+  const byteSize = (number) => number ? `${(number / 1e9).toFixed(1)} GB` : '—';
+  const add = (parent, tag, text, className) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    node.textContent = text;
+    parent.appendChild(node);
+    return node;
+  };
+
+  const updateTotals = () => {
+    const values = {
+      tokens: compact(status.tokens), docs: compact(status.docs),
+      corpora: String(status.corpora.length), bytes: `${(status.bytes / 1e9).toFixed(1)}GB`,
+    };
+    Object.entries(values).forEach(([key, value]) => {
+      const target = document.querySelector(`[data-total="${key}"]`);
+      if (target) target.textContent = value;
     });
   };
-  layoutGlimmer();
-  window.addEventListener('load', layoutGlimmer);
-  window.addEventListener('resize', layoutGlimmer);
-}
 
-// Corpus counter: fill the front-page stats strip live from the status
-// feed the index repo publishes. Numbers count up when the strip scrolls
-// into view; the license bar is a token-share spectrum from the same data;
-// the corpus cloud is a physics playground of glassy spheres, one per
-// corpus, area proportional to tokens.
-const STATS_URL = 'https://openwaldo.github.io/waldo-index/status.json';
-const statsBox = document.querySelector('[data-stats]');
-if (statsBox) {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const NUM = [[1e12, 'T'], [1e9, 'B'], [1e6, 'M'], [1e3, 'K'], [1, '']];
-  const SIZE = [[1e12, ' TB'], [1e9, ' GB'], [1e6, ' MB'], [1e3, ' KB'], [1, ' B']];
-  const split = (n, units) => {
-    for (const [v, u] of units) if (n >= v || v === 1) return [n / v, u];
-  };
-  const fmt = (x, target) =>
-    target >= 100 || Number.isInteger(target)
-      ? String(Math.round(x))
-      : x.toFixed(1).replace(/\.0$/, target >= 10 ? '' : '.0');
+  const renderDetail = (corpus) => {
+    detail.replaceChildren();
+    add(detail, 'p', corpus.path, 'detail-path');
+    add(detail, 'h2', corpus.title || corpus.name || corpus.path);
+    add(detail, 'p', corpus.description || 'An indexed corpus with attributable source and license metadata, canonical content-addressed shards, and exact counts.');
 
-  const pending = [];
-  const setStat = (key, n, units, title) => {
-    const box = statsBox.querySelector(`[data-stat="${key}"]`);
-    if (!box) return;
-    const [value, unit] = units ? split(n, units) : [n, ''];
-    box.querySelector('.u').textContent = unit;
-    if (title) box.title = title;
-    const v = box.querySelector('.v');
-    if (reduced) { v.textContent = fmt(value, value); return; }
-    pending.push({ el: v, value });
-  };
+    const list = document.createElement('dl');
+    [
+      ['Reference tokens', corpus.tokens.toLocaleString()],
+      ['Documents', corpus.docs.toLocaleString()],
+      ['Canonical data', byteSize(corpus.bytes)],
+      ['Shards', corpus.shards ? corpus.shards.toLocaleString() : '—'],
+    ].forEach(([label, value]) => {
+      const row = document.createElement('div');
+      add(row, 'dt', label); add(row, 'dd', value); list.appendChild(row);
+    });
+    detail.appendChild(list);
 
-  const runCountUp = () => {
-    const t0 = performance.now(), dur = 1600;
-    const tick = (t) => {
-      const p = Math.min((t - t0) / dur, 1);
-      const ease = 1 - Math.pow(1 - p, 4);
-      for (const s of pending) s.el.textContent = fmt(s.value * ease, s.value);
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+    const licenses = Object.keys(corpus.licenses || {});
+    if (licenses.length) {
+      const box = document.createElement('div'); box.className = 'license-list';
+      add(box, 'span', 'Asserted licenses');
+      licenses.forEach((license) => add(box, 'b', license));
+      detail.appendChild(box);
+    }
+    if (corpus.sources && corpus.sources[0]) {
+      const source = document.createElement('div'); source.className = 'source-note';
+      add(source, 'span', 'Source');
+      add(source, 'p', corpus.sources[0].origin || corpus.sources[0].name || corpus.sources[0].url || 'Recorded in manifest');
+      detail.appendChild(source);
+    }
+    const link = add(detail, 'a', 'Inspect metadata on GitHub ↗', 'text-action');
+    link.href = `https://github.com/openwaldo/waldo-index/tree/main/${corpus.path.split('/').map(encodeURIComponent).join('/')}`;
   };
 
-  const PALETTE = ['#ff4a3d', '#ddd2ba', '#ff8a5c', '#8fa0bd', '#ffb454',
-                   '#d92e23', '#c9b8a0', '#7d8aa5', '#ffd9d5', '#58627a'];
+  const render = () => {
+    tree.replaceChildren();
+    const visible = status.corpora.filter((corpus) =>
+      `${corpus.path} ${corpus.title || corpus.name}`.toLowerCase().includes(query.toLowerCase()));
+    const groups = new Map();
+    visible.forEach((corpus) => {
+      const branch = corpus.path.split('/')[0];
+      if (!groups.has(branch)) groups.set(branch, []);
+      groups.get(branch).push(corpus);
+    });
 
-  fetch(STATS_URL)
-    .then((r) => {
-      if (!r.ok) throw new Error('status feed unavailable');
-      return r.json();
-    })
-    .then((s) => {
-      const licenses = Object.entries(s.licenses || {})
-        .sort((a, b) => b[1].tokens - a[1].tokens);
+    groups.forEach((corpora, branch) => {
+      const section = document.createElement('section'); section.className = 'tree-branch';
+      const heading = document.createElement('h2');
+      add(heading, 'span', '▾'); heading.append(`${branch}/`);
+      add(heading, 'b', compact(corpora.reduce((sum, corpus) => sum + corpus.tokens, 0)));
+      section.appendChild(heading);
+      corpora.forEach((corpus) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        if (corpus.path === selectedPath) button.className = 'active';
+        const names = document.createElement('span');
+        add(names, 'strong', corpus.title || corpus.name || corpus.path);
+        add(names, 'small', corpus.path.split('/').slice(1).join('/'));
+        button.appendChild(names); add(button, 'b', compact(corpus.tokens));
+        const share = document.createElement('i');
+        share.style.setProperty('--share', `${Math.max(1, corpus.tokens / status.tokens * 100)}%`);
+        button.appendChild(share);
+        button.addEventListener('click', () => { selectedPath = corpus.path; render(); renderDetail(corpus); });
+        section.appendChild(button);
+      });
+      tree.appendChild(section);
+    });
 
-      setStat('tokens', s.tokens, NUM, s.tokens.toLocaleString() + ' tokens');
-      setStat('docs', s.docs, NUM, s.docs.toLocaleString() + ' documents');
-      setStat('bytes', s.bytes, SIZE,
-        s.bytes.toLocaleString() + ' bytes across ' + s.shards + ' shard(s)');
-      setStat('licenses', licenses.length, null,
-        licenses.map(([name]) => name).join(', '));
+    if (!visible.length) add(tree, 'p', `No corpus matches “${query}”.`, 'empty-search');
+    const selected = status.corpora.find((corpus) => corpus.path === selectedPath) || visible[0] || status.corpora[0];
+    if (selected) renderDetail(selected);
+  };
 
-      // license → color for the spectrum bar (and the modal's mini-bar)
-      const licColor = {};
-      licenses.forEach(([name], i) => { licColor[name] = PALETTE[i % PALETTE.length]; });
-      const pctLabel = (p) => (p >= 10 ? String(Math.round(p)) : p >= 1 ? p.toFixed(1) : '<1');
-      const numFmt = (n) => {
-        const [v, u] = split(n, NUM);
-        return fmt(v, v) + u;
-      };
-      const sizeFmt = (n) => {
-        const [v, u] = split(n, SIZE);
-        return fmt(v, v) + u;
-      };
+  search.addEventListener('input', () => { query = search.value.trim(); render(); });
+  updateTotals(); render();
 
-      // Custom hover tooltip, shared (native title tips are too slow)
-      const tip = document.createElement('div');
-      tip.className = 'bar-tip';
-      document.body.appendChild(tip);
-      const attachTip = (host) => {
-        host.addEventListener('mousemove', (e) => {
-          const seg = e.target.closest('[data-tip-head]');
-          if (!seg) { tip.classList.remove('show'); return; }
-          tip.innerHTML = '';
-          const head = document.createElement('b');
-          head.textContent = seg.dataset.tipHead;
-          tip.append(head, seg.dataset.tipBody || '');
-          // clamp horizontally so the box slides inward at the viewport
-          // edges instead of getting cut off (content is set, so the
-          // measured width is its natural, un-squashed width)
-          const half = tip.offsetWidth / 2;
-          tip.style.left = Math.min(
-            Math.max(e.clientX, half + 10),
-            window.innerWidth - half - 10) + 'px';
-          tip.style.top = e.clientY + 'px';
-          tip.classList.add('show');
-        });
-        host.addEventListener('mouseleave', () => tip.classList.remove('show'));
-      };
-
-      const fillLicenseBar = (barEl, licEntries, total) => {
-        licEntries.forEach(([name, info]) => {
-          const p = pctLabel((info.tokens / total) * 100) + '%';
-          const seg = document.createElement('span');
-          seg.style.flexGrow = info.tokens;
-          seg.style.background = licColor[name] || '#58627a';
-          seg.dataset.tipHead = name;
-          seg.dataset.tipBody = p + ' · ' + info.tokens.toLocaleString() + ' tokens';
-          seg.setAttribute('aria-label', name + ' — ' + p);
-          barEl.appendChild(seg);
-        });
-      };
-
-      // ---- the corpus map: a treemap of the index tree ----
-      // The corpus IS a tree (core/…, science/…, post-train/…), so draw it
-      // as one: rectangles tiled edge to edge, area proportional to tokens,
-      // colored by top-level branch. A du(1) of the commons.
-      const map = statsBox.querySelector('[data-stat="map"]');
-      const corpora = (s.corpora || []).slice().sort((a, b) => b.tokens - a.tokens);
-      if (map && corpora.length && s.tokens > 0) {
-        const modal = document.querySelector('[data-stat="modal"]');
-        const list = statsBox.querySelector('[data-stat="list"]');
-        let modalReturnFocus = null;
-        // tiles wear their dominant license's color — the same palette as
-        // the spectrum bar above, so the bar doubles as the map's legend
-        const hexToRgb = (hex) => {
-          const n = parseInt(hex.slice(1), 16);
-          return (n >> 16) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255);
-        };
-        // the license with the most tokens; "mostly" only when it isn't
-        // the whole corpus
-        const dominantLicense = (c) => {
-          const ls = Object.entries(c.licenses || {})
-            .sort((a, b) => (b[1].tokens || 0) - (a[1].tokens || 0));
-          if (!ls.length) return null;
-          const total = ls.reduce((t, [, v]) => t + (v.tokens || 0), 0);
-          const sole = (ls[0][1].tokens || 0) === total;
-          return { name: ls[0][0], label: sole ? ls[0][0] : 'mostly ' + ls[0][0] };
-        };
-
-        // squarified treemap: lay rows along the shorter side, growing each
-        // row while it improves the worst tile aspect ratio
-        const squarify = (values, x, y, w, h) => {
-          const rects = [];
-          let items = values.slice();
-          while (items.length) {
-            const vertical = w < h;
-            const side = vertical ? w : h;
-            const worst = (row) => {
-              const sum = row.reduce((t, v) => t + v.a, 0);
-              const thick = sum / side;
-              return Math.max(...row.map((v) => {
-                const len = v.a / thick;
-                return Math.max(len / thick, thick / len);
-              }));
-            };
-            let row = [items[0]], rest = items.slice(1);
-            while (rest.length && worst(row.concat(rest[0])) <= worst(row)) {
-              row.push(rest[0]);
-              rest = rest.slice(1);
-            }
-            const thick = row.reduce((t, v) => t + v.a, 0) / side;
-            let off = 0;
-            row.forEach((v) => {
-              const len = v.a / thick;
-              rects.push(vertical
-                ? { v, x: x + off, y, w: len, h: thick }
-                : { v, x, y: y + off, w: thick, h: len });
-              off += len;
-            });
-            if (vertical) { y += thick; h -= thick; } else { x += thick; w -= thick; }
-            items = rest;
-          }
-          return rects;
-        };
-
-        const openModal = (c) => {
-          if (!modal) return;
-          const put = (key, fill) => {
-            const el = modal.querySelector(`[data-m="${key}"]`);
-            if (el) { el.innerHTML = ''; fill(el); }
-          };
-          put('path', (el) => { el.textContent = c.path; });
-          put('name', (el) => { el.textContent = c.title || c.name; });
-          put('desc', (el) => {
-            el.textContent = c.description || '';
-            el.hidden = !c.description;
-          });
-          put('stats', (el) => {
-            [[numFmt(c.tokens), 'tokens', c.tokens], [numFmt(c.docs), 'documents', c.docs],
-             [sizeFmt(c.bytes), 'of data', c.bytes], [String(c.shards), 'shards', c.shards]]
-              .forEach(([n, l, exact]) => {
-                const d = document.createElement('div');
-                d.title = exact.toLocaleString();
-                d.innerHTML = '<div class="n"></div><div class="l"></div>';
-                d.querySelector('.n').textContent = n;
-                d.querySelector('.l').textContent = l;
-                el.appendChild(d);
-              });
-          });
-          const licEntries = Object.entries(c.licenses || {})
-            .sort((a, b) => (b[1].tokens || 0) - (a[1].tokens || 0));
-          put('bar', (el) => { fillLicenseBar(el, licEntries, c.tokens); attachTip(el); });
-          put('lics', (el) => {
-            licEntries.forEach(([name, info]) => {
-              const chip = document.createElement('span');
-              const dot = document.createElement('i');
-              dot.style.background = licColor[name] || '#58627a';
-              chip.append(dot, name + ' ' + pctLabel((info.tokens / c.tokens) * 100) + '%');
-              el.appendChild(chip);
-            });
-          });
-          put('sources', (el) => {
-            (c.sources || []).forEach((src) => {
-              const d = document.createElement('div');
-              d.className = 'src';
-              if (src.url) {
-                const a = document.createElement('a');
-                a.href = src.url;
-                a.textContent = src.name || src.url;
-                d.appendChild(a);
-              } else {
-                d.textContent = src.name || '';
-              }
-              const rest = [src.origin, src.version].filter(Boolean).join(' · ');
-              if (rest) d.append(' — ' + rest);
-              el.appendChild(d);
-            });
-            if (c.converted_by) {
-              const d = document.createElement('div');
-              d.className = 'src';
-              d.textContent = 'converted by ' + c.converted_by;
-              el.appendChild(d);
-            }
-          });
-          modal.hidden = false;
-          document.body.style.overflow = 'hidden';
-          modalReturnFocus = document.activeElement;
-          modal.querySelector('.corpus-modal-close')?.focus();
-        };
-        const closeModal = () => {
-          if (modal && !modal.hidden) {
-            modal.hidden = true;
-            document.body.style.overflow = '';
-            modalReturnFocus?.focus();
-          }
-        };
-        if (modal) {
-          modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.closest('.corpus-modal-close')) closeModal();
-          });
-          document.addEventListener('keydown', (e) => {
-            if (modal.hidden) return;
-            if (e.key === 'Escape') closeModal();
-            if (e.key === 'Tab') {
-              const focusable = [...modal.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])')]
-                .filter((el) => !el.hidden && el.offsetParent !== null);
-              if (!focusable.length) return;
-              const first = focusable[0], last = focusable[focusable.length - 1];
-              if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault(); last.focus();
-              } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault(); first.focus();
-              }
-            }
-          });
-        }
-
-        let firstBuild = true;
-        const buildMap = () => {
-          map.innerHTML = '';
-          const W = map.clientWidth;
-          if (!W) return;
-          const H = Math.max(280, Math.min(460, Math.round(W * 0.4)));
-          map.style.height = H + 'px';
-          // honest areas, with a visibility floor: every corpus gets at
-          // least ~0.6% of the map so the long tail never vanishes; floored
-          // tiles say so in their tooltip
-          const area = W * H;
-          const floorA = area * 0.006;
-          let raw = corpora.map((c) => (c.tokens / s.tokens) * area);
-          raw = raw.map((a) => Math.max(a, floorA));
-          const k = area / raw.reduce((t2, a) => t2 + a, 0);
-          const values = corpora.map((c, i) => ({
-            c, a: raw[i] * k,
-            floored: (c.tokens / s.tokens) * area < floorA,
-          }));
-          squarify(values, 0, 0, W, H).forEach(({ v, x, y, w, h }, i) => {
-            const c = v.c;
-            const disp = c.title || c.name;
-            const dom = dominantLicense(c);
-            const el = document.createElement('div');
-            el.className = 'tile';
-            el.style.left = (x + 1) + 'px';
-            el.style.top = (y + 1) + 'px';
-            el.style.width = Math.max(3, w - 2) + 'px';
-            el.style.height = Math.max(3, h - 2) + 'px';
-            el.style.setProperty('--tint', hexToRgb((dom && licColor[dom.name]) || '#58627a'));
-            el.style.setProperty('--in-delay', (firstBuild ? i * 0.035 : 0) + 's');
-            if (w > 30 && h > 17) {
-              // name scales with the box: as big as fits the width (mono
-              // chars are ~0.62em wide), capped by height and at 34px
-              const nameSize = Math.max(8, Math.min(
-                22, (w - 18) / (disp.length * 0.9), h * 0.16));
-              const subSize = Math.max(9, Math.min(13, nameSize * 0.55));
-              const label = document.createElement('b');
-              label.textContent = disp;
-              label.style.fontSize = nameSize + 'px';
-              el.appendChild(label);
-              const addSub = (text) => {
-                const sub = document.createElement('small');
-                sub.textContent = text;
-                sub.style.fontSize = subSize + 'px';
-                sub.style.lineHeight = '1.5';
-                el.appendChild(sub);
-              };
-              if (c.description && h > 170 && w > 260) {
-                const d = document.createElement('span');
-                d.className = 'tile-desc';
-                d.textContent = c.description;
-                d.style.fontSize = Math.max(10, subSize) + 'px';
-                el.appendChild(d);
-              }
-              if (h > 54 && w > 90) addSub(numFmt(c.tokens) + ' tokens');
-              if (h > 140 && w > 190) {
-                addSub(numFmt(c.docs) + ' docs · ' + sizeFmt(c.bytes));
-                if (dom) addSub(dom.label);
-              }
-            }
-            el.dataset.tipHead = disp;
-            const shortDesc = (c.description || '').length > 110
-              ? c.description.slice(0, 109).trimEnd() + '…' : (c.description || '');
-            el.dataset.tipBody = (shortDesc ? shortDesc + '\n' : '') +
-              c.path + '\n' +
-              numFmt(c.tokens) + ' tokens · ' + numFmt(c.docs) +
-              ' docs · ' + sizeFmt(c.bytes) +
-              (dom ? '\n' + dom.label : '') +
-              (v.floored ? '\n(tile enlarged to stay visible)' : '') +
-              '\nclick for details';
-            el.setAttribute('role', 'button');
-            el.setAttribute('tabindex', '0');
-            el.setAttribute('aria-label', disp + ' — ' + numFmt(c.tokens) + ' tokens');
-            const open = () => openModal(c);
-            el.addEventListener('click', open);
-            el.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-            });
-            map.appendChild(el);
-          });
-          firstBuild = false;
-        };
-
-        buildMap();
-        attachTip(map);
-        if (list) {
-          list.innerHTML = '';
-          corpora.slice(0, 7).forEach((c) => {
-            const button = document.createElement('button');
-            button.type = 'button';
-            const name = document.createElement('strong');
-            name.textContent = c.title || c.name;
-            const path = document.createElement('small');
-            path.textContent = c.path;
-            const count = document.createElement('span');
-            count.className = 'corpus-list-count';
-            count.textContent = numFmt(c.tokens) + ' tokens';
-            button.append(name, path, count);
-            button.addEventListener('click', () => openModal(c));
-            list.appendChild(button);
-          });
-        }
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(buildMap, 150);
-        });
-      }
-
-      const note = statsBox.querySelector('[data-stat="note"]');
-      if (note) {
-        const when = (s.generated || '').slice(0, 10);
-        note.textContent = (s.index_commit ? 'waldo-index@' + s.index_commit : 'the public index') +
-          (when ? ' · ' + when : '') + ' · verifiable shard by shard ↗';
-      }
-
-      if (!reduced && pending.length) {
-        const io2 = new IntersectionObserver((entries) => {
-          if (entries.some((e) => e.isIntersecting)) { io2.disconnect(); runCountUp(); }
-        }, { threshold: 0.35 });
-        io2.observe(statsBox);
-      }
+  fetch('https://openwaldo.github.io/waldo-index/status.json')
+    .then((response) => { if (!response.ok) throw new Error('status unavailable'); return response.json(); })
+    .then((liveStatus) => {
+      if (!liveStatus || !Array.isArray(liveStatus.corpora)) throw new Error('invalid status');
+      status = liveStatus;
+      feedState.textContent = 'Live public index';
+      feedDot.className = 'live-dot';
+      updateTotals(); render();
     })
     .catch(() => {
-      statsBox.classList.add('stats-unavailable');
-      const note = statsBox.querySelector('[data-stat="note"]');
-      if (note) {
-        note.textContent = 'Live index statistics are temporarily unavailable · open the public index ↗';
-      }
-      statsBox.querySelectorAll('.count-stat .v').forEach((value) => {
-        value.textContent = '—';
-      });
-      const map = statsBox.querySelector('[data-stat="map"]');
-      if (map) {
-        map.classList.add('map-unavailable');
-        map.textContent = 'The corpus map will return with the live index feed.';
-      }
-      const list = statsBox.querySelector('[data-stat="list"]');
-      if (list) list.textContent = 'Live corpus details are temporarily unavailable.';
+      feedState.textContent = 'Verified local snapshot';
+      feedDot.className = 'snapshot-dot';
     });
-}
+})();
+
+// Keep the homepage corpus record live from the same public status feed as
+// the explorer. The HTML remains a complete verified snapshot if the feed is
+// unavailable, so a network failure never leaves an empty or broken section.
+(() => {
+  const total = document.querySelector('[data-home-total]');
+  if (!total) return;
+
+  const compact = (number) => {
+    if (number >= 1e9) return `${(number / 1e9).toFixed(number >= 1e11 ? 1 : 2)}`;
+    if (number >= 1e6) return `${(number / 1e6).toFixed(1)}M`;
+    return number.toLocaleString();
+  };
+  const set = (selector, value) => {
+    const node = document.querySelector(selector);
+    if (node) node.textContent = value;
+  };
+  const dateLabel = (value) => {
+    const date = new Date(value);
+    return Number.isNaN(date.valueOf())
+      ? 'Live public index'
+      : `Live public index · ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  };
+
+  fetch('https://openwaldo.github.io/waldo-index/status.json')
+    .then((response) => { if (!response.ok) throw new Error('status unavailable'); return response.json(); })
+    .then((status) => {
+      if (!status || !Array.isArray(status.corpora) || !status.tokens) throw new Error('invalid status');
+      total.textContent = compact(status.tokens);
+      set('[data-home-docs]', compact(status.docs));
+      set('[data-home-corpora]', status.corpora.length.toLocaleString());
+      set('[data-home-shards]', Number(status.shards || 0).toLocaleString());
+      set('[data-home-licenses]', Object.keys(status.licenses || {}).length.toLocaleString());
+      set('[data-home-feed]', dateLabel(status.generated));
+
+      const branches = new Map();
+      status.corpora.forEach((corpus) => {
+        const branch = corpus.path.split('/')[0];
+        branches.set(branch, (branches.get(branch) || 0) + Number(corpus.tokens || 0));
+      });
+      document.querySelectorAll('[data-branch]').forEach((node) => {
+        const tokens = branches.get(node.dataset.branch) || 0;
+        const share = tokens / status.tokens * 100;
+        node.style.setProperty('--branch-width', `${Math.max(share, .1)}%`);
+        node.title = `${tokens.toLocaleString()} reference tokens`;
+        const label = node.querySelector('b');
+        if (label) label.textContent = `${share < .1 ? '<0.1' : share.toFixed(1)}%`;
+      });
+    })
+    .catch(() => {});
+})();

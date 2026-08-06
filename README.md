@@ -9,30 +9,32 @@ Plain static HTML/CSS, no build step, no external dependencies. Served by
 GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 `.nojekyll` disables Jekyll processing).
 
-## Layout
+## Primary site
 
 ```
-index.html          home — the thesis, live corpus counter, WALDO checklist
-how.html            the machinery: index, lookaside, CLI, license bar, ladder, examples
-community.html      how to contribute, the roles, who's here, sponsors, badges
-about.html          the case for open source AI, how the project runs, the founder
-faq.html            questions answered, grouped by audience
-404.html            not in the index
-assets/style.css    the one shared stylesheet
-assets/main.js      nav toggle, scroll reveal, hero glimmer, corpus counter
-assets/favicon.svg  the stripes
-assets/badges/      the Open Source AI — OpenWALDO badges
+index.html          project thesis and live corpus record
+corpus.html         live, searchable corpus explorer
+using.html          model lifecycle and current implementation boundaries
+contributing.html   corpus contribution workflow
+posts/              generated Markdown archive and individual posts
+about.html          project purpose and principles
+assets/style.css    primary visual system
+assets/main.js      corpus feed, explorer, and shared accessibility
 ```
+
+The detailed walkthroughs and FAQ remain at their established URLs. They use
+`assets/legacy.css` and `assets/legacy.js` until their content is folded into
+the primary site. Keeping them separate prevents the production documentation
+from breaking during the visual migration.
 
 ## The corpus counter
 
-The front page's stats strip (tokens, documents, size, licenses) loads live
+The front page corpus record and the corpus explorer load live
 from the status feed the index repo publishes:
 `https://openwaldo.github.io/waldo-index/status.json`. Nothing in this repo
-generates or stores those numbers — they update whenever the index does. The
-feed records the index commit and generation date, which the strip displays
-as its provenance chip; the numbers count up on scroll, and the license
-spectrum bar shows each license's share of tokens (hover for exact counts).
+generates those numbers — they update whenever the index does. Both pages ship
+with a complete local snapshot, so the corpus remains useful if the live feed
+is temporarily unavailable.
 
 ## Posts
 
