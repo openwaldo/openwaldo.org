@@ -379,11 +379,12 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 :root {
   --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
-  --ink: #18201d;
+  --ink: #18211e;
   --paper: #f4f1e8;
   --cream: #e9e4d8;
   --white: #fbfaf6;
-  --red: #e4573f;
+  --red: #d9634f;
+  --cta: #e4573f;
   --red-dark: #bd3e2c;
   --muted: #616760;
   --line: rgba(24, 32, 29, .2);
@@ -413,7 +414,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 
 .button { min-height: 46px; padding: 0 18px; gap: 22px; border-width: 1px; font-family: var(--font-mono); font-size: 10px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
 .button:hover { transform: translateY(-1px); }
-.button.primary { color: var(--white); }
+.button.primary { border-color: var(--cta); background: var(--cta); color: var(--white); }
 .text-action { font-family: var(--font-mono); font-size: 10px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
 
 .hero-shell { min-height: 780px; padding-top: 144px; background: var(--ink); }
