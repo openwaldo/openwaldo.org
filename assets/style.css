@@ -95,7 +95,7 @@ em { font-family: Georgia, serif; font-weight: 400; }
 /* Manifesto */
 .manifesto { background: var(--red); padding: 150px 0; }
 .manifesto-grid { display: grid; grid-template-columns: 1.18fr .82fr; gap: 8vw; }
-.manifesto-title { position: sticky; top: 60px; align-self: start; }
+.manifesto-title { align-self: start; }
 .manifesto-title .light { color: rgba(16,16,15,.55); }
 .manifesto h2 { font-size: clamp(52px, 6.6vw, 98px); }
 .manifesto h2 em { color: var(--paper); }
@@ -104,17 +104,6 @@ em { font-family: Georgia, serif; font-weight: 400; }
 .manifesto-points span { font: 650 11px var(--font-mono), monospace; }
 .manifesto-points h3 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
 .manifesto-points p { grid-column: 2; max-width: 380px; margin: 10px 0 0; line-height: 1.55; }
-
-/* chain */
-.chain-section { background: var(--white); }
-.provenance-chain { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--ink); }
-.provenance-chain li { min-height: 250px; padding: 22px; display: flex; flex-direction: column; border-right: 1px solid var(--ink); position: relative; }
-.provenance-chain li:last-child { border: 0; background: var(--ink); color: var(--paper); }
-.provenance-chain li:not(:last-child)::after { content: "→"; position: absolute; z-index: 1; right: -14px; top: 50%; transform: translateY(-50%); background: var(--white); padding: 5px; font-family: var(--font-mono); }
-.provenance-chain span { font: 600 10px var(--font-mono), monospace; color: var(--muted); }
-.provenance-chain strong { margin-top: auto; font-size: 25px; letter-spacing: -.045em; }
-.provenance-chain small { margin-top: 9px; min-height: 36px; font-size: 12px; line-height: 1.45; color: var(--muted); }
-.provenance-chain li:last-child small { color: rgba(242,238,228,.55); }
 
 /* doors */
 .doors { background: var(--cream); }
@@ -324,11 +313,9 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
   .corpus-pulse { grid-template-columns: 1fr; }
   .corpus-total { border-right: 0; border-bottom: 1px solid var(--line); }
   .branch-map { padding-left: 0; }
-  .manifesto-title { position: static; }
-  .provenance-chain, .ingest-steps { grid-template-columns: 1fr; }
-  .provenance-chain li, .ingest-steps li { min-height: 150px; border-right: 0; border-bottom: 0; }
-  .provenance-chain li:last-child, .ingest-steps li:last-child { border: 1px solid var(--ink); }
-  .provenance-chain li:not(:last-child)::after { content: "↓"; top: auto; bottom: -14px; right: 24px; transform: none; }
+  .ingest-steps { grid-template-columns: 1fr; }
+  .ingest-steps li { min-height: 150px; border-right: 0; border-bottom: 0; }
+  .ingest-steps li:last-child { border: 1px solid var(--ink); }
   .door-grid, .start-grid, .input-grid, .separation-grid { grid-template-columns: 1fr; }
   .door-card { min-height: 500px; }
   .page-intro { min-height: 780px; }
@@ -460,7 +447,6 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .corpus-meta span { font-weight: 400; }
 
 .manifesto { padding: 112px 0; background: #23302b; color: var(--paper); }
-.manifesto-title { top: 36px; }
 .manifesto-title .light { color: rgba(244,241,232,.55); }
 .manifesto h2 { max-width: 700px; font-size: clamp(43px, 5.2vw, 68px); }
 .manifesto h2 em { color: var(--red); }
@@ -469,11 +455,6 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .manifesto-points article:last-child { border-color: rgba(244,241,232,.2); }
 .manifesto-points h3 { font-size: 21px; font-weight: 500; letter-spacing: -.025em; }
 .manifesto-points p { color: rgba(244,241,232,.62); }
-
-.provenance-chain { border-color: var(--line); }
-.provenance-chain li { min-height: 210px; border-color: var(--line); }
-.provenance-chain li:not(:last-child)::after { color: var(--red); }
-.provenance-chain strong { font-size: 21px; font-weight: 500; letter-spacing: -.02em; }
 
 .doors { background: var(--cream); }
 .door-grid { gap: 16px; }
@@ -749,7 +730,6 @@ code { font-size: 10px; }
   .evidence-model-grid { grid-template-columns: 1fr; }
   .evidence-model-grid article { min-height: 240px; border-right: 0; border-bottom: 1px solid rgba(24,32,29,.3); }
   .evidence-model-grid article:last-child { border-bottom: 0; }
-  .manifesto-title { position: static; }
   .principles-grid { grid-template-columns: 1fr 1fr; }
   .accountability-grid { grid-template-columns: 1fr 1fr; }
   .accountability-grid article:nth-child(2) { border-right: 0; }
