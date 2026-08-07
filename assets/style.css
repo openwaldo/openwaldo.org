@@ -447,7 +447,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-object { min-height: 390px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); }
 .hero-object::after { content: "PROVENANCE / 001"; top: 30px; right: 30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; font: 400 9px var(--font-mono); letter-spacing: .1em; color: rgba(244,241,232,.45); }
 .hero-object .provenance-mark { width: 36px; height: 52px; filter: none; }
-.hero-object p { margin-bottom: 10px; font-size: 24px; font-weight: 500; letter-spacing: .07em; }
+.hero-object p { margin-bottom: 10px; font-size: 21px; font-weight: 500; letter-spacing: .07em; }
 .hero-object p b { color: var(--red); font-weight: 700; }
 .hero-object strong { font-size: clamp(47px, 4.4vw, 62px); line-height: .88; letter-spacing: -.055em; font-weight: 600; color: var(--paper); }
 .hero-object > span { font-weight: 400; }
