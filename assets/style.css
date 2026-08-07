@@ -413,7 +413,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 
 .site-header { position: absolute; color: var(--paper); border-color: rgba(244,241,232,.22); }
 .nav-shell { height: 76px; }
-.brand { gap: 10px; font-size: 16px; letter-spacing: -.015em; }
+.brand { gap: 10px; font-size: 18px; letter-spacing: -.015em; }
 .brand strong { font-weight: 600; }
 .provenance-mark { width: 22px; height: 31px; }
 .site-header nav { gap: 26px; font-family: var(--font-mono); font-size: 13px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
@@ -646,9 +646,9 @@ code { font-size: 10px; }
 .origin-grid h2 em { color: var(--red); }
 .origin-story > p { margin: 0 0 28px; color: var(--muted); font-size: 17px; line-height: 1.72; }
 .origin-quote { margin: 38px 0; }
-.origin-story blockquote { margin: 0; padding: 8px 0 8px 26px; border-left: 3px solid var(--red); font-size: clamp(19px, 1.65vw, 23px); line-height: 1.5; letter-spacing: -.015em; }
+.origin-story blockquote { margin: 0; padding: 8px 0 8px 26px; border-left: 3px solid var(--red); font-size: clamp(20px, 1.75vw, 25px); line-height: 1.5; letter-spacing: -.015em; }
 .origin-quote figcaption { display: flex; align-items: center; gap: 14px; margin: 22px 0 0 29px; }
-.origin-quote figcaption img { width: 58px; aspect-ratio: 1; object-fit: cover; border-top: 4px solid var(--red); filter: saturate(.82) contrast(1.03); }
+.origin-quote figcaption img { width: 66px; aspect-ratio: 1; object-fit: cover; border-top: 4px solid var(--red); filter: saturate(.82) contrast(1.03); }
 .origin-quote figcaption span { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font: 400 9px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
 .origin-quote figcaption strong { color: var(--ink); font-weight: 400; }
 .origin-story .text-action { margin-top: 10px; }
@@ -1039,7 +1039,7 @@ code { font-size: 10px; }
   .post .post-meta > div:nth-child(odd) { padding-left: 0; border-left: 0; }
   .post .post-meta > div:last-child:nth-child(odd) { width: 100%; }
   .post-body p, .post-body li { font-size: 14.5px; }
-  .origin-story blockquote { padding-left: 18px; font-size: 18px; }
+  .origin-story blockquote { padding-left: 18px; font-size: 19px; }
   .origin-quote figcaption { margin-left: 21px; }
   .not-found-copy h1 { font-size: clamp(53px, 15vw, 68px); }
   .not-found-copy > p:not(.kicker) { margin-top: 28px; font-size: 15px; }
