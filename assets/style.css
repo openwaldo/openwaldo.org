@@ -413,7 +413,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 
 .site-header { position: absolute; color: var(--paper); border-color: rgba(244,241,232,.22); }
 .nav-shell { height: 76px; }
-.brand { gap: 10px; font-size: 18px; letter-spacing: -.015em; }
+.brand { gap: 10px; font-size: 21px; letter-spacing: -.015em; }
 .brand strong { font-weight: 600; }
 .provenance-mark { width: 22px; height: 31px; }
 .site-header nav { gap: 26px; font-family: var(--font-mono); font-size: 13px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
