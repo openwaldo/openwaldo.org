@@ -330,6 +330,10 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .footer-bottom { min-height: 80px; padding-top: 26px; border-top: 1px solid rgba(242,238,228,.2); display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: start; }
 .footer-bottom > div { display: flex; gap: 24px; justify-content: center; font-size: 12px; }
 .footer-bottom p { margin: 0; text-align: right; color: rgba(242,238,228,.45); font: 500 10px var(--font-mono), monospace; text-transform: uppercase; }
+.footer-project-links { display: flex; flex-wrap: wrap; justify-content: flex-end !important; gap: 8px !important; }
+.site-footer .footer-project-links a { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(244,241,232,.28); color: rgba(244,241,232,.72); }
+.site-footer .footer-project-links svg { width: 14px; height: 14px; fill: currentColor; }
+.site-footer .footer-project-links a:hover { border-color: var(--red); background: var(--red); color: var(--paper); }
 
 /* Focus */
 :focus-visible { outline: 3px solid #67b9ff; outline-offset: 4px; }
@@ -385,7 +389,7 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
   .run-rail li { grid-template-columns: 42px 1fr; }.run-rail li div { grid-template-columns: 1fr; gap: 10px; }.run-rail p { grid-column: 1; }
   .reality-grid > div:first-child h2, .join-grid h2 { font-size: 55px; }
   .ingest-steps li { min-height: 180px; }.separation-grid article { min-height: 450px; padding: 30px; }
-  .footer-top { padding-bottom: 65px; }.footer-top h2 { font-size: 56px; }.footer-bottom { grid-template-columns: 1fr; gap: 28px; }.footer-bottom > div { justify-content: flex-start; flex-wrap: wrap; }.footer-bottom p { text-align: left; }
+  .footer-top { padding-bottom: 65px; }.footer-top h2 { font-size: 56px; }.footer-bottom { grid-template-columns: 1fr; gap: 28px; }.footer-bottom > div { justify-content: flex-start; flex-wrap: wrap; }.footer-bottom p { text-align: left; }.footer-project-links { justify-content: flex-start !important; }
 }
 
 /* --------------------------------------------------------------------------
