@@ -13,7 +13,7 @@ GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 
 ```
 index.html          project thesis and live corpus record
-corpus.html         live, searchable corpus explorer
+corpus.html         accountability, evidence, and the live corpus record
 training.html       model lifecycle and current implementation boundaries
 contributing.html   corpus contribution workflow
 posts/              generated Markdown archive and individual posts
@@ -22,10 +22,10 @@ assets/style.css    primary visual system
 assets/main.js      corpus feed, explorer, and shared accessibility
 ```
 
-The detailed walkthroughs and FAQ remain at their established URLs. They use
-`assets/legacy.css` and `assets/legacy.js` until their content is folded into
-the primary site. Keeping them separate prevents the production documentation
-from breaking during the visual migration.
+The primary pages use one shared visual system in `assets/style.css` and one
+shared behavior layer in `assets/main.js`. Detailed implementation guidance
+lives with the WALDO code and index repositories so it can evolve with the
+software.
 
 ## The corpus counter
 
@@ -65,9 +65,8 @@ $ python3 -m http.server -d . 8080
 # → http://localhost:8080
 ```
 
-Preview through the server, not `file://` — `404.html` uses absolute asset
-paths (GitHub Pages serves it for missing URLs at any depth), so opening it
-as a file renders unstyled.
+Preview through the server, not `file://`, so dynamic corpus and post behavior
+matches production.
 
 The `www.openwaldo.org` repo holds the redirect from www to the apex domain.
 

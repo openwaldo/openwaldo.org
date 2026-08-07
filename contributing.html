@@ -1,30 +1,398 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Contribute Data — OpenWALDO</title><meta name="description" content="Turn large source collections into attributable, inspectable OpenWALDO index contributions."><meta property="og:site_name" content="OpenWALDO"><meta property="og:type" content="website"><meta property="og:title" content="Contributing — OpenWALDO"><meta property="og:description" content="Turn large source collections into attributable, inspectable OpenWALDO index contributions."><meta property="og:url" content="https://openwaldo.org/contributing.html"><meta property="og:image" content="https://openwaldo.org/assets/og-v2.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://openwaldo.org/contributing.html"><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/style.css"></head>
-<body>
-<header class="site-header"><div class="shell nav-shell"><a class="brand" href="index.html" aria-label="OpenWALDO home"><img class="provenance-mark" src="assets/mark.svg" alt=""><span>Open<strong>WALDO</strong></span></a><nav aria-label="Primary navigation"><a href="index.html">Index</a><a href="corpus.html">Corpus</a><a href="training.html">Training</a><a href="community.html">Community</a><a href="posts/">Posts</a><a href="about.html">About</a></nav></div></header>
-<main>
-  <section class="page-intro"><div class="shell page-intro-grid"><div><p class="kicker light">Grow the public commons</p><h1>If the source matters,<br><em>put it on</em><br><em>the record.</em></h1></div><div class="page-intro-side"><span>03 / CONTRIBUTE</span><p>WALDO turns acquired source material into large canonical, audited shards and a compact Git review record. The bytes stay out of Git. The meaning and accountability stay in public review.</p><a class="button primary" href="#how-to-contribute">See how to contribute <span>↓</span></a></div></div></section>
-  <section class="section contribution-guide" id="how-to-contribute"><div class="shell">
-    <div class="section-head split-head"><div><p class="kicker">How to contribute</p><h2>Bring knowledge.<br>Put it on the record.</h2></div><p>A contribution starts with a corpus and ends with an accountable pull request. Large collections are welcome—the bigger, the better—provided their origin and asserted redistribution terms can be recorded and reviewed.</p></div>
-    <ol class="contribution-flow">
-      <li><span>01</span><div><h3>Obtain or build a corpus.</h3><p>Acquire eligible material from an upstream source, or assemble material you or your organization can contribute. A company might gather its public documentation, product information, and service portfolio so future AI models can learn from an authoritative source.</p></div><div class="flow-note"><b>YOU BRING</b><strong>Raw source material with a clear origin and asserted terms.</strong></div></li>
-      <li><span>02</span><div><h3>Choose files or a recipe.</h3><p>If the material is already local, point WALDO at its directory. If it must be fetched or assembled, use a reviewed ingest recipe that declares the metadata and runs the acquisition steps in a controlled temporary workspace. The destination is a directory inside your local <span class="flow-inline">waldo-index</span> checkout.</p></div><div class="flow-commands"><code>waldo index ingest &lt;raw-source-directory&gt; &lt;path-in-waldo-index&gt; [flags]</code><code>waldo index ingest &lt;recipe.yaml&gt; &lt;path-in-waldo-index&gt; [flags]</code></div></li>
-      <li><span>03</span><div><h3>Let WALDO ingest it.</h3><p>WALDO probes the input, converts it into canonical Parquet shards, audits the records and totals, uploads the content-addressed objects to the lookaside store configured on your machine, and verifies the published bytes.</p></div><div class="flow-note"><b>WALDO WRITES</b><strong>Canonical Parquet in lookaside storage—no large data objects in Git.</strong></div></li>
-      <li><span>04</span><div><h3>Inspect the index record.</h3><p>WALDO writes the contribution overlay into your index checkout. It contains the corpus description, sources, asserted licenses, conversion identity, counts, hashes, and public links to the lookaside objects.</p></div><div class="flow-note"><b>GIT RECORDS</b><strong>The reviewable meaning, inventory, evidence, and object references.</strong></div></li>
-      <li><span>05</span><div><h3>Sign, commit, and open a pull request.</h3><p>Review the generated diff, commit it with DCO sign-off, push your branch, and open a pull request. Maintainers and the community can then inspect the claims, run the checks, question the evidence, and improve the contribution.</p></div><div class="flow-commands"><code>git add .</code><code>git commit -s -m "Add &lt;corpus name&gt;"</code></div></li>
-    </ol>
-    <div class="section-action"><a class="button primary" href="walkthrough-contributing.html">Follow the complete walkthrough <span>↗</span></a><a class="button paper-button" href="https://github.com/openwaldo/waldo-index">Open the public index <span>↗</span></a></div>
-  </div></section>
-  <section class="section ingest-section"><div class="shell"><p class="kicker light">Review and accountability</p><h2>Review the corpus.<br> Strengthen the provenance.</h2><div class="ingest-accountability"><span>DCO ACCOUNTABILITY</span><strong>Every contribution must carry an accountable sign-off.</strong><p>The DCO attaches a contributor’s certification to the public Git history. It does not prove that every claim is correct; it makes the contributor and attestation visible so both can be reviewed and challenged.</p></div><ol class="ingest-steps"><li><span>01</span><div><h3>Understand</h3><p>Inspect what was submitted and confirm that its detected content and schema match the proposed corpus.</p></div></li><li><span>02</span><div><h3>Standardize</h3><p>Convert the material into tokenizer-neutral canonical Parquet with a recorded conversion identity.</p></div></li><li><span>03</span><div><h3>Verify</h3><p>Reopen every shard and validate its schema, records, hashes, and exact aggregate totals.</p></div></li><li><span>04</span><div><h3>Confirm</h3><p>Prove that each content-addressed object is available from lookaside storage and matches the published record.</p></div></li><li><span>05</span><div><h3>Challenge</h3><p>Examine the source and license assertions, conversion identity, counts, object inventory, DCO sign-off, and public diff.</p></div></li></ol><div class="truth-note"><strong>A strong corpus is built through accountable review.</strong><p>Automation can prove structure, identity, integrity, totals, and availability. Named contributors and human reviewers still have to evaluate usefulness, examine source evidence, challenge rights assertions, and improve the provenance record.</p></div></div></section>
-  <section class="section review-section"><div class="shell"><div class="section-head split-head"><div><p class="kicker">The public record</p><h2>Bytes over here.<br>Meaning over here.</h2></div><p>This separation keeps large objects efficient without hiding the facts reviewers need to understand what entered the commons.</p></div><div class="separation-grid"><article class="git-side"><span>GIT / REVIEWABLE</span><h3>Meaning</h3><ul><li>Corpus description</li><li>Sources and asserted licenses</li><li>Conversion identity</li><li>Counts and shard hashes</li><li>Index navigation</li></ul></article><article class="lookaside-side"><span>LOOKASIDE / CONTENT-ADDRESSED</span><h3>Canonical bytes</h3><ul><li>Self-contained Parquet</li><li>SHA-256 object identity</li><li>No loose media</li><li>No hidden catalogs</li><li>No metadata sidecars</li></ul></article></div></div></section>
-  <section class="section dco-section" id="dco"><div class="shell">
-    <div class="section-head split-head"><div><p class="kicker">Accountability at scale</p><h2>Sign the contribution.<br>Stand behind the claim.</h2></div><div><p>The Developer Certificate of Origin (DCO) is a lightweight accountability mechanism proven across open-source software. A sign-off connects each submitted change to a contributor who certifies that they created it—or otherwise have the right to submit it under the project’s license—and understands that the contribution is public.</p><div class="section-action"><a class="button primary" href="https://developercertificate.org/">Read the DCO <span>↗</span></a></div></div></div>
-    <div class="dco-grid"><article><span>01 / IDENTIFY</span><h3>Identify the contributor.</h3><p><code>git commit -s</code> adds a <code>Signed-off-by</code> trailer using the contributor’s Git identity.</p></article><article><span>02 / ATTEST</span><h3>Make responsibility explicit.</h3><p>The sign-off records the contributor’s certification instead of leaving provenance as an anonymous upload or an implied promise.</p></article><article><span>03 / PRESERVE</span><h3>Keep the record public.</h3><p>The commit, sign-off, review, automated checks, corrections, and history remain together in the shared index.</p></article></div>
-    <div class="dco-limit"><strong>Accountability is evidence—not magic.</strong><p>A DCO sign-off does not independently prove that an asserted corpus license is correct or that every underlying document can legally be redistributed. It makes the contribution attributable, explicit, reviewable, and challengeable.</p></div>
-  </div></section>
-  <section class="section join-section"><div class="shell join-grid"><div><p class="kicker light">Make the source better</p><h2>Contribute data.<br>Review claims.<br>Build the tool.</h2></div><div><p>WALDO is open infrastructure, not a data vending machine. The commons gets stronger through attributable contribution and skeptical review.</p><div class="actions"><a class="button primary" href="walkthrough-contributing.html">Follow the contribution walkthrough <span>↗</span></a><a class="button inverse" href="https://github.com/openwaldo">OpenWALDO on GitHub <span>↗</span></a><a class="button inverse" href="community.html">Join the AI community <span>↗</span></a></div></div></div></section>
-</main>
-<footer class="site-footer"><div class="shell footer-top community-footer"><div><p class="kicker light">WALDO is the AI community.</p><h2>Build it together.</h2></div><div class="footer-actions"><a class="button primary" href="community.html#join">Join the community <span>↗</span></a><a class="button inverse" href="community.html#corpus">Participate in the corpus <span>↗</span></a><a class="button inverse" href="community.html#spread">Spread the word <span>↗</span></a></div></div><div class="shell footer-bottom"><a class="brand" href="index.html"><img class="provenance-mark" src="assets/mark.svg" alt=""><span>Open<strong>WALDO</strong></span></a><div><a href="index.html">Index</a><a href="corpus.html">Corpus</a><a href="training.html">Training</a><a href="contributing.html">Contributing</a><a href="posts/">Posts</a><a href="about.html">About</a><a href="community.html">Community</a><a href="faq.html">FAQ</a></div><p>Open source. Community governed.</p></div></footer>
-<script src="assets/main.js"></script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contribute Data — OpenWALDO</title>
+    <meta
+      name="description"
+      content="Turn large source collections into attributable, inspectable OpenWALDO index contributions."
+    />
+    <meta property="og:site_name" content="OpenWALDO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contributing — OpenWALDO" />
+    <meta
+      property="og:description"
+      content="Turn large source collections into attributable, inspectable OpenWALDO index contributions."
+    />
+    <meta property="og:url" content="https://openwaldo.org/contributing.html" />
+    <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openwaldo.org/contributing.html" />
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav-shell">
+        <a class="brand" href="index.html" aria-label="OpenWALDO home"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <nav aria-label="Primary navigation">
+          <a href="index.html">Index</a><a href="corpus.html">Corpus</a
+          ><a href="training.html">Training</a><a href="community.html">Community</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-intro">
+        <div class="shell page-intro-grid">
+          <div>
+            <p class="kicker light">Grow the public commons</p>
+            <h1>If the source matters,<br /><em>put it on</em><br /><em>the record.</em></h1>
+          </div>
+          <div class="page-intro-side">
+            <span>03 / CONTRIBUTE</span>
+            <p>
+              WALDO turns acquired source material into large canonical, audited shards and a
+              compact Git review record. The bytes stay out of Git. The meaning and accountability
+              stay in public review.
+            </p>
+            <a class="button primary" href="#how-to-contribute"
+              >See how to contribute <span>↓</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section contribution-guide" id="how-to-contribute">
+        <div class="shell">
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker">How to contribute</p>
+              <h2>Bring knowledge.<br />Put it on the record.</h2>
+            </div>
+            <p>
+              A contribution starts with a corpus and ends with an accountable pull request. Large
+              collections are welcome—the bigger, the better—provided their origin and asserted
+              redistribution terms can be recorded and reviewed.
+            </p>
+          </div>
+          <ol class="contribution-flow">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Obtain or build a corpus.</h3>
+                <p>
+                  Acquire eligible material from an upstream source, or assemble material you or
+                  your organization can contribute. A company might gather its public documentation,
+                  product information, and service portfolio so future AI models can learn from an
+                  authoritative source.
+                </p>
+              </div>
+              <div class="flow-note">
+                <b>YOU BRING</b
+                ><strong>Raw source material with a clear origin and asserted terms.</strong>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Choose files or a recipe.</h3>
+                <p>
+                  If the material is already local, point WALDO at its directory. If it must be
+                  fetched or assembled, use a reviewed ingest recipe that declares the metadata and
+                  runs the acquisition steps in a controlled temporary workspace. The destination is
+                  a directory inside your local
+                  <span class="flow-inline">waldo-index</span> checkout.
+                </p>
+              </div>
+              <div class="flow-commands">
+                <code
+                  >waldo index ingest &lt;raw-source-directory&gt; &lt;path-in-waldo-index&gt;
+                  [flags]</code
+                ><code
+                  >waldo index ingest &lt;recipe.yaml&gt; &lt;path-in-waldo-index&gt; [flags]</code
+                >
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Let WALDO ingest it.</h3>
+                <p>
+                  WALDO probes the input, converts it into canonical Parquet shards, audits the
+                  records and totals, uploads the content-addressed objects to the lookaside store
+                  configured on your machine, and verifies the published bytes.
+                </p>
+              </div>
+              <div class="flow-note">
+                <b>WALDO WRITES</b
+                ><strong
+                  >Canonical Parquet in lookaside storage—no large data objects in Git.</strong
+                >
+              </div>
+            </li>
+            <li>
+              <span>04</span>
+              <div>
+                <h3>Inspect the index record.</h3>
+                <p>
+                  WALDO writes the contribution overlay into your index checkout. It contains the
+                  corpus description, sources, asserted licenses, conversion identity, counts,
+                  hashes, and public links to the lookaside objects.
+                </p>
+              </div>
+              <div class="flow-note">
+                <b>GIT RECORDS</b
+                ><strong
+                  >The reviewable meaning, inventory, evidence, and object references.</strong
+                >
+              </div>
+            </li>
+            <li>
+              <span>05</span>
+              <div>
+                <h3>Sign, commit, and open a pull request.</h3>
+                <p>
+                  Review the generated diff, commit it with DCO sign-off, push your branch, and open
+                  a pull request. Maintainers and the community can then inspect the claims, run the
+                  checks, question the evidence, and improve the contribution.
+                </p>
+              </div>
+              <div class="flow-commands">
+                <code>git add .</code><code>git commit -s -m "Add &lt;corpus name&gt;"</code>
+              </div>
+            </li>
+          </ol>
+          <div class="section-action">
+            <a class="button primary" href="community.html#join"
+              >Ask the community <span>↗</span></a
+            ><a class="button paper-button" href="https://github.com/openwaldo/waldo-index"
+              >Open the public index <span>↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section ingest-section">
+        <div class="shell">
+          <p class="kicker light">Review and accountability</p>
+          <h2>
+            Review the corpus.<br />
+            Strengthen the provenance.
+          </h2>
+          <div class="ingest-accountability">
+            <span>DCO ACCOUNTABILITY</span
+            ><strong>Every contribution must carry an accountable sign-off.</strong>
+            <p>
+              The DCO attaches a contributor’s certification to the public Git history. It does not
+              prove that every claim is correct; it makes the contributor and attestation visible so
+              both can be reviewed and challenged.
+            </p>
+          </div>
+          <ol class="ingest-steps">
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Understand</h3>
+                <p>
+                  Inspect what was submitted and confirm that its detected content and schema match
+                  the proposed corpus.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Standardize</h3>
+                <p>
+                  Convert the material into tokenizer-neutral canonical Parquet with a recorded
+                  conversion identity.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Verify</h3>
+                <p>
+                  Reopen every shard and validate its schema, records, hashes, and exact aggregate
+                  totals.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>04</span>
+              <div>
+                <h3>Confirm</h3>
+                <p>
+                  Prove that each content-addressed object is available from lookaside storage and
+                  matches the published record.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>05</span>
+              <div>
+                <h3>Challenge</h3>
+                <p>
+                  Examine the source and license assertions, conversion identity, counts, object
+                  inventory, DCO sign-off, and public diff.
+                </p>
+              </div>
+            </li>
+          </ol>
+          <div class="truth-note">
+            <strong>A strong corpus is built through accountable review.</strong>
+            <p>
+              Automation can prove structure, identity, integrity, totals, and availability. Named
+              contributors and human reviewers still have to evaluate usefulness, examine source
+              evidence, challenge rights assertions, and improve the provenance record.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section review-section">
+        <div class="shell">
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker">The public record</p>
+              <h2>Bytes over here.<br />Meaning over here.</h2>
+            </div>
+            <p>
+              This separation keeps large objects efficient without hiding the facts reviewers need
+              to understand what entered the commons.
+            </p>
+          </div>
+          <div class="separation-grid">
+            <article class="git-side">
+              <span>GIT / REVIEWABLE</span>
+              <h3>Meaning</h3>
+              <ul>
+                <li>Corpus description</li>
+                <li>Sources and asserted licenses</li>
+                <li>Conversion identity</li>
+                <li>Counts and shard hashes</li>
+                <li>Index navigation</li>
+              </ul>
+            </article>
+            <article class="lookaside-side">
+              <span>LOOKASIDE / CONTENT-ADDRESSED</span>
+              <h3>Canonical bytes</h3>
+              <ul>
+                <li>Self-contained Parquet</li>
+                <li>SHA-256 object identity</li>
+                <li>No loose media</li>
+                <li>No hidden catalogs</li>
+                <li>No metadata sidecars</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section dco-section" id="dco">
+        <div class="shell">
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker">Accountability at scale</p>
+              <h2>Sign the contribution.<br />Stand behind the claim.</h2>
+            </div>
+            <div>
+              <p>
+                The Developer Certificate of Origin (DCO) is a lightweight accountability mechanism
+                proven across open-source software. A sign-off connects each submitted change to a
+                contributor who certifies that they created it—or otherwise have the right to submit
+                it under the project’s license—and understands that the contribution is public.
+              </p>
+              <div class="section-action">
+                <a class="button primary" href="https://developercertificate.org/"
+                  >Read the DCO <span>↗</span></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="dco-grid">
+            <article>
+              <span>01 / IDENTIFY</span>
+              <h3>Identify the contributor.</h3>
+              <p>
+                <code>git commit -s</code> adds a <code>Signed-off-by</code> trailer using the
+                contributor’s Git identity.
+              </p>
+            </article>
+            <article>
+              <span>02 / ATTEST</span>
+              <h3>Make responsibility explicit.</h3>
+              <p>
+                The sign-off records the contributor’s certification instead of leaving provenance
+                as an anonymous upload or an implied promise.
+              </p>
+            </article>
+            <article>
+              <span>03 / PRESERVE</span>
+              <h3>Keep the record public.</h3>
+              <p>
+                The commit, sign-off, review, automated checks, corrections, and history remain
+                together in the shared index.
+              </p>
+            </article>
+          </div>
+          <div class="dco-limit">
+            <strong>Accountability is evidence—not magic.</strong>
+            <p>
+              A DCO sign-off does not independently prove that an asserted corpus license is correct
+              or that every underlying document can legally be redistributed. It makes the
+              contribution attributable, explicit, reviewable, and challengeable.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section join-section">
+        <div class="shell join-grid">
+          <div>
+            <p class="kicker light">Make the source better</p>
+            <h2>Contribute data.<br />Review claims.<br />Build the tool.</h2>
+          </div>
+          <div>
+            <p>
+              WALDO is open infrastructure, not a data vending machine. The commons gets stronger
+              through attributable contribution and skeptical review.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#how-to-contribute"
+                >Review the contribution workflow <span>↗</span></a
+              ><a class="button inverse" href="https://github.com/openwaldo"
+                >OpenWALDO on GitHub <span>↗</span></a
+              ><a class="button inverse" href="community.html"
+                >Join the AI community <span>↗</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-top community-footer">
+        <div>
+          <p class="kicker light">WALDO is the AI community.</p>
+          <h2>Build it together.</h2>
+        </div>
+        <div class="footer-actions">
+          <a class="button primary" href="community.html#join">Join the community <span>↗</span></a
+          ><a class="button inverse" href="community.html#corpus"
+            >Participate in the corpus <span>↗</span></a
+          ><a class="button inverse" href="community.html#spread"
+            >Spread the word <span>↗</span></a
+          >
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <a class="brand" href="index.html"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <div>
+          <a href="index.html">Index</a><a href="corpus.html">Corpus</a
+          ><a href="training.html">Training</a><a href="contributing.html">Contributing</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a
+          ><a href="community.html">Community</a><a href="faq.html">FAQ</a>
+        </div>
+        <p>Open source. Community governed.</p>
+      </div>
+    </footer>
+    <script src="assets/main.js"></script>
+  </body>
+</html>
