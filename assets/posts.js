@@ -134,10 +134,10 @@
   };
 
   const metaLine = (meta) => {
-    let h = '<div class="post-meta"><span>' + esc(meta.date) + '</span>';
-    if (meta.type) h += '<span class="type-chip">' + esc(meta.type) + '</span>';
-    if (meta.author) h += '<span class="post-author">by ' + esc(meta.author) + '</span>';
-    return h + '</div>';
+    let h = '<dl class="post-meta"><div><dt>Published</dt><dd>' + esc(meta.date) + '</dd></div>';
+    if (meta.type) h += '<div><dt>Filed under</dt><dd>' + esc(meta.type) + '</dd></div>';
+    if (meta.author) h += '<div><dt>Written by</dt><dd>' + esc(meta.author) + '</dd></div>';
+    return h + '</dl>';
   };
 
   const card = (meta) => {
@@ -174,8 +174,8 @@
   };
 
   const returnLink = () =>
-    '<a class="post-return" href="./"><span aria-hidden="true">←</span>' +
-    '<span><small>Return to the archive</small><strong>All posts</strong></span></a>';
+    '<div class="post-return-wrap"><a class="post-return" href="./">' +
+    '<span aria-hidden="true">←</span><strong>Back to all posts</strong></a></div>';
 
   // share links always point at the live site, so they work even when the
   // page is being previewed over file:// or a local server; brand logos are
