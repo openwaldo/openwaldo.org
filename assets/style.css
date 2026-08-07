@@ -207,18 +207,28 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .weight-stack i:nth-child(2) { transform: translate(24px, -1px); background: var(--cream); }.weight-stack i:nth-child(3) { transform: translate(48px, -2px); background: var(--red); }
 .start-card h3 { margin: auto 0 10px; font-size: 34px; letter-spacing: -.05em; }
 .start-card p { min-height: 76px; margin: 0 0 26px; color: var(--muted); line-height: 1.55; }
-.command-sequence { margin-top: auto; border-top: 1px solid var(--line); }
+.command-sequence {
+  margin-top: auto; overflow: hidden; border: 1px solid rgba(244,241,232,.2);
+  background: var(--ink); color: var(--paper);
+}
+.command-sequence::before {
+  content: "●  ●  ●     " attr(data-terminal); min-height: 34px; display: flex; align-items: center;
+  padding: 0 14px; border-bottom: 1px solid rgba(244,241,232,.16);
+  color: rgba(244,241,232,.45); font: 400 8px/1 var(--font-mono); letter-spacing: .08em;
+}
 .command-sequence > div {
   min-height: 48px; display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center;
-  border-bottom: 1px solid var(--line);
+  padding: 0 14px; border-bottom: 1px solid rgba(244,241,232,.12);
 }
+.command-sequence > div:last-child { border-bottom: 0; }
 .command-sequence span {
   color: var(--red); font: 400 8px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
 }
 .command-sequence code {
   min-width: 0; margin: 0; padding: 12px 0; overflow-wrap: anywhere;
-  background: transparent; font-size: 9px;
+  background: transparent; color: var(--paper); font-size: 9px;
 }
+.command-sequence code::before { content: "$ "; color: var(--red); }
 .run-section { background: var(--ink); color: var(--paper); }
 .run-header { margin-bottom: 70px; }
 .run-rail { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(242,238,228,.32); }

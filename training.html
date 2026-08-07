@@ -92,7 +92,11 @@
                 Use a strict compose to define the architecture, ordered corpora, objectives, and
                 training parameters. WALDO creates and trains the model from that portable plan.
               </p>
-              <div class="command-sequence" aria-label="Blank model workflow">
+              <div
+                class="command-sequence"
+                data-terminal="NEW MODEL / COMPOSE"
+                aria-label="Blank model workflow"
+              >
                 <div>
                   <span>Compose</span><code>waldo model compose small ./pretrain.yaml</code>
                 </div>
@@ -113,10 +117,17 @@
                 <span class="flow-inline">base.model: llama-base</span> can then create a new model,
                 adding training without mutating the original.
               </p>
-              <div class="command-sequence" aria-label="Open-weight continuation workflow">
+              <div
+                class="command-sequence"
+                data-terminal="OPEN WEIGHTS / CONTINUE"
+                aria-label="Open-weight continuation workflow"
+              >
                 <div>
                   <span>Pull</span
-                  ><code>waldo model pull llama-base huggingface://org/model@revision</code>
+                  ><code
+                    >waldo model pull llama-base
+                    huggingface://organization/repository@revision</code
+                  >
                 </div>
                 <div>
                   <span>Compose</span
