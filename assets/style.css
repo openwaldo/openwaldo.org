@@ -954,13 +954,14 @@ code { font-size: 10px; }
 .post-back a:hover { color: var(--red); }
 .post-body p, .post-body li { color: #424943; font-size: 17px; line-height: 1.78; }
 .post-body p { margin: 0 0 23px; }
-.post-body ul, .post-body ol { margin: 0 0 28px 22px; padding: 0; }
-.post-body li { margin-bottom: 10px; }
+.post-body ul, .post-body ol { margin: 0 0 26px; padding-left: 34px; }
+.post-body li { margin: 0 0 4px; line-height: 1.62; }
 .post-body h3, .post-body h4, .post-body h5, .post-body h6 { margin: 48px 0 16px; font-size: 25px; line-height: 1.2; font-weight: 500; }
 .post-body blockquote { margin: 40px 0; padding: 24px 0 24px 26px; border-left: 3px solid var(--red); font-size: 21px; }
 .post-body pre { padding: 20px; overflow-x: auto; background: var(--ink); color: var(--paper); }
 .post-body code { font-family: var(--font-mono); }
-.post-body a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+.post-body a { color: inherit; font-weight: 500; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color .16s ease, text-decoration-color .16s ease; }
+.post-body a:hover { color: var(--red); text-decoration-color: currentColor; }
 .post-share { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; max-width: 780px; margin: 42px auto 0; padding-top: 20px; border-top: 1px solid var(--line); }
 .share-label { margin-right: 6px; color: var(--muted); font: 400 9px var(--font-mono); text-transform: uppercase; }
 .share-chip { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
