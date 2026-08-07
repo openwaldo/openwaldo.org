@@ -952,8 +952,8 @@ code { font-size: 10px; }
 .post .post-meta dd { margin: 0; color: var(--ink); font: 400 11px var(--font-mono); letter-spacing: .035em; }
 .post-back { max-width: 780px; margin: 0 auto 26px; font: 400 10px var(--font-mono); text-transform: uppercase; }
 .post-back a:hover { color: var(--red); }
-.post-body p, .post-body li { color: #424943; font-size: 16px; line-height: 1.72; }
-.post-body p { margin: 0 0 23px; }
+.post-body p, .post-body li { color: #424943; font-size: 15px; line-height: 1.68; }
+.post-body p { margin: 0 0 17px; }
 .post-body ul, .post-body ol { margin: 0 0 26px; padding-left: 34px; }
 .post-body li { margin: 0 0 4px; line-height: 1.62; }
 .post-body h3, .post-body h4, .post-body h5, .post-body h6 { margin: 48px 0 16px; font-size: 25px; line-height: 1.2; font-weight: 500; }
@@ -1006,5 +1006,5 @@ code { font-size: 10px; }
   .post .post-meta > div { width: 50%; min-width: 0; padding: 0 14px; }
   .post .post-meta > div:nth-child(odd) { padding-left: 0; border-left: 0; }
   .post .post-meta > div:last-child:nth-child(odd) { width: 100%; }
-  .post-body p, .post-body li { font-size: 15px; }
+  .post-body p, .post-body li { font-size: 14px; }
 }
