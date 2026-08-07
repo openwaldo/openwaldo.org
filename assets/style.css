@@ -207,6 +207,18 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .weight-stack i:nth-child(2) { transform: translate(24px, -1px); background: var(--cream); }.weight-stack i:nth-child(3) { transform: translate(48px, -2px); background: var(--red); }
 .start-card h3 { margin: auto 0 10px; font-size: 34px; letter-spacing: -.05em; }
 .start-card p { min-height: 76px; margin: 0 0 26px; color: var(--muted); line-height: 1.55; }
+.command-sequence { margin-top: auto; border-top: 1px solid var(--line); }
+.command-sequence > div {
+  min-height: 48px; display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.command-sequence span {
+  color: var(--red); font: 400 8px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+}
+.command-sequence code {
+  min-width: 0; margin: 0; padding: 12px 0; overflow-wrap: anywhere;
+  background: transparent; font-size: 9px;
+}
 .run-section { background: var(--ink); color: var(--paper); }
 .run-header { margin-bottom: 70px; }
 .run-rail { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(242,238,228,.32); }

@@ -89,10 +89,19 @@
               <div class="model-glyph"><i></i><i></i><i></i><i></i></div>
               <h3>Declare the model.</h3>
               <p>
-                Initialize an immutable architecture or use a strict compose to define architecture,
-                ordered corpora, objectives, and training parameters.
+                Use a strict compose to define the architecture, ordered corpora, objectives, and
+                training parameters. WALDO creates and trains the model from that portable plan.
               </p>
-              <code>waldo model init small --preset 10m</code>
+              <div class="command-sequence" aria-label="Blank model workflow">
+                <div>
+                  <span>Compose</span><code>waldo model compose small ./pretrain.yaml</code>
+                </div>
+                <div><span>List</span><code>waldo model list</code></div>
+                <div>
+                  <span>Export</span
+                  ><code>waldo model export small ./small-hf --format huggingface</code>
+                </div>
+              </div>
             </article>
             <article class="start-card weights-card">
               <div class="card-label"><span>START / 02</span><b>Supported open weights</b></div>
@@ -100,9 +109,27 @@
               <h3>Pin the origin.</h3>
               <p>
                 Pull compatible Hugging Face Safetensors at an immutable revision, validate them,
-                and record a separate origin BOM before training.
+                and record an origin BOM. A compose with
+                <span class="flow-inline">base.model: llama-base</span> can then create a new model,
+                adding training without mutating the original.
               </p>
-              <code>waldo model pull llama-base huggingface://…@revision</code>
+              <div class="command-sequence" aria-label="Open-weight continuation workflow">
+                <div>
+                  <span>Pull</span
+                  ><code>waldo model pull llama-base huggingface://org/model@revision</code>
+                </div>
+                <div>
+                  <span>Compose</span
+                  ><code>waldo model compose llama-continued ./continue-from-llama.yaml</code>
+                </div>
+                <div><span>List</span><code>waldo model list</code></div>
+                <div>
+                  <span>Export</span
+                  ><code
+                    >waldo model export llama-continued ./llama-hf --format huggingface</code
+                  >
+                </div>
+              </div>
             </article>
           </div>
         </div>
