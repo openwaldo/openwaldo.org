@@ -698,6 +698,10 @@ code { font-size: 10px; }
 .origin-quote figcaption img { width: 66px; aspect-ratio: 1; object-fit: cover; border-top: 4px solid var(--red); filter: saturate(.82) contrast(1.03); }
 .origin-quote figcaption span { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font: 400 9px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
 .origin-quote figcaption strong { color: var(--ink); font-weight: 400; }
+.sponsor-note { margin: 38px 0; padding: 25px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.sponsor-note > span { color: var(--red); font: 400 9px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+.sponsor-note > strong { display: block; margin-top: 13px; font-size: 21px; line-height: 1.45; font-weight: 500; }
+.sponsor-note > p { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
 .origin-story .text-action { margin-top: 10px; }
 
 /* 404 */
@@ -805,6 +809,9 @@ code { font-size: 10px; }
 .footer-top h2 { max-width: 700px; font-size: clamp(43px, 5.2vw, 68px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
 .footer-bottom { grid-template-columns: .7fr 1.6fr .7fr; }
 .footer-bottom > div { flex-wrap: wrap; gap: 10px 20px; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; }
+.footer-attribution { margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(244,241,232,.12); display: flex; flex-wrap: wrap; justify-content: center; gap: 5px 9px; color: rgba(244,241,232,.55); font: 400 9px/1.6 var(--font-mono); letter-spacing: .04em; text-align: center; text-transform: uppercase; }
+.footer-attribution a { color: var(--paper); }
+.footer-attribution a:hover { color: var(--red); }
 
 @media (max-width: 980px) {
   :root { --shell: min(100% - 40px, 760px); }
