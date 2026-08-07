@@ -629,26 +629,32 @@ code { font-size: 10px; }
 .longform h3 { margin: 54px 0 15px; font-size: 24px; font-weight: 500; }
 .longform p { margin: 0 0 23px; color: #424943; font-size: 17px; line-height: 1.78; }
 .longform blockquote { margin: 48px 0; padding: 26px 0 26px 28px; border-left: 3px solid var(--red); font-size: 23px; line-height: 1.5; }
-.waldo-definition-section { background: var(--ink); color: var(--paper); }
+.waldo-definition-section { padding-block: 92px; background: var(--ink); color: var(--paper); }
+.waldo-definition-section .split-head { align-items: end; }
+.waldo-definition-section .split-head h2 {
+  max-width: 680px; font-size: clamp(38px, 4.2vw, 58px); line-height: 1.02;
+}
 .waldo-definition-section .split-head h2 em { color: var(--red); }
-.waldo-definition-section .split-head > p { color: rgba(244,241,232,.62); }
-.waldo-definition { margin-top: 72px; border-top: 1px solid rgba(244,241,232,.34); }
+.waldo-definition-section .split-head > p {
+  max-width: 540px; color: rgba(244,241,232,.62); font-size: 15px; line-height: 1.68;
+}
+.waldo-definition { margin-top: 52px; border-top: 1px solid rgba(244,241,232,.34); }
 .waldo-definition article {
-  min-height: 138px; display: grid; grid-template-columns: minmax(310px, .8fr) minmax(0, 1.2fr);
-  gap: 7vw; align-items: center; border-bottom: 1px solid rgba(244,241,232,.2);
+  min-height: 112px; display: grid; grid-template-columns: minmax(270px, .72fr) minmax(0, 1.28fr);
+  gap: 5vw; align-items: center; border-bottom: 1px solid rgba(244,241,232,.2);
 }
 .waldo-definition h3 {
-  margin: 0; display: grid; grid-template-columns: 58px .72em auto; align-items: baseline;
-  font-size: clamp(31px, 3.1vw, 43px); line-height: 1; letter-spacing: -.035em; font-weight: 600;
+  margin: 0; display: grid; grid-template-columns: 52px .72em auto; align-items: baseline;
+  font-size: clamp(27px, 2.5vw, 35px); line-height: 1; letter-spacing: -.03em; font-weight: 600;
 }
 .waldo-definition h3 span {
-  padding-right: 12px; color: rgba(244,241,232,.46); font: 400 10px/1 var(--font-mono);
+  padding-right: 10px; color: rgba(244,241,232,.46); font: 400 9px/1 var(--font-mono);
   letter-spacing: .07em; text-align: right; text-transform: uppercase;
 }
 .waldo-definition h3 b { color: var(--red); font-weight: 700; }
 .waldo-definition h3 em { color: var(--paper); }
 .waldo-definition p {
-  max-width: 650px; margin: 0; color: rgba(244,241,232,.66); font-size: 15px; line-height: 1.65;
+  max-width: 680px; margin: 0; color: rgba(244,241,232,.7); font-size: 14px; line-height: 1.6;
 }
 .post-date, .post-row small, .posts-heading > span { font: 400 10px var(--font-mono); letter-spacing: .07em; color: var(--red); }
 .invitation-section { background: #23302b; color: var(--paper); }
@@ -880,11 +886,12 @@ code { font-size: 10px; }
   .evidence-status { grid-template-columns: 1fr; }
   .evidence-status > div:nth-child(odd) { border-right: 0; }
   .evidence-status > div:nth-child(even) { padding-left: 0; }
-  .waldo-definition { margin-top: 52px; }
-  .waldo-definition article { min-height: 0; grid-template-columns: 1fr; gap: 18px; padding: 30px 0; }
-  .waldo-definition h3 { grid-template-columns: 48px .72em auto; font-size: clamp(29px, 9vw, 38px); }
+  .waldo-definition-section { padding-block: 72px; }
+  .waldo-definition { margin-top: 42px; }
+  .waldo-definition article { min-height: 0; grid-template-columns: 1fr; gap: 14px; padding: 24px 0; }
+  .waldo-definition h3 { grid-template-columns: 44px .72em auto; font-size: clamp(27px, 8vw, 32px); }
   .waldo-definition h3 span { padding-right: 9px; font-size: 9px; }
-  .waldo-definition p { padding-left: 48px; font-size: 14px; }
+  .waldo-definition p { padding-left: 44px; font-size: 14px; }
   .post-row { grid-template-columns: 1fr; gap: 14px; padding: 30px 0; }
   .community-ways-head { display: block; }
   .community-ways-head .kicker { margin-bottom: 24px; }
