@@ -42,14 +42,24 @@ em { font-family: Georgia, serif; font-weight: 400; }
 /* Buttons */
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
 .button { min-height: 52px; display: inline-flex; justify-content: center; align-items: center; gap: 26px; padding: 0 22px; border: 1px solid currentColor; font-size: 13px; font-weight: 700; transition: transform .2s ease, background .2s ease, color .2s ease; }
-.button span, .text-action span { transition: transform .2s ease; }
+.button span { transition: transform .2s ease; }
 .button:hover { transform: translateY(-2px); }
-.button:hover span, .text-action:hover span { transform: translate(3px, -3px); }
+.button:hover span { transform: translate(3px, -3px); }
 .button.primary { background: var(--red); border-color: var(--red); color: #111; }
 .button.primary:hover { background: #ff5c4e; }
 .button.inverse { color: var(--paper); border-color: rgba(242,238,228,.45); }
 .button.inverse:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-.text-action { display: inline-flex; gap: 14px; font-size: 14px; font-weight: 720; border-bottom: 1px solid var(--ink); padding-bottom: 7px; }
+.text-action {
+  min-height: 46px; display: inline-flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: 0 0 0 16px; border: 1px solid var(--ink); background: transparent;
+  font-size: 14px; font-weight: 720; transition: background .18s ease, color .18s ease;
+}
+.text-action > span, .text-action > b {
+  min-width: 42px; align-self: stretch; display: grid; place-items: center; border-left: 1px solid currentColor;
+  font-weight: inherit; transition: color .18s ease;
+}
+.text-action:hover { background: var(--ink); color: var(--paper); }
+.text-action:hover > span, .text-action:hover > b { color: var(--red); }
 .section-action { display: flex; gap: 12px; align-items: center; margin-top: 44px; }
 
 /* Home hero */
@@ -664,7 +674,7 @@ code { font-size: 10px; }
 .community-options article > span { color: var(--red); font: 400 10px var(--font-mono); letter-spacing: .08em; }
 .community-options h3 { margin: 74px 0 18px; font-size: clamp(25px, 2vw, 32px); line-height: 1.05; letter-spacing: -.035em; font-weight: 600; }
 .community-options p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
-.community-options .text-action { margin-top: auto; padding-top: 30px; align-self: flex-start; font-size: 9px; }
+.community-options .text-action { margin-top: auto; padding-top: 0; align-self: flex-start; font-size: 9px; }
 .community-options .text-action b { font-weight: 400; }
 .community-join { background: var(--paper); }
 .community-corpus { background: var(--cream); }
