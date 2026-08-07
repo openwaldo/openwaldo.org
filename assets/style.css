@@ -699,9 +699,10 @@ code { font-size: 10px; }
 .origin-quote figcaption span { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font: 400 9px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
 .origin-quote figcaption strong { color: var(--ink); font-weight: 400; }
 .origin-person { display: flex; flex-direction: column; gap: 9px; }
-.origin-socials { display: flex; flex-wrap: wrap; gap: 6px 14px; }
-.origin-socials a { color: var(--red); font: 400 9px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
-.origin-socials a:hover { color: var(--ink); }
+.origin-socials { display: flex; flex-wrap: wrap; gap: 8px; }
+.origin-socials a { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--ink); }
+.origin-socials svg { width: 14px; height: 14px; fill: currentColor; }
+.origin-socials a:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 .origin-story .text-action { margin-top: 10px; }
 .stewardship-section { background: var(--paper); }
 .stewardship-content { text-align: center; }
