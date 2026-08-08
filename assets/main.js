@@ -56,12 +56,12 @@ if (mainContent) {
   });
 })();
 
-// stats.json is the canonical public aggregate feed. status.json remains a
-// temporary fallback while the index publisher transitions to the new name.
+// status.json is the canonical public aggregate feed. Keep stats.json as a
+// compatibility fallback for older or alternate index publishers.
 const fetchIndexStats = async () => {
   const feeds = [
-    'https://openwaldo.github.io/waldo-index/stats.json',
     'https://openwaldo.github.io/waldo-index/status.json',
+    'https://openwaldo.github.io/waldo-index/stats.json',
   ];
   for (const feed of feeds) {
     try {
