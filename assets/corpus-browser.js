@@ -22,6 +22,7 @@
     dialog: document.querySelector('[data-corpus-dialog]'),
     dialogTitle: document.querySelector('[data-dialog-title]'),
     dialogPath: document.querySelector('[data-dialog-path]'),
+    dialogLicenses: document.querySelector('[data-dialog-licenses]'),
     dialogContent: document.querySelector('[data-dialog-content]'),
     dialogTabs: document.querySelector('[data-dialog-tabs]'),
     dialogClose: document.querySelector('[data-dialog-close]'),
@@ -487,6 +488,13 @@
     state.shardPage = 1;
     elements.dialogTitle.textContent = corpus.title || corpus.name || corpus.path;
     elements.dialogPath.textContent = corpus.path;
+    const assertedLicenses = licenses(corpus);
+    const declaredLicenses = assertedLicenses.filter((license) => license !== '(none declared)');
+    const partlyUndeclared = assertedLicenses.includes('(none declared)') && declaredLicenses.length;
+    elements.dialogLicenses.textContent = [
+      `Asserted licenses / ${declaredLicenses.join(' · ') || 'None declared'}`,
+      partlyUndeclared ? 'Some sources undeclared' : '',
+    ].filter(Boolean).join(' · ');
     renderDialogTab();
     if (!elements.dialog.open) elements.dialog.showModal();
     document.body.classList.add('dialog-open');
