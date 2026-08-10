@@ -424,6 +424,9 @@
       const row = body.insertRow();
       const hashCell = row.insertCell();
       add(hashCell, 'code', shard.sha256 || 'Not exposed');
+      const inspect = add(hashCell, 'button', 'Inspect object', 'shard-inspect-toggle');
+      inspect.type = 'button';
+      inspect.setAttribute('aria-expanded', 'false');
       const sourceCell = row.insertCell();
       sourceCell.textContent = list(shard.sources).join(', ') || 'Not exposed';
       const licenseCell = row.insertCell();
@@ -435,15 +438,24 @@
       row.insertCell().textContent = bytes(shard.bytes);
       const detail = body.insertRow();
       detail.className = 'shard-detail-row';
+      detail.hidden = true;
+      detail.id = `shard-${shard.sha256 || start}`;
+      inspect.setAttribute('aria-controls', detail.id);
+      inspect.addEventListener('click', () => {
+        detail.hidden = !detail.hidden;
+        inspect.setAttribute('aria-expanded', String(!detail.hidden));
+        inspect.textContent = detail.hidden ? 'Inspect object' : 'Close details';
+      });
       const detailCell = detail.insertCell();
       detailCell.colSpan = 6;
-      const summary = document.createElement('details');
-      const summaryLabel = add(summary, 'summary', 'Inspect object record');
-      summaryLabel.setAttribute('aria-label', `Inspect shard ${shard.sha256 || ''}`);
-      const objectUrl = add(summary, 'p', shard.url || 'Object URL not exposed');
+      const objectUrl = add(detailCell, 'p', shard.url || 'Object URL not exposed');
       objectUrl.className = 'shard-object-url';
-      add(summary, 'p', 'Record-level Parquet inspection will be added as a later browser capability.', 'shard-future');
-      detailCell.appendChild(summary);
+      add(
+        detailCell,
+        'p',
+        'Record-level Parquet inspection will be added as a later browser capability.',
+        'shard-future',
+      );
     });
     if (pages > 1) {
       const pager = add(elements.dialogContent, 'div', undefined, 'dialog-pagination');
