@@ -392,13 +392,44 @@
     const head = table.createTHead().insertRow();
     ['Object SHA-256', 'Sources', 'License', 'Documents', 'Tokens', 'Bytes'].forEach((label) => add(head, 'th', label).scope = 'col');
     const body = table.createTBody();
+    const resolveShardLicenses = (shard) => {
+      const direct = [...list(shard.licenses), shard.license].filter(Boolean);
+      if (direct.length) return { names: [...new Set(direct)], scope: 'Shard-level assertion' };
+
+      const shardSources = new Set(list(shard.sources));
+      const sourceAssertions = list(state.manifest.sources)
+        .filter((source) => shardSources.has(source.name)
+          || shardSources.has(source.source)
+          || shardSources.has(source.origin))
+        .map((source) => source.license)
+        .filter(Boolean);
+      if (sourceAssertions.length) {
+        return { names: [...new Set(sourceAssertions)], scope: 'Source-level assertion' };
+      }
+
+      const manifestLicenses = Array.isArray(state.manifest.licenses)
+        ? state.manifest.licenses
+        : Object.keys(state.manifest.licenses || {});
+      const corpusAssertions = [
+        ...manifestLicenses,
+        state.manifest.license,
+        ...licenses(state.selected).filter((license) => license !== '(none declared)'),
+      ].filter(Boolean);
+      return {
+        names: [...new Set(corpusAssertions)],
+        scope: corpusAssertions.length ? 'Corpus-level assertion' : 'No assertion recorded',
+      };
+    };
     shards.slice(start, start + shardPageSize).forEach((shard) => {
       const row = body.insertRow();
       const hashCell = row.insertCell();
       add(hashCell, 'code', shard.sha256 || 'Not exposed');
       const sourceCell = row.insertCell();
       sourceCell.textContent = list(shard.sources).join(', ') || 'Not exposed';
-      row.insertCell().textContent = shard.license || 'Not declared';
+      const licenseCell = row.insertCell();
+      const shardLicenses = resolveShardLicenses(shard);
+      licenseCell.textContent = shardLicenses.names.join(' · ') || 'Not declared';
+      licenseCell.title = shardLicenses.scope;
       row.insertCell().textContent = number(shard.docs).toLocaleString();
       row.insertCell().textContent = number(shard.tokens).toLocaleString();
       row.insertCell().textContent = bytes(shard.bytes);
