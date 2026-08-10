@@ -1075,6 +1075,7 @@ code { font-size: 10px; }
 /* Corpus browser */
 .corpus-browser-intro { min-height: 520px; }
 .corpus-browser-section { background: var(--paper); }
+.corpus-browser-cta { margin-bottom: 54px; }
 .browser-feed { margin-bottom: 30px; padding-bottom: 2px; }
 .browser-feed > span { display: flex; align-items: center; gap: 9px; font: 400 10px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .browser-feed b { font-weight: 400; }
