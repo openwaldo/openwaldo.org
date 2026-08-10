@@ -1110,7 +1110,7 @@ code { font-size: 10px; }
 .table-number { text-align: right; font-family: var(--font-mono); white-space: nowrap; }
 .browser-empty { height: 180px; color: var(--muted); text-align: center; }
 .browser-pagination { min-height: 65px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px; padding: 12px 18px; }
-.browser-pagination button { min-height: 36px; padding: 0 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font: 400 9px var(--font-mono); text-transform: uppercase; }
+.browser-pagination button { width: 126px; min-height: 36px; padding: 0 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font: 400 9px var(--font-mono); text-transform: uppercase; }
 .browser-pagination button:last-child { justify-self: end; }
 .browser-pagination button:hover:not(:disabled) { border-color: var(--red); color: var(--red); }
 .browser-pagination button:disabled { opacity: .35; cursor: default; }
