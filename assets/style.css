@@ -1157,11 +1157,6 @@ body.dialog-open { overflow: hidden; }
 .shard-table td { padding: 12px; border-bottom: 1px solid var(--line); font-size: 11px; vertical-align: top; }
 .shard-table td:nth-last-child(-n+3), .shard-table th:nth-last-child(-n+3) { text-align: right; }
 .shard-table code { max-width: 245px; display: block; overflow: hidden; background: transparent; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
-.dialog-pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; margin-top: 16px; }
-.dialog-pagination button { justify-self: start; min-height: 35px; padding: 0 10px; border: 1px solid var(--line); background: transparent; cursor: pointer; font: 400 8px var(--font-mono); text-transform: uppercase; }
-.dialog-pagination button:last-child { justify-self: end; }
-.dialog-pagination button:disabled { opacity: .35; }
-.dialog-pagination span { color: var(--muted); font: 400 8px var(--font-mono); text-transform: uppercase; }
 .dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .button.inverse-dark { border-color: var(--ink); color: var(--ink); }
 .button.inverse-dark:hover { background: var(--ink); color: var(--paper); }

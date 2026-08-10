@@ -36,7 +36,6 @@
     selected: null,
     manifest: null,
     tab: 'overview',
-    shardPage: 1,
     closingFromHistory: false,
   };
 
@@ -382,11 +381,12 @@
       add(elements.dialogContent, 'p', 'The aggregate feed records shard totals, but the pinned manifest could not be loaded.', 'dialog-empty');
       return;
     }
-    const shardPageSize = 10;
-    const pages = Math.max(1, Math.ceil(shards.length / shardPageSize));
-    state.shardPage = Math.min(state.shardPage, pages);
-    const start = (state.shardPage - 1) * shardPageSize;
-    add(elements.dialogContent, 'p', `${shards.length.toLocaleString()} content-addressed objects · showing ${start + 1}–${Math.min(start + shardPageSize, shards.length)}`, 'dialog-record-count');
+    add(
+      elements.dialogContent,
+      'p',
+      `${shards.length.toLocaleString()} content-addressed objects`,
+      'dialog-record-count',
+    );
     const wrap = add(elements.dialogContent, 'div', undefined, 'shard-table-wrap');
     const table = add(wrap, 'table', undefined, 'shard-table');
     const head = table.createTHead().insertRow();
@@ -420,7 +420,7 @@
         scope: corpusAssertions.length ? 'Corpus-level assertion' : 'No assertion recorded',
       };
     };
-    shards.slice(start, start + shardPageSize).forEach((shard) => {
+    shards.forEach((shard) => {
       const row = body.insertRow();
       const hashCell = row.insertCell();
       add(hashCell, 'code', shard.sha256 || 'Not exposed');
@@ -434,18 +434,6 @@
       row.insertCell().textContent = number(shard.tokens).toLocaleString();
       row.insertCell().textContent = bytes(shard.bytes);
     });
-    if (pages > 1) {
-      const pager = add(elements.dialogContent, 'div', undefined, 'dialog-pagination');
-      const previous = add(pager, 'button', '← Previous shards');
-      previous.type = 'button';
-      previous.disabled = state.shardPage === 1;
-      previous.addEventListener('click', () => { state.shardPage -= 1; renderDialogTab(); });
-      add(pager, 'span', `Page ${state.shardPage} of ${pages}`);
-      const next = add(pager, 'button', 'Next shards →');
-      next.type = 'button';
-      next.disabled = state.shardPage === pages;
-      next.addEventListener('click', () => { state.shardPage += 1; renderDialogTab(); });
-    }
   };
 
   const renderHistory = () => {
@@ -505,7 +493,6 @@
     state.selected = corpus;
     state.manifest = null;
     state.tab = 'overview';
-    state.shardPage = 1;
     elements.dialogTitle.textContent = corpus.title || corpus.name || corpus.path;
     elements.dialogPath.textContent = corpus.path;
     const assertedLicenses = licenses(corpus);
@@ -550,7 +537,6 @@
     const button = event.target.closest('button[data-tab]');
     if (!button) return;
     state.tab = button.dataset.tab;
-    state.shardPage = 1;
     renderDialogTab();
   });
 
