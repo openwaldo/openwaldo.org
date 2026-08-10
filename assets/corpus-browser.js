@@ -345,7 +345,8 @@
       if (source.url) {
         const link = add(article, 'a', 'Open upstream source ↗', 'text-action');
         link.href = source.url;
-        link.rel = 'noopener';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
       }
       article.appendChild(metricGrid([
         ['License assertion', source.license || state.manifest?.license || 'None declared'],
@@ -359,7 +360,8 @@
         if (source.license_evidence.url) {
           const link = add(evidence, 'a', 'Inspect evidence ↗');
           link.href = source.license_evidence.url;
-          link.rel = 'noopener';
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
         }
       }
       const content = source.content || {};
@@ -444,6 +446,8 @@
     links.forEach(([label, href], index) => {
       const link = add(actions, 'a', label, `button ${index === 0 ? 'primary' : 'inverse-dark'}`);
       link.href = href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
     });
   };
 
@@ -533,6 +537,7 @@
     });
     render();
   };
+  elements.search.form.addEventListener('submit', (event) => event.preventDefault());
   elements.search.addEventListener('input', updateFilters);
   [elements.section, elements.license, elements.sort].forEach((control) => control.addEventListener('change', updateFilters));
   elements.reset.addEventListener('click', () => {
