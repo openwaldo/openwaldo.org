@@ -1075,7 +1075,8 @@ code { font-size: 10px; }
 /* Corpus browser */
 .corpus-browser-intro { min-height: 520px; }
 .corpus-browser-section { background: var(--paper); }
-.corpus-browser-cta { margin-bottom: 54px; }
+.corpus-browser-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 42px; align-items: center; margin-bottom: 78px; padding: 32px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.corpus-browser-cta .accountability-summary { margin: 0; padding: 0; border: 0; }
 .browser-feed { margin-bottom: 30px; padding-bottom: 2px; }
 .browser-feed > span { display: flex; align-items: center; gap: 9px; font: 400 10px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .browser-feed b { font-weight: 400; }
@@ -1208,6 +1209,7 @@ body.dialog-open { overflow: hidden; }
   .not-found-copy > p:not(.kicker) { margin-top: 28px; font-size: 15px; }
   .not-found-record { min-height: 285px; padding: 25px; }
   .corpus-browser-intro { min-height: 560px; }
+  .corpus-browser-cta { grid-template-columns: 1fr; gap: 25px; margin-bottom: 54px; }
   .corpus-browser-toolbar { grid-template-columns: 1fr; }
   .corpus-browser-toolbar label { border-right: 0; border-bottom: 1px solid var(--line); }
   .corpus-browser-toolbar label:last-child { border-bottom: 0; }
