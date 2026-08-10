@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Corpus Browser — OpenWALDO</title>
+    <meta
+      name="description"
+      content="Search and inspect the sources, licenses, shards, and public history of the OpenWALDO community corpus."
+    />
+    <meta property="og:site_name" content="OpenWALDO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Corpus Browser — OpenWALDO" />
+    <meta
+      property="og:description"
+      content="Follow the data and inspect the public record behind the OpenWALDO community corpus."
+    />
+    <meta property="og:url" content="https://openwaldo.org/browser.html" />
+    <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openwaldo.org/browser.html" />
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/ibm-plex-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/ibm-plex-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav-shell">
+        <a class="brand" href="index.html" aria-label="OpenWALDO home"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <nav aria-label="Primary navigation">
+          <a href="index.html">Index</a><a href="corpus.html" aria-current="page">Corpus</a
+          ><a href="training.html">Training</a><a href="community.html">Community</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-intro compact-intro corpus-browser-intro">
+        <div class="shell page-intro-grid">
+          <div>
+            <p class="kicker light">The public index.</p>
+            <h1>Follow the data.<br /><em>Inspect the record.</em></h1>
+          </div>
+          <div class="page-intro-side">
+            <span>02 / CORPUS BROWSER</span>
+            <p>
+              Search the community corpus, compare its public records, and open any entry to inspect
+              its sources, asserted rights, canonical shards, and Git history.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section corpus-browser-section" data-corpus-browser>
+        <div class="shell">
+          <div class="browser-heading">
+            <div>
+              <p class="kicker">Browse the community corpus</p>
+              <h2>Every entry.<br />One public record.</h2>
+            </div>
+            <div class="browser-feed">
+              <span><i class="snapshot-dot" data-browser-dot></i><b data-browser-feed>Loading</b></span>
+              <p data-browser-summary>Loading the live accountability records from the public index…</p>
+            </div>
+          </div>
+
+          <div class="corpus-browser-shell">
+            <form class="corpus-browser-toolbar" data-browser-toolbar>
+              <label class="browser-search">
+                <span>Search</span>
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="Corpus, path, source, or description…"
+                  autocomplete="off"
+                  data-browser-search
+                />
+              </label>
+              <label>
+                <span>Index section</span>
+                <select name="section" data-browser-section>
+                  <option value="">All sections</option>
+                </select>
+              </label>
+              <label>
+                <span>Asserted license</span>
+                <select name="license" data-browser-license>
+                  <option value="">All licenses</option>
+                </select>
+              </label>
+              <label>
+                <span>Sort</span>
+                <select name="sort" data-browser-sort>
+                  <option value="tokens-desc">Largest by tokens</option>
+                  <option value="docs-desc">Largest by documents</option>
+                  <option value="shards-desc">Most shards</option>
+                  <option value="name-asc">Name A–Z</option>
+                </select>
+              </label>
+            </form>
+
+            <div class="browser-result-bar">
+              <p data-browser-result-count>Loading the public index…</p>
+              <button type="button" data-browser-reset>Clear filters</button>
+            </div>
+
+            <div class="corpus-table-wrap">
+              <table class="corpus-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Corpus</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">Sources</th>
+                    <th scope="col">Licenses</th>
+                    <th scope="col">Documents</th>
+                    <th scope="col">Tokens</th>
+                    <th scope="col">Shards</th>
+                  </tr>
+                </thead>
+                <tbody data-browser-rows>
+                  <tr><td colspan="7" class="browser-empty">Loading the public index…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <nav class="browser-pagination" aria-label="Corpus results" data-browser-pagination></nav>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="corpus-record-dialog" data-corpus-dialog aria-labelledby="corpus-dialog-title">
+      <div class="dialog-frame">
+        <header class="dialog-header">
+          <div>
+            <p class="dialog-path" data-dialog-path>Corpus record</p>
+            <h2 id="corpus-dialog-title" data-dialog-title>Loading…</h2>
+          </div>
+          <button type="button" class="dialog-close" data-dialog-close aria-label="Close corpus record">
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+        <nav class="dialog-tabs" aria-label="Corpus record sections" data-dialog-tabs>
+          <button type="button" data-tab="overview" aria-selected="true">Overview</button>
+          <button type="button" data-tab="sources" aria-selected="false">Sources &amp; rights</button>
+          <button type="button" data-tab="shards" aria-selected="false">Shards</button>
+          <button type="button" data-tab="history" aria-selected="false">History</button>
+        </nav>
+        <div class="dialog-content" data-dialog-content>
+          <p class="dialog-loading">Loading the pinned public record…</p>
+        </div>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="shell footer-top community-footer">
+        <div>
+          <p class="kicker light">WALDO is the AI community.</p>
+          <h2>Build it together.</h2>
+        </div>
+        <div class="footer-actions">
+          <a class="button primary" href="community.html#join">Join the community <span>↗</span></a
+          ><a class="button inverse" href="community.html#corpus"
+            >Participate in the corpus <span>↗</span></a
+          ><a class="button inverse" href="community.html#spread">Spread the word <span>↗</span></a>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <a class="brand" href="index.html"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <div>
+          <a href="index.html">Index</a><a href="corpus.html">Corpus</a
+          ><a href="training.html">Training</a><a href="contributing.html">Contributing</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a
+          ><a href="community.html">Community</a><a href="faq.html">FAQ</a>
+        </div>
+        <div class="origin-socials footer-project-links" aria-label="OpenWALDO profiles">
+          <a
+            href="https://x.com/openwaldo"
+            rel="me"
+            aria-label="OpenWALDO on X/Twitter"
+            title="X/Twitter"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z" /></svg
+          ></a>
+          <a
+            href="https://github.com/openwaldo"
+            rel="me"
+            aria-label="OpenWALDO on GitHub"
+            title="GitHub"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.41-1.26.74-1.55-2.57-.29-5.27-1.28-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.38-5.29 5.67.42.36.79 1.07.79 2.16v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z" /></svg
+          ></a>
+          <a
+            href="https://huggingface.co/openwaldo"
+            rel="me"
+            aria-label="OpenWALDO on Hugging Face"
+            title="Hugging Face"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.8a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm9.6 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM12 17c3.1 0 5.5-2 6.2-4.8l-1.9-.5c-.5 1.9-2.1 3.3-4.3 3.3s-3.8-1.4-4.3-3.3l-1.9.5C6.5 15 8.9 17 12 17Z" /><path d="M4.8 13.6c-1.6 0-3-1.1-3.4-2.7l1.9-.5c.2.8.9 1.2 1.5 1.2V4.8h2v8.8h-2Zm14.4 0h-2V4.8h2v6.8c.6 0 1.3-.4 1.5-1.2l1.9.5c-.4 1.6-1.8 2.7-3.4 2.7Z" /></svg
+          ></a>
+        </div>
+      </div>
+      <p class="shell footer-attribution">
+        Founded by Gregory M. Kurtzer <span>·</span> Sponsored by
+        <a href="https://ciq.com/">CIQ</a> <span>·</span> Built by the OpenWALDO community.
+      </p>
+    </footer>
+
+    <script src="assets/main.js"></script>
+    <script src="assets/corpus-browser.js"></script>
+  </body>
+</html>
