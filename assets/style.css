@@ -1104,8 +1104,9 @@ code { font-size: 10px; }
 .corpus-row-open small, .table-sources small { display: block; margin-top: 3px; overflow: hidden; color: var(--muted); font: 400 8px var(--font-mono); text-overflow: ellipsis; white-space: nowrap; }
 .table-section { color: var(--red); font: 400 9px var(--font-mono); }
 .table-sources { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.table-licenses { display: flex; flex-wrap: wrap; gap: 4px; }
-.table-license, .table-more { padding: 4px 5px; border: 1px solid var(--line); font: 400 7px var(--font-mono); white-space: nowrap; }
+.table-licenses { font-family: var(--font-mono); }
+.table-license, .table-more { font-size: 8px; white-space: nowrap; }
+.table-licenses span + span::before { content: " · "; color: var(--muted); }
 .table-more, .table-muted { color: var(--muted); }
 .table-number { text-align: right; font-family: var(--font-mono); white-space: nowrap; }
 .browser-empty { height: 180px; color: var(--muted); text-align: center; }
