@@ -184,17 +184,21 @@ const fetchIndexStats = async () => {
         setBom('generated', `Generated ${generated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`);
       }
     })
-    .catch(() => {});
+    .catch(() => {
+      setBom('revision', 'Unavailable');
+      setBom('selection', 'Live index unavailable');
+      setBom('generated', 'Live index unavailable');
+    });
 })();
 
 // Keep the homepage corpus record live from the same public statistics feed. The
-// HTML snapshot remains visible if the network is unavailable.
+// HTML starts empty so a network failure never presents stale totals as current.
 (() => {
   const total = document.querySelector('[data-home-total]');
   if (!total) return;
 
   const compact = (number) => {
-    if (number >= 1e9) return `${(number / 1e9).toFixed(number >= 1e11 ? 1 : 2)}`;
+    if (number >= 1e9) return `${(number / 1e9).toFixed(number >= 1e11 ? 1 : 2)}B`;
     if (number >= 1e6) return `${(number / 1e6).toFixed(1)}M`;
     return number.toLocaleString();
   };
@@ -244,5 +248,9 @@ const fetchIndexStats = async () => {
         return node;
       }));
     })
-    .catch(() => {});
+    .catch(() => {
+      set('[data-home-feed]', 'Live index unavailable');
+      const branchMap = document.querySelector('[data-home-branches]');
+      if (branchMap) branchMap.textContent = 'The live index could not be loaded.';
+    });
 })();

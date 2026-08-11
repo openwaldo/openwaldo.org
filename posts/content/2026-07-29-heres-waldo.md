@@ -2,22 +2,22 @@
 title: Here’s WALDO
 type: announcement
 author: Gregory Kurtzer
-description: OpenWALDO goes public — a community-managed corpus of openly licensed training data, tracked in git and verifiable by hash, plus the toolchain that turns it into auditable models.
+description: OpenWALDO goes public — a community-managed corpus with attributable license assertions, tracked in git and verifiable by hash, plus the toolchain that turns it into auditable models.
 ---
 
 # Here’s WALDO
 
-Today OpenWALDO goes public: a community-managed corpus of openly licensed
-AI training data — tracked in git, licensed per shard, verifiable by hash —
-and the toolchain that turns it into auditable models.
+Today OpenWALDO goes public: a community-managed corpus of AI training data
+with attributable license assertions—tracked in Git and verifiable by hash—
+and the toolchain that turns it into auditable models. Builders choose the
+sources and asserted licenses appropriate for their own use.
 
 Open models are not open source, because open source means the source is
-open. The training data is the model's source code, and OpenWALDO opens it:
-every byte with its origin, its license, and your rights to it, on the
-record.
+open. The training data is the model's source code, and OpenWALDO puts its
+identity, origin, and asserted terms on the record.
 
-The index is live and growing — books, wikis, science, conversation data,
-and more, with every shard anonymously fetchable and every claim checkable.
+The index is live and growing—books, wikis, science, conversation data, and
+more—with public object references and reviewable claims.
 The [front page](https://openwaldo.org/) counts it in real time.
 
 Come take part:

@@ -30,12 +30,12 @@ software.
 ## The corpus counter
 
 The front page corpus record and the corpus explorer load live from the
-aggregate feed the index repo publishes:
-`https://openwaldo.github.io/waldo-index/stats.json`. During the feed-name
-transition, the site falls back to `status.json`. Nothing in this repo generates
-those numbers—they update whenever the index does. Both pages ship with a
-complete local snapshot, so the corpus remains useful if the live feed is
-temporarily unavailable.
+canonical feed the index repo publishes:
+`https://openwaldo.github.io/waldo-index/status.json`. The site accepts the
+older `stats.json` name only as a compatibility fallback. Nothing in this repo
+generates those numbers—they update whenever the index does. Until the live
+feed loads, the pages show an explicit loading or unavailable state rather
+than stale corpus totals.
 
 ## Posts
 

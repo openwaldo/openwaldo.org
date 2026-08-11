@@ -80,8 +80,9 @@
             </div>
             <p>
               A contribution starts with a corpus and ends with an accountable pull request. Large
-              collections are welcome—the bigger, the better—provided their origin and asserted
-              redistribution terms can be recorded and reviewed.
+              collections are welcome when their origin and asserted terms can be recorded and
+              reviewed. Consumers remain free to select the licenses and sources appropriate for
+              their own use.
             </p>
           </div>
           <ol class="contribution-flow">
@@ -109,9 +110,17 @@
                   If the material is already local, point WALDO at its directory. If it must be
                   fetched or assembled, use a reviewed ingest recipe that declares the metadata and
                   runs the acquisition steps in a controlled temporary workspace. The destination is
-                  a directory inside your local
-                  <span class="flow-inline">waldo-index</span> checkout.
+                  a logical path inside the writable
+                  <span class="flow-inline">waldo-index</span> checkout configured on your machine.
+                  Public contributions also need a lookaside destination whose published objects
+                  reviewers can read; coordinate access with the maintainers before a large ingest.
                 </p>
+              </div>
+              <div class="flow-commands">
+                <code>waldo config set index /path/to/waldo-index</code
+                ><code>waldo config set lookaside &lt;public-lookaside-url&gt;</code
+                ><code>waldo index ingest --help</code
+                >
               </div>
               <div class="flow-commands">
                 <code
@@ -144,9 +153,10 @@
               <div>
                 <h3>Inspect the index record.</h3>
                 <p>
-                  WALDO writes the contribution overlay into your index checkout. It contains the
+                  WALDO writes a contribution overlay into its staging area and prints that
+                  location. Apply the reported overlay to your index checkout, then inspect the
                   corpus description, sources, asserted licenses, conversion identity, counts,
-                  hashes, and public links to the lookaside objects.
+                  hashes, and public object links before committing anything.
                 </p>
               </div>
               <div class="flow-note">
@@ -167,7 +177,9 @@
                 </p>
               </div>
               <div class="flow-commands">
-                <code>git add .</code><code>git commit -s -m "Add &lt;corpus name&gt;"</code>
+                <code>cp -R &lt;reported-contribution-directory&gt;/. /path/to/waldo-index/</code
+                ><code>git diff --check</code><code>git add .</code
+                ><code>git commit -s -m "Add &lt;corpus name&gt;"</code>
               </div>
             </li>
           </ol>
