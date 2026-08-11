@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenWALDO X header source</title>
+    <style>
+      @font-face {
+        font-family: "Plex Sans";
+        src: url("fonts/ibm-plex-sans.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Plex Mono";
+        src: url("fonts/ibm-plex-mono.woff2") format("woff2");
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1500px;
+        height: 500px;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        color: #f4f1e8;
+        background: #18211e;
+        font-family: "Plex Sans", sans-serif;
+      }
+      .banner {
+        position: relative;
+        width: 1500px;
+        height: 500px;
+        padding: 92px 98px;
+        background-image:
+          linear-gradient(rgba(244, 241, 232, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(244, 241, 232, 0.045) 1px, transparent 1px);
+        background-size: 72px 72px;
+      }
+      .banner::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 7px;
+        background: #d9634f;
+      }
+      .copy {
+        position: relative;
+        z-index: 1;
+        width: 990px;
+      }
+      .eyebrow {
+        margin: 0 0 31px;
+        color: rgba(244, 241, 232, 0.62);
+        font: 15px/1 "Plex Mono", monospace;
+        letter-spacing: 0.18em;
+      }
+      h1 {
+        margin: 0;
+        font-size: 65px;
+        line-height: 0.98;
+        letter-spacing: -0.052em;
+        font-weight: 600;
+      }
+      h1 span {
+        color: #d9634f;
+      }
+      .community-line {
+        margin: 30px 0 0;
+        color: rgba(244, 241, 232, 0.68);
+        font: 14px/1 "Plex Mono", monospace;
+        letter-spacing: 0.13em;
+      }
+      .brand {
+        position: absolute;
+        right: 85px;
+        bottom: 70px;
+        margin: 0;
+        font-size: 37px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+      .brand strong {
+        color: #d9634f;
+        font-weight: 600;
+      }
+      .mark-panel {
+        position: absolute;
+        top: 66px;
+        right: 85px;
+        width: 236px;
+        height: 332px;
+        border: 1px solid rgba(244, 241, 232, 0.28);
+        border-top: 7px solid #d9634f;
+      }
+      .mark-panel img {
+        position: absolute;
+        top: 57px;
+        left: 64px;
+        width: 108px;
+        height: 159px;
+      }
+      .mark-panel p {
+        position: absolute;
+        right: 20px;
+        bottom: 21px;
+        left: 20px;
+        padding-top: 15px;
+        margin: 0;
+        border-top: 1px solid rgba(244, 241, 232, 0.12);
+        color: rgba(244, 241, 232, 0.58);
+        font: 10px/1.1 "Plex Mono", monospace;
+        letter-spacing: 0.12em;
+      }
+      .serial {
+        position: absolute;
+        top: 22px;
+        right: 18px;
+        color: rgba(244, 241, 232, 0.42);
+        font: 9px/1 "Plex Mono", monospace;
+        letter-spacing: 0.12em;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="banner">
+      <div class="copy">
+        <p class="eyebrow">JOIN THE OPEN SOURCE AI COMMUNITY</p>
+        <h1>BUILD AI.<br />BUILD IT <span>TOGETHER.</span></h1>
+        <p class="community-line">LEARN · COLLABORATE · CONTRIBUTE · SCALE</p>
+      </div>
+      <div class="mark-panel">
+        <span class="serial">COMMUNITY / 001</span>
+        <img src="mark.svg" alt="" />
+        <p>OPEN THE INPUTS<br />TRACE THE OUTPUTS</p>
+      </div>
+      <p class="brand">Open<strong>WALDO</strong></p>
+    </main>
+  </body>
+</html>
