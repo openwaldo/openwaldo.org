@@ -1,5 +1,38 @@
 // OpenWALDO primary site — small shared behaviors, no dependencies.
 
+// Keep navigation within OpenWALDO in the current tab while opening absolute
+// web links separately. Observe additions because posts and corpus records are
+// rendered after this script runs.
+(() => {
+  const isExternal = (href) => /^(?:https?:)?\/\//i.test(href.trim());
+  const prepare = (root) => {
+    const links = root.matches?.('a[href]') ? [root] : root.querySelectorAll?.('a[href]') || [];
+    links.forEach((link) => {
+      if (!isExternal(link.getAttribute('href') || '')) return;
+      const rel = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+      rel.add('noopener');
+      rel.add('noreferrer');
+      link.target = '_blank';
+      link.rel = [...rel].join(' ');
+    });
+  };
+
+  prepare(document);
+  new MutationObserver((changes) => {
+    changes.forEach((change) => {
+      if (change.type === 'attributes') prepare(change.target);
+      change.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) prepare(node);
+      });
+    });
+  }).observe(document.documentElement, {
+    attributeFilter: ['href'],
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+})();
+
 // Shared keyboard affordance for every static page using the primary theme.
 const mainContent = document.querySelector('main');
 if (mainContent) {

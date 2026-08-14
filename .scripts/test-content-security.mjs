@@ -38,4 +38,10 @@ const corpus = await readFile(new URL('../assets/corpus-browser.js', import.meta
 assert.match(corpus, /applySafeLink\(link, source\.url/);
 assert.match(corpus, /Object\.create\(null\)/);
 
+const main = await readFile(new URL('../assets/main.js', import.meta.url), 'utf8');
+assert.match(main, /\^\(\?:https\?:\)\?\\\/\\\//);
+assert.match(main, /rel\.add\('noopener'\)/);
+assert.match(main, /rel\.add\('noreferrer'\)/);
+assert.match(main, /new MutationObserver/);
+
 console.log('Content security regression tests passed.');
