@@ -18,22 +18,41 @@
 //                           ?p=slug shows one full post
 //   [data-posts-latest]     homepage strip — the newest few, as cards
 (async () => {
+  'use strict';
   const listEl = document.querySelector('[data-posts]');
   const latestEl = document.querySelector('[data-posts-latest]');
   if (!listEl && !latestEl) return;
 
+  const security = globalThis.OpenWALDOSecurity;
+  if (!security) throw new Error('OpenWALDO security helpers did not load');
+  const {
+    escapeAttribute: escAttr,
+    escapeHTML: esc,
+    safeURL,
+    sanitizeRenderedHTML,
+  } = security;
+
   // base path from the homepage vs the posts page itself
   const BASE = latestEl && !listEl ? 'posts/' : '';
 
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
   const inline = (s) => {
-    const codes = [];
-    s = s.replace(/`([^`]+)`/g, (_, c) => { codes.push(c); return '\x00' + (codes.length - 1) + '\x00'; });
-    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
-    return s.replace(/\x00(\d+)\x00/g, (_, i) => '<code>' + codes[+i] + '</code>');
+    const tokens = [];
+    const token = (html) => {
+      tokens.push(html);
+      return `\x00OW${tokens.length - 1}\x00`;
+    };
+    const emphasis = (value) => value
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+    s = String(s ?? '').replace(/`([^`]+)`/g, (_, code) => token(`<code>${esc(code)}</code>`));
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, target) => {
+      const href = safeURL(target, 'link');
+      const safeLabel = emphasis(esc(label));
+      return token(href ? `<a href="${escAttr(href)}">${safeLabel}</a>` : safeLabel);
+    });
+    s = emphasis(esc(s));
+    return s.replace(/\x00OW(\d+)\x00/g, (_, index) => tokens[Number(index)]);
   };
 
   // a deliberate markdown subset: headings, paragraphs, lists, quotes,
@@ -41,10 +60,10 @@
   const md2html = (md) => {
     const out = [], lines = md.replace(/\r/g, '').split('\n');
     let i = 0, para = [], list = null;
-    const flushP = () => { if (para.length) { out.push('<p>' + inline(esc(para.join(' '))) + '</p>'); para = []; } };
+    const flushP = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
     const flushL = () => {
       if (list) {
-        out.push('<' + list.tag + '>' + list.items.map((it) => '<li>' + inline(esc(it)) + '</li>').join('') + '</' + list.tag + '>');
+        out.push('<' + list.tag + '>' + list.items.map((it) => '<li>' + inline(it) + '</li>').join('') + '</' + list.tag + '>');
         list = null;
       }
     };
@@ -61,7 +80,7 @@
       if (h) {
         flushP(); flushL();
         const lv = Math.min(h[1].length + 2, 6);   // post h1 -> page h3
-        out.push('<h' + lv + '>' + inline(esc(h[2])) + '</h' + lv + '>'); i++;
+        out.push('<h' + lv + '>' + inline(h[2]) + '</h' + lv + '>'); i++;
         continue;
       }
       if (/^(-{3,}|\*{3,})\s*$/.test(l)) { flushP(); flushL(); out.push('<hr>'); i++; continue; }
@@ -69,7 +88,7 @@
         flushP(); flushL();
         const buf = [];
         while (i < lines.length && /^>\s?/.test(lines[i])) buf.push(lines[i++].replace(/^>\s?/, ''));
-        out.push('<blockquote>' + inline(esc(buf.join(' '))) + '</blockquote>');
+        out.push('<blockquote>' + inline(buf.join(' ')) + '</blockquote>');
         continue;
       }
       const li = l.match(/^[-*]\s+(.*)/), oli = l.match(/^\d+\.\s+(.*)/);
@@ -142,13 +161,14 @@
 
   const card = (meta) => {
     const href = BASE + '?p=' + encodeURIComponent(meta.slug);
+    const logo = safeURL(meta.logo, 'image');
     const a = document.createElement('article');
     a.className = 'post-card';
     a.innerHTML =
       '<div class="post-card-index"><span>' + esc(meta.date) + '</span>' +
       (meta.type ? '<b>' + esc(meta.type) + '</b>' : '') + '</div>' +
       '<div class="post-card-copy">' +
-      (meta.logo ? '<img class="post-logo" src="' + esc(meta.logo) + '" alt="">' : '') +
+      (logo ? '<img class="post-logo" src="' + escAttr(logo) + '" alt="">' : '') +
       '<h3><a href="' + href + '">' + esc(meta.title) + '</a></h3>' +
       (meta.description ? '<p>' + esc(meta.description) + '</p>' : '') + '</div>' +
       '<div class="post-card-author">' +
@@ -162,14 +182,15 @@
   };
 
   const fullPost = ({ meta, body }) => {
+    const logo = safeURL(meta.logo, 'image');
     const art = document.createElement('article');
     art.className = 'post';
     art.id = meta.slug;
     art.innerHTML =
-      (meta.logo ? '<img class="post-logo" src="' + esc(meta.logo) + '" alt="">' : '') +
+      (logo ? '<img class="post-logo" src="' + escAttr(logo) + '" alt="">' : '') +
       '<h2>' + esc(meta.title) + '</h2>' +
       metaLine(meta) +
-      '<div class="prose post-body">' + md2html(body) + '</div>';
+      '<div class="prose post-body">' + sanitizeRenderedHTML(md2html(body)) + '</div>';
     return art;
   };
 

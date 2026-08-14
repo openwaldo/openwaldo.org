@@ -1,8 +1,13 @@
 // OpenWALDO corpus browser — status.json drives the table; the selected
 // manifest is loaded from the exact public index revision on demand.
 (() => {
+  'use strict';
   const browser = document.querySelector('[data-corpus-browser]');
   if (!browser) return;
+
+  const security = globalThis.OpenWALDOSecurity;
+  if (!security) throw new Error('OpenWALDO security helpers did not load');
+  const { applySafeLink } = security;
 
   const feed = 'https://openwaldo.github.io/waldo-index/status.json';
   const pageSize = 15;
@@ -90,7 +95,7 @@
       if (trimmed === 'false') return false;
       if (/^-?\d+(?:\.\d+)?$/.test(trimmed)) return Number(trimmed);
       if (trimmed === '[]') return [];
-      if (trimmed === '{}') return {};
+      if (trimmed === '{}') return Object.create(null);
       return trimmed;
     };
     const pair = (value) => {
@@ -101,7 +106,7 @@
 
     const parseBlock = (start, indent) => {
       const array = lines[start]?.indent === indent && lines[start].text.startsWith('-');
-      const output = array ? [] : {};
+      const output = array ? [] : Object.create(null);
       let index = start;
       while (index < lines.length) {
         const line = lines[index];
@@ -115,13 +120,13 @@
             index += 1;
             continue;
           }
-          const item = {};
+          const item = Object.create(null);
           if (value) item[key] = scalar(value);
           else if (lines[index + 1]?.indent > indent) {
             const child = parseBlock(index + 1, lines[index + 1].indent);
             item[key] = child.value;
             index = child.index - 1;
-          } else item[key] = {};
+          } else item[key] = Object.create(null);
           index += 1;
           if (lines[index]?.indent > indent) {
             const rest = parseBlock(index, lines[index].indent);
@@ -140,7 +145,7 @@
             output[key] = child.value;
             index = child.index;
           } else {
-            output[key] = {};
+            output[key] = Object.create(null);
             index += 1;
           }
         }
@@ -344,9 +349,7 @@
       add(heading, 'span', source.version || 'Version not exposed');
       if (source.url) {
         const link = add(article, 'a', 'Open upstream source ↗', 'text-action');
-        link.href = source.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
+        if (!applySafeLink(link, source.url, { newTab: true })) link.remove();
       }
       article.appendChild(metricGrid([
         ['License assertion', source.license || state.manifest?.license || 'None declared'],
@@ -359,9 +362,7 @@
         add(evidence, 'p', source.license_evidence.declaration);
         if (source.license_evidence.url) {
           const link = add(evidence, 'a', 'Inspect evidence ↗');
-          link.href = source.license_evidence.url;
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
+          if (!applySafeLink(link, source.license_evidence.url, { newTab: true })) link.remove();
         }
       }
       const content = source.content || {};
