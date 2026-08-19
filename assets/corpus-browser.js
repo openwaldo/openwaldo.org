@@ -16,6 +16,8 @@
     search: browser.querySelector('[data-browser-search]'),
     section: browser.querySelector('[data-browser-section]'),
     license: browser.querySelector('[data-browser-license]'),
+    language: browser.querySelector('[data-browser-language]'),
+    programmingLanguage: browser.querySelector('[data-browser-programming-language]'),
     sort: browser.querySelector('[data-browser-sort]'),
     reset: browser.querySelector('[data-browser-reset]'),
     rows: browser.querySelector('[data-browser-rows]'),
@@ -68,11 +70,15 @@
   };
   const list = (value) => Array.isArray(value) ? value : [];
   const licenses = (corpus) => Object.keys(corpus.licenses || {});
+  const languages = (corpus) => list(corpus.languages);
+  const programmingLanguages = (corpus) => list(corpus.programming_languages);
   const section = (corpus) => String(corpus.path || '').split('/')[0] || 'root';
   const corpusText = (corpus) => [
     corpus.title, corpus.name, corpus.path, corpus.description,
     ...list(corpus.sources).flatMap((source) => [source.name, source.origin, source.url]),
     ...licenses(corpus),
+    ...languages(corpus),
+    ...programmingLanguages(corpus),
   ].filter(Boolean).join(' ').toLowerCase();
 
   // The public manifests use a deliberately small YAML subset: mappings,
@@ -172,12 +178,24 @@
   const populateFilters = () => {
     const sections = [...new Set(state.corpora.map(section))].sort();
     const licenseNames = [...new Set(state.corpora.flatMap(licenses))].sort();
+    const languageNames = [...new Set(state.corpora.flatMap(languages))].sort();
+    const programmingLanguageNames = [
+      ...new Set(state.corpora.flatMap(programmingLanguages)),
+    ].sort();
     sections.forEach((value) => {
       const option = add(elements.section, 'option', `${value}/`);
       option.value = value;
     });
     licenseNames.forEach((value) => {
       const option = add(elements.license, 'option', value);
+      option.value = value;
+    });
+    languageNames.forEach((value) => {
+      const option = add(elements.language, 'option', value);
+      option.value = value;
+    });
+    programmingLanguageNames.forEach((value) => {
+      const option = add(elements.programmingLanguage, 'option', value);
       option.value = value;
     });
   };
@@ -187,6 +205,8 @@
     elements.search.value = params.get('q') || '';
     elements.section.value = params.get('section') || '';
     elements.license.value = params.get('license') || '';
+    elements.language.value = params.get('language') || '';
+    elements.programmingLanguage.value = params.get('programming-language') || '';
     elements.sort.value = params.get('sort') || 'tokens-desc';
     state.page = Math.max(1, Number.parseInt(params.get('page') || '1', 10) || 1);
     return params.get('corpus');
@@ -196,10 +216,15 @@
     const query = elements.search.value.trim().toLowerCase();
     const selectedSection = elements.section.value;
     const selectedLicense = elements.license.value;
+    const selectedLanguage = elements.language.value;
+    const selectedProgrammingLanguage = elements.programmingLanguage.value;
     state.visible = state.corpora.filter((corpus) =>
       (!query || corpusText(corpus).includes(query))
       && (!selectedSection || section(corpus) === selectedSection)
-      && (!selectedLicense || licenses(corpus).includes(selectedLicense)));
+      && (!selectedLicense || licenses(corpus).includes(selectedLicense))
+      && (!selectedLanguage || languages(corpus).includes(selectedLanguage))
+      && (!selectedProgrammingLanguage
+        || programmingLanguages(corpus).includes(selectedProgrammingLanguage)));
 
     const sorts = {
       'tokens-desc': (a, b) => number(b.tokens) - number(a.tokens),
@@ -222,6 +247,19 @@
     if (names.length > limit) add(parent, 'span', `+${names.length - limit}`, 'table-more');
   };
 
+  const renderLanguages = (parent, corpus) => {
+    const human = languages(corpus);
+    const programming = programmingLanguages(corpus);
+    if (!human.length && !programming.length) {
+      add(parent, 'span', 'Not declared', 'table-muted');
+      return;
+    }
+    if (human.length) add(parent, 'span', human.join(' · '), 'table-language');
+    if (programming.length) {
+      add(parent, 'small', `Code: ${programming.join(' · ')}`, 'table-programming-language');
+    }
+  };
+
   const renderRows = () => {
     elements.rows.replaceChildren();
     const start = (state.page - 1) * pageSize;
@@ -229,7 +267,7 @@
     if (!page.length) {
       const row = document.createElement('tr');
       const cell = add(row, 'td', 'No corpus records match these filters.', 'browser-empty');
-      cell.colSpan = 7;
+      cell.colSpan = 8;
       elements.rows.appendChild(row);
       return;
     }
@@ -252,6 +290,8 @@
       if (sourceNames.length > 1) add(sourceCell, 'small', `+${sourceNames.length - 1} more`);
       const licenseCell = add(row, 'td', undefined, 'table-licenses');
       renderLicenses(licenseCell, corpus);
+      const languageCell = add(row, 'td', undefined, 'table-languages');
+      renderLanguages(languageCell, corpus);
       add(row, 'td', number(corpus.docs).toLocaleString(), 'table-number');
       add(row, 'td', compact(corpus.tokens), 'table-number');
       add(row, 'td', number(corpus.shards).toLocaleString(), 'table-number');
@@ -319,6 +359,8 @@
       ['Encoded size', bytes(corpus.bytes)],
       ['Format', corpus.format || manifest.format || 'parquet'],
       ['Record schema', String(manifest.record_schema || 'Not exposed')],
+      ['Human languages', languages(corpus).join(' · ') || 'Not declared'],
+      ['Programming languages', programmingLanguages(corpus).join(' · ') || 'None declared'],
     ]));
     const section = add(elements.dialogContent, 'section', undefined, 'dialog-section');
     add(section, 'h3', 'Conversion identity');
@@ -369,6 +411,7 @@
       const facts = [
         ['Types', list(content.types).join(' · ')],
         ['Languages', list(content.languages).join(' · ')],
+        ['Programming languages', list(content.programming_languages).join(' · ')],
         ['Coverage', [content.from, content.to].filter(Boolean).join(' → ')],
         ['Selection', content.selection],
       ].filter(([, value]) => value);
@@ -547,6 +590,8 @@
       q: elements.search.value.trim(),
       section: elements.section.value,
       license: elements.license.value,
+      language: elements.language.value,
+      'programming-language': elements.programmingLanguage.value,
       sort: elements.sort.value === 'tokens-desc' ? null : elements.sort.value,
       page: null,
     });
@@ -554,11 +599,14 @@
   };
   elements.search.form.addEventListener('submit', (event) => event.preventDefault());
   elements.search.addEventListener('input', updateFilters);
-  [elements.section, elements.license, elements.sort].forEach((control) => control.addEventListener('change', updateFilters));
+  [elements.section, elements.license, elements.language, elements.programmingLanguage, elements.sort]
+    .forEach((control) => control.addEventListener('change', updateFilters));
   elements.reset.addEventListener('click', () => {
     elements.search.value = '';
     elements.section.value = '';
     elements.license.value = '';
+    elements.language.value = '';
+    elements.programmingLanguage.value = '';
     elements.sort.value = 'tokens-desc';
     updateFilters();
   });
@@ -596,7 +644,7 @@
       elements.rows.replaceChildren();
       const row = document.createElement('tr');
       const cell = add(row, 'td', 'The live public index is temporarily unavailable.', 'browser-empty');
-      cell.colSpan = 7;
+      cell.colSpan = 8;
       elements.rows.appendChild(row);
       elements.count.textContent = 'No live results';
     });

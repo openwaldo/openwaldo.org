@@ -68,7 +68,8 @@
             <span>02 / CORPUS BROWSER</span>
             <p>
               Search the community corpus, compare its public records, and open any entry to inspect
-              its sources, license assertions, canonical shards, and Git history.
+              its sources, declared languages, license assertions, canonical shards, and Git
+              history.
             </p>
           </div>
         </div>
@@ -110,6 +111,18 @@
                 </select>
               </label>
               <label>
+                <span>Human language</span>
+                <select name="language" data-browser-language>
+                  <option value="">All languages</option>
+                </select>
+              </label>
+              <label>
+                <span>Programming language</span>
+                <select name="programming-language" data-browser-programming-language>
+                  <option value="">All programming languages</option>
+                </select>
+              </label>
+              <label>
                 <span>Sort</span>
                 <select name="sort" data-browser-sort>
                   <option value="tokens-desc">Largest by tokens</option>
@@ -133,13 +146,14 @@
                     <th scope="col">Section</th>
                     <th scope="col">Sources</th>
                     <th scope="col">Licenses</th>
+                    <th scope="col">Languages</th>
                     <th scope="col">Documents</th>
                     <th scope="col">Tokens</th>
                     <th scope="col">Shards</th>
                   </tr>
                 </thead>
                 <tbody data-browser-rows>
-                  <tr><td colspan="7" class="browser-empty">Loading the public index…</td></tr>
+                  <tr><td colspan="8" class="browser-empty">Loading the public index…</td></tr>
                 </tbody>
               </table>
             </div>
