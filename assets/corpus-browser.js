@@ -72,6 +72,10 @@
   const licenses = (corpus) => Object.keys(corpus.licenses || {});
   const languages = (corpus) => list(corpus.languages);
   const programmingLanguages = (corpus) => list(corpus.programming_languages);
+  const inputFormats = (corpus, manifest = {}) => [...new Set([
+    ...list(corpus.input_formats),
+    ...list(manifest.sources).flatMap((source) => list(source.input_formats)),
+  ])].sort();
   const section = (corpus) => String(corpus.path || '').split('/')[0] || 'root';
   const corpusText = (corpus) => [
     corpus.title, corpus.name, corpus.path, corpus.description,
@@ -79,6 +83,7 @@
     ...licenses(corpus),
     ...languages(corpus),
     ...programmingLanguages(corpus),
+    ...inputFormats(corpus),
   ].filter(Boolean).join(' ').toLowerCase();
 
   // The public manifests use a deliberately small YAML subset: mappings,
@@ -357,7 +362,7 @@
       ['Reference tokens', number(corpus.tokens).toLocaleString()],
       ['Canonical shards', number(corpus.shards).toLocaleString()],
       ['Encoded size', bytes(corpus.bytes)],
-      ['Format', corpus.format || manifest.format || 'parquet'],
+      ['Source format', inputFormats(corpus, manifest).join(' · ') || 'Not declared'],
       ['Record schema', String(manifest.record_schema || 'Not exposed')],
       ['Human languages', languages(corpus).join(' · ') || 'Not declared'],
       ['Programming languages', programmingLanguages(corpus).join(' · ') || 'None declared'],
@@ -396,6 +401,7 @@
       article.appendChild(metricGrid([
         ['License assertion', source.license || state.manifest?.license || 'None declared'],
         ['Category', source.category || 'Not exposed'],
+        ['Source format', list(source.input_formats).join(' · ') || 'Not declared'],
         ['Source identity', source.sha256 || 'Not exposed'],
       ]));
       if (source.license_evidence?.declaration) {
