@@ -65,6 +65,7 @@ for (const page of publicPages) {
   );
   assert.match(html, /script-src 'self' https:\/\/cloud\.umami\.is/);
   assert.match(html, /connect-src 'self' https:\/\/cloud\.umami\.is/);
+  assert.match(html, /connect-src[^\"]*https:\/\/gateway\.umami\.is/);
 }
 
 console.log('Content security regression tests passed.');
