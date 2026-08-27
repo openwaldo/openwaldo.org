@@ -44,4 +44,27 @@ assert.match(main, /rel\.add\('noopener'\)/);
 assert.match(main, /rel\.add\('noreferrer'\)/);
 assert.match(main, /new MutationObserver/);
 
+const publicPages = [
+  '../404.html',
+  '../about.html',
+  '../browser.html',
+  '../community.html',
+  '../contributing.html',
+  '../corpus.html',
+  '../faq.html',
+  '../index.html',
+  '../posts/index.html',
+  '../training.html',
+];
+for (const page of publicPages) {
+  const html = await readFile(new URL(page, import.meta.url), 'utf8');
+  assert.equal(
+    html.match(/data-website-id="638523af-5c0d-4385-8448-54d3c52c79ac"/g)?.length,
+    1,
+    `${page} must contain exactly one Umami tracker`,
+  );
+  assert.match(html, /script-src 'self' https:\/\/cloud\.umami\.is/);
+  assert.match(html, /connect-src 'self' https:\/\/cloud\.umami\.is/);
+}
+
 console.log('Content security regression tests passed.');
