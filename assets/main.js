@@ -1,5 +1,77 @@
 // OpenWALDO primary site — small shared behaviors, no dependencies.
 
+// Give important calls to action a consistent Umami event and enough context
+// to compare the same action in different parts of the site.
+(() => {
+  const page = (() => {
+    const path = window.location.pathname.replace(/\/$/, '');
+    const name = path.split('/').pop() || 'home';
+    return name.replace(/\.html$/, '') || 'home';
+  })();
+
+  const actionFor = (element) => {
+    const href = element.getAttribute?.('href') || '';
+    if (/join\.slack\.com/i.test(href)) return 'join-slack';
+    if (/(?:^|\/)browser\.html(?:$|[?#])/i.test(href)) return 'browse-corpus';
+    if (/(?:^|\/)training\.html(?:$|[?#])/i.test(href)) return 'explore-training';
+    if (/(?:^|\/)contributing\.html(?:$|[?#])/i.test(href)) return 'contribute-data';
+    if (/github\.com\/openwaldo/i.test(href)) return 'open-github';
+    if (/x\.com\/openwaldo|huggingface\.co\/openwaldo/i.test(href)) return 'follow-project';
+    if (/(?:^|\/)about\.html(?:$|[?#])/i.test(href)) return 'read-about';
+    if (/linkedin\.com\/sharing|x\.com\/intent|bsky\.app\/intent|reddit\.com\/submit/i.test(href)) {
+      return 'share-project';
+    }
+    if (element.matches?.('[data-share-community], [data-copy-community]')) return 'share-project';
+    if (/community\.html(?:$|[?#])|^#(?:join|ways|corpus|project|spread)$/i.test(href)) {
+      return 'explore-community';
+    }
+    return '';
+  };
+
+  const locationFor = (element) => {
+    const section = element.closest?.('section, footer, header');
+    if (!section) return page;
+    if (section.id) return `${page}:${section.id}`;
+    if (section.matches('footer')) return `${page}:footer`;
+    if (section.matches('header')) return `${page}:header`;
+    const sectionClass = [...section.classList].find(
+      (name) => !['section', 'dark-section', 'light-section'].includes(name),
+    );
+    if (sectionClass) return `${page}:${sectionClass}`;
+    return page;
+  };
+
+  const prepare = (root) => {
+    const selector = [
+      'a.button',
+      'a.text-action',
+      'a.door-card',
+      '.footer-project-links a',
+      '[data-share-community]',
+      '[data-copy-community]',
+    ].join(',');
+    const elements = root.matches?.(selector) ? [root] : root.querySelectorAll?.(selector) || [];
+
+    elements.forEach((element) => {
+      const action = actionFor(element);
+      if (!action) return;
+      element.dataset.umamiEvent = 'cta-click';
+      element.dataset.umamiEventAction = action;
+      element.dataset.umamiEventLocation = locationFor(element);
+      element.dataset.umamiEventLabel = (element.textContent || '').replace(/\s+/g, ' ').trim();
+    });
+  };
+
+  prepare(document);
+  new MutationObserver((changes) => {
+    changes.forEach((change) => {
+      change.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) prepare(node);
+      });
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+
 // Keep navigation within OpenWALDO in the current tab while opening absolute
 // web links separately. Observe additions because posts and corpus records are
 // rendered after this script runs.
