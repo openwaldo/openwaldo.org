@@ -45,21 +45,26 @@
         background: #d9634f;
       }
       .copy {
-        position: relative;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
         z-index: 1;
         width: 825px;
       }
       .eyebrow {
-        margin: 0 0 34px;
-        color: rgba(244, 241, 232, 0.62);
-        font:
-          15px/1 "Plex Mono",
-          monospace;
-        letter-spacing: 0.18em;
+        margin: 0 0 38px;
+        color: #f4f1e8;
+        font-size: 43px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+      .eyebrow strong {
+        color: #d9634f;
+        font-weight: 600;
       }
       h1 {
         margin: 0;
-        font-size: 70px;
+        font-size: 68px;
         line-height: 0.98;
         letter-spacing: -0.055em;
         font-weight: 600;
@@ -68,25 +73,12 @@
         color: #d9634f;
       }
       .subline {
-        margin: 28px 0 0;
+        margin: 42px 0 0;
         color: rgba(244, 241, 232, 0.72);
         font:
           14px/1 "Plex Mono",
           monospace;
         letter-spacing: 0.13em;
-      }
-      .brand {
-        position: absolute;
-        bottom: 58px;
-        left: 68px;
-        margin: 0;
-        font-size: 43px;
-        line-height: 1;
-        letter-spacing: -0.04em;
-      }
-      .brand strong {
-        color: #d9634f;
-        font-weight: 600;
       }
       .mark-panel {
         position: absolute;
@@ -114,7 +106,7 @@
         border-top: 1px solid rgba(244, 241, 232, 0.12);
         color: rgba(244, 241, 232, 0.58);
         font:
-          12px/1 "Plex Mono",
+          12px/1.3 "Plex Mono",
           monospace;
         letter-spacing: 0.12em;
       }
@@ -133,15 +125,14 @@
   <body>
     <main class="card">
       <div class="copy">
-        <p class="eyebrow">THE OPEN-SOURCE AI COMMUNITY</p>
-        <h1>BUILD AI<br />FROM THE <span>SOURCE.</span></h1>
+        <p class="eyebrow">Open<strong>WALDO</strong></p>
+        <h1>The open <span>source</span> AI</h1>
         <p class="subline">LEARN · COLLABORATE · CONTRIBUTE · SCALE</p>
       </div>
-      <p class="brand">Open<strong>WALDO</strong></p>
       <div class="mark-panel">
         <span class="serial">PROVENANCE / 001</span>
         <img src="mark.svg" alt="" />
-        <p>SHARED CORPUS<br />VERIFIABLE ORIGINS</p>
+        <p>COMMUNITY · TOOLS<br />CORPUS · PROVENANCE<br />BUILD FROM THE SOURCE</p>
       </div>
     </main>
   </body>
