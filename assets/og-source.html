@@ -46,28 +46,40 @@
       }
       .copy {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        bottom: 64px;
+        left: 68px;
         z-index: 1;
         width: 825px;
       }
-      .eyebrow {
-        margin: 0 0 38px;
+      .brand {
+        position: absolute;
+        top: 66px;
+        left: 68px;
+        z-index: 1;
+        margin: 0;
         color: #f4f1e8;
-        font-size: 43px;
+        font-size: 86px;
         line-height: 1;
         letter-spacing: -0.04em;
       }
-      .eyebrow strong {
+      .brand strong {
         color: #d9634f;
         font-weight: 600;
       }
       h1 {
         margin: 0;
-        font-size: 68px;
+        font-size: 62px;
         line-height: 0.98;
         letter-spacing: -0.055em;
         font-weight: 600;
+      }
+      h1 small {
+        display: block;
+        margin-bottom: 15px;
+        font:
+          18px/1 "Plex Mono",
+          monospace;
+        letter-spacing: 0.14em;
       }
       h1 span {
         color: #d9634f;
@@ -124,9 +136,9 @@
   </head>
   <body>
     <main class="card">
+      <p class="brand">Open<strong>WALDO</strong></p>
       <div class="copy">
-        <p class="eyebrow">Open<strong>WALDO</strong></p>
-        <h1>The open <span>source</span> AI</h1>
+        <h1><small>THE</small><span>OPEN SOURCE</span><br />COMMUNITY FOR AI.</h1>
         <p class="subline">LEARN · COLLABORATE · CONTRIBUTE · SCALE</p>
       </div>
       <div class="mark-panel">
