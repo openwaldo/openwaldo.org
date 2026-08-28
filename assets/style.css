@@ -469,7 +469,8 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-copy .hero-name { margin-top: .25em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
 .hero-copy .hero-name b { color: var(--red); font-weight: 700; }
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
-.hero-lede { max-width: 670px; margin-top: 22px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; letter-spacing: -.01em; }
+.hero-lede { max-width: 680px; margin-top: 22px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; letter-spacing: -.01em; }
+.hero-community-actions .button { min-height: 56px; font-size: 12px; }
 .hero-object { min-height: 390px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); }
 .hero-object::after { content: "PROVENANCE / 001"; top: 30px; right: 30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; font: 400 9px var(--font-mono); letter-spacing: .1em; color: rgba(244,241,232,.45); }
 .hero-object .provenance-mark { width: 36px; height: 52px; filter: none; }
