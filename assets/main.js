@@ -232,8 +232,8 @@ const fetchIndexStats = async () => {
     shareButton.hidden = false;
     shareButton.addEventListener('click', () => {
       navigator.share({
-        title: 'Join the first true open-source AI community',
-        text: 'OpenWALDO lets everyone participate in AI’s source: contribute, review, correct, govern, and build from one shared foundation.',
+        title: 'Join the first complete open-source AI project',
+        text: 'OpenWALDO brings community, training data, tools, models, governance, and provenance together in one public project.',
         url: 'https://openwaldo.org/',
       }).catch(() => {});
     });
