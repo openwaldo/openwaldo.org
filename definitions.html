@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cloud.umami.is; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://openwaldo.github.io https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>OpenWALDO Definitions</title>
+    <meta
+      name="description"
+      content="Working definitions for AI, AGI, open source, open weights, training, inference, agents, provenance, and the AI Bill of Materials."
+    />
+    <meta property="og:site_name" content="OpenWALDO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OpenWALDO Definitions" />
+    <meta
+      property="og:description"
+      content="A shared language for understanding open-source AI, from source material and training through agents, models, and accountability."
+    />
+    <meta property="og:url" content="https://openwaldo.org/definitions.html" />
+    <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openwaldo.org/definitions.html" />
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/ibm-plex-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/ibm-plex-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <script defer src="assets/analytics.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav-shell">
+        <a class="brand" href="index.html" aria-label="OpenWALDO home"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <nav aria-label="Primary navigation">
+          <a href="index.html">Home</a><a href="corpus.html">Corpus</a
+          ><a href="training.html">Training</a><a href="community.html">Community</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-intro compact-intro definitions-hero">
+        <div class="shell page-intro-grid">
+          <div>
+            <p class="kicker light">OpenWALDO definitions</p>
+            <h1>Shared language.<br /><em>Clear meaning.</em></h1>
+          </div>
+          <div class="page-intro-side">
+            <span>08 / DEFINITIONS</span>
+            <p>
+              AI terminology is still evolving. These are the working definitions OpenWALDO uses
+              to describe the technology, the source, and the accountability around it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">01 / Foundations</p>
+              <h2>What the system <em>is.</em></h2>
+            </div>
+            <p>
+              AI is more than a model. It is a system of technologies working together to learn,
+              reason, produce results, use tools, and interact with the world.
+            </p>
+          </div>
+          <div class="definition-list">
+            <article class="definition-entry" id="ai">
+              <div class="definition-term"><span>01.01</span><h3>AI</h3></div>
+              <div class="definition-copy">
+                <p>
+                  <strong>Artificial intelligence</strong> is a complete system of technologies
+                  that works together to produce intelligent behavior. An AI system may combine
+                  models, agents, harnesses, prompts, context, memory, retrieval, tools, data,
+                  interfaces, and infrastructure.
+                </p>
+                <p>
+                  A model capable of inference is an essential component, but it is not by itself
+                  a complete AI system. The surrounding components determine how the model receives
+                  information, takes action, uses tools, remembers context, and interacts with
+                  people and other systems.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="ai-model">
+              <div class="definition-term"><span>01.02</span><h3>AI model</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A mathematical system shaped through training. Its learned parameters, or
+                  weights, transform inputs into outputs during inference. A model supplies
+                  capabilities to an AI system; it is not the whole system.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="llm">
+              <div class="definition-term"><span>01.03</span><h3>LLM</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A <strong>large language model</strong> is an AI model trained on large
+                  collections of tokenized material to learn statistical relationships in
+                  language and other symbolic data. It can interpret and generate language, write
+                  code, and provide capabilities to agents and tools.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="agi">
+              <div class="definition-term"><span>01.04</span><h3>AGI</h3></div>
+              <div class="definition-copy">
+                <p>
+                  <strong>Artificial general intelligence</strong> is an AI that can independently
+                  learn, reason, adapt, and apply what it learns to novel problems across a broad
+                  range of domains at or above capable-human level.
+                </p>
+                <p>
+                  There is not yet a universally accepted test or threshold for AGI. The term
+                  describes breadth and adaptability, not necessarily consciousness, perfection,
+                  superintelligence, or unlimited autonomy.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">02 / Model development</p>
+              <h2>How models are <em>built and used.</em></h2>
+            </div>
+            <p>
+              Training turns source material into learned parameters. Inference uses those
+              parameters. A compose records how the model should be built.
+            </p>
+          </div>
+          <div class="definition-list">
+            <article class="definition-entry" id="training">
+              <div class="definition-term"><span>02.01</span><h3>Training</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The process of presenting source material to a model and optimizing its weights
+                  so it learns useful patterns. Training repeatedly measures model output and
+                  adjusts the weights to improve it. The term includes pretraining, continued
+                  training, instruction tuning, and preference training.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="inference">
+              <div class="definition-term"><span>02.02</span><h3>Inference</h3></div>
+              <div class="definition-copy">
+                <p>
+                  Running a trained model to produce an output from an input. Inference may happen
+                  locally, inside an application, or through a remote API. The API is an interface
+                  to inference; it is not itself the intelligence.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="open-weights">
+              <div class="definition-term"><span>02.03</span><h3>Open weights</h3></div>
+              <div class="definition-copy">
+                <p>
+                  Model weights made available under a license that permits some level of use,
+                  study, modification, or redistribution. Open weights are immensely valuable for
+                  local inference, research, fine-tuning, and deployment.
+                </p>
+                <p>
+                  They are the binary artifacts produced by training a model on source material.
+                  Like compiled software binaries, weights are outputs of a build process, not the
+                  complete source needed to inspect or reproduce that process.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="model-compose">
+              <div class="definition-term"><span>02.04</span><h3>Model compose</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A portable, reviewable definition of a model build. It can describe the
+                  architecture or starting model, corpus mixture, training stages, objectives,
+                  budgets, and evaluation plan while leaving machine-specific execution details
+                  to the environment running it.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">03 / Agent systems</p>
+              <h2>How models <em>act.</em></h2>
+            </div>
+            <p>
+              Agents turn model capabilities into purposeful work. Harnesses provide the context,
+              tools, permissions, and control loops that make that work possible.
+            </p>
+          </div>
+          <div class="definition-list">
+            <article class="definition-entry" id="agent">
+              <div class="definition-term"><span>03.01</span><h3>Agent</h3></div>
+              <div class="definition-copy">
+                <p>
+                  An AI system that uses one or more models to pursue a goal across multiple steps.
+                  An agent can interpret context, choose actions, use tools, observe results, and
+                  revise its approach within the authority it has been given.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="agent-harness">
+              <div class="definition-term"><span>03.02</span><h3>Agent harness</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The software surrounding a model that manages prompts, context, memory, tools,
+                  permissions, state, execution loops, error handling, and interaction with people
+                  or other systems. The model provides capabilities; the harness organizes and
+                  applies them.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="api">
+              <div class="definition-term"><span>03.03</span><h3>API</h3></div>
+              <div class="definition-copy">
+                <p>
+                  An <strong>application programming interface</strong> is a defined way for
+                  software systems to communicate. In AI, an API may provide access to model
+                  inference, agents, tools, data, or complete AI services. An API is an interface
+                  to those capabilities; access to an API does not by itself make the underlying
+                  system open source.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">04 / The open foundation</p>
+              <h2>What makes AI <em>open source.</em></h2>
+            </div>
+            <p>
+              Open source means the source is open. For AI, that source extends across the data,
+              tools, build definitions, decisions, records, and resulting artifacts.
+            </p>
+          </div>
+          <div class="definition-list">
+            <article class="definition-entry" id="open-source">
+              <div class="definition-term"><span>04.01</span><h3>Open source</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A way of building in which the source is accessible under licenses that allow
+                  people to use, study, modify, improve, and share it. Open source also depends on
+                  a community able to participate in maintaining and governing that shared work.
+                </p>
+                <p>
+                  For AI, OpenWALDO defines source across the training material and its licenses,
+                  the tools and model composes, the build decisions and records, the resulting
+                  weights, and the provenance connecting every layer.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="corpus">
+              <div class="definition-term"><span>04.02</span><h3>Corpus</h3></div>
+              <div class="definition-copy">
+                <p>
+                  An organized collection of source material used to train or evaluate a model. A
+                  responsible corpus records where its material came from, how it was processed,
+                  which licenses or rights assertions apply, and exactly which content was used.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="open-tooling">
+              <div class="definition-term"><span>04.03</span><h3>Open tooling</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The openly licensed software used to ingest and curate data, compose and train
+                  models, evaluate results, inspect artifacts, reproduce builds, and run AI
+                  systems. Open tooling lets people examine and improve the process instead of
+                  merely consuming its outputs.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="community-involvement">
+              <div class="definition-term"><span>04.04</span><h3>Community involvement</h3></div>
+              <div class="definition-copy">
+                <p>
+                  Meaningful participation in the work and governance of a shared AI foundation.
+                  Community members can contribute and review training data, improve tools,
+                  validate model composes and results, correct the public record, make decisions,
+                  and help determine what the project becomes.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">05 / Accountability</p>
+              <h2>How models <em>earn trust.</em></h2>
+            </div>
+            <p>
+              Trust grows from evidence people can inspect. Provenance and an AI Bill of Materials
+              connect a release to the exact inputs and processes that produced it.
+            </p>
+          </div>
+          <div class="definition-list">
+            <article class="definition-entry" id="provenance">
+              <div class="definition-term"><span>05.01</span><h3>Provenance</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The evidence chain connecting an artifact to its origins and transformations. In
+                  AI, provenance can connect source material, license assertions, corpus versions,
+                  model composes, training runs, checkpoints, weights, and releases.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="ai-bom">
+              <div class="definition-term"><span>05.02</span><h3>AI Bill of Materials</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A verifiable inventory of the inputs, processes, and outputs behind an AI model.
+                  An AI BOM is meaningful when it points to exact, versioned corpora that can be
+                  independently located, validated, and audited, then connects them to the model
+                  compose, training run, artifacts, and release.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-top community-footer">
+        <div>
+          <p class="kicker light">OpenWALDO is the AI community.</p>
+          <h2>Help define what comes next.</h2>
+        </div>
+        <div class="footer-actions">
+          <a class="button primary" href="community.html#join"
+            >Join the community <span>↗</span></a
+          ><a class="button inverse" href="faq.html">Read the FAQ <span>↗</span></a>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <a class="brand" href="index.html"
+          ><img class="provenance-mark" src="assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <div>
+          <a href="index.html">Home</a><a href="corpus.html">Corpus</a
+          ><a href="training.html">Training</a><a href="contributing.html">Contributing</a
+          ><a href="posts/">Posts</a><a href="about.html">About</a
+          ><a href="community.html">Community</a><a href="faq.html">FAQ</a
+          ><a href="definitions.html" aria-current="page">Definitions</a>
+        </div>
+        <div class="origin-socials footer-project-links" aria-label="OpenWALDO profiles">
+          <a href="https://x.com/openwaldo" rel="me" aria-label="OpenWALDO on X/Twitter" title="X/Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg></a>
+          <a href="https://github.com/openwaldo" rel="me" aria-label="OpenWALDO on GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.41-1.26.74-1.55-2.57-.29-5.27-1.28-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.38-5.29 5.67.42.36.79 1.07.79 2.16v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg></a>
+          <a href="https://huggingface.co/openwaldo" rel="me" aria-label="OpenWALDO on Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.8a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm9.6 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM12 17c3.1 0 5.5-2 6.2-4.8l-1.9-.5c-.5 1.9-2.1 3.3-4.3 3.3s-3.8-1.4-4.3-3.3l-1.9.5C6.5 15 8.9 17 12 17Z"/><path d="M4.8 13.6c-1.6 0-3-1.1-3.4-2.7l1.9-.5c.2.8.9 1.2 1.5 1.2V4.8h2v8.8h-2Zm14.4 0h-2V4.8h2v6.8c.6 0 1.3-.4 1.5-1.2l1.9.5c-.4 1.6-1.8 2.7-3.4 2.7Z"/></svg></a>
+        </div>
+      </div>
+      <p class="shell footer-attribution">
+        Founded by Gregory M. Kurtzer <span>·</span> Sponsored by
+        <a href="https://ciq.com/">CIQ</a> <span>·</span> Built by the OpenWALDO community.
+      </p>
+    </footer>
+    <script src="assets/main.js"></script>
+  </body>
+</html>

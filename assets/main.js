@@ -116,6 +116,71 @@ if (mainContent) {
   document.body.prepend(skip);
 }
 
+// Definition permalinks. Each control updates the visible URL and copies the
+// canonical deep link, while the definition remains readable without JavaScript.
+(() => {
+  const entries = [...document.querySelectorAll('.definition-entry[id]')];
+  if (!entries.length) return;
+
+  const copyText = async (value) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return;
+    }
+    const field = document.createElement('textarea');
+    field.value = value;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.append(field);
+    field.select();
+    document.execCommand('copy');
+    field.remove();
+  };
+
+  entries.forEach((entry) => {
+    const finalParagraph = entry.querySelector('.definition-copy p:last-child');
+    if (!finalParagraph) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'definition-link';
+    button.setAttribute('aria-label', `Copy link to ${entry.querySelector('h3')?.textContent || 'definition'}`);
+    button.title = 'Copy link';
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('aria-hidden', 'true');
+    const firstLink = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    firstLink.setAttribute('d', 'M10 13a5 5 0 0 0 7.07.07l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15');
+    const secondLink = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    secondLink.setAttribute('d', 'M14 11a5 5 0 0 0-7.07-.07l-2 2A5 5 0 0 0 12 20l1.15-1.15');
+    icon.append(firstLink, secondLink);
+    button.append(icon);
+    finalParagraph.append(' ', button);
+
+    button.addEventListener('click', async () => {
+      const url = new URL(window.location.href);
+      url.hash = entry.id;
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+      try {
+        await copyText(url.href);
+        button.classList.add('is-copied');
+        button.title = 'Copied';
+        button.setAttribute('aria-label', 'Link copied');
+      } catch (_) {
+        button.title = 'Link ready in address bar';
+      }
+      window.setTimeout(() => {
+        button.classList.remove('is-copied');
+        button.title = 'Copy link';
+        button.setAttribute(
+          'aria-label',
+          `Copy link to ${entry.querySelector('h3')?.textContent || 'definition'}`,
+        );
+      }, 1800);
+    });
+  });
+})();
+
 // Progressive mobile navigation. Without JavaScript the links remain visible;
 // once enhanced, the button controls a compact full-width menu on small screens.
 (() => {

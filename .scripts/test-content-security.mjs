@@ -56,6 +56,7 @@ const publicPages = [
   '../community.html',
   '../contributing.html',
   '../corpus.html',
+  '../definitions.html',
   '../faq.html',
   '../index.html',
   '../posts/index.html',
