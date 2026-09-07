@@ -232,7 +232,7 @@ const fetchIndexStats = async () => {
     shareButton.hidden = false;
     shareButton.addEventListener('click', () => {
       navigator.share({
-        title: 'Join the first complete open-source AI project',
+        title: 'Join the first open-source AI project and community',
         text: 'OpenWALDO brings community, training data, tools, models, governance, and provenance together in one public project.',
         url: 'https://openwaldo.org/',
       }).catch(() => {});

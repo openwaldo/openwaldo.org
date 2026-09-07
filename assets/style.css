@@ -470,16 +470,17 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
 .hero-lede { max-width: 680px; margin-top: 22px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; letter-spacing: -.01em; }
 .hero-community-actions .button { min-height: 56px; font-size: 12px; }
-.hero-object { min-height: 390px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); }
-.hero-object::after { content: "PROVENANCE / 001"; top: 30px; right: 30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; font: 400 9px var(--font-mono); letter-spacing: .1em; color: rgba(244,241,232,.45); }
+.hero-object { min-height: 340px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); display: grid; grid-template-rows: auto 1fr auto; }
+.hero-object::after { content: "PROVENANCE / 001"; top: 30px; right: 30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; font: 400 10px var(--font-mono); letter-spacing: .1em; color: rgba(244,241,232,.52); }
 .hero-object .provenance-mark { width: 36px; height: 52px; filter: none; }
-.hero-object strong { margin-top: auto; font-size: clamp(29px, 2.1vw, 32px); line-height: .96; letter-spacing: -.045em; font-weight: 600; color: var(--paper); }
-.hero-object strong small { display: block; margin-bottom: 15px; font: 400 9px/1 var(--font-mono); letter-spacing: .14em; }
+.hero-object strong { align-self: center; margin-top: 18px; font-size: clamp(29px, 2.1vw, 32px); line-height: .96; letter-spacing: -.045em; font-weight: 600; color: var(--paper); }
+.hero-object strong small { display: block; margin-bottom: 15px; font: 500 11px/1.4 var(--font-mono); letter-spacing: .13em; }
 .hero-object strong em, .hero-object strong span { display: block; }
-.hero-object strong em { margin-bottom: 7px; white-space: nowrap; color: var(--red); }
+.hero-object strong em { margin-bottom: 7px; white-space: nowrap; color: var(--red); font-size: .96em; }
+.hero-object strong em b { color: var(--paper); font-weight: inherit; }
 .hero-object strong .hero-object-community { margin-bottom: 6px; white-space: nowrap; }
 .hero-object strong .hero-object-for { font-size: 1em; letter-spacing: -.045em; }
-.hero-object > span { white-space: nowrap; font-size: 8px; line-height: 1.45; font-weight: 400; letter-spacing: .06em; }
+.hero-object > span { margin-top: 0; white-space: nowrap; font-size: 9px; line-height: 1.45; font-weight: 500; letter-spacing: .045em; }
 .hero-rule { height: 68px; }
 
 .corpus-pulse { border-color: var(--ink); }

@@ -31,7 +31,7 @@
         position: relative;
         width: 1200px;
         height: 630px;
-        padding: 58px 68px;
+        padding: 74px 82px;
         background-image:
           linear-gradient(rgba(244, 241, 232, 0.045) 1px, transparent 1px),
           linear-gradient(90deg, rgba(244, 241, 232, 0.045) 1px, transparent 1px);
@@ -40,25 +40,32 @@
       .card::before {
         content: "";
         position: absolute;
-        inset: 0 0 auto;
+        inset: 34px 34px auto;
         height: 7px;
         background: #d9634f;
       }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 34px;
+        border: 1px solid rgba(244, 241, 232, 0.28);
+        pointer-events: none;
+      }
       .copy {
         position: absolute;
-        bottom: 64px;
-        left: 68px;
+        top: 278px;
+        left: 82px;
         z-index: 1;
-        width: 825px;
+        width: 1036px;
       }
       .brand {
         position: absolute;
-        top: 66px;
-        left: 68px;
+        top: 78px;
+        left: 82px;
         z-index: 1;
         margin: 0;
         color: #f4f1e8;
-        font-size: 86px;
+        font-size: 68px;
         line-height: 1;
         letter-spacing: -0.04em;
       }
@@ -68,16 +75,16 @@
       }
       h1 {
         margin: 0;
-        font-size: 56px;
+        font-size: 82px;
         line-height: 0.98;
         letter-spacing: -0.055em;
         font-weight: 600;
       }
       h1 small {
         display: block;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
         font:
-          18px/1 "Plex Mono",
+          19px/1.3 "Plex Mono",
           monospace;
         letter-spacing: 0.14em;
       }
@@ -85,50 +92,36 @@
         color: #d9634f;
       }
       .subline {
-        margin: 42px 0 0;
-        color: rgba(244, 241, 232, 0.72);
+        position: absolute;
+        right: 82px;
+        bottom: 76px;
+        left: 82px;
+        z-index: 1;
+        padding-top: 20px;
+        margin: 0;
+        border-top: 1px solid rgba(244, 241, 232, 0.14);
+        color: rgba(244, 241, 232, 0.78);
         font:
-          14px/1 "Plex Mono",
+          16px/1 "Plex Mono",
           monospace;
         letter-spacing: 0.13em;
       }
-      .mark-panel {
+      .mark {
         position: absolute;
-        top: 76px;
-        right: 68px;
-        width: 245px;
-        height: 478px;
-        border: 1px solid rgba(244, 241, 232, 0.28);
-        border-top: 7px solid #d9634f;
-      }
-      .mark-panel img {
-        position: absolute;
-        top: 67px;
-        left: 58px;
-        width: 128px;
-        height: 188px;
-      }
-      .mark-panel p {
-        position: absolute;
-        right: 22px;
-        bottom: 25px;
-        left: 22px;
-        padding-top: 18px;
-        margin: 0;
-        border-top: 1px solid rgba(244, 241, 232, 0.12);
-        color: rgba(244, 241, 232, 0.58);
-        font:
-          12px/1.3 "Plex Mono",
-          monospace;
-        letter-spacing: 0.12em;
+        top: 79px;
+        right: 86px;
+        z-index: 1;
+        width: 56px;
+        height: 82px;
       }
       .serial {
         position: absolute;
-        top: 25px;
-        right: 20px;
-        color: rgba(244, 241, 232, 0.42);
+        top: 111px;
+        right: 174px;
+        z-index: 1;
+        color: rgba(244, 241, 232, 0.52);
         font:
-          10px/1 "Plex Mono",
+          13px/1 "Plex Mono",
           monospace;
         letter-spacing: 0.12em;
       }
@@ -137,15 +130,12 @@
   <body>
     <main class="card">
       <p class="brand">Open<strong>WALDO</strong></p>
+      <span class="serial">PROVENANCE / 001</span>
+      <img class="mark" src="mark.svg" alt="" />
       <div class="copy">
-        <h1><small>THE FIRST COMPLETE</small><span>OPEN-SOURCE AI</span><br />PROJECT.</h1>
-        <p class="subline">COMMUNITY · DATA · TOOLS · MODELS</p>
+        <h1><small>THE FIRST OF ITS KIND.</small><span>OPEN-SOURCE</span> AI.</h1>
       </div>
-      <div class="mark-panel">
-        <span class="serial">PROVENANCE / 001</span>
-        <img src="mark.svg" alt="" />
-        <p>CONTRIBUTE · TRAIN · VALIDATE<br />EXTEND · REPRODUCE<br />GOVERNED IN PUBLIC</p>
-      </div>
+      <p class="subline">COMMUNITY · DATA · TOOLS · MODELS</p>
     </main>
   </body>
 </html>
