@@ -44,6 +44,11 @@ assert.match(main, /rel\.add\('noopener'\)/);
 assert.match(main, /rel\.add\('noreferrer'\)/);
 assert.match(main, /new MutationObserver/);
 
+const analytics = await readFile(new URL('../assets/analytics.js', import.meta.url), 'utf8');
+assert.match(analytics, /https:\/\/cloud\.umami\.is\/script\.js/);
+assert.match(analytics, /638523af-5c0d-4385-8448-54d3c52c79ac/);
+assert.match(analytics, /openwaldo\.org/);
+
 const publicPages = [
   '../404.html',
   '../about.html',
@@ -59,9 +64,10 @@ const publicPages = [
 for (const page of publicPages) {
   const html = await readFile(new URL(page, import.meta.url), 'utf8');
   assert.equal(
-    html.match(/data-website-id="638523af-5c0d-4385-8448-54d3c52c79ac"/g)?.length,
+    (html.match(/<script defer src="(?:\.\.\/|\/)?assets\/analytics\.js"><\/script>/g) ?? [])
+      .length,
     1,
-    `${page} must contain exactly one Umami tracker`,
+    `${page} must contain exactly one analytics loader`,
   );
   assert.match(html, /script-src 'self' https:\/\/cloud\.umami\.is/);
   assert.match(html, /connect-src 'self' https:\/\/cloud\.umami\.is/);
