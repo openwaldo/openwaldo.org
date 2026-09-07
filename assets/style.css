@@ -471,18 +471,21 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
   background-size: 72px 72px;
 }
 .hero-grain { display: none; }
-.hero-grid { min-height: 560px; grid-template-columns: minmax(0, 1.5fr) minmax(320px, .55fr); gap: 7vw; }
+.hero-grid { min-height: 560px; grid-template-columns: minmax(0, 1.5fr) minmax(320px, .55fr); gap: 0 7vw; }
 .hero-copy { padding: 30px 0 54px; }
 .hero-copy h1 { width: fit-content; max-width: 900px; margin: 0; line-height: 1; font-weight: 650; }
 .hero-copy h1 > span, .hero-copy h1 > strong { display: block; }
-.hero-copy .hero-principles { max-width: 760px; color: var(--paper); font-size: clamp(24px, 2.55vw, 34px); line-height: 1.28; letter-spacing: -.035em; text-align: center; }
-.hero-copy .hero-principles b { color: var(--red); font-weight: 700; }
+.hero-principles { grid-column: 1 / -1; width: 100%; margin: 34px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 18px; color: var(--paper); }
+.hero-principles span { min-width: 0; padding: 0 12px 18px; position: relative; text-align: center; }
+.hero-principles small { display: block; margin-bottom: 8px; color: rgba(244,241,232,.5); font: 500 9px/1 var(--font-mono); letter-spacing: .14em; }
+.hero-principles strong { display: block; font-size: clamp(23px, 2.3vw, 32px); line-height: 1; letter-spacing: -.04em; font-weight: 600; white-space: nowrap; }
+.hero-principles b { color: var(--red); font-weight: 700; }
 .hero-copy .hero-name { margin-top: .25em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
 .hero-copy .hero-name b { color: var(--red); font-weight: 700; }
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
 .hero-lede { max-width: 680px; margin-top: 22px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; letter-spacing: -.01em; }
 .hero-community-actions .button { min-height: 56px; font-size: 12px; }
-.hero-object { min-height: 340px; align-self: center; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); display: grid; grid-template-rows: auto 1fr auto; }
+.hero-object { min-height: 340px; align-self: end; margin-bottom: 54px; padding: 30px; border: 1px solid rgba(244,241,232,.35); border-top: 5px solid var(--red); background: rgba(244,241,232,.035); color: var(--paper); display: grid; grid-template-rows: auto 1fr auto; }
 .hero-object::after { content: "PROVENANCE / 001"; top: 30px; right: 30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; font: 400 10px var(--font-mono); letter-spacing: .1em; color: rgba(244,241,232,.52); }
 .hero-object .provenance-mark { width: 36px; height: 52px; filter: none; }
 .hero-object strong { width: 100%; align-self: center; margin-top: 18px; text-align: center; font-size: clamp(33px, 2.3vw, 36px); line-height: .96; letter-spacing: -.045em; font-weight: 600; color: var(--paper); }
@@ -1049,7 +1052,8 @@ code { font-size: 10px; }
   .site-header nav { gap: 17px; }
   .door-grid { grid-template-columns: 1fr; }
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-object { width: min(400px, 100%); min-height: 300px; justify-self: end; }
+  .hero-principles { grid-template-columns: repeat(3, 1fr); row-gap: 24px; }
+  .hero-object { width: min(400px, 100%); min-height: 300px; margin-bottom: 0; align-self: center; justify-self: end; }
   .manifesto-grid, .split-head, .page-intro-grid, .prose-layout, .invitation-grid, .origin-grid, .spread-grid, .community-thesis-head { grid-template-columns: 1fr; gap: 38px; }
   .waldo-definition-layout { grid-template-columns: 1fr; gap: 56px; }
   .waldo-definition-intro { max-width: 620px; }
@@ -1407,7 +1411,10 @@ body.dialog-open { overflow: hidden; }
 .button.inverse-dark:hover { background: var(--ink); color: var(--paper); }
 
 @media (max-width: 700px) {
-  .hero-copy .hero-principles { font-size: clamp(22px, 6.8vw, 30px); line-height: 1.3; }
+  .hero-principles { grid-template-columns: 1fr 1fr; }
+  .hero-principles span, .hero-principles span:nth-child(4) { padding: 0 8px 14px; }
+  .hero-principles span:last-child { grid-column: 1 / -1; }
+  .hero-principles strong { font-size: clamp(24px, 7.5vw, 31px); }
   .hero-grid { min-height: 0; }
   .hero-copy { min-width: 0; padding-bottom: 38px; }
   .hero-copy h1 { width: 100%; max-width: 100%; }
