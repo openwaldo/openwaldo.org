@@ -477,7 +477,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-object strong small { display: block; margin-bottom: 15px; font: 400 9px/1 var(--font-mono); letter-spacing: .14em; }
 .hero-object strong em, .hero-object strong span { display: block; }
 .hero-object strong em { margin-bottom: 7px; white-space: nowrap; color: var(--red); }
-.hero-object strong .hero-object-community { margin-bottom: 6px; }
+.hero-object strong .hero-object-community { margin-bottom: 6px; white-space: nowrap; }
 .hero-object strong .hero-object-for { font-size: 1em; letter-spacing: -.045em; }
 .hero-object > span { white-space: nowrap; font-size: 8px; line-height: 1.45; font-weight: 400; letter-spacing: .06em; }
 .hero-rule { height: 68px; }

@@ -11,14 +11,14 @@
     <title>Questions, Answered — OpenWALDO</title>
     <meta
       name="description"
-      content="Clear answers about OpenWALDO, AI bills of materials, corpus verification, licensing, training, private use, and contribution."
+      content="Clear answers about OpenWALDO’s community-maintained corpus, open-source governance, AI bills of materials, training, and contribution."
     />
     <meta property="og:site_name" content="OpenWALDO" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Questions, Answered — OpenWALDO" />
     <meta
       property="og:description"
-      content="What OpenWALDO does, what it proves, and where its limits are."
+      content="How the OpenWALDO community maintains AI’s source foundation, what it proves, and where its limits are."
     />
     <meta property="og:url" content="https://openwaldo.org/faq.html" />
     <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
@@ -83,8 +83,9 @@
               <h2>Understand<br />the project.</h2>
             </div>
             <p>
-              The short version: OpenWALDO is public infrastructure for identifying, verifying,
-              selecting, and carrying the source material of AI into the models built from it.
+              The short version: OpenWALDO is the first true open-source AI community because
+              everyone can participate in maintaining the training source, tools, and shared
+              foundation, then carry that evidence into the models they build.
             </p>
           </div>
           <div class="faq-group">
@@ -100,15 +101,15 @@
                 </summary>
                 <div class="faq-answer">
                   <p>
-                    OpenWALDO is an open training-data commons and the toolchain that makes it
-                    usable. The public index records corpus meaning and evidence in Git. Federated
-                    lookaside storage serves canonical, content-addressed Parquet objects. The WALDO
-                    command-line tool ingests, verifies, selects, exports, trains, and packages
-                    models while preserving provenance.
+                    OpenWALDO is the first true open-source AI community: a community-maintained
+                    training-data commons and the toolchain that makes it usable. People and
+                    organizations can propose sources, review evidence, correct records, improve the
+                    tools, participate in governance, and build models from the shared result.
                   </p>
                   <p>
-                    It is not a model vendor or a single frozen dataset. It is infrastructure for
-                    building models whose source material can be inspected.
+                    The WALDO command-line tool ingests, verifies, selects, exports, trains, and
+                    packages models while preserving provenance. OpenWALDO is not a model vendor or
+                    a single frozen dataset; it is a living source foundation maintained in public.
                   </p>
                 </div>
               </details>
@@ -141,20 +142,45 @@
                   </p>
                 </div>
               </details>
-              <details class="faq-item" id="faq-open-weights" data-faq="open-weights">
+              <details class="faq-item" id="faq-difference" data-faq="difference">
                 <summary>
-                  <span>03</span><strong>Why aren’t open weights enough?</strong
+                  <span>03</span
+                  ><strong
+                    >Why is OpenWALDO the first true open-source AI community?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
-                    Weights are a valuable artifact, but they are the result of training—not the
-                    complete source needed to understand how the model came to exist. Without the
-                    training material, license assertions, object identity, configuration, and run
-                    history, users cannot fully inspect or reconstruct the process that produced
-                    them.
+                    Open datasets, open-weight models, code releases, and research projects are
+                    enormously valuable. OpenWALDO focuses on the ongoing work after publication:
+                    its community can continuously propose sources, inspect evidence, review
+                    license assertions, correct records, version the corpus, and improve the tools.
                   </p>
-                  <p>OpenWALDO’s position is direct: AI is not open source without the source.</p>
+                  <p>
+                    The defining difference is community participation in the source itself.
+                    Training data remains a living open-source project with ongoing public
+                    contribution, review, correction, versioning, and governance. That turns users
+                    into contributors and lets every improvement benefit everyone building from the
+                    shared foundation.
+                  </p>
+                </div>
+              </details>
+              <details class="faq-item" id="faq-open-weights" data-faq="open-weights">
+                <summary>
+                  <span>04</span><strong>How does OpenWALDO complement open-weight models?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    Open weights are enormously valuable: they let people run, study, adapt, and
+                    build upon models. OpenWALDO helps those releases go further by preserving the
+                    training material, license assertions, object identity, configuration, and run
+                    history needed to inspect how a model came to exist.
+                  </p>
+                  <p>
+                    OpenWALDO gives open-weight releases an inspectable source foundation that a
+                    community can keep improving.
+                  </p>
                 </div>
               </details>
               <details
@@ -163,7 +189,7 @@
                 data-faq="ai-bill-of-materials"
               >
                 <summary>
-                  <span>04</span><strong>What is an AI Bill of Materials?</strong
+                  <span>05</span><strong>What is an AI Bill of Materials?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -181,7 +207,7 @@
               </details>
               <details class="faq-item" id="faq-data-in-git" data-faq="data-in-git">
                 <summary>
-                  <span>05</span><strong>Does the training data live in Git?</strong
+                  <span>06</span><strong>Does the training data live in Git?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -221,7 +247,7 @@
             <div class="faq-list">
               <details class="faq-item" id="faq-verification" data-faq="verification">
                 <summary>
-                  <span>06</span><strong>What does WALDO verify?</strong><b aria-hidden="true"></b>
+                  <span>07</span><strong>What does WALDO verify?</strong><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
@@ -238,7 +264,7 @@
               </details>
               <details class="faq-item" id="faq-licenses" data-faq="licenses">
                 <summary>
-                  <span>07</span><strong>How does OpenWALDO handle licenses?</strong
+                  <span>08</span><strong>How does OpenWALDO handle licenses?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -256,7 +282,7 @@
               </details>
               <details class="faq-item" id="faq-existing-stacks" data-faq="existing-stacks">
                 <summary>
-                  <span>08</span
+                  <span>09</span
                   ><strong>Can I use WALDO with existing models and training stacks?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
@@ -275,7 +301,7 @@
               </details>
               <details class="faq-item" id="faq-reproducibility" data-faq="reproducibility">
                 <summary>
-                  <span>09</span><strong>Can a model be reproduced exactly?</strong
+                  <span>10</span><strong>Can a model be reproduced exactly?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -318,7 +344,7 @@
             <div class="faq-list">
               <details class="faq-item" id="faq-private-offline" data-faq="private-offline">
                 <summary>
-                  <span>10</span><strong>Can WALDO run privately or offline?</strong
+                  <span>11</span><strong>Can WALDO run privately or offline?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -336,7 +362,7 @@
               </details>
               <details class="faq-item" id="faq-contribute" data-faq="contribute">
                 <summary>
-                  <span>11</span><strong>How do I contribute a corpus?</strong
+                  <span>12</span><strong>How do I contribute a corpus?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -354,7 +380,7 @@
               </details>
               <details class="faq-item" id="faq-dco" data-faq="dco">
                 <summary>
-                  <span>12</span
+                  <span>13</span
                   ><strong>What does the Developer Certificate of Origin establish?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
@@ -376,7 +402,7 @@
               </details>
               <details class="faq-item" id="faq-corrections" data-faq="corrections">
                 <summary>
-                  <span>13</span
+                  <span>14</span
                   ><strong>How are mistakes, disputes, or removal requests handled?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
@@ -395,7 +421,7 @@
               </details>
               <details class="faq-item" id="faq-current-status" data-faq="current-status">
                 <summary>
-                  <span>14</span><strong>What works today, and what is still planned?</strong
+                  <span>15</span><strong>What works today, and what is still planned?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -448,7 +474,7 @@
     <footer class="site-footer">
       <div class="shell footer-top community-footer">
         <div>
-          <p class="kicker light">WALDO is the AI community.</p>
+          <p class="kicker light">OpenWALDO is the AI community.</p>
           <h2>Build it together.</h2>
         </div>
         <div class="footer-actions">
