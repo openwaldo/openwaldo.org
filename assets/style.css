@@ -61,6 +61,15 @@ em { font-family: Georgia, serif; font-weight: 400; }
 .text-action:hover { background: var(--ink); color: var(--paper); }
 .text-action:hover > span, .text-action:hover > b { color: var(--red); }
 .section-action { display: flex; gap: 12px; align-items: center; margin-top: 44px; }
+.definition-reference {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+  transition: color .16s ease;
+}
+.definition-reference:hover { color: var(--red); }
 
 /* Home hero */
 .hero-shell { position: relative; overflow: hidden; min-height: 900px; padding: 170px 0 0; background: var(--ink); color: var(--paper); }
