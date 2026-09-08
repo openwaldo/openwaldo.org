@@ -869,9 +869,55 @@ code { font-size: 10px; }
 
 /* Definitions */
 .definitions-hero .page-intro-side p { max-width: 590px; }
+.definition-index {
+  position: sticky;
+  z-index: 15;
+  top: 0;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  box-shadow: 0 6px 18px rgba(24,32,29,.06);
+}
+.definition-index > .shell {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  align-items: stretch;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+.definition-index-top {
+  margin: 0;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+  font: 500 9px var(--font-mono), monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.definition-index-top span { color: var(--red); font-size: 10px; }
+.definition-index > .shell > div { display: grid; grid-template-columns: repeat(6, 1fr); }
+.definition-index > .shell > div a {
+  min-width: 0;
+  min-height: 82px;
+  padding: 17px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+  border-right: 1px solid var(--line);
+  font: 500 10px/1.25 var(--font-mono), monospace;
+  transition: background-color .16s ease, color .16s ease;
+}
+.definition-index > .shell > div a:last-child { border-right: 0; }
+.definition-index > .shell > div a span { color: var(--red); font-size: 8px; }
+.definition-index a:hover { background: var(--ink); color: var(--paper); }
 .section.definition-section {
   --definition-heading: #e8e3d7;
-  padding: 76px 0 0;
+  scroll-margin-top: 83px;
+  padding: 0;
   background: var(--paper);
 }
 .section.definition-section:last-of-type { padding-bottom: 96px; }
@@ -963,6 +1009,13 @@ code { font-size: 10px; }
 .definition-link:focus-visible,
 .definition-link.is-copied { color: var(--red); opacity: 1; }
 @media (max-width: 900px) {
+  .definition-index > .shell { grid-template-columns: 120px minmax(0, 1fr); }
+  .definition-index > .shell > div {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .definition-index > .shell > div a { flex: 0 0 158px; }
   .definition-chapter-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 34px; }
   .definition-chapter-head > p { max-width: 680px; }
   .definition-entry { grid-template-columns: 220px minmax(0, 1fr); }
@@ -970,7 +1023,14 @@ code { font-size: 10px; }
 }
 
 @media (max-width: 620px) {
-  .section.definition-section { padding-top: 58px; }
+  .definition-index > .shell { grid-template-columns: 1fr; border-left: 0; border-right: 0; }
+  .definition-index-top { display: none; }
+  .definition-index > .shell > div a {
+    min-height: 60px;
+    flex-basis: 142px;
+    padding: 11px 12px;
+  }
+  .section.definition-section { scroll-margin-top: 61px; padding-top: 0; }
   .section.definition-section:last-of-type { padding-bottom: 72px; }
   .definition-chapter-head h2 { font-size: 36px; }
   .definition-entry { grid-template-columns: 1fr; }
