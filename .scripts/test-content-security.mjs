@@ -51,16 +51,16 @@ assert.match(analytics, /openwaldo\.org/);
 
 const publicPages = [
   '../404.html',
-  '../about.html',
-  '../browser.html',
-  '../community.html',
-  '../contributing.html',
-  '../corpus.html',
-  '../definitions.html',
-  '../faq.html',
+  '../about/index.html',
+  '../browser/index.html',
+  '../join/index.html',
+  '../contributing/index.html',
+  '../corpus/index.html',
+  '../definitions/index.html',
+  '../faq/index.html',
   '../index.html',
   '../posts/index.html',
-  '../training.html',
+  '../training/index.html',
 ];
 for (const page of publicPages) {
   const html = await readFile(new URL(page, import.meta.url), 'utf8');

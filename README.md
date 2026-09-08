@@ -13,11 +13,12 @@ GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 
 ```
 index.html          project thesis and live corpus record
-corpus.html         accountability, evidence, and the live corpus record
-training.html       model lifecycle and current implementation boundaries
-contributing.html   corpus contribution workflow
+corpus/             accountability, evidence, and the live corpus record
+training/           model lifecycle and current implementation boundaries
+contributing/       corpus contribution workflow
+join/               community participation and project entry points
 posts/              generated Markdown archive and individual posts
-about.html          project purpose and principles
+about/              project purpose and principles
 assets/style.css    primary visual system
 assets/main.js      corpus feed, explorer, and shared accessibility
 ```

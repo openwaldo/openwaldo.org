@@ -24,6 +24,6 @@ Come take part:
 
 - **The index**: [openwaldo/waldo-index](https://github.com/openwaldo/waldo-index)
 - **The project**: [OpenWALDO on GitHub](https://github.com/openwaldo)
-- **The community**: [Slack](https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g) · [how to contribute](https://openwaldo.org/community.html)
+- **The community**: [Slack](https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g) · [how to contribute](https://openwaldo.org/join/)
 
 Open source AI didn’t exist, until now.

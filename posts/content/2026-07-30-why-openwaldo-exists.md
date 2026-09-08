@@ -153,6 +153,6 @@ Let's build the common foundation together, learn from one another, make life
 easier for everyone developing AI, and create something greater than any of us
 could create alone.
 
-[Join the OpenWALDO community](https://openwaldo.org/community.html).
+[Join the OpenWALDO community](https://openwaldo.org/join/).
 
 Greg

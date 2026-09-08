@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cloud.umami.is; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://openwaldo.github.io https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>The Community-Maintained Corpus — OpenWALDO</title>
+    <meta
+      name="description"
+      content="A living public corpus the OpenWALDO community can contribute to, review, correct, version, and carry into AI bills of materials."
+    />
+    <meta property="og:site_name" content="OpenWALDO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="The Community-Maintained Corpus — OpenWALDO" />
+    <meta
+      property="og:description"
+      content="A living source foundation, continuously contributed, reviewed, corrected, and maintained in public."
+    />
+    <meta property="og:url" content="https://openwaldo.org/corpus/" />
+    <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openwaldo.org/corpus/" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/assets/fonts/ibm-plex-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/ibm-plex-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script defer src="/assets/analytics.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav-shell">
+        <a class="brand" href="/" aria-label="OpenWALDO home"
+          ><img class="provenance-mark" src="/assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <nav aria-label="Primary navigation">
+          <a href="/">Home</a><a href="/corpus/" aria-current="page">Corpus</a
+          ><a href="/training/">Training</a><a href="/join/">Community</a
+          ><a href="/posts/">Posts</a><a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-intro">
+        <div class="shell page-intro-grid">
+          <div>
+            <p class="kicker light">The source belongs to the community.</p>
+            <h1>A living corpus.<br /><em>Maintained in public.</em></h1>
+          </div>
+          <div class="page-intro-side">
+            <span>01 / CORPUS</span>
+            <p>
+              This is what makes OpenWALDO truly open source: everyone can participate in the
+              training foundation itself. The community proposes sources, reviews evidence,
+              corrects records, and maintains a versioned public corpus. Every resolved selection
+              becomes an immutable AI Bill of Materials.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section corpus-browser-callout accountability-section">
+        <div class="shell">
+          <div class="corpus-browser-cta">
+            <p class="accountability-summary" data-corpus-summary>
+              The public index currently records <strong data-total="corpora">—</strong> corpora
+              across <strong data-total="shards">—</strong> canonical shards—<strong
+                data-total="docs"
+                >—</strong
+              >
+              documents and <strong data-total="tokens">—</strong> reference tokens under
+              <strong data-total="licenses">—</strong> asserted license identifiers.
+            </p>
+            <div>
+              <a class="button primary" href="/browser/"
+                >Browse the public corpus <span>↗</span></a
+              >
+            </div>
+          </div>
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker">Why use OpenWALDO</p>
+              <h2>Every model needs<br />a bill of materials.</h2>
+            </div>
+            <p>
+              OpenWALDO starts the
+              <a class="definition-reference" href="/definitions/#ai-bom"
+                >AI Bill of Materials</a
+              > with the corpus. A resolved selection pins the exact data meaning and object
+              identity, then crosses the boundary into exports and training runs so provenance does
+              not disappear when data becomes weights.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section accountability-chapter origin-section dark-section">
+        <div class="shell chapter-grid">
+          <div class="chapter-copy">
+            <span>01 / ORIGIN</span>
+            <p class="kicker">
+              <a class="definition-reference" href="/definitions/#provenance"
+                >Source provenance</a
+              >
+            </p>
+            <h2>Trace every corpus<br />to its source.</h2>
+            <p>
+              OpenWALDO records where the material came from, which upstream object or collection
+              was acquired, and which version was used. Reviewers get a concrete origin trail
+              instead of relying on a dataset title alone.
+            </p>
+            <p>
+              Each claim is attributable and correctable. Missing evidence remains visible, helping
+              teams make informed decisions about what they use.
+            </p>
+          </div>
+          <div class="record-sheet bom-sheet" data-live-bom>
+            <div class="sheet-head">
+              <span>OPENWALDO BOM</span><b><i class="live-dot"></i> LIVE INDEX</b>
+            </div>
+            <dl>
+              <div>
+                <dt>Revision</dt>
+                <dd>
+                  <a
+                    data-bom="revision"
+                    href="https://github.com/openwaldo/waldo-index"
+                    >Loading…</a
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>Selection</dt>
+                <dd data-bom="selection">Loading live index…</dd>
+              </div>
+              <div>
+                <dt>Objects</dt>
+                <dd data-bom="objects">—</dd>
+              </div>
+              <div>
+                <dt>Contents</dt>
+                <dd data-bom="contents">—</dd>
+              </div>
+              <div>
+                <dt>Assertions</dt>
+                <dd data-bom="licenses">—</dd>
+              </div>
+            </dl>
+            <p>
+              Current complete public-index selection ·
+              <span data-bom="generated">Loading live index…</span>
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section accountability-chapter rights-section">
+        <div class="shell chapter-grid reverse-grid">
+          <div class="chapter-copy">
+            <span>02 / RIGHTS</span>
+            <p class="kicker">License accountability</p>
+            <h2>See the terms<br />before you train.</h2>
+            <p>
+              OpenWALDO carries asserted license identifiers with the corpus inventory, helping
+              teams understand declared terms before selecting data. When a corpus contains multiple
+              assertions, their scope remains visible instead of being flattened into “mixed.”
+            </p>
+            <p>
+              Each assertion is attributable, reviewable, and correctable in public. It informs
+              responsible selection without pretending to be a legal opinion.
+            </p>
+          </div>
+          <div class="rights-ledger">
+            <div>
+              <span>ASSERTION</span><strong>Named license identifier</strong>
+              <p>Recorded as a claim, not silently promoted to fact.</p>
+            </div>
+            <div>
+              <span>SCOPE</span><strong>Corpus and shard inventory</strong>
+              <p>Counts show which recorded objects the assertion covers.</p>
+            </div>
+            <div>
+              <span>OPTIMIZATION</span><strong>Public review path</strong>
+              <p>Disagreement becomes a change to the record, not private metadata.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section accountability-chapter identity-section dark-section">
+        <div class="shell chapter-grid">
+          <div class="chapter-copy">
+            <span>03 / IDENTITY</span>
+            <p class="kicker">Reproducible objects</p>
+            <h2>Know exactly<br />the contents of the model.</h2>
+            <p>
+              WALDO records the converter identity, canonical format, exact document and
+              reference-token counts, encoded size, and content-addressed shard inventory. A
+              readable corpus record is therefore bound to specific bytes.
+            </p>
+            <p>
+              Teams can reproduce the selection and verify its identity and integrity. License,
+              quality, safety, and fitness remain separate questions with their own evidence.
+            </p>
+          </div>
+          <ol class="identity-ledger">
+            <li>
+              <span>01</span>
+              <div><small>CONVERSION</small><strong>Named tool and format</strong></div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <small>CANONICAL OBJECTS</small><strong>Self-contained Parquet shards</strong>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div><small>CONTENT IDENTITY</small><strong>SHA-256 object references</strong></div>
+            </li>
+            <li>
+              <span>04</span>
+              <div><small>EXACT INVENTORY</small><strong>Documents · tokens · bytes</strong></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section class="section accountability-chapter governance-section light-section">
+        <div class="shell chapter-grid reverse-grid">
+          <div class="chapter-copy">
+            <span>04 / HISTORY</span>
+            <p class="kicker">Public governance</p>
+            <h2>Accountability needs<br />a place to live.</h2>
+            <p>
+              The community governs the corpus through public Git review. Descriptions, source
+              claims, asserted licenses, conversion identity, counts, and object references remain
+              inspectable; large canonical bytes stay in lookaside storage.
+            </p>
+            <p>
+              Every accepted contribution retains its public diff, review, and Developer Certificate
+              of Origin sign-off. The DCO makes responsibility attributable; it does not turn a
+              rights assertion into legal proof. Corrections become part of the same durable record.
+            </p>
+            <div class="section-action">
+              <a class="button primary" href="https://github.com/openwaldo/waldo-index"
+                >Inspect the public index <span>↗</span></a
+              ><a class="button inverse" href="/contributing/#dco"
+                >How DCO accountability works <span>↗</span></a
+              ><a class="button inverse" href="https://github.com/openwaldo/waldo-index/issues"
+                >Review open corrections <span>↗</span></a
+              >
+            </div>
+          </div>
+          <div class="governance-ledger">
+            <div>
+              <span>GIT / INDEX</span>
+              <ul>
+                <li>Source and license claims</li>
+                <li>Conversion identity</li>
+                <li>Counts and object references</li>
+                <li>Diff, review, and correction history</li>
+              </ul>
+            </div>
+            <div>
+              <span>LOOKASIDE / DATA</span>
+              <ul>
+                <li>Canonical Parquet objects</li>
+                <li>Content-addressed identity</li>
+                <li>Independent retrieval</li>
+                <li>No private catalog required</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section evidence-model-section dark-section">
+        <div class="shell">
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker light">Read the evidence precisely</p>
+              <h2>Recorded.<br />Identified.<br /><em>Verified.</em></h2>
+            </div>
+            <p>
+              OpenWALDO does not collapse different kinds of evidence into a trust score. Each word
+              has a narrower meaning—and visible limits.
+            </p>
+          </div>
+          <div class="evidence-model-grid">
+            <article>
+              <span>01</span>
+              <h3>Recorded</h3>
+              <p>
+                An attributable manifest contains the claim. The record can be inspected and
+                corrected; its presence does not make the claim legally conclusive.
+              </p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Identified</h3>
+              <p>
+                A content hash binds the record to specific bytes. Identity and integrity do not
+                establish rights, quality, or safety.
+              </p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Verified</h3>
+              <p>
+                A named machine check passed against a defined selection. Verification proves only
+                what that check actually examined.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section verify-section light-section">
+        <div class="shell">
+          <div class="section-head split-head">
+            <div>
+              <p class="kicker">Choose your proof</p>
+              <h2>Inspect lightly.<br />Audit completely.</h2>
+            </div>
+            <p>
+              WALDO separates quick structural checks from full object and record validation, so the
+              cost of verification is explicit.
+            </p>
+          </div>
+          <div class="verify-grid">
+            <article>
+              <span>01</span>
+              <h3>Verify metadata</h3>
+              <p>
+                Validate index structure and check that referenced objects are reachable with their
+                declared sizes.
+              </p>
+              <code>waldo index verify core/books</code>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Verify objects</h3>
+              <p>Download selected objects and prove every content hash.</p>
+              <code>waldo index verify core/books --objects</code>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Audit records</h3>
+              <p>
+                Validate canonical records, identities, text hashes, duplicates, and manifest
+                totals.
+              </p>
+              <code>waldo index audit core/books</code>
+            </article>
+          </div>
+          <div class="section-action dark-action">
+            <a class="button primary" href="https://github.com/openwaldo/waldo"
+              >Explore the OpenWALDO toolchain <span>↗</span></a
+            ><a class="button inverse" href="https://github.com/openwaldo/waldo-index"
+              >Browse the complete index <span>↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-top community-footer">
+        <div>
+          <p class="kicker light">OpenWALDO is the AI community.</p>
+          <h2>Build it together.</h2>
+        </div>
+        <div class="footer-actions">
+          <a class="button primary" href="/join/#join">Join the community <span>↗</span></a
+          ><a class="button inverse" href="/join/#corpus"
+            >Participate in the corpus <span>↗</span></a
+          ><a class="button inverse" href="/join/#spread"
+            >Spread the word <span>↗</span></a
+          >
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <a class="brand" href="/"
+          ><img class="provenance-mark" src="/assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <div>
+          <a href="/">Index</a><a href="/corpus/">Corpus</a
+          ><a href="/training/">Training</a><a href="/contributing/">Contributing</a
+          ><a href="/posts/">Posts</a><a href="/about/">About</a
+          ><a href="/join/">Join</a><a href="/faq/">FAQ</a
+          ><a href="/definitions/">Definitions</a>
+        </div>
+        <div class="origin-socials footer-project-links" aria-label="OpenWALDO profiles">
+          <a href="https://x.com/openwaldo" rel="me" aria-label="OpenWALDO on X/Twitter" title="X/Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg></a>
+          <a href="https://github.com/openwaldo" rel="me" aria-label="OpenWALDO on GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.41-1.26.74-1.55-2.57-.29-5.27-1.28-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.38-5.29 5.67.42.36.79 1.07.79 2.16v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg></a>
+          <a href="https://huggingface.co/openwaldo" rel="me" aria-label="OpenWALDO on Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.8a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm9.6 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM12 17c3.1 0 5.5-2 6.2-4.8l-1.9-.5c-.5 1.9-2.1 3.3-4.3 3.3s-3.8-1.4-4.3-3.3l-1.9.5C6.5 15 8.9 17 12 17Z"/><path d="M4.8 13.6c-1.6 0-3-1.1-3.4-2.7l1.9-.5c.2.8.9 1.2 1.5 1.2V4.8h2v8.8h-2Zm14.4 0h-2V4.8h2v6.8c.6 0 1.3-.4 1.5-1.2l1.9.5c-.4 1.6-1.8 2.7-3.4 2.7Z"/></svg></a>
+        </div>
+      </div>
+      <p class="shell footer-attribution">
+        Founded by Gregory M. Kurtzer <span>·</span> Sponsored by
+        <a href="https://ciq.com/">CIQ</a> <span>·</span> Built by the OpenWALDO community.
+      </p>
+    </footer>
+    <script src="/assets/main.js"></script>
+  </body>
+</html>

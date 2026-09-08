@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cloud.umami.is; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://openwaldo.github.io https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>About — OpenWALDO</title>
+    <meta
+      name="description"
+      content="Why OpenWALDO brings the full open-source model to AI: community, data, tools, models, governance, and provenance."
+    />
+    <meta property="og:site_name" content="OpenWALDO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="About — OpenWALDO" />
+    <meta
+      property="og:description"
+      content="Everything people expect from open source, brought together for AI."
+    />
+    <meta property="og:url" content="https://openwaldo.org/about/" />
+    <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openwaldo.org/about/" />
+    <link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/assets/fonts/ibm-plex-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/ibm-plex-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script defer src="/assets/analytics.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav-shell">
+        <a class="brand" href="/" aria-label="OpenWALDO home"
+          ><img class="provenance-mark" src="/assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <nav aria-label="Primary navigation">
+          <a href="/">Home</a><a href="/corpus/">Corpus</a
+          ><a href="/training/">Training</a><a href="/join/">Community</a
+          ><a href="/posts/">Posts</a><a href="/about/" aria-current="page">About</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-intro compact-intro">
+        <div class="shell page-intro-grid">
+          <div>
+            <p class="kicker light">About the project</p>
+            <h1>Everything open source<br /><em>should be.</em></h1>
+          </div>
+          <div class="page-intro-side">
+            <span>05 / ABOUT</span>
+            <p>
+              OpenWALDO brings community, training data, tools, model building, governance, and
+              provenance into one public project people can inspect, improve, extend, and build
+              upon.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section prose-section">
+        <div class="shell prose-layout">
+          <aside>
+            <p class="kicker">The case</p>
+            <p class="aside-note">
+              Open source built the software infrastructure the world depends on by giving people
+              the right to inspect, contribute, rebuild, improve, and share it. OpenWALDO brings
+              that proven model to AI.
+            </p>
+          </aside>
+          <div class="longform">
+            <h2>The missing layer of open source AI is the source material.</h2>
+            <p>
+              Weights are executable artifacts, not a complete account of how a model came to exist.
+              Without named sources, asserted licenses, exact object identity, and training records,
+              “open” stops at distribution.
+            </p>
+            <p>
+              WALDO makes training material behave more like open-source input: named, reviewable,
+              versioned, attributable, content-addressed, and usable without trusting a central data
+              service. The public index is the map. Federated lookaside storage serves the canonical
+              bytes. BOMs carry the resolved evidence into exports and model releases.
+            </p>
+            <blockquote>
+              What’s missing isn’t another trust pledge. It’s an inspectable source of data and a
+              toolchain that keeps the evidence attached.
+            </blockquote>
+            <h3>A commons, not a product</h3>
+            <p>
+              This is what makes OpenWALDO the first open-source AI project and community: people
+              do not merely gather around a release; they participate across the project. Anyone
+              can contribute and audit data, improve and test tools, validate model compositions,
+              verify reproducibility, extend models, and take part in stewardship. No single
+              company owns the shared corpus or receives exclusive access to it. WALDO records
+              attributable facts and the limits of what it verified—it does not turn a hash into a
+              legal or safety conclusion.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section waldo-definition-section">
+        <div class="shell waldo-definition-layout">
+          <header class="waldo-definition-intro">
+            <p class="kicker light">The name is the architecture</p>
+            <h2>Five essentials.<br /><em>An Open Foundation.</em></h2>
+            <p>
+              WALDO names the parts of AI that should remain open, inspectable, and connected from
+              source material through model release.
+            </p>
+            <div class="section-action">
+              <a class="button inverse" href="/definitions/#open-foundation"
+                >What makes AI open source? <span>↗</span></a
+              >
+            </div>
+          </header>
+          <div class="waldo-definition" aria-label="WALDO definition">
+            <article>
+              <b class="waldo-letter">W</b>
+              <div class="waldo-term">
+                <span>Open</span>
+                <h3>Weights</h3>
+              </div>
+              <p>
+                Valuable model artifacts, released with the records needed to understand what
+                produced them.
+              </p>
+            </article>
+            <article>
+              <b class="waldo-letter">A</b>
+              <div class="waldo-term">
+                <span>Open</span>
+                <h3>Artifacts</h3>
+              </div>
+              <p>
+                Shards, manifests, recipes, tokenizers, and other inputs identified by content and
+                independently verifiable.
+              </p>
+            </article>
+            <article>
+              <b class="waldo-letter">L</b>
+              <div class="waldo-term">
+                <span>Open</span>
+                <h3>Licenses</h3>
+              </div>
+              <p>
+                Attributable license assertions remain visible, reviewable, and usable when
+                assembling a corpus.
+              </p>
+            </article>
+            <article>
+              <b class="waldo-letter">D</b>
+              <div class="waldo-term">
+                <span>Open</span>
+                <h3>Data</h3>
+              </div>
+              <p>
+                The source material itself: openly indexed, reproducible, and available through
+                federated storage.
+              </p>
+            </article>
+            <article>
+              <b class="waldo-letter">O</b>
+              <div class="waldo-term">
+                <span>Open</span>
+                <h3>Origins</h3>
+              </div>
+              <p>
+                Provenance, acquisition records, and DCO attestations preserve accountability from
+                contribution through release.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section origin-section">
+        <div class="shell origin-grid">
+          <div>
+            <p class="kicker">Why WALDO. Why now.</p>
+            <h2>Open source scales through community.<br /><em>AI needs that now.</em></h2>
+          </div>
+          <div class="origin-story">
+            <p>
+              OpenWALDO was founded by Gregory M. Kurtzer after two and a half decades of building
+              open-source projects and communities. The lesson behind it is simple: foundational
+              infrastructure becomes stronger when the people who depend on it can inspect it,
+              improve it, and collaborate together.
+            </p>
+            <figure class="origin-quote">
+              <blockquote>
+                “For decades, open source has shown that transparency and community can transform
+                shared challenges into world-changing infrastructure. It turns users into builders,
+                competitors into collaborators, and individual efforts into progress at massive
+                scale. OpenWALDO brings that proven model to AI: a foundation we can inspect,
+                improve, and build upon together.”
+              </blockquote>
+              <figcaption>
+                <img src="/assets/gregory-kurtzer.jpg" alt="Gregory M. Kurtzer, Founder of OpenWALDO" />
+                <div class="origin-person">
+                  <span><strong>Gregory M. Kurtzer</strong>Founder of OpenWALDO</span>
+                  <div class="origin-socials" aria-label="Gregory M. Kurtzer social profiles">
+                    <a
+                      href="https://www.linkedin.com/in/gmkurtzer"
+                      aria-label="Gregory M. Kurtzer on LinkedIn"
+                      title="LinkedIn"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.54V9H7.1v11.45Z"
+                        />
+                      </svg>
+                    </a>
+                    <a
+                      href="https://x.com/gmkurtzer"
+                      aria-label="Gregory M. Kurtzer on X/Twitter"
+                      title="X/Twitter"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </figcaption>
+            </figure>
+            <p>
+              Today, companies building AI do not have a common, community-maintained training
+              foundation where people and organizations can continuously contribute, review,
+              correct, and expand the work together. OpenWALDO creates that shared foundation: a
+              living public corpus and toolchain that every contribution can strengthen, every
+              participant can leverage, and the entire ecosystem can build upon.
+            </p>
+            <a class="text-action" href="/posts/?p=2026-07-30-why-openwaldo-exists"
+              >Read the origin story <span>↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section stewardship-section dark-section">
+        <div class="shell stewardship-content">
+          <p class="kicker">Project stewardship</p>
+          <h2>
+            <span>Founded by Gregory M. Kurtzer.</span> <em>Sponsored by CIQ.</em>
+            <span>Built by the OpenWALDO community.</span>
+          </h2>
+          <p>
+            CIQ contributes engineering, infrastructure, and operational support to help OpenWALDO
+            grow. The project is developed in public as a shared community foundation: contributions
+            are reviewed openly, and sponsorship does not provide exclusive access to the corpus.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-top community-footer">
+        <div>
+          <p class="kicker light">OpenWALDO is the AI community.</p>
+          <h2>Build it together.</h2>
+        </div>
+        <div class="footer-actions">
+          <a
+            class="button primary"
+            href="https://join.slack.com/t/openwaldo/shared_invite/zt-44vpjma2b-FaOktN~r6dsZ_PbECGRi0g"
+            data-umami-event="About: Join Slack"
+            >Join the OpenWALDO Slack <span>↗</span></a
+          ><a class="button inverse" href="/join/#corpus"
+            >Participate in the corpus <span>↗</span></a
+          ><a class="button inverse" href="/join/#spread"
+            >Spread the word <span>↗</span></a
+          >
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <a class="brand" href="/"
+          ><img class="provenance-mark" src="/assets/mark.svg" alt="" /><span
+            >Open<strong>WALDO</strong></span
+          ></a
+        >
+        <div>
+          <a href="/">Index</a><a href="/corpus/">Corpus</a
+          ><a href="/training/">Training</a><a href="/contributing/">Contributing</a
+          ><a href="/posts/">Posts</a><a href="/about/">About</a
+          ><a href="/join/">Join</a><a href="/faq/">FAQ</a
+          ><a href="/definitions/">Definitions</a>
+        </div>
+        <div class="origin-socials footer-project-links" aria-label="OpenWALDO profiles">
+          <a href="https://x.com/openwaldo" rel="me" aria-label="OpenWALDO on X/Twitter" title="X/Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.51 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></svg></a>
+          <a href="https://github.com/openwaldo" rel="me" aria-label="OpenWALDO on GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.41-1.26.74-1.55-2.57-.29-5.27-1.28-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.38-5.29 5.67.42.36.79 1.07.79 2.16v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg></a>
+          <a href="https://huggingface.co/openwaldo" rel="me" aria-label="OpenWALDO on Hugging Face" title="Hugging Face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.8a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm9.6 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM12 17c3.1 0 5.5-2 6.2-4.8l-1.9-.5c-.5 1.9-2.1 3.3-4.3 3.3s-3.8-1.4-4.3-3.3l-1.9.5C6.5 15 8.9 17 12 17Z"/><path d="M4.8 13.6c-1.6 0-3-1.1-3.4-2.7l1.9-.5c.2.8.9 1.2 1.5 1.2V4.8h2v8.8h-2Zm14.4 0h-2V4.8h2v6.8c.6 0 1.3-.4 1.5-1.2l1.9.5c-.4 1.6-1.8 2.7-3.4 2.7Z"/></svg></a>
+        </div>
+      </div>
+      <p class="shell footer-attribution">
+        Founded by Gregory M. Kurtzer <span>·</span> Sponsored by
+        <a href="https://ciq.com/">CIQ</a> <span>·</span> Built by the OpenWALDO community.
+      </p>
+    </footer>
+    <script src="/assets/main.js"></script>
+  </body>
+</html>
