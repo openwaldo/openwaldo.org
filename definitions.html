@@ -125,13 +125,30 @@
                 </p>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section definition-section">
+        <div class="shell">
+          <div class="definition-chapter-head">
+            <div>
+              <p class="kicker">02 / Capability stages</p>
+              <h2>The stages of <em>AI capability.</em></h2>
+            </div>
+            <p>
+              These are distinct milestones: reasoning broadly, learning persistently from
+              experience, and improving the machinery that produces intelligence.
+            </p>
+          </div>
+          <div class="definition-list">
             <article class="definition-entry" id="agi">
-              <div class="definition-term"><span>01.04</span><h3>AGI</h3></div>
+              <div class="definition-term"><span>02.01</span><h3>AGI</h3></div>
               <div class="definition-copy">
                 <p>
-                  <strong>Artificial general intelligence</strong> is an AI system that can learn,
-                  reason, adapt, and apply what it learns to novel problems across a broad range of
-                  domains at or above capable-human level.
+                  <strong>Artificial general intelligence</strong> is an AI system that can reason,
+                  adapt, and apply knowledge to novel problems across a broad range of domains at
+                  or above capable-human level.
                 </p>
                 <p>
                   AGI describes the breadth and depth of capability. It does not necessarily imply
@@ -140,9 +157,19 @@
                 </p>
               </div>
             </article>
+            <article class="definition-entry" id="continual-learning">
+              <div class="definition-term"><span>02.02</span><h3>Continual learning</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The ability of an AI system to acquire and retain new knowledge or skills through
+                  experience after deployment, rather than adapting only within temporary context
+                  or depending on a separate, human-directed retraining process.
+                </p>
+              </div>
+            </article>
             <article class="definition-entry" id="recursive-self-improvement">
               <div class="definition-term">
-                <span>01.05</span><h3>Recursive self-improvement</h3>
+                <span>02.03</span><h3>Recursive self-improvement</h3>
               </div>
               <div class="definition-copy">
                 <p>
@@ -152,11 +179,10 @@
                   progressively less human direction.
                 </p>
                 <p>
-                  OpenWALDO informally calls this the <strong>Skynet Effect</strong>: the point at
-                  which AI moves beyond learning from people and begins systematically improving
-                  how it builds itself. The name is intentionally playful; recursive
-                  self-improvement does not itself imply consciousness, hostility, or loss of
-                  human control.
+                  Continual learning changes what an AI knows; recursive self-improvement changes
+                  how it becomes more capable. OpenWALDO playfully calls that transition the
+                  <strong>Skynet Effect</strong>. It implies neither consciousness nor hostility,
+                  only an AI systematically improving how it builds itself.
                 </p>
               </div>
             </article>
@@ -168,7 +194,7 @@
         <div class="shell">
           <div class="definition-chapter-head">
             <div>
-              <p class="kicker">02 / Model development</p>
+              <p class="kicker">03 / Model development</p>
               <h2>How models are <em>built and used.</em></h2>
             </div>
             <p>
@@ -178,7 +204,7 @@
           </div>
           <div class="definition-list">
             <article class="definition-entry" id="training">
-              <div class="definition-term"><span>02.01</span><h3>Training</h3></div>
+              <div class="definition-term"><span>03.01</span><h3>Training</h3></div>
               <div class="definition-copy">
                 <p>
                   The process of presenting source material to a model and optimizing its weights
@@ -189,7 +215,7 @@
               </div>
             </article>
             <article class="definition-entry" id="inference">
-              <div class="definition-term"><span>02.02</span><h3>Inference</h3></div>
+              <div class="definition-term"><span>03.02</span><h3>Inference</h3></div>
               <div class="definition-copy">
                 <p>
                   Running a trained model to produce an output from an input. Inference may happen
@@ -199,7 +225,7 @@
               </div>
             </article>
             <article class="definition-entry" id="open-weights">
-              <div class="definition-term"><span>02.03</span><h3>Open weights</h3></div>
+              <div class="definition-term"><span>03.03</span><h3>Open weights</h3></div>
               <div class="definition-copy">
                 <p>
                   Model weights made available under a license that permits some level of use,
@@ -214,14 +240,13 @@
               </div>
             </article>
             <article class="definition-entry" id="model-compose">
-              <div class="definition-term"><span>02.04</span><h3>Model compose</h3></div>
+              <div class="definition-term"><span>03.04</span><h3>Model compose</h3></div>
               <div class="definition-copy">
                 <p>
                   A portable, reviewable definition of a model build. It can describe the
                   architecture or starting model, corpus mixture, training stages, objectives,
                   budgets, and evaluation plan while leaving machine-specific execution details
                   to the environment running it.
-                </p>
               </div>
             </article>
           </div>
@@ -232,7 +257,7 @@
         <div class="shell">
           <div class="definition-chapter-head">
             <div>
-              <p class="kicker">03 / Agent systems</p>
+              <p class="kicker">04 / Agent systems</p>
               <h2>How models <em>act.</em></h2>
             </div>
             <p>
@@ -242,7 +267,7 @@
           </div>
           <div class="definition-list">
             <article class="definition-entry" id="agent">
-              <div class="definition-term"><span>03.01</span><h3>Agent</h3></div>
+              <div class="definition-term"><span>04.01</span><h3>Agent</h3></div>
               <div class="definition-copy">
                 <p>
                   An AI system that uses one or more models to pursue a goal across multiple steps.
@@ -252,7 +277,7 @@
               </div>
             </article>
             <article class="definition-entry" id="agent-harness">
-              <div class="definition-term"><span>03.02</span><h3>Agent harness</h3></div>
+              <div class="definition-term"><span>04.02</span><h3>Agent harness</h3></div>
               <div class="definition-copy">
                 <p>
                   The software surrounding a model that manages prompts, context, memory, tools,
@@ -263,7 +288,7 @@
               </div>
             </article>
             <article class="definition-entry" id="api">
-              <div class="definition-term"><span>03.03</span><h3>API</h3></div>
+              <div class="definition-term"><span>04.03</span><h3>API</h3></div>
               <div class="definition-copy">
                 <p>
                   An <strong>application programming interface</strong> is a defined way for
@@ -282,7 +307,7 @@
         <div class="shell">
           <div class="definition-chapter-head">
             <div>
-              <p class="kicker">04 / The open foundation</p>
+              <p class="kicker">05 / The open foundation</p>
               <h2>What makes AI <em>open source.</em></h2>
             </div>
             <p>
@@ -292,7 +317,7 @@
           </div>
           <div class="definition-list">
             <article class="definition-entry" id="open-source">
-              <div class="definition-term"><span>04.01</span><h3>Open source</h3></div>
+              <div class="definition-term"><span>05.01</span><h3>Open source</h3></div>
               <div class="definition-copy">
                 <p>
                   A way of building in which the source is accessible under licenses that allow
@@ -307,7 +332,7 @@
               </div>
             </article>
             <article class="definition-entry" id="corpus">
-              <div class="definition-term"><span>04.02</span><h3>Corpus</h3></div>
+              <div class="definition-term"><span>05.02</span><h3>Corpus</h3></div>
               <div class="definition-copy">
                 <p>
                   An organized collection of source material used to train or evaluate a model. A
@@ -317,7 +342,7 @@
               </div>
             </article>
             <article class="definition-entry" id="open-tooling">
-              <div class="definition-term"><span>04.03</span><h3>Open tooling</h3></div>
+              <div class="definition-term"><span>05.03</span><h3>Open tooling</h3></div>
               <div class="definition-copy">
                 <p>
                   The openly licensed software used to ingest and curate data, compose and train
@@ -328,7 +353,7 @@
               </div>
             </article>
             <article class="definition-entry" id="community-involvement">
-              <div class="definition-term"><span>04.04</span><h3>Community involvement</h3></div>
+              <div class="definition-term"><span>05.04</span><h3>Community involvement</h3></div>
               <div class="definition-copy">
                 <p>
                   Meaningful participation in the work and governance of a shared AI foundation.
@@ -346,7 +371,7 @@
         <div class="shell">
           <div class="definition-chapter-head">
             <div>
-              <p class="kicker">05 / Accountability</p>
+              <p class="kicker">06 / Accountability</p>
               <h2>How models <em>earn trust.</em></h2>
             </div>
             <p>
@@ -356,7 +381,7 @@
           </div>
           <div class="definition-list">
             <article class="definition-entry" id="provenance">
-              <div class="definition-term"><span>05.01</span><h3>Provenance</h3></div>
+              <div class="definition-term"><span>06.01</span><h3>Provenance</h3></div>
               <div class="definition-copy">
                 <p>
                   The evidence chain connecting an artifact to its origins and transformations. In
@@ -366,7 +391,7 @@
               </div>
             </article>
             <article class="definition-entry" id="ai-bom">
-              <div class="definition-term"><span>05.02</span><h3>AI Bill of Materials</h3></div>
+              <div class="definition-term"><span>06.02</span><h3>AI Bill of Materials</h3></div>
               <div class="definition-copy">
                 <p>
                   A verifiable inventory of the inputs, processes, and outputs behind an AI model.
