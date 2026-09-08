@@ -448,7 +448,13 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 }
 .split-head > p, .section-head > p { font-size: 16px; line-height: 1.72; }
 
-.site-header { position: absolute; color: var(--paper); border-color: rgba(244,241,232,.22); }
+.site-header {
+  position: fixed;
+  color: var(--paper);
+  border-color: rgba(244,241,232,.3);
+  background: #111815;
+  box-shadow: 0 7px 20px rgba(0,0,0,.16);
+}
 .nav-shell { height: 76px; }
 .brand { gap: 10px; font-size: 23px; letter-spacing: -.015em; }
 .brand strong { font-weight: 600; }
@@ -1671,4 +1677,24 @@ body.dialog-open { overflow: hidden; }
   .source-record-head { display: block; }
   .source-record-head span { display: block; margin-bottom: 14px; }
   .dialog-actions .button { width: 100%; }
+}
+
+/* Definitions stacked sticky navigation */
+.definitions-page {
+  --definitions-header-height: 76px;
+  --definitions-index-height: 84px;
+}
+.definitions-page .definition-index {
+  top: var(--definitions-header-height);
+}
+.definitions-page .section.definition-section,
+.definitions-page .definition-entry {
+  scroll-margin-top: calc(var(--definitions-header-height) + var(--definitions-index-height));
+}
+
+@media (max-width: 700px) {
+  .definitions-page {
+    --definitions-header-height: 58px;
+    --definitions-index-height: 61px;
+  }
 }
