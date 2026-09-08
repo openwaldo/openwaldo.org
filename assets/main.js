@@ -105,6 +105,29 @@
   });
 })();
 
+// Directory URLs are canonical on the deployed site. When pages are opened
+// directly from disk, point those same links to their physical index files so
+// the complete site remains navigable without a local web server.
+if (window.location.protocol === 'file:') {
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    const link = event.target.closest?.('a[href]');
+    if (!link || link.target || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    const href = link.getAttribute('href') || '';
+    if (!href || href.startsWith('#')) return;
+
+    const destination = new URL(href, window.location.href);
+    if (destination.protocol !== 'file:' || !destination.pathname.endsWith('/')) return;
+
+    event.preventDefault();
+    destination.pathname += 'index.html';
+    window.location.assign(destination.href);
+  });
+}
+
 // Shared keyboard affordance for every static page using the primary theme.
 const mainContent = document.querySelector('main');
 if (mainContent) {
