@@ -12,17 +12,17 @@
   const actionFor = (element) => {
     const href = element.getAttribute?.('href') || '';
     if (/join\.slack\.com/i.test(href)) return 'join-slack';
-    if (/(?:^|\/)browser\/(?:$|[?#])/i.test(href)) return 'browse-corpus';
-    if (/(?:^|\/)training\/(?:$|[?#])/i.test(href)) return 'explore-training';
-    if (/(?:^|\/)contributing\/(?:$|[?#])/i.test(href)) return 'contribute-data';
+    if (/(?:^|\/)browser\/?(?:$|[?#])/i.test(href)) return 'browse-corpus';
+    if (/(?:^|\/)training\/?(?:$|[?#])/i.test(href)) return 'explore-training';
+    if (/(?:^|\/)contributing\/?(?:$|[?#])/i.test(href)) return 'contribute-data';
     if (/github\.com\/openwaldo/i.test(href)) return 'open-github';
     if (/x\.com\/openwaldo|huggingface\.co\/openwaldo/i.test(href)) return 'follow-project';
-    if (/(?:^|\/)about\/(?:$|[?#])/i.test(href)) return 'read-about';
+    if (/(?:^|\/)about\/?(?:$|[?#])/i.test(href)) return 'read-about';
     if (/linkedin\.com\/sharing|x\.com\/intent|bsky\.app\/intent|reddit\.com\/submit/i.test(href)) {
       return 'share-project';
     }
     if (element.matches?.('[data-share-community], [data-copy-community]')) return 'share-project';
-    if (/(?:^|\/)join\/(?:$|[?#])|^#(?:join|ways|corpus|project|spread)$/i.test(href)) {
+    if (/(?:^|\/)join\/?(?:$|[?#])|^#(?:join|ways|corpus|project|spread)$/i.test(href)) {
       return 'explore-community';
     }
     return '';
@@ -120,10 +120,14 @@ if (window.location.protocol === 'file:') {
     if (!href || href.startsWith('#')) return;
 
     const destination = new URL(href, window.location.href);
-    if (destination.protocol !== 'file:' || !destination.pathname.endsWith('/')) return;
+    if (destination.protocol !== 'file:') return;
+
+    const segment = destination.pathname.split('/').pop();
+    const isDirectory = destination.pathname.endsWith('/') || (segment && !segment.includes('.'));
+    if (!isDirectory) return;
 
     event.preventDefault();
-    destination.pathname += 'index.html';
+    destination.pathname = `${destination.pathname.replace(/\/?$/, '/')}index.html`;
     window.location.assign(destination.href);
   });
 }
