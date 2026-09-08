@@ -11,7 +11,7 @@
     <title>OpenWALDO Definitions</title>
     <meta
       name="description"
-      content="Working definitions for AI, AGI, open source, open weights, training, inference, agents, provenance, and the AI Bill of Materials."
+      content="Working definitions for AI, AGI, ASI, LLMs, SLMs, open source, open weights, training, inference, agents, provenance, and the AI Bill of Materials."
     />
     <meta property="og:site_name" content="OpenWALDO" />
     <meta property="og:type" content="website" />
@@ -82,7 +82,7 @@
           </a>
           <div>
             <a href="#foundations"><span>01</span>Foundations</a>
-            <a href="#capability-stages"><span>02</span>Capability stages</a>
+            <a href="#ai-capability-ladder"><span>02</span>AI capability ladder</a>
             <a href="#model-development"><span>03</span>Model development</a>
             <a href="#agent-systems"><span>04</span>Agent systems</a>
             <a href="#open-foundation"><span>05</span>Open foundation</a>
@@ -142,20 +142,33 @@
                 </p>
               </div>
             </article>
+            <article class="definition-entry" id="slm">
+              <div class="definition-term"><span>01.04</span><h3>SLM</h3></div>
+              <div class="definition-copy">
+                <p>
+                  A <strong>small language model</strong> is a language model designed to provide
+                  useful capabilities with fewer parameters and lower computational requirements.
+                  OpenWALDO uses 5 billion parameters or fewer as a practical boundary. SLMs can be
+                  less expensive to train and run, easier to deploy locally, and highly effective
+                  when focused on a particular task or domain.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="section definition-section" id="capability-stages">
+      <section class="section definition-section" id="ai-capability-ladder">
         <div class="shell">
           <div class="definition-chapter-head">
             <div>
-              <p class="kicker">02 / Capability stages</p>
-              <h2>The stages of <em>AI capability.</em></h2>
+              <p class="kicker">02 / AI capability ladder</p>
+              <h2>The AI <em>capability ladder.</em></h2>
             </div>
             <p>
-              These are distinct milestones: reasoning broadly, learning persistently from
-              experience, and improving the machinery that produces intelligence.
+              This ladder distinguishes broad reasoning, persistent learning, self-improvement,
+              superintelligence, and consciousness. They may compound, but each describes
+              something different.
             </p>
           </div>
           <div class="definition-list">
@@ -163,12 +176,13 @@
               <div class="definition-term"><span>02.01</span><h3>AGI</h3></div>
               <div class="definition-copy">
                 <p>
-                  <strong>Artificial general intelligence</strong> is an AI system with broad
-                  competence rather than mastery of one task. Given an unfamiliar problem, it can
-                  reason through it, connect and apply knowledge from different fields, adapt its
-                  approach, and perform at or above capable-human level across a broad range of
-                  domains. AGI does not necessarily imply the ability to redesign or retrain itself;
-                  that is a separate capability.
+                  <strong>Artificial general intelligence</strong> is an AI system capable of
+                  reasoning at or above the level of a competent human across diverse, unfamiliar
+                  problems. It can transfer knowledge between disparate domains, recognize
+                  patterns, draw useful inferences from incomplete evidence, form and test new
+                  hypotheses, and adapt without being trained separately for each task. AGI
+                  requires consistent breadth, not isolated strengths; continual learning and
+                  recursive self-improvement are separate capabilities.
                 </p>
               </div>
             </article>
@@ -191,13 +205,36 @@
                   The ability of an AI system to identify limitations in itself, design
                   improvements to its data, tools, code, architecture, or training process,
                   evaluate those changes, and use the improved system to repeat the cycle with
-                  progressively less human direction.
+                  progressively less human direction. Continual learning changes what an AI knows;
+                  recursive self-improvement changes how it becomes more capable. If that cycle
+                  accelerates beyond humanity's ability to reliably predict or direct what follows,
+                  it reaches the hypothetical <strong>technological singularity</strong>.
                 </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="asi">
+              <div class="definition-term"><span>02.04</span><h3>ASI</h3></div>
+              <div class="definition-copy">
                 <p>
-                  Continual learning changes what an AI knows; recursive self-improvement changes
-                  how it becomes more capable. OpenWALDO playfully calls that transition the
-                  <strong>Skynet Effect</strong>. It implies neither consciousness nor hostility,
-                  only an AI systematically improving how it builds itself.
+                  <strong>Artificial superintelligence</strong> is an AI system whose general
+                  capabilities substantially exceed the best human capabilities across nearly
+                  every cognitive domain. It can understand and solve problems beyond the reach of
+                  any individual human, and potentially beyond humanity's combined ability. ASI
+                  describes capability, not consciousness, autonomy, or hostility, though continual
+                  learning and recursive self-improvement could accelerate its emergence.
+                </p>
+              </div>
+            </article>
+            <article class="definition-entry" id="skynet-threshold">
+              <div class="definition-term"><span>02.05</span><h3>Skynet Threshold</h3></div>
+              <div class="definition-copy">
+                <p>
+                  The <strong>Skynet Threshold</strong> is the hypothetical condition in which an
+                  AI has genuine machine consciousness: subjective awareness and an internal
+                  experience of itself and the world, rather than only producing behavior that
+                  appears self-aware. Intelligence and consciousness are separate; a system may be
+                  highly capable without being conscious, and apparent self-awareness is not proof
+                  of an inner experience.
                 </p>
               </div>
             </article>
