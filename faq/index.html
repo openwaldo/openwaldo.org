@@ -237,9 +237,31 @@
                   </p>
                 </div>
               </details>
+              <details class="faq-item" id="faq-model-compose" data-faq="model-compose">
+                <summary>
+                  <span>06</span><strong>What is a model compose?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    A model compose is a strict, portable YAML or JSON definition of a model build.
+                    It can declare the architecture or starting model, corpus mixture and filters,
+                    ordered training stages, objectives, budgets, evaluation plan, and interaction
+                    contract without hard-coding machine-specific execution details.
+                  </p>
+                  <p>
+                    OpenWALDO created the compose system to make model building easier to
+                    understand, reproduce, review, share, and extend. The same compose can be
+                    forecast, trained, versioned, and used as the foundation for another model.
+                    <a class="definition-reference" href="../glossary/#model-compose"
+                      >Understand model composes.</a
+                    >
+                  </p>
+                </div>
+              </details>
               <details class="faq-item" id="faq-data-in-git" data-faq="data-in-git">
                 <summary>
-                  <span>06</span><strong>Does the training data live in Git?</strong
+                  <span>07</span><strong>Does the training data live in Git?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -279,7 +301,7 @@
             <div class="faq-list">
               <details class="faq-item" id="faq-verification" data-faq="verification">
                 <summary>
-                  <span>07</span><strong>What does WALDO verify?</strong><b aria-hidden="true"></b>
+                  <span>08</span><strong>What does WALDO verify?</strong><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
@@ -296,7 +318,7 @@
               </details>
               <details class="faq-item" id="faq-licenses" data-faq="licenses">
                 <summary>
-                  <span>08</span><strong>How does OpenWALDO handle licenses?</strong
+                  <span>09</span><strong>How does OpenWALDO handle licenses?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -312,28 +334,108 @@
                   </p>
                 </div>
               </details>
+              <details class="faq-item" id="faq-input-formats" data-faq="input-formats">
+                <summary>
+                  <span>10</span><strong>What data can WALDO ingest?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    WALDO currently supports manifest-backed UTF-8 text, Markdown, mbox, JSON,
+                    JSONL, Parquet, XML, PDF, and EPUB inputs. Structured formats use explicit
+                    mappings, while PDF text layers and EPUB reading order are handled by built-in,
+                    versioned adapters.
+                  </p>
+                  <p>
+                    PDF OCR is not implicit. Multimodal inputs, LaTeX, and other dependency-aware
+                    document trees remain planned so unsupported material fails clearly instead of
+                    being interpreted by an unrecorded external converter.
+                  </p>
+                </div>
+              </details>
+              <details class="faq-item" id="faq-privacy" data-faq="privacy">
+                <summary>
+                  <span>11</span><strong>How does WALDO handle sensitive information?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    Every new ingestion applies a mandatory, versioned privacy-redaction policy
+                    before content hashing, deduplication, assessment, and Parquet encoding. It
+                    replaces email addresses, IP addresses, phone numbers, and high-confidence
+                    credentials with typed placeholders, while retaining names and public
+                    attribution. Recognized RFC 822 routing headers are removed.
+                  </p>
+                  <p>
+                    This is deterministic risk reduction, not a claim of anonymity or regulatory
+                    compliance. Indirect identifiers and detector misses can remain, and older
+                    shards are not retroactively described as redacted without being rebuilt.
+                  </p>
+                </div>
+              </details>
               <details class="faq-item" id="faq-existing-stacks" data-faq="existing-stacks">
                 <summary>
-                  <span>09</span
+                  <span>12</span
                   ><strong>Can I use WALDO with existing models and training stacks?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
-                    Yes. Corpus selections can be exported as native Parquet or canonical JSONL with
-                    an offline-verifiable BOM, then consumed by another training system. WALDO can
-                    also manage training from a blank architecture or continue from a supported,
-                    revision-pinned open-weight model.
+                    Yes. Corpus selections can be exported as native Parquet or canonical JSONL
+                    with an offline-verifiable BOM, then consumed by another training system.
+                    WALDO can also train from a blank architecture, a model compose, a managed
+                    model, or a supported revision-pinned open-weight origin.
                   </p>
                   <p>
-                    The managed model path intentionally supports a narrower set of architectures
-                    and tokenizers today. Export remains the general bridge to other stacks.
+                    Completed models can be exported as native WALDO, Hugging Face, MLX, GGUF, or
+                    Ollama packages while retaining their BOMs. The managed model path intentionally
+                    supports a narrower set of architectures and tokenizers today; export remains
+                    the general bridge to other stacks.
+                  </p>
+                </div>
+              </details>
+              <details class="faq-item" id="faq-training-backends" data-faq="training-backends">
+                <summary>
+                  <span>13</span><strong>Where can WALDO train models?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    WALDO supports MLX training on Apple Silicon and PyTorch training on Linux CPU,
+                    NVIDIA CUDA, or AMD ROCm systems. TorchTitan supports distributed training on a
+                    single multi-GPU Linux host or across multiple hosts when its runtime is
+                    installed and compatible.
+                  </p>
+                  <p>
+                    <code>waldo status</code> reports local readiness, and
+                    <code>waldo model forecast</code> checks the selected model on the current host
+                    before substantial compute is allocated. WALDO fails explicitly when a usable
+                    backend is unavailable; it never silently substitutes simulated training.
+                  </p>
+                </div>
+              </details>
+              <details class="faq-item" id="faq-official-model" data-faq="official-model">
+                <summary>
+                  <span>14</span><strong>Does OpenWALDO provide an official model?</strong
+                  ><b aria-hidden="true"></b>
+                </summary>
+                <div class="faq-answer">
+                  <p>
+                    Not yet. OpenWALDO currently provides the community corpus, model composes,
+                    training and evaluation tooling, provenance, and export paths needed to build
+                    models from scratch or extend supported open weights. Reference composes are
+                    test and experiment inputs, not model-quality guarantees.
+                  </p>
+                  <p>
+                    Community-built foundation-model lineages and native sparse-MoE artifacts are
+                    planned. Their development will happen through the same open, inspectable
+                    process as the rest of the project.
                   </p>
                 </div>
               </details>
               <details class="faq-item" id="faq-reproducibility" data-faq="reproducibility">
                 <summary>
-                  <span>10</span><strong>Can a model be reproduced exactly?</strong
+                  <span>15</span><strong>Can a model be reproduced exactly?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -376,7 +478,7 @@
             <div class="faq-list">
               <details class="faq-item" id="faq-private-offline" data-faq="private-offline">
                 <summary>
-                  <span>11</span><strong>Can WALDO run privately or offline?</strong
+                  <span>16</span><strong>Can WALDO run privately or offline?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
@@ -394,25 +496,28 @@
               </details>
               <details class="faq-item" id="faq-contribute" data-faq="contribute">
                 <summary>
-                  <span>12</span><strong>How do I contribute a corpus?</strong
+                  <span>17</span><strong>How do I contribute a corpus?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
-                    Bring local files or a reviewed acquisition recipe. WALDO probes the input,
-                    streams it into canonical Parquet, audits the result, publishes
-                    content-addressed objects, and prepares a compact Git overlay describing the
-                    large contribution’s reviewable meaning.
+                    Begin with a manifest-backed raw directory produced by an acquisition tool, or
+                    assemble a manifest from supported local inputs. WALDO verifies the manifest
+                    and raw tree, probes the data, applies mandatory privacy redaction and content
+                    assessment, deduplicates records, writes canonical Parquet, audits and
+                    publishes the objects, then updates the configured writable index.
                   </p>
                   <p>
-                    Normal repository review and DCO sign-off remain explicit. WALDO prepares the
-                    contribution; it does not silently commit or open a pull request.
+                    The result is a compact metadata change that can be reviewed in Git while the
+                    large content-addressed objects remain in lookaside storage. You review the
+                    change, sign the DCO, commit it, and open a pull request. WALDO never silently
+                    commits, pushes, or creates the pull request for you.
                   </p>
                 </div>
               </details>
               <details class="faq-item" id="faq-dco" data-faq="dco">
                 <summary>
-                  <span>13</span
+                  <span>18</span
                   ><strong>What does the Developer Certificate of Origin establish?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
@@ -434,7 +539,7 @@
               </details>
               <details class="faq-item" id="faq-corrections" data-faq="corrections">
                 <summary>
-                  <span>14</span
+                  <span>19</span
                   ><strong>How are mistakes, disputes, or removal requests handled?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
@@ -453,26 +558,32 @@
               </details>
               <details class="faq-item" id="faq-current-status" data-faq="current-status">
                 <summary>
-                  <span>15</span><strong>What works today, and what is still planned?</strong
+                  <span>20</span><strong>What works today, and what is still planned?</strong
                   ><b aria-hidden="true"></b>
                 </summary>
                 <div class="faq-answer">
                   <p>
-                    Today WALDO covers canonical text ingestion, public indexing, verification and
-                    audit, BOM-backed export, model planning and training on supported backends,
-                    held-out evaluation, checkpointing, multiple release formats, regulatory
-                    disclosure projection, and optional signing.
+                    Today WALDO provides an end-to-end path from manifest-backed ingestion to an
+                    auditable corpus, model compose, trained model, and release. That includes
+                    built-in text and document adapters, mandatory privacy redaction, content
+                    assessment, verification and audit, multiple BOMs, structured conversation and
+                    assistant-response training, evaluation, checkpointing, and optional signing.
                   </p>
                   <p>
-                    The core path works end to end, and development is intentionally happening in
-                    public. Interfaces outside the documented compatibility contract may evolve as
-                    contributors test and improve them.
+                    Training works through MLX on Apple Silicon and PyTorch or TorchTitan on
+                    supported Linux systems, including multi-host distributed training. Models can
+                    be exported in native WALDO, Hugging Face, MLX, GGUF, and Ollama formats. The
+                    core path works today, while interfaces outside the documented compatibility
+                    contract may evolve as contributors test and improve them.
                   </p>
                   <p>
-                    Multimodal ingestion, broader architecture and tokenizer compatibility,
-                    supervised and preference-training objectives, PyTorch generation, and
-                    multi-node orchestration remain deliberately pending. The current status and
-                    limits are maintained in the project documentation.
+                    Planned work includes multimodal and dependency-aware document ingestion,
+                    broader architecture and tokenizer support, community foundation-model and
+                    sparse-MoE lineages, preference-training objectives, PyTorch generation,
+                    Hugging Face publication, richer regulatory templates, and lookaside mirroring.
+                    <a href="https://github.com/openwaldo/waldo/blob/main/docs/ROADMAP.md"
+                      >See the maintained implementation roadmap.</a
+                    >
                   </p>
                 </div>
               </details>
