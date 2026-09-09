@@ -791,7 +791,7 @@ code { font-size: 10px; }
 .not-found-record dt { color: rgba(244,241,232,.4); }
 .not-found-record dd { color: rgba(244,241,232,.76); }
 
-.faq-section { padding: 0; background: var(--paper); }
+.faq-section { --definition-heading: #e8e3d7; padding: 0; background: var(--paper); }
 .faq-section:last-of-type { padding-bottom: 96px; }
 .faq-group { display: block; border: 0; }
 .faq-group-label { display: none; }
