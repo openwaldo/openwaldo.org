@@ -1,7 +1,7 @@
 // Preserve query parameters and anchors when legacy page URLs move.
 (() => {
   const target = document.currentScript?.dataset.redirect || '';
-  if (!/^[a-z0-9/-]+\/$/i.test(target)) return;
+  if (!/^(?:\.\.\/)?[a-z0-9/-]+\/$/i.test(target)) return;
 
   const destination = new URL(target, window.location.href);
   if (window.location.protocol === 'file:') destination.pathname += 'index.html';

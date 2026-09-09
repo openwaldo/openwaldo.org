@@ -56,7 +56,7 @@ const publicPages = [
   '../join/index.html',
   '../contributing/index.html',
   '../corpus/index.html',
-  '../definitions/index.html',
+  '../glossary/index.html',
   '../faq/index.html',
   '../index.html',
   '../posts/index.html',
