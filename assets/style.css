@@ -495,7 +495,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .hero-principles small { display: block; margin-bottom: 8px; color: rgba(244,241,232,.5); font: 500 9px/1 var(--font-mono); letter-spacing: .14em; }
 .hero-principles strong { display: block; font-size: clamp(23px, 2.3vw, 32px); line-height: 1; letter-spacing: -.04em; font-weight: 600; white-space: nowrap; }
 .hero-principles b { color: var(--red); font-weight: 700; }
-.hero-copy .hero-name { margin-top: .25em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
+.hero-copy .hero-name { margin-top: .25em; margin-left: -.055em; color: var(--paper); font-size: clamp(72px, 9vw, 116px); line-height: .9; letter-spacing: -.06em; font-weight: 650; }
 .hero-copy .hero-name b { color: var(--red); font-weight: 700; }
 .hero-subtitle { max-width: 720px; margin: 30px 0 0; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; letter-spacing: -.025em; font-weight: 500; }
 .hero-lede { max-width: 680px; margin-top: 22px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; letter-spacing: -.01em; }
