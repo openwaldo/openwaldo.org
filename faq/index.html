@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="../assets/style.css" />
     <script defer src="../assets/analytics.js"></script>
   </head>
-  <body>
+  <body id="top" class="faq-page">
     <header class="site-header">
       <div class="shell nav-shell">
         <a class="brand" href="../" aria-label="OpenWALDO home"
@@ -75,12 +75,28 @@
         </div>
       </section>
 
-      <section class="section faq-section">
+      <nav class="definition-index faq-index" aria-label="FAQ sections">
         <div class="shell">
-          <div class="section-head split-head">
+          <a class="definition-index-top" href="#top">
+            <span aria-hidden="true">↑</span>
+            Jump to top
+          </a>
+          <div>
+            <a href="#foundation"><span>01</span>Foundation</a>
+            <a href="#use-and-verification"><span>02</span>Use and verification</a>
+            <a href="#operation-and-participation"
+              ><span>03</span>Operation and participation</a
+            >
+          </div>
+        </div>
+      </nav>
+
+      <section class="section faq-section" id="foundation">
+        <div class="shell">
+          <div class="definition-chapter-head faq-chapter-head">
             <div>
-              <p class="kicker">Start here</p>
-              <h2>Understand<br />the project.</h2>
+              <p class="kicker">01 / Foundation</p>
+              <h2>Understand <em>the project.</em></h2>
             </div>
             <p>
               The short version: OpenWALDO is the first open-source AI project and community.
@@ -243,12 +259,12 @@
         </div>
       </section>
 
-      <section class="section faq-section faq-section-alt dark-section">
+      <section class="section faq-section" id="use-and-verification">
         <div class="shell">
-          <div class="section-head split-head">
+          <div class="definition-chapter-head faq-chapter-head">
             <div>
-              <p class="kicker">Use the evidence</p>
-              <h2>Select carefully.<br />Verify precisely.</h2>
+              <p class="kicker">02 / Use and verification</p>
+              <h2>Select carefully. <em>Verify precisely.</em></h2>
             </div>
             <p>
               WALDO separates recorded claims from machine checks so users can understand exactly
@@ -339,12 +355,12 @@
         </div>
       </section>
 
-      <section class="section faq-section">
+      <section class="section faq-section" id="operation-and-participation">
         <div class="shell">
-          <div class="section-head split-head">
+          <div class="definition-chapter-head faq-chapter-head">
             <div>
-              <p class="kicker">Work in the open</p>
-              <h2>Use it privately.<br />Improve it publicly.</h2>
+              <p class="kicker">03 / Operation and participation</p>
+              <h2>Use it privately. <em>Improve it publicly.</em></h2>
             </div>
             <p>
               The public commons is one deployment. The same formats and verification model can
