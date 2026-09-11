@@ -593,7 +593,7 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .chapter-copy .kicker { margin-bottom: 16px; }
 .chapter-copy h2 { max-width: 700px; margin: 0 0 36px; font-size: clamp(43px, 5.2vw, 70px); line-height: .96; letter-spacing: -.05em; font-weight: 600; }
 .chapter-copy > p:not(.kicker) { max-width: 640px; margin: 0 0 20px; color: var(--muted); font-size: 17px; line-height: 1.75; }
-.record-sheet { padding: 30px; border: 1px solid var(--ink); border-top: 5px solid var(--red); background: var(--white); }
+.record-sheet { padding: 30px; border: 1px solid var(--ink); border-top: 5px solid var(--red); background: var(--white); color: var(--ink); }
 .sheet-head { display: flex; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--ink); font: 400 9px var(--font-mono); letter-spacing: .06em; }
 .sheet-head b { color: var(--red); font-weight: 400; }
 .sheet-head b .live-dot { margin-right: 3px; }
