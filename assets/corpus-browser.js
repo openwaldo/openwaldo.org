@@ -539,21 +539,38 @@
     return manifest;
   };
 
+  const renderDialogLicenses = (corpus) => {
+    const asserted = licenses(corpus);
+    const declared = asserted.filter((license) => license !== '(none declared)').sort();
+    const partlyUndeclared = asserted.includes('(none declared)') && declared.length;
+    const label = declared.length > 3
+      ? `${declared.length.toLocaleString()} distinct assertions`
+      : declared.join(' · ') || 'None declared';
+
+    elements.dialogLicenses.replaceChildren();
+    add(elements.dialogLicenses, 'span', `Asserted licenses / ${label}`);
+    if (partlyUndeclared) add(elements.dialogLicenses, 'span', 'Some sources undeclared');
+
+    if (declared.length > 3) {
+      const disclosure = add(elements.dialogLicenses, 'details', undefined, 'dialog-license-details');
+      add(disclosure, 'summary', 'View all license assertions');
+      const listNode = add(disclosure, 'div', undefined, 'dialog-license-list');
+      declared.forEach((license) => add(listNode, 'span', license));
+    }
+  };
+
   const openCorpus = async (corpus, updateHistory) => {
     state.selected = corpus;
     state.manifest = null;
     state.tab = 'overview';
     elements.dialogTitle.textContent = corpus.title || corpus.name || corpus.path;
     elements.dialogPath.textContent = corpus.path;
-    const assertedLicenses = licenses(corpus);
-    const declaredLicenses = assertedLicenses.filter((license) => license !== '(none declared)');
-    const partlyUndeclared = assertedLicenses.includes('(none declared)') && declaredLicenses.length;
-    elements.dialogLicenses.textContent = [
-      `Asserted licenses / ${declaredLicenses.join(' · ') || 'None declared'}`,
-      partlyUndeclared ? 'Some sources undeclared' : '',
-    ].filter(Boolean).join(' · ');
+    renderDialogLicenses(corpus);
     renderDialogTab();
-    if (!elements.dialog.open) elements.dialog.showModal();
+    if (!elements.dialog.open) {
+      elements.dialog.showModal();
+      elements.dialogClose.focus({ preventScroll: true });
+    }
     document.body.classList.add('dialog-open');
     if (updateHistory) setUrl({ corpus: corpus.path }, 'push');
     try {
