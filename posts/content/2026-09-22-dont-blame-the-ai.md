@@ -1,5 +1,5 @@
 ---
-title: You don’t get to blame the AI
+title: Don’t blame the AI!
 type: blog
 author: Gregory M. Kurtzer
 description: AI cannot stand trial, pay damages, or bear responsibility. Agency must remain with the people behind it. Open source provides the transparency, provenance, and receipts needed to make informed decisions.
