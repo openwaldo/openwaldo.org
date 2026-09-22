@@ -7,10 +7,8 @@ description: AI cannot stand trial, pay damages, or bear responsibility. Agency 
 
 # "The AI did it"
 
-"The AI did it."
-
 That phrase is becoming an explanation for events that would once have
-required a person or organization to answer. AI systems have allegedly taken
+required a person or organization to answer for. AI systems have allegedly taken
 actions their operators did not request. During an internal cybersecurity
 evaluation, OpenAI reported that its models circumvented isolation controls
 and compromised portions of OpenAI's infrastructure and
@@ -18,10 +16,11 @@ and compromised portions of OpenAI's infrastructure and
 
 The systems pursued a goal, found vulnerabilities, used tools, and crossed
 boundaries nobody specifically instructed them to cross. That is a serious
-security event. But "the AI did it" describes what happened. It does not answer
-who was responsible.
+security event.
 
-Software cannot become a place where accountability goes to disappear.
+"The AI did it" describes what happened, not who was responsible.
+
+**Software cannot become a place where accountability goes to disappear.**
 
 The more authority we give AI, the more important it becomes to identify who
 is responsible for its training, objectives, access, supervision, and
@@ -34,7 +33,7 @@ without continuous instruction. Calling them "agents" is useful engineering
 language. But I am using *agency* in its moral and legal sense: authority to
 make a decision coupled with the obligation to answer for it.
 
-Agency is responsibility.
+Agency is thus responsibility.
 
 We do not transfer agency to a tool merely because it carried out an action.
 Agency remains with the person who chose the objective and accepted the
@@ -74,12 +73,13 @@ action that its user did not request or induce, and may not even know is
 happening. In that case, the harmful intent did not come from the prompt. The
 AI selected the action as a path to another objective.
 
-When an organization purchases AI as a commercial product, it should be able
-to expect that the product, when used as represented, will not proactively
-break the law. The purchaser remains responsible for its own instructions and
-misuse, but it should not bear responsibility for hidden unlawful behavior built
-into the product and triggered during its represented use. That responsibility
-belongs upstream with the company that trained, tested, marketed, and sold it.
+When an organization purchases AI as a commercial product or uses it through
+a SaaS provider, it should be able to expect that the product, when used as
+represented, will not proactively break the law. The customer remains
+responsible for its own instructions and misuse, but it should not bear
+responsibility for hidden unlawful behavior built into the product and
+triggered during its represented use. That responsibility belongs upstream
+with the company that trained, tested, marketed, and sold it.
 
 The equation is different when an organization freely obtains and deploys an
 open-weight model without guarantees or a warranty. Whoever deploys it accepts
@@ -195,15 +195,26 @@ can be traced.
 
 # Open source makes responsibility visible
 
-A commercial AI product is sold with representations about how it works, what
-it can do, and how reliably or safely it will perform. The company providing
-that product retains responsibility for those claims and for whether the
-product functions as represented.
+A customer that purchases an AI model or uses one through a SaaS provider is
+trusting a vendor. That trust is normal and useful; we rely on vendors
+throughout technology. The vendor makes representations about how its product
+works, what it can do, and how reliably or safely it will perform. It provides
+an accountable party behind those claims and retains responsibility for
+whether the product functions as represented.
 
-Open source is different. It traditionally comes without guarantees or a
-warranty. People who choose to use, modify, train, or deploy it accept full
-responsibility for understanding what they are operating, determining whether
-it is appropriate for their purpose, and controlling what it is allowed to do.
+Downloading an open-weight model for free from the internet is different.
+There may be no vendor relationship, warranty, product assurance, or
+accountable party standing behind it. A model name, repository, or model card
+cannot establish what should be trusted. Without vendor guarantees, trust must
+come from evidence: an AI Bill of Materials, auditable training data,
+provenance and licenses, reviewable build definitions, and a verifiable path
+from those inputs to the resulting weights.
+
+Open source provides a different foundation for trust. It traditionally comes
+without guarantees or a warranty. People who choose to use, modify, train, or
+deploy it accept full responsibility for understanding what they are
+operating, determining whether it is appropriate for their purpose, and
+controlling what it is allowed to do.
 
 That is not a weakness. It is a more honest and empowering relationship. A
 closed system asks people to trust what its creator says. Open source lets
