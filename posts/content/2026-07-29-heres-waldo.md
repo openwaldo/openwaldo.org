@@ -12,8 +12,8 @@ with attributable license assertions—tracked in Git and verifiable by hash—
 and the toolchain that turns it into auditable models. Builders choose the
 sources and asserted licenses appropriate for their own use.
 
-Open models are not open source, because open source means the source is
-open. The training data is the model's source code, and OpenWALDO puts its
+Open-weight models are not open source, because open source means the source
+is open. The training data is the model's source code, and OpenWALDO puts its
 identity, origin, and asserted terms on the record.
 
 The index is live and growing—books, wikis, science, conversation data, and

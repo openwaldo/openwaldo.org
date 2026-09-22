@@ -62,7 +62,7 @@ a community-managed corpus of AI training material, with the toolchain needed
 to contribute, review, verify, and begin training with the community corpus.
 
 WALDO stands for Weights, Artifacts, Licenses, Data, and Origins. In my mind,
-this is the definition of what a truly open source model needs to provide,
+this is the definition of what truly open-source AI needs to provide,
 but there is still one major missing piece for the spirit of open source...
 Community.
 
