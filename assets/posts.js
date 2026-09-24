@@ -32,8 +32,11 @@
     sanitizeRenderedHTML,
   } = security;
 
-  // base path from the homepage vs the posts page itself
-  const BASE = latestEl && !listEl ? 'posts/' : '';
+  // Fetch content relative to this script so `/posts` and `/posts/` behave
+  // identically. Keep navigation relative so same-site links stay in the
+  // current tab and local file previews continue to work.
+  const CONTENT_BASE = new URL('../posts/', document.currentScript?.src || location.href).href;
+  const POSTS_HREF = listEl ? './' : 'posts/';
 
   const inline = (s) => {
     const tokens = [];
@@ -148,7 +151,7 @@
 
   // the whole archive, one fetch, in memory
   const loadIndex = async () => {
-    const posts = JSON.parse(await get(BASE + 'index.json'));
+    const posts = JSON.parse(await get(CONTENT_BASE + 'index.json'));
     return posts.sort((a, b) => (a.slug < b.slug ? 1 : -1));
   };
 
@@ -160,7 +163,7 @@
   };
 
   const card = (meta) => {
-    const href = BASE + '?p=' + encodeURIComponent(meta.slug);
+    const href = POSTS_HREF + '?p=' + encodeURIComponent(meta.slug);
     const logo = safeURL(meta.logo, 'image');
     const a = document.createElement('article');
     a.className = 'post-card';
@@ -195,8 +198,22 @@
   };
 
   const returnLink = () =>
-    '<div class="post-return-wrap"><a class="post-return" href="./">' +
+    '<div class="post-return-wrap"><a class="post-return" href="' + escAttr(POSTS_HREF) + '">' +
     '<span aria-hidden="true">←</span><strong>Back to all posts</strong></a></div>';
+
+  const errorState = () => {
+    const state = document.createElement('div');
+    state.className = 'post-error-state';
+    state.innerHTML =
+      '<div class="post-error-title"><span>404 / POST</span>' +
+      '<h2>This is not the post you’re looking for.</h2></div>' +
+      '<div class="post-error-copy"><p>' +
+      'Move along to the posts index and see if you can find it there.' +
+      '</p><div class="actions"><a class="button primary" href="' + escAttr(POSTS_HREF) + '">' +
+      'Back to the posts index <span>←</span></a>' +
+      '</div></div>';
+    return state;
+  };
 
   // share links always point at the live site, so they work even when the
   // page is being previewed over file:// or a local server; brand logos are
@@ -269,12 +286,11 @@
 
   // ---- the posts page ----
   const param = new URLSearchParams(location.search).get('p');
-  let missingPost = false;
   try {
     if (param) {
       if (/^[\w-]+$/.test(param)) {
         try {
-          const post = parsePost(param, await get('content/' + param + '.md'));
+          const post = parsePost(param, await get(CONTENT_BASE + 'content/' + param + '.md'));
           // Keep only a compact dark masthead above the light editorial page.
           document.body.classList.add('single-post-page');
           document.title = post.meta.title + ' — OpenWALDO';
@@ -290,9 +306,9 @@
         }
       }
 
-      missingPost = true;
-      const archiveURL = location.protocol === 'file:' ? location.pathname : './';
-      history.replaceState({}, '', archiveURL);
+      listEl.innerHTML = '';
+      listEl.appendChild(errorState());
+      return;
     }
 
     const posts = await loadIndex();
@@ -312,14 +328,6 @@
     results.className = 'post-list';
     const pager = document.createElement('div');
     pager.className = 'post-pager';
-    if (missingPost) {
-      const notice = document.createElement('div');
-      notice.className = 'post-not-found';
-      notice.setAttribute('role', 'status');
-      notice.innerHTML = '<strong>Post not found</strong>' +
-        '<span>That link doesn’t point to a published post. Here’s the complete archive.</span>';
-      listEl.appendChild(notice);
-    }
     listEl.append(toolbar, results, pager);
     const input = toolbar.querySelector('input');
     const filtersEl = toolbar.querySelector('.post-filters');
@@ -467,7 +475,7 @@
     syncState('replace');
     render();
   } catch (e) {
-    listEl.innerHTML = '<p class="sub">Couldn’t load the posts right now — they live ' +
-      '<a href="https://github.com/openwaldo/openwaldo.org/tree/main/posts/content">on GitHub</a> too.</p>';
+    listEl.innerHTML = '';
+    listEl.appendChild(errorState());
   }
 })();

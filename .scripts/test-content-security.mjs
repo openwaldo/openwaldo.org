@@ -34,7 +34,9 @@ assert.doesNotMatch(posts, /<a href="\$2">\$1<\/a>/);
 assert.match(posts, /sanitizeRenderedHTML\(md2html\(body\)\)/);
 assert.match(posts, /safeURL\(meta\.logo, 'image'\)/);
 assert.match(posts, /if \(error !== 404\) throw error/);
-assert.match(posts, /Post not found/);
+assert.match(posts, /This is not the post you’re looking for/);
+assert.match(posts, /const CONTENT_BASE = new URL\('\.\.\/posts\/', document\.currentScript\?\.src/);
+assert.match(posts, /const POSTS_HREF = listEl \? '\.\/' : 'posts\/'/);
 
 const corpus = await readFile(new URL('../assets/corpus-browser.js', import.meta.url), 'utf8');
 assert.match(corpus, /applySafeLink\(link, source\.url/);
