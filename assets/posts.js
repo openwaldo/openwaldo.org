@@ -269,18 +269,30 @@
 
   // ---- the posts page ----
   const param = new URLSearchParams(location.search).get('p');
+  let missingPost = false;
   try {
-    if (param && /^[\w-]+$/.test(param)) {
-      const post = parsePost(param, await get('content/' + param + '.md'));
-      // Keep only a compact dark masthead above the light editorial page.
-      document.body.classList.add('single-post-page');
-      document.title = post.meta.title + ' — OpenWALDO';
-      listEl.innerHTML = '';
-      listEl.insertAdjacentHTML('beforeend', returnLink());
-      listEl.appendChild(fullPost(post));
-      listEl.appendChild(shareRow(post.meta));
-      listEl.insertAdjacentHTML('beforeend', returnLink());
-      return;
+    if (param) {
+      if (/^[\w-]+$/.test(param)) {
+        try {
+          const post = parsePost(param, await get('content/' + param + '.md'));
+          // Keep only a compact dark masthead above the light editorial page.
+          document.body.classList.add('single-post-page');
+          document.title = post.meta.title + ' — OpenWALDO';
+          listEl.innerHTML = '';
+          listEl.insertAdjacentHTML('beforeend', returnLink());
+          listEl.appendChild(fullPost(post));
+          listEl.appendChild(shareRow(post.meta));
+          listEl.insertAdjacentHTML('beforeend', returnLink());
+          return;
+        } catch (error) {
+          // A missing post is an archive navigation case, not a site failure.
+          if (error !== 404) throw error;
+        }
+      }
+
+      missingPost = true;
+      const archiveURL = location.protocol === 'file:' ? location.pathname : './';
+      history.replaceState({}, '', archiveURL);
     }
 
     const posts = await loadIndex();
@@ -300,6 +312,14 @@
     results.className = 'post-list';
     const pager = document.createElement('div');
     pager.className = 'post-pager';
+    if (missingPost) {
+      const notice = document.createElement('div');
+      notice.className = 'post-not-found';
+      notice.setAttribute('role', 'status');
+      notice.innerHTML = '<strong>Post not found</strong>' +
+        '<span>That link doesn’t point to a published post. Here’s the complete archive.</span>';
+      listEl.appendChild(notice);
+    }
     listEl.append(toolbar, results, pager);
     const input = toolbar.querySelector('input');
     const filtersEl = toolbar.querySelector('.post-filters');

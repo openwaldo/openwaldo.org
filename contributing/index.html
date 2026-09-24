@@ -121,19 +121,21 @@
                   reviewers can read; coordinate access with the maintainers before a large ingest.
                 </p>
               </div>
-              <div class="flow-commands">
-                <code>waldo config set index /path/to/waldo-index</code
-                ><code>waldo config set lookaside &lt;public-lookaside-url&gt;</code
-                ><code>waldo index ingest --help</code
-                >
-              </div>
-              <div class="flow-commands">
-                <code
-                  >waldo index ingest &lt;raw-source-directory&gt; &lt;path-in-waldo-index&gt;
-                  [flags]</code
-                ><code
-                  >waldo index ingest &lt;recipe.yaml&gt; &lt;path-in-waldo-index&gt; [flags]</code
-                >
+              <div class="flow-command-stack">
+                <div class="flow-commands">
+                  <code>waldo config set index /path/to/waldo-index</code
+                  ><code>waldo config set lookaside &lt;public-lookaside-url&gt;</code
+                  ><code>waldo index ingest --help</code
+                  >
+                </div>
+                <div class="flow-commands">
+                  <code
+                    >waldo index ingest &lt;raw-source-directory&gt; &lt;path-in-waldo-index&gt;
+                    [flags]</code
+                  ><code
+                    >waldo index ingest &lt;recipe.yaml&gt; &lt;path-in-waldo-index&gt; [flags]</code
+                  >
+                </div>
               </div>
             </li>
             <li>

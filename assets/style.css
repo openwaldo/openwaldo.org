@@ -297,8 +297,9 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .flow-note { min-height: 112px; padding: 20px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; background: var(--white); }
 .flow-note b { color: var(--red); font: 400 9px var(--font-mono); letter-spacing: .08em; }
 .flow-note strong { max-width: 480px; font-size: 17px; line-height: 1.35; font-weight: 500; }
+.flow-command-stack { min-width: 0; display: grid; gap: 18px; }
 .flow-commands { display: grid; gap: 8px; }
-.flow-commands code { margin: 0; padding: 17px 18px; background: var(--ink); color: var(--paper); font-size: 11px; }
+.flow-commands code { min-width: 0; margin: 0; padding: 17px 18px; overflow-wrap: anywhere; background: var(--ink); color: var(--paper); font-size: 11px; }
 .contribution-guide > .shell > .section-action { display: flex; flex-wrap: wrap; gap: 12px; }
 .ingest-section { background: var(--ink); color: var(--paper); }
 .ingest-section > .shell > h2 { max-width: 850px; margin-bottom: 70px; }
@@ -1558,6 +1559,15 @@ code { font-size: 10px; }
 .corpus-meta b { font-weight: inherit; }
 .posts-loading { margin: 38px 0; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
 .post-browser { border: 1px solid var(--ink); }
+.post-not-found {
+  min-height: 58px; padding: 15px 22px; display: flex; align-items: center; gap: 22px;
+  border-bottom: 1px solid var(--ink); background: var(--cream);
+}
+.post-not-found strong {
+  flex: 0 0 auto; color: var(--red); font: 500 10px var(--font-mono);
+  letter-spacing: .07em; text-transform: uppercase;
+}
+.post-not-found span { color: var(--muted); font-size: 14px; line-height: 1.45; }
 .post-toolbar { min-height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ink); }
 .post-toolbar label { min-width: 0; flex: 1; display: flex; align-items: center; gap: 22px; }
 .post-toolbar label span { flex: 0 0 auto; padding-left: 22px; font: 400 10px var(--font-mono); text-transform: uppercase; }
@@ -1777,6 +1787,7 @@ body.dialog-open { overflow: hidden; }
   .community-thesis-grid article:last-child { border-bottom: 0; }
   .community-thesis-grid h3 { margin: 30px 0 12px; }
   .post-toolbar { align-items: stretch; flex-direction: column; padding: 18px; gap: 16px; }
+  .post-not-found { align-items: flex-start; flex-direction: column; gap: 5px; padding: 15px 18px; }
   .post-toolbar label { align-items: stretch; flex-direction: column; gap: 8px; }
   .post-toolbar label span { padding-left: 0; }
   .post-toolbar input { max-width: none; padding: 12px; border: 1px solid var(--line); }

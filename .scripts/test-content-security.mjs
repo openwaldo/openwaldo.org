@@ -33,6 +33,8 @@ const posts = await readFile(new URL('../assets/posts.js', import.meta.url), 'ut
 assert.doesNotMatch(posts, /<a href="\$2">\$1<\/a>/);
 assert.match(posts, /sanitizeRenderedHTML\(md2html\(body\)\)/);
 assert.match(posts, /safeURL\(meta\.logo, 'image'\)/);
+assert.match(posts, /if \(error !== 404\) throw error/);
+assert.match(posts, /Post not found/);
 
 const corpus = await readFile(new URL('../assets/corpus-browser.js', import.meta.url), 'utf8');
 assert.match(corpus, /applySafeLink\(link, source\.url/);
