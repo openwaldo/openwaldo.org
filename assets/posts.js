@@ -285,6 +285,16 @@
   }
 
   // ---- the posts page ----
+  // The shared HTML serves archive and article URLs. Add the canonical only
+  // once the requested view has been resolved, so article URLs have their own identity.
+  const setSearchMetadata = (slug = '', description = '') => {
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://openwaldo.org/posts/' + (slug ? '?p=' + encodeURIComponent(slug) : '');
+    document.head.appendChild(canonical);
+    if (description) document.querySelector('meta[name="description"]').content = description;
+  };
+
   const param = new URLSearchParams(location.search).get('p');
   try {
     if (param) {
@@ -299,6 +309,7 @@
           listEl.appendChild(fullPost(post));
           listEl.appendChild(shareRow(post.meta));
           listEl.insertAdjacentHTML('beforeend', returnLink());
+          setSearchMetadata(param, post.meta.description);
           return;
         } catch (error) {
           // A missing post is an archive navigation case, not a site failure.
@@ -311,6 +322,7 @@
       return;
     }
 
+    setSearchMetadata();
     const posts = await loadIndex();
     listEl.innerHTML = '';
     if (!posts.length) {
