@@ -288,16 +288,17 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .input-grid h3 { margin: auto 0 20px; font-size: clamp(34px, 3.6vw, 52px); line-height: .95; letter-spacing: -.055em; }
 .input-grid p { min-height: 100px; margin: 0 0 25px; color: var(--muted); line-height: 1.6; }
 .contribution-guide { background: var(--paper); scroll-margin-top: 84px; }
-.contribution-flow { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-.contribution-flow > li { display: grid; grid-template-columns: 58px minmax(260px, .85fr) minmax(320px, 1.15fr); gap: 34px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--line); }
-.contribution-flow > li > span { padding-top: 6px; color: var(--red); font: 400 10px var(--font-mono); letter-spacing: .08em; }
-.contribution-flow h3 { margin: 0 0 12px; font-size: clamp(25px, 2.3vw, 34px); line-height: 1.05; letter-spacing: -.035em; font-weight: 550; }
-.contribution-flow p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.68; }
+.contribution-flow { list-style: none; margin: 0 0 46px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.contribution-flow > li { position: relative; min-height: 330px; display: flex; flex-direction: column; padding: 32px; border: 1px solid var(--ink); background: var(--white); box-shadow: 8px 8px 0 var(--ink); transition: transform .16s ease, box-shadow .16s ease; }
+.contribution-flow > li:hover { transform: translate(3px, 3px); box-shadow: 5px 5px 0 var(--ink); }
+.contribution-flow > li > span { width: 36px; height: 36px; display: grid; place-items: center; margin-bottom: 52px; border: 1px solid var(--red); color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .08em; }
+.contribution-flow h3 { max-width: 500px; margin: 0 0 14px; font-size: clamp(27px, 2.4vw, 38px); line-height: 1.02; letter-spacing: -.045em; font-weight: 550; }
+.contribution-flow p { max-width: 580px; margin: 0 0 28px; color: var(--muted); font-size: 15px; line-height: 1.62; }
 .flow-inline { font-family: var(--font-mono); font-size: .9em; }
-.flow-note { min-height: 112px; padding: 20px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; background: var(--white); }
-.flow-note b { color: var(--red); font: 400 9px var(--font-mono); letter-spacing: .08em; }
-.flow-note strong { max-width: 480px; font-size: 17px; line-height: 1.35; font-weight: 500; }
-.flow-note strong a { border-bottom: 1px solid var(--line); }
+.flow-note { margin: auto -32px -32px; padding: 20px 32px; border-top: 1px solid var(--ink); display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 18px; align-items: center; background: var(--cream); }
+.flow-note b { color: var(--red); font: 500 9px var(--font-mono); letter-spacing: .1em; }
+.flow-note strong { font-size: 17px; line-height: 1.35; font-weight: 550; }
+.flow-note strong a { display: inline; border-bottom: 1px solid var(--line); }
 .flow-note strong a:hover { color: var(--red); border-color: var(--red); }
 .flow-command-stack { min-width: 0; display: grid; gap: 18px; }
 .flow-commands { display: grid; gap: 8px; }
@@ -1419,8 +1420,9 @@ code { font-size: 10px; }
   .compose-value-grid article:nth-child(2) { border-right: 0; }
   .compose-value-grid article:nth-child(-n+2) { border-bottom: 1px solid rgba(244,241,232,.22); }
   .prose-layout aside { max-width: 400px; }
-  .contribution-flow > li { grid-template-columns: 42px 1fr; gap: 24px; }
-  .contribution-flow > li > :last-child { grid-column: 2; }
+  .contribution-flow { gap: 18px; }
+  .contribution-flow > li { min-height: 350px; padding: 26px; }
+  .flow-note { margin: auto -26px -26px; padding: 18px 26px; }
   .ingest-accountability { grid-template-columns: 1fr 1fr; }
   .ingest-accountability p { grid-column: 2; }
   .dco-grid { grid-template-columns: 1fr; }
@@ -1539,9 +1541,10 @@ code { font-size: 10px; }
   .community-audiences article, .community-audiences article:first-child, .community-roles article, .community-roles article:first-child { min-height: 230px; padding: 24px 0; border-right: 0; border-top: 1px solid var(--line); }
   .community-roles article, .community-roles article:first-child { border-color: rgba(244,241,232,.18); }
   .community-paths article { min-height: 480px; padding: 26px; }
-  .contribution-flow > li { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
-  .contribution-flow > li > :last-child { grid-column: 1; }
-  .flow-note { min-height: 100px; }
+  .contribution-flow { grid-template-columns: 1fr; gap: 20px; }
+  .contribution-flow > li { min-height: 310px; padding: 24px; box-shadow: 5px 5px 0 var(--ink); }
+  .contribution-flow > li > span { margin-bottom: 38px; }
+  .flow-note { margin: auto -24px -24px; padding: 18px 24px; grid-template-columns: 66px minmax(0, 1fr); }
   .ingest-accountability { grid-template-columns: 1fr; gap: 14px; margin-top: -12px; padding: 22px; }
   .ingest-accountability p { grid-column: 1; }
   .share-actions { grid-template-columns: 1fr; }
