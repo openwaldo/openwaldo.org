@@ -57,7 +57,7 @@ const publicPages = [
   '../404.html',
   '../about/index.html',
   '../browser/index.html',
-  '../join/index.html',
+  '../community/index.html',
   '../contributing/index.html',
   '../corpus/index.html',
   '../glossary/index.html',
