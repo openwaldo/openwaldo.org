@@ -288,23 +288,24 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .input-grid h3 { margin: auto 0 20px; font-size: clamp(34px, 3.6vw, 52px); line-height: .95; letter-spacing: -.055em; }
 .input-grid p { min-height: 100px; margin: 0 0 25px; color: var(--muted); line-height: 1.6; }
 .contribution-guide { background: var(--paper); scroll-margin-top: 84px; }
-.capability-head { display: grid; grid-template-columns: 58px minmax(260px, .82fr) minmax(360px, 1.18fr); border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
-.capability-head > * { padding: 15px 24px; border-right: 1px solid rgba(244,241,232,.25); }
+.capability-head { display: grid; grid-template-columns: 58px minmax(260px, .82fr) minmax(360px, 1.18fr); border: 1px solid var(--ink); border-top: 4px solid var(--red); border-bottom: 0; border-radius: 18px 18px 0 0; overflow: hidden; background: var(--ink); color: var(--paper); }
+.capability-head > * { padding: 17px 24px; border-right: 1px solid rgba(244,241,232,.16); }
 .capability-head > *:last-child { border-right: 0; }
 .capability-head strong { font: 500 10px var(--font-mono); letter-spacing: .12em; }
 .capability-head strong:last-child { color: var(--red); }
-.contribution-flow { list-style: none; margin: 0 0 46px; padding: 0; border: 1px solid var(--ink); border-top: 0; }
-.contribution-flow > li { display: grid; grid-template-columns: 58px minmax(260px, .82fr) minmax(360px, 1.18fr); min-height: 190px; border-bottom: 1px solid var(--ink); background: var(--white); }
-.contribution-flow > li:last-child { border-bottom: 0; }
-.contribution-flow > li > span { padding: 30px 18px; border-right: 1px solid var(--ink); color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .08em; }
-.contribution-flow > li > div:not(.flow-note) { padding: 30px 34px; display: flex; align-items: center; border-right: 1px solid var(--ink); }
+.contribution-flow { list-style: none; margin: 0 0 46px; padding: 10px 14px 16px; border: 1px solid var(--ink); border-top: 0; border-radius: 0 0 18px 18px; background: var(--ink); }
+.contribution-flow > li { display: grid; grid-template-columns: 58px minmax(260px, .82fr) minmax(360px, 1.18fr); min-height: 168px; margin-bottom: 10px; overflow: hidden; border: 1px solid rgba(242,238,228,.2); border-radius: 10px; background: #191a18; color: var(--paper); }
+.contribution-flow > li:last-child { margin-bottom: 0; }
+.contribution-flow > li > span { padding: 28px 18px; border-right: 1px solid rgba(242,238,228,.16); background: rgba(239,73,59,.07); color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .08em; }
+.contribution-flow > li > div:not(.flow-note) { padding: 28px 34px; display: flex; align-items: center; border-right: 1px solid rgba(242,238,228,.16); }
 .contribution-flow h3 { max-width: 440px; margin: 0; font-size: clamp(25px, 2.1vw, 34px); line-height: 1.06; letter-spacing: -.04em; font-weight: 550; }
-.contribution-flow p { max-width: 620px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.58; }
+.contribution-flow p { max-width: 620px; margin: 0; color: rgba(242,238,228,.66); font-size: 15px; line-height: 1.58; }
 .flow-inline { font-family: var(--font-mono); font-size: .9em; }
-.flow-note { padding: 28px 34px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px 18px; align-content: center; background: var(--cream); }
+.flow-note { padding: 28px 34px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px 18px; align-content: center; background: rgba(242,238,228,.035); }
 .flow-note b { grid-row: 1 / span 2; padding-top: 3px; color: var(--red); font: 500 9px var(--font-mono); letter-spacing: .1em; }
+.flow-note b::after { content: "→"; display: block; margin-top: 18px; font: 400 24px/1 var(--font-sans); }
 .flow-note strong { font-size: 17px; line-height: 1.35; font-weight: 550; }
-.flow-note strong a { display: inline; border-bottom: 1px solid var(--line); }
+.flow-note strong a { display: inline; border-bottom: 1px solid rgba(242,238,228,.3); }
 .flow-note strong a:hover { color: var(--red); border-color: var(--red); }
 .flow-command-stack { min-width: 0; display: grid; gap: 18px; }
 .flow-commands { display: grid; gap: 8px; }
@@ -1551,13 +1552,13 @@ code { font-size: 10px; }
   .community-roles article, .community-roles article:first-child { border-color: rgba(244,241,232,.18); }
   .community-paths article { min-height: 480px; padding: 26px; }
   .capability-head { display: none; }
-  .contribution-flow { border-top: 1px solid var(--ink); }
+  .contribution-flow { padding: 12px; border-top: 4px solid var(--red); border-radius: 14px; }
   .contribution-flow > li { grid-template-columns: 42px minmax(0, 1fr); min-height: 0; }
   .contribution-flow > li > span { grid-row: 1 / span 2; padding: 24px 12px; }
   .contribution-flow > li > div:not(.flow-note) { grid-column: 2; padding: 24px; border-right: 0; }
   .contribution-flow > li > div:not(.flow-note)::before { content: "WITH THIS"; display: block; margin-right: 20px; color: var(--red); font: 500 9px var(--font-mono); letter-spacing: .1em; }
   .contribution-flow h3 { font-size: 25px; }
-  .flow-note { grid-column: 2; padding: 24px; border-top: 1px solid var(--ink); grid-template-columns: 62px minmax(0, 1fr); }
+  .flow-note { grid-column: 2; padding: 24px; border-top: 1px solid rgba(242,238,228,.16); grid-template-columns: 62px minmax(0, 1fr); }
   .ingest-accountability { grid-template-columns: 1fr; gap: 14px; margin-top: -12px; padding: 22px; }
   .ingest-accountability p { grid-column: 1; }
   .share-actions { grid-template-columns: 1fr; }
