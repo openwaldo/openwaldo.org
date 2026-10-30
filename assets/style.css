@@ -287,23 +287,20 @@ code { display: block; padding: 14px 15px; overflow-x: auto; background: rgba(16
 .input-grid span { font: 600 9px var(--font-mono), monospace; color: var(--red); }
 .input-grid h3 { margin: auto 0 20px; font-size: clamp(34px, 3.6vw, 52px); line-height: .95; letter-spacing: -.055em; }
 .input-grid p { min-height: 100px; margin: 0 0 25px; color: var(--muted); line-height: 1.6; }
-.contribution-overview { background: var(--cream); }
+.contribution-overview { padding-block: 104px; background: var(--cream); }
 .contribution-overview-grid { display: grid; grid-template-columns: minmax(300px, .8fr) minmax(560px, 1.2fr); gap: 9vw; align-items: start; }
 .contribution-overview-copy h2 { max-width: 580px; margin: 0; font-size: clamp(42px, 4.8vw, 66px); line-height: .98; letter-spacing: -.055em; font-weight: 650; }
-.contribution-overview-copy > p:last-child { max-width: 570px; margin: 34px 0 0; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.contribution-overview-copy > p:last-child { max-width: 570px; margin: 28px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
 .common-workflow { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-.common-workflow li { min-height: 112px; display: grid; grid-template-columns: 48px minmax(150px, .55fr) minmax(260px, 1fr); gap: 22px; align-items: center; border-bottom: 1px solid var(--line); }
+.common-workflow li { min-height: 100px; display: grid; grid-template-columns: 48px minmax(150px, .55fr) minmax(260px, 1fr); gap: 22px; align-items: center; border-bottom: 1px solid var(--line); }
 .common-workflow li > span { color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .08em; }
 .common-workflow h3 { margin: 0; font-size: 21px; line-height: 1.15; letter-spacing: -.025em; font-weight: 600; }
 .common-workflow p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-.contribution-terms { margin-top: 88px; }
-.contribution-terms-head { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: end; margin-bottom: 22px; padding-top: 22px; border-top: 1px solid var(--ink); }
-.contribution-terms-head span { color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .1em; }
-.contribution-terms-head p { max-width: 520px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-.contribution-terms dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.contribution-terms dl > div { min-height: 148px; padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.contribution-terms dt { margin: 0 0 24px; color: var(--red); font: 600 10px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
-.contribution-terms dd { margin: 0; color: #45443f; font-size: 14px; line-height: 1.58; }
+.contribution-language { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 44px; margin: 52px 0 0; padding: 22px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.contribution-language strong { color: var(--red); font: 500 10px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.contribution-language span { max-width: 900px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.contribution-language b { color: var(--ink); font-weight: 600; }
+.contribution-language a { color: var(--ink); border-bottom: 1px solid var(--ink); }
 .contribution-guide { background: var(--paper); scroll-margin-top: 84px; }
 .capability-head { display: grid; grid-template-columns: 58px minmax(260px, .82fr) minmax(360px, 1.18fr); border: 1px solid var(--ink); border-top: 4px solid var(--red); border-bottom: 0; border-radius: 18px 18px 0 0; overflow: hidden; background: var(--ink); color: var(--paper); }
 .capability-head > * { padding: 17px 24px; border-right: 1px solid rgba(244,241,232,.16); }
@@ -1449,7 +1446,6 @@ code { font-size: 10px; }
   .prose-layout aside { max-width: 400px; }
   .contribution-overview-grid { grid-template-columns: 1fr; gap: 58px; }
   .contribution-overview-copy > p:last-child { max-width: 720px; }
-  .contribution-terms dl { grid-template-columns: repeat(2, 1fr); }
   .capability-head, .contribution-flow > li { grid-template-columns: 48px minmax(210px, .8fr) minmax(320px, 1.2fr); }
   .capability-head > * { padding: 14px 18px; }
   .contribution-flow > li { min-height: 210px; }
@@ -1578,11 +1574,7 @@ code { font-size: 10px; }
   .common-workflow li { grid-template-columns: 34px minmax(0, 1fr); gap: 10px 16px; padding: 22px 0; }
   .common-workflow h3 { font-size: 20px; }
   .common-workflow p { grid-column: 2; }
-  .contribution-terms { margin-top: 64px; }
-  .contribution-terms-head { grid-template-columns: 1fr; gap: 14px; }
-  .contribution-terms dl { grid-template-columns: 1fr; }
-  .contribution-terms dl > div { min-height: 0; padding: 22px; }
-  .contribution-terms dt { margin-bottom: 12px; }
+  .contribution-language { grid-template-columns: 1fr; gap: 12px; margin-top: 44px; }
   .capability-head { display: none; }
   .contribution-flow { padding: 12px; border-top: 4px solid var(--red); border-radius: 14px; }
   .contribution-flow > li { grid-template-columns: 42px minmax(0, 1fr); min-height: 0; }
