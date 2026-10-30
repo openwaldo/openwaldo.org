@@ -15,7 +15,7 @@ GitHub Pages from the `main` branch root (`CNAME` sets the custom domain;
 index.html          project thesis and live corpus record
 corpus/             accountability, evidence, and the live corpus record
 training/           model lifecycle and current implementation boundaries
-contributing/       corpus contribution workflow
+contributing/       contribution paths for community, tooling, data, models, and compute
 join/               community participation and project entry points
 posts/              generated Markdown archive and individual posts
 about/              project purpose and principles

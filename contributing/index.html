@@ -8,17 +8,17 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <title>Contribute Data — OpenWALDO</title>
+    <title>Contribute to OpenWALDO</title>
     <meta
       name="description"
-      content="Help maintain OpenWALDO’s living source foundation by contributing data, reviewing evidence, correcting records, and improving the tools."
+      content="Contribute code, documentation, data, review, experiments, compute, and what you learn about open AI infrastructure."
     />
     <meta property="og:site_name" content="OpenWALDO" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Contributing — OpenWALDO" />
+    <meta property="og:title" content="Contribute to OpenWALDO" />
     <meta
       property="og:description"
-      content="Contribute to the living corpus the OpenWALDO community reviews, corrects, versions, and maintains in public."
+      content="Find a practical way to contribute to OpenWALDO with the skills and hardware you already have."
     />
     <meta property="og:url" content="https://openwaldo.org/contributing/" />
     <meta property="og:image" content="https://openwaldo.org/assets/og-v2.png" />
@@ -52,7 +52,9 @@
         >
         <nav aria-label="Primary navigation">
           <a href="../">Home</a><a href="../corpus/">Corpus</a
-          ><a href="../training/">Training</a><a href="../join/">Join</a
+          ><a href="../training/">Training</a
+          ><a href="../contributing/" aria-current="page">Contribute</a
+          ><a href="../join/">Join</a
           ><a href="../posts/">Posts</a><a href="../about/">About</a>
         </nav>
       </div>
@@ -61,218 +63,225 @@
       <section class="page-intro">
         <div class="shell page-intro-grid">
           <div>
-            <p class="kicker light">Grow the public commons</p>
-            <h1>If the source matters,<br /><em>put it on</em><br /><em>the record.</em></h1>
+            <p class="kicker light">Open-source AI needs contributors</p>
+            <h1>Bring what you have.<br /><em>Build what comes next.</em></h1>
           </div>
           <div class="page-intro-side">
-            <span>03 / CONTRIBUTE</span>
+            <span>CONTRIBUTE / OPEN TO EVERYONE</span>
             <p>
-              OpenWALDO’s community maintains the training foundation itself. Contributors add
-              source material; reviewers inspect its evidence; corrections remain visible; and the
-              WALDO tool turns accepted material into canonical shards and a compact Git record.
+              Contribute code, documentation, data, review, experiments, compute, or what you learn
+              while exploring AI infrastructure. You do not need a lab or a rack of GPUs to begin.
             </p>
-            <a class="button primary" href="#how-to-contribute"
-              >See how to contribute <span>↓</span></a
+            <a
+              class="button primary"
+              href="https://github.com/openwaldo/docs/blob/main/contributing/README.md"
+              >Open the Contributor Guide <span>↗</span></a
+            ><a class="text-action light" href="#what-you-have"
+              >Start with what you have <span>↓</span></a
             >
           </div>
         </div>
       </section>
-      <section class="section contribution-guide" id="how-to-contribute">
+      <section class="section contribution-guide" id="what-you-have">
         <div class="shell">
           <div class="section-head split-head">
             <div>
-              <p class="kicker">How to contribute</p>
-              <h2>Bring knowledge.<br />Put it on the record.</h2>
+              <p class="kicker">If you have this, you can do this</p>
+              <h2>Start where you are.<br />Grow from there.</h2>
             </div>
             <p>
-              The corpus is maintained continuously as an open-source project. A contribution
-              starts with source material and ends with an accountable pull request the community
-              can inspect, question, improve, and correct over time.
+              OpenWALDO has useful work at every resource level. These are starting points, not
+              limits. Use WALDO’s forecast before committing time or money to a training run.
             </p>
           </div>
-          <ol class="contribution-flow">
+          <ol class="contribution-flow capability-flow">
             <li>
               <span>01</span>
               <div>
-                <h3>Obtain or build a corpus.</h3>
+                <h3>Internet and curiosity</h3>
                 <p>
-                  Acquire eligible material from an upstream source, or assemble material you or
-                  your organization can contribute. A company might gather its public documentation,
-                  product information, and service portfolio so future AI models can learn from an
-                  authoritative source.
+                  Join the community, explore the corpus, reproduce an issue, review a contribution,
+                  or learn how open AI infrastructure works.
                 </p>
               </div>
               <div class="flow-note">
-                <b>YOU BRING</b
-                ><strong>Raw source material with a clear origin and asserted terms.</strong>
+                <b>START HERE</b><strong><a href="../join/">Join the community ↗</a></strong>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <h3>Choose files or a recipe.</h3>
+                <h3>Writing, design, or domain knowledge</h3>
                 <p>
-                  If the material is already local, point WALDO at its directory. If it must be
-                  fetched or assembled, use a reviewed ingest recipe that declares the metadata and
-                  runs the acquisition steps in a controlled temporary workspace. The destination is
-                  a logical path inside the writable
-                  <span class="flow-inline">waldo-index</span> checkout configured on your machine.
-                  Public contributions also need a lookaside destination whose published objects
-                  reviewers can read; coordinate access with the maintainers before a large ingest.
+                  Improve documentation, create examples, clarify the contributor experience,
+                  review source evidence, or teach what you learn.
                 </p>
               </div>
-              <div class="flow-command-stack">
-                <div class="flow-commands">
-                  <code>waldo config set index /path/to/waldo-index</code
-                  ><code>waldo config set lookaside &lt;public-lookaside-url&gt;</code
-                  ><code>waldo index ingest --help</code
-                  >
-                </div>
-                <div class="flow-commands">
-                  <code
-                    >waldo index ingest &lt;raw-source-directory&gt; &lt;path-in-waldo-index&gt;
-                    [flags]</code
-                  ><code
-                    >waldo index ingest &lt;recipe.yaml&gt; &lt;path-in-waldo-index&gt; [flags]</code
-                  >
-                </div>
+              <div class="flow-note">
+                <b>CONTRIBUTE</b
+                ><strong
+                  ><a href="https://github.com/openwaldo/docs/blob/main/contributing/code-and-docs.md"
+                    >Documentation and code procedure ↗</a
+                  ></strong
+                >
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <h3>Let WALDO ingest it.</h3>
+                <h3>A laptop, Go, and Git</h3>
                 <p>
-                  WALDO probes the input, converts it into canonical Parquet shards, audits the
-                  records and totals, uploads the content-addressed objects to the lookaside store
-                  configured on your machine, and verifies the published bytes.
+                  Build and test the WALDO CLI, improve tooling, inspect and export data, or run a
+                  complete local corpus-ingestion exercise without cloud access.
                 </p>
               </div>
               <div class="flow-note">
-                <b>WALDO WRITES</b
+                <b>TRY IT</b
                 ><strong
-                  >Canonical Parquet in lookaside storage—no large data objects in Git.</strong
+                  ><a href="https://github.com/openwaldo/docs/blob/main/contributing/local-corpus.md"
+                    >Local corpus walkthrough ↗</a
+                  ></strong
                 >
               </div>
             </li>
             <li>
               <span>04</span>
               <div>
-                <h3>Inspect the index record.</h3>
+                <h3>Authorized data and disk space</h3>
                 <p>
-                  WALDO writes a contribution overlay into its staging area and prints that
-                  location. Apply the reported overlay to your index checkout, then inspect the
-                  corpus description, sources, asserted licenses, conversion identity, counts,
-                  hashes, and public object links before committing anything.
+                  Prepare manifest-backed source material, review its provenance and asserted
+                  license, and work with maintainers to publish it to the shared corpus.
                 </p>
               </div>
               <div class="flow-note">
-                <b>GIT RECORDS</b
+                <b>PUBLISH</b
                 ><strong
-                  >The reviewable meaning, inventory, evidence, and object references.</strong
+                  ><a href="https://github.com/openwaldo/docs/blob/main/contributing/README.md#publish-a-corpus-contribution"
+                    >Corpus publication procedure ↗</a
+                  ></strong
                 >
               </div>
             </li>
             <li>
               <span>05</span>
               <div>
-                <h3>Sign, commit, and open a pull request.</h3>
+                <h3>An Apple Silicon Mac</h3>
                 <p>
-                  Review the generated diff, commit it with DCO sign-off, push your branch, and open
-                  a pull request. Maintainers and the community can then inspect the claims, run the
-                  checks, question the evidence, and improve the contribution.
+                  Use MLX to forecast and run small training experiments, inspect their evidence,
+                  and learn the model lifecycle on hardware you control.
                 </p>
               </div>
-              <div class="flow-commands">
-                <code>cp -R &lt;reported-contribution-directory&gt;/. /path/to/waldo-index/</code
-                ><code>git diff --check</code><code>git add .</code
-                ><code>git commit -s -m "Add &lt;corpus name&gt;"</code>
+              <div class="flow-note">
+                <b>LEARN</b
+                ><strong
+                  ><a href="https://github.com/openwaldo/docs/blob/main/training/README.md"
+                    >Training Quickstart ↗</a
+                  ></strong
+                >
+              </div>
+            </li>
+            <li>
+              <span>06</span>
+              <div>
+                <h3>Linux CPU, AMD ROCm, or NVIDIA CUDA</h3>
+                <p>
+                  Use PyTorch for training and evaluation matched to the host. NVIDIA multi-GPU
+                  systems can run TorchTitan. Forecast the exact compose before allocating compute.
+                </p>
+              </div>
+              <div class="flow-note">
+                <b>CHECK FIRST</b
+                ><strong
+                  ><a href="https://github.com/openwaldo/docs/blob/main/what-can-i-do.md"
+                    >Hardware and resource guide ↗</a
+                  ></strong
+                >
               </div>
             </li>
           </ol>
           <div class="section-action">
-            <a class="button primary" href="../join/#join"
-              >Ask the community <span>↗</span></a
-            ><a class="button paper-button" href="https://github.com/openwaldo/waldo-index"
-              >Open the public index <span>↗</span></a
+            <a
+              class="button primary"
+              href="https://github.com/openwaldo/docs/blob/main/contributing/README.md"
+              >Open the Contributor Guide <span>↗</span></a
+            ><a class="button paper-button" href="../join/"
+              >Find collaborators <span>↗</span></a
             >
           </div>
         </div>
       </section>
       <section class="section ingest-section">
         <div class="shell">
-          <p class="kicker light">Review and accountability</p>
+          <p class="kicker light">Ways to contribute</p>
           <h2>
-            Review the corpus.<br />
-            Strengthen the provenance.
+            The whole project<br />
+            needs contributors.
           </h2>
           <div class="ingest-accountability">
-            <span>DCO ACCOUNTABILITY</span
-            ><strong>Every contribution must carry an accountable sign-off.</strong>
+            <span>CONTRIBUTION IS NOT A HARDWARE CLASS</span
+            ><strong>Useful work starts with attention, judgment, and a willingness to learn.</strong>
             <p>
-              The DCO attaches a contributor’s certification to the public Git history. It does not
-              prove that every claim is correct; it makes the contributor and attestation visible so
-              both can be reviewed and challenged.
+              Some contributors write Go or operate GPUs. Others test instructions, explain a hard
+              concept, review evidence, report a failure, or help someone else get started.
             </p>
           </div>
           <ol class="ingest-steps">
             <li>
               <span>01</span>
               <div>
-                <h3>Understand</h3>
+                <h3>Community + learning</h3>
                 <p>
-                  Inspect what was submitted and confirm that its detected content and schema match
-                  the proposed corpus.
+                  Learn AI infrastructure in public, ask good questions, share experiments, review
+                  proposals, and help other people participate.
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <h3>Standardize</h3>
+                <h3>Tooling + infrastructure</h3>
                 <p>
-                  Convert the material into tokenizer-neutral canonical Parquet with a recorded
-                  conversion identity.
+                  Improve the CLI, ingestion adapters, training backends, tests, packaging,
+                  integrations, reliability, and operator experience.
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <h3>Verify</h3>
+                <h3>Data + provenance</h3>
                 <p>
-                  Reopen every shard and validate its schema, records, hashes, and exact aggregate
-                  totals.
+                  Prepare source material, review evidence and asserted licenses, audit corpus
+                  records, propose corrections, and publish accountable contributions.
                 </p>
               </div>
             </li>
             <li>
               <span>04</span>
               <div>
-                <h3>Confirm</h3>
+                <h3>Models + evaluation</h3>
                 <p>
-                  Prove that each content-addressed object is available from lookaside storage and
-                  matches the published record.
+                  Develop composes, reproduce training runs, evaluate behavior, compare backends,
+                  report results, and improve model workflows.
                 </p>
               </div>
             </li>
             <li>
               <span>05</span>
               <div>
-                <h3>Challenge</h3>
+                <h3>Compute + documentation</h3>
                 <p>
-                  Examine the source and license assertions, conversion identity, counts, object
-                  inventory, DCO sign-off, and public diff.
+                  Run bounded experiments on available hardware, document what worked, create
+                  tutorials, and coordinate larger efforts with the community.
                 </p>
               </div>
             </li>
           </ol>
           <div class="truth-note">
-            <strong>A strong corpus is built through accountable review.</strong>
+            <strong>Learning the system is a valid way to begin contributing.</strong>
             <p>
-              Automation can prove structure, identity, integrity, totals, and availability. Named
-              contributors and human reviewers still have to evaluate usefulness, examine source
-              evidence, challenge rights assertions, and improve the provenance record.
+              Follow a real workflow, record what was confusing, and turn that experience into a
+              fix, issue, test, example, or explanation that helps the next contributor.
             </p>
           </div>
         </div>
@@ -281,36 +290,42 @@
         <div class="shell">
           <div class="section-head split-head">
             <div>
-              <p class="kicker">The public record</p>
-              <h2>Bytes over here.<br />Meaning over here.</h2>
+              <p class="kicker">Contribute and join</p>
+              <h2>Do the work.<br />Find your people.</h2>
             </div>
             <p>
-              This separation keeps large objects efficient without hiding the facts reviewers need
-              to understand what entered the commons.
+              These are two connected doors. Contribute is the action path. Join is where people ask
+              questions, find collaborators, coordinate work, and help each other improve.
             </p>
           </div>
           <div class="separation-grid">
             <article class="git-side">
-              <span>GIT / REVIEWABLE</span>
-              <h3>Meaning</h3>
+              <span>CONTRIBUTE / ACTION</span>
+              <h3>Choose useful work</h3>
               <ul>
-                <li>Corpus description</li>
-                <li>Sources and asserted licenses</li>
-                <li>Conversion identity</li>
-                <li>Counts and shard hashes</li>
-                <li>Index navigation</li>
+                <li>Find a path that matches your resources</li>
+                <li>Follow the current contributor procedure</li>
+                <li>Make a focused, reviewable change</li>
+                <li>Record how you validated it</li>
+                <li>Help improve the shared project</li>
               </ul>
+              <a
+                class="text-action"
+                href="https://github.com/openwaldo/docs/blob/main/contributing/README.md"
+                >Open the Contributor Guide <b>↗</b></a
+              >
             </article>
             <article class="lookaside-side">
-              <span>LOOKASIDE / CONTENT-ADDRESSED</span>
-              <h3>Canonical bytes</h3>
+              <span>JOIN / COMMUNITY</span>
+              <h3>Work with people</h3>
               <ul>
-                <li>Self-contained Parquet</li>
-                <li>SHA-256 object identity</li>
-                <li>No loose media</li>
-                <li>No hidden catalogs</li>
-                <li>No metadata sidecars</li>
+                <li>Ask questions and compare notes</li>
+                <li>Find maintainers and collaborators</li>
+                <li>Coordinate data and compute work</li>
+                <li>Share experiments and failures</li>
+                <li>Learn AI infrastructure together</li>
               </ul>
+              <a class="text-action" href="../join/">Join the community <b>↗</b></a>
             </article>
           </div>
         </div>
@@ -358,16 +373,15 @@
               <h3>Keep the record public.</h3>
               <p>
                 The commit, sign-off, review, automated checks, corrections, and history remain
-                together in the shared index.
+                together in the public project record.
               </p>
             </article>
           </div>
           <div class="dco-limit">
             <strong>Accountability is evidence—not magic.</strong>
             <p>
-              A DCO sign-off does not independently prove that an asserted corpus license is correct
-              or that every underlying document can legally be redistributed. It makes the
-              contribution attributable, explicit, reviewable, and challengeable.
+              A DCO sign-off does not prove that every technical or legal claim is correct. It makes
+              the contribution attributable, explicit, reviewable, and challengeable.
             </p>
           </div>
         </div>
@@ -375,20 +389,22 @@
       <section class="section join-section">
         <div class="shell join-grid">
           <div>
-            <p class="kicker">Make the source better</p>
-            <h2>Contribute data.<br />Review claims.<br />Build the tool.</h2>
+            <p class="kicker">Your first contribution</p>
+            <h2>Choose a path.<br />Ask for help.<br />Start small.</h2>
           </div>
           <div>
             <p>
-              OpenWALDO is a living community project, not a data vending machine. The commons gets
-              stronger through attributable contribution, careful review, visible correction, and
-              shared stewardship.
+              The Contributor Guide contains the current procedures. The community is where you can
+              ask questions, find collaborators, and coordinate work that needs more people or
+              compute than you have alone.
             </p>
             <div class="actions">
-              <a class="button primary" href="#how-to-contribute"
-                >Review the contribution workflow <span>↗</span></a
-              ><a class="button inverse" href="https://github.com/openwaldo"
-                >OpenWALDO on GitHub <span>↗</span></a
+              <a
+                class="button primary"
+                href="https://github.com/openwaldo/docs/blob/main/contributing/README.md"
+                >Open the Contributor Guide <span>↗</span></a
+              ><a class="button inverse" href="https://github.com/openwaldo/docs/blob/main/what-can-i-do.md"
+                >Check your hardware <span>↗</span></a
               ><a class="button inverse" href="../join/"
                 >Join the AI community <span>↗</span></a
               >
@@ -420,7 +436,7 @@
         >
         <div>
           <a href="../">Index</a><a href="../corpus/">Corpus</a
-          ><a href="../training/">Training</a><a href="../contributing/">Contributing</a
+          ><a href="../training/">Training</a><a href="../contributing/">Contribute</a
           ><a href="../posts/">Posts</a><a href="../about/">About</a
           ><a href="../join/">Join</a><a href="../faq/">FAQ</a
           ><a href="../glossary/">Glossary</a>
