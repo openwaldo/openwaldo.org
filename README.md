@@ -16,7 +16,7 @@ index.html          project thesis and live corpus record
 corpus/             accountability, evidence, and the live corpus record
 training/           model lifecycle and current implementation boundaries
 contributing/       contribution paths for community, tooling, data, models, and compute
-join/               community participation and project entry points
+community/          community participation and project entry points
 posts/              generated Markdown archive and individual posts
 about/              project purpose and principles
 assets/style.css    primary visual system

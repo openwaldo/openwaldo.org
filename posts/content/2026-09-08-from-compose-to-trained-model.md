@@ -196,6 +196,6 @@ to repeat the experiment. The models are still small and the training system
 is still evolving, but the complete open-source loop now exists.
 
 Try the canary. Change a compose. Train something. Share the result—and the
-lessons—with the [OpenWALDO community](https://openwaldo.org/join/).
+lessons—with the [OpenWALDO community](https://openwaldo.org/community/).
 
 Greg
