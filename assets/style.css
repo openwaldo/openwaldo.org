@@ -582,8 +582,8 @@ em { font-family: inherit; font-style: normal; font-weight: inherit; color: var(
 .page-intro { min-height: 560px; padding: 140px 0 64px; }
 .page-intro-grid { align-items: center; }
 .page-intro h1 { max-width: 780px; font-size: clamp(52px, 6.4vw, 82px); line-height: .97; letter-spacing: -.05em; font-weight: 600; }
-.contributor-intro h1 { max-width: none; font-size: clamp(48px, 5.8vw, 74px); }
-.contributor-intro h1 > span { white-space: nowrap; }
+.nowrap-intro h1 { max-width: none; font-size: clamp(48px, 5.8vw, 74px); }
+.nowrap-intro h1 > span { white-space: nowrap; }
 .page-intro-side { padding-top: 18px; }
 .page-intro-side > span { margin-bottom: 38px; font-weight: 400; }
 .page-intro-side p { font-size: 17px; line-height: 1.68; }
@@ -1479,7 +1479,7 @@ code { font-size: 10px; }
   .page-intro { min-height: 630px; padding-top: 118px; }
   .compact-intro { min-height: 550px; }
   .page-intro h1 { font-size: clamp(44px, 12.2vw, 58px); }
-  .contributor-intro h1 > span { white-space: nowrap; font-size: .82em; }
+  .nowrap-intro h1 > span { white-space: nowrap; font-size: .82em; }
   .faq-page .page-intro-grid > * { min-width: 0; }
   .faq-page .page-intro h1 { font-size: clamp(40px, 11vw, 48px); }
   .split-head h2, .manifesto h2, .run-header h2, .ingest-section > .shell > h2 { font-size: 39px; }
